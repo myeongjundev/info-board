@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "id": "stackoverflow-new-questions",
+    "label": "Stack Overflow · 신규 질문",
+    "publisher": "Stack Exchange API",
+    "docsUrl": "https://api.stackexchange.com/docs/questions",
+    "unit": "건",
+    "timezone": "UTC"
+  },
+  "records": [
+    {
+      "value": 65,
+      "unit": "건",
+      "date": "2026-08-25",
+      "sourceUrl": "https://api.stackexchange.com/2.3/questions?site=stackoverflow&fromdate=1787616000&todate=1787702400&filter=total",
+      "sourceLabel": "Stack Overflow · 신규 질문",
+      "timezone": "UTC",
+      "fetchedAt": "2026-08-26T15:08:00.793Z"
+    }
+  ]
+}

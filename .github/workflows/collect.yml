@@ -1,0 +1,51 @@
+name: 하루 한 번 기록
+
+on:
+  schedule:
+    # 매일 01:10 UTC (10:10 KST). 대상은 그 시점 기준 어제(UTC) 하루이므로
+    # 자정 직후에 돌려도 대상 날짜는 이미 끝나 있다.
+    - cron: '10 1 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: '메울 날짜 (YYYY-MM-DD, UTC). 비우면 어제'
+        required: false
+
+permissions:
+  contents: write
+
+# 겹쳐 돌면 같은 파일을 두 번 커밋하려다 충돌한다. 하나씩 돌린다.
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      # 이 출처는 인증 키를 요구하지 않는다. 저장소에도 워크플로에도 비밀값이 없다.
+      - name: 값 재기
+        run: node scripts/collect.mjs ${{ inputs.date }}
+
+      - name: 바뀐 게 있을 때만 커밋
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/records.json; then
+            echo "기록이 그대로다. 커밋하지 않는다."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/records.json
+          git commit -m "data: record $(node -e "
+            const j=require('./data/records.json');
+            const r=j.records.at(-1);
+            process.stdout.write(r.date+' — '+r.value+' '+r.unit);
+          ")"
+          git push
