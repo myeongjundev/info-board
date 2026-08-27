@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/collect.mjs:*)",
+      "Bash(node --test:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(curl -s https://api.steampowered.com/:*)"
+    ]
+  }
+}

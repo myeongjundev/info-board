@@ -1,0 +1,43 @@
+name: 테스트
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      # node --test 는 파일을 하나도 못 찾아도 exit 0 이다. 그래서 "전부 통과" 와
+      # "아무것도 실행 안 함" 이 똑같이 초록불로 보인다. T03 에서 겪은 일이라
+      # 통과 개수를 직접 세서 0 이면 실패로 만든다.
+      #
+      # 개수는 TAP 리포터의 요약줄에서 읽는다. 기본 리포터는 통계줄이 유니코드
+      # 기호로 시작해서 grep 패턴이 환경에 따라 빗나간다.
+      - name: 테스트
+        run: |
+          set -euo pipefail
+          npm run test:tap | tee test.tap
+          passed=$(sed -n 's/^# pass \([0-9]*\)$/\1/p' test.tap)
+          failed=$(sed -n 's/^# fail \([0-9]*\)$/\1/p' test.tap)
+          echo "통과 ${passed:-0}건 · 실패 ${failed:-0}건"
+          if [ -z "${passed:-}" ] || [ -z "${failed:-}" ]; then
+            echo "::error::테스트 요약을 읽지 못했다. 러너가 결과를 내지 않았다는 뜻이다."
+            exit 1
+          fi
+          if [ "$failed" -ne 0 ]; then
+            echo "::error::실패한 테스트 ${failed}건"
+            exit 1
+          fi
+          if [ "$passed" -lt 1 ]; then
+            echo "::error::통과한 테스트가 0건이다. 테스트가 실행되지 않았다는 뜻이다."
+            exit 1
+          fi

@@ -1,31 +1,273 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "source": {
-    "id": "stackoverflow-new-questions",
-    "label": "Stack Overflow · 신규 질문",
-    "publisher": "Stack Exchange API",
-    "docsUrl": "https://api.stackexchange.com/docs/questions",
-    "unit": "건",
-    "timezone": "UTC"
+    "id": "steam-concurrent-players",
+    "label": "Steam · 동시접속자",
+    "publisher": "Steam Web API",
+    "docsUrl": "https://partner.steamgames.com/doc/webapi/ISteamUserStats",
+    "unit": "명",
+    "timezone": "Asia/Seoul",
+    "measuredAtLocal": "10:10",
+    "heroAppid": 730
   },
-  "records": [
+  "games": [
     {
-      "value": 65,
-      "unit": "건",
-      "date": "2026-08-25",
-      "sourceUrl": "https://api.stackexchange.com/2.3/questions?site=stackoverflow&fromdate=1787616000&todate=1787702400&filter=total",
-      "sourceLabel": "Stack Overflow · 신규 질문",
-      "timezone": "UTC",
-      "fetchedAt": "2026-08-26T15:08:00.793Z"
+      "appid": 730,
+      "name": "Counter-Strike 2",
+      "year": 2012,
+      "tier": "active"
     },
     {
-      "value": 67,
-      "unit": "건",
-      "date": "2026-08-26",
-      "sourceUrl": "https://api.stackexchange.com/2.3/questions?site=stackoverflow&fromdate=1787702400&todate=1787788800&filter=total",
-      "sourceLabel": "Stack Overflow · 신규 질문",
-      "timezone": "UTC",
-      "fetchedAt": "2026-08-27T00:04:09.957Z"
+      "appid": 570,
+      "name": "Dota 2",
+      "year": 2013,
+      "tier": "active"
+    },
+    {
+      "appid": 1623730,
+      "name": "Palworld",
+      "year": 2024,
+      "tier": "active"
+    },
+    {
+      "appid": 578080,
+      "name": "PUBG: BATTLEGROUNDS",
+      "year": 2017,
+      "tier": "active"
+    },
+    {
+      "appid": 1172470,
+      "name": "Apex Legends",
+      "year": 2020,
+      "tier": "active"
+    },
+    {
+      "appid": 553850,
+      "name": "HELLDIVERS 2",
+      "year": 2024,
+      "tier": "active"
+    },
+    {
+      "appid": 271590,
+      "name": "Grand Theft Auto V",
+      "year": 2015,
+      "tier": "active"
+    },
+    {
+      "appid": 105600,
+      "name": "Terraria",
+      "year": 2011,
+      "tier": "legacy"
+    },
+    {
+      "appid": 440,
+      "name": "Team Fortress 2",
+      "year": 2007,
+      "tier": "legacy"
+    },
+    {
+      "appid": 218620,
+      "name": "PAYDAY 2",
+      "year": 2013,
+      "tier": "legacy"
+    },
+    {
+      "appid": 550,
+      "name": "Left 4 Dead 2",
+      "year": 2009,
+      "tier": "legacy"
+    },
+    {
+      "appid": 4000,
+      "name": "Garry's Mod",
+      "year": 2006,
+      "tier": "legacy"
+    },
+    {
+      "appid": 8930,
+      "name": "Sid Meier's Civilization V",
+      "year": 2010,
+      "tier": "legacy"
+    },
+    {
+      "appid": 10,
+      "name": "Counter-Strike",
+      "year": 2000,
+      "tier": "legacy"
+    },
+    {
+      "appid": 620,
+      "name": "Portal 2",
+      "year": 2011,
+      "tier": "legacy"
+    },
+    {
+      "appid": 72850,
+      "name": "The Elder Scrolls V: Skyrim",
+      "year": 2011,
+      "tier": "legacy"
+    }
+  ],
+  "records": [
+    {
+      "value": 5884,
+      "unit": "명",
+      "appid": 10,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=10",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:21.873Z"
+    },
+    {
+      "value": 44758,
+      "unit": "명",
+      "appid": 440,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=440",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:20.343Z"
+    },
+    {
+      "value": 25947,
+      "unit": "명",
+      "appid": 550,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=550",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:20.960Z"
+    },
+    {
+      "value": 405221,
+      "unit": "명",
+      "appid": 570,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=570",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:17.857Z"
+    },
+    {
+      "value": 1198,
+      "unit": "명",
+      "appid": 620,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=620",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:22.112Z"
+    },
+    {
+      "value": 551673,
+      "unit": "명",
+      "appid": 730,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:17.522Z"
+    },
+    {
+      "value": 19862,
+      "unit": "명",
+      "appid": 4000,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=4000",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:21.194Z"
+    },
+    {
+      "value": 11407,
+      "unit": "명",
+      "appid": 8930,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=8930",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:21.645Z"
+    },
+    {
+      "value": 998,
+      "unit": "명",
+      "appid": 72850,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=72850",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:22.346Z"
+    },
+    {
+      "value": 41467,
+      "unit": "명",
+      "appid": 105600,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=105600",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:20.109Z"
+    },
+    {
+      "value": 32557,
+      "unit": "명",
+      "appid": 218620,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=218620",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:20.576Z"
+    },
+    {
+      "value": 38891,
+      "unit": "명",
+      "appid": 271590,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=271590",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:19.709Z"
+    },
+    {
+      "value": 62103,
+      "unit": "명",
+      "appid": 553850,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=553850",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:19.243Z"
+    },
+    {
+      "value": 102136,
+      "unit": "명",
+      "appid": 578080,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=578080",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:18.525Z"
+    },
+    {
+      "value": 65473,
+      "unit": "명",
+      "appid": 1172470,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1172470",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:18.910Z"
+    },
+    {
+      "value": 122871,
+      "unit": "명",
+      "appid": 1623730,
+      "date": "2026-08-27",
+      "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1623730",
+      "sourceLabel": "Steam · 동시접속자",
+      "timezone": "Asia/Seoul",
+      "fetchedAt": "2026-08-27T00:59:18.125Z"
     }
   ]
 }

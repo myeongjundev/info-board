@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "collect": "node scripts/collect.mjs",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "test:tap": "node --test --test-reporter=tap test/*.test.js"
   }
 }

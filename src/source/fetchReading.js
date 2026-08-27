@@ -1,10 +1,10 @@
 // 값을 한 덩어리로만 다룬다.
 //
-// 화면에 보이는 값·단위·출처·기준일·조회시각은 전부 이 Reading 하나에서 나온다.
+// 화면에 보이는 값·단위·출처·날짜·조회시각은 전부 이 Reading 하나에서 나온다.
 // 따로 전달하지 않기 때문에 "값은 새 것인데 시각은 옛 것" 이 구조적으로 불가능하다.
 // 정상값이 없으면 Reading 자체가 없고, 그러면 숫자 자리에 넣을 것도 없다.
 
-import { SOURCE, buildUrl, parse, SchemaError } from './definition.js';
+import { SOURCE, buildUrl, parse, todayLocal, SchemaError } from './definition.js';
 
 /** 장애를 서로 다른 상태로 구분한다. 같은 문구로 뭉뚱그리지 않는다. */
 export const FAULT = {
@@ -26,13 +26,16 @@ export class FetchFault extends Error {
 }
 
 /**
- * 한 날짜의 값을 가져온다.
+ * 게임 하나의 지금 동시접속자를 가져온다.
  * 성공하면 Reading, 실패하면 FAULT 가 붙은 FetchFault 를 던진다.
  *
- * @param {string} date 'YYYY-MM-DD' (UTC 기준)
+ * 날짜를 인자로 받지 않는다. 순간값이라 "언제 잴지" 를 고를 수 없고, 잰 시각이
+ * 곧 그 값의 날짜이기 때문이다. 과거를 재는 척할 여지를 서명에서 없앤다.
+ *
+ * @param {number} appid
  */
-export async function fetchReading(date, { timeoutMs = 8000, fetchImpl = fetch } = {}) {
-  const url = buildUrl(date);
+export async function fetchReading(appid, { timeoutMs = 8000, fetchImpl = fetch, now = new Date() } = {}) {
+  const url = buildUrl(appid);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -67,12 +70,6 @@ export async function fetchReading(date, { timeoutMs = 8000, fetchImpl = fetch }
     throw new FetchFault(FAULT.SCHEMA, 'JSON 으로 읽히지 않는다', String(err && err.message));
   }
 
-  // Stack Exchange 는 오류도 200 으로 주는 경우가 있어 본문을 봐야 한다.
-  if (body && typeof body.error_id === 'number') {
-    const fault = body.error_id === 502 ? FAULT.RATE_LIMIT : FAULT.AUTH;
-    throw new FetchFault(fault, `출처가 오류를 반환했다: ${body.error_message}`, body.error_name);
-  }
-
   let value;
   try {
     value = parse(body);
@@ -86,10 +83,11 @@ export async function fetchReading(date, { timeoutMs = 8000, fetchImpl = fetch }
   return {
     value,
     unit: SOURCE.unit,
-    date,                                  // 이 값이 가리키는 날 (UTC)
+    appid,
+    date: todayLocal(now),                 // 잰 시각의 KST 날짜
     sourceUrl: url,                        // 누르면 이 응답이 그대로 열린다
     sourceLabel: SOURCE.label,
     timezone: SOURCE.timezone,
-    fetchedAt: new Date().toISOString(),   // 내가 조회한 시각. 절대 date 와 섞지 않는다
+    fetchedAt: now.toISOString(),          // 내가 조회한 시각. 절대 date 와 섞지 않는다
   };
 }
