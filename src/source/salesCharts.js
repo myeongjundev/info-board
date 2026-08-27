@@ -101,7 +101,15 @@ function weeklyTop20(document) {
   const query = candidates.find((item) => item.queryKey[2] === 'latest')
     ?? candidates.sort((a, b) => Number(b.queryKey[2]) - Number(a.queryKey[2]))[0];
   const rows = query?.state?.data?.rgRanks;
-  if (!rows || rows.length !== 20) throw new TypeError('Steam 주간 매출 Top 20을 읽지 못했다');
+  if (!rows || rows.length !== 20) {
+    const available = document.queries.filter((item) => item.queryKey?.[0] === 'ChartsWeeklyTopSellers')
+      .map((item) => ({
+        key: item.queryKey.slice(1),
+        country: item.state?.data?.strCountryCode ?? null,
+        rows: item.state?.data?.rgRanks?.length ?? null,
+      }));
+    throw new TypeError(`Steam 주간 매출 Top 20을 읽지 못했다: ${JSON.stringify(available)}`);
+  }
   const items = storeItems(document.queries);
   const readings = rows.map((row) => {
     const reading = itemReading(row.itemKey.appid, row.nRank, items);
