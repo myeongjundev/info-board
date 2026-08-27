@@ -87,10 +87,19 @@ function liveTop20(document, sort) {
 }
 
 function weeklyTop20(document) {
-  const query = document.queries.find((item) => (
-    item.queryKey?.[0] === 'ChartsWeeklyTopSellers' && item.queryKey?.[1] === 'KR'
-    && item.queryKey?.[2] === 'latest' && item.queryKey?.[3] === 20 && item.queryKey?.[4] === true
+  // Steam SSR은 같은 최신 주간 목록을 `latest` 키로 주기도 하고 실제 주차 epoch
+  // 키로만 주기도 한다. KR·20개·전체 항목이라는 값의 의미를 고정하고, 키 표현만
+  // 둘 다 허용한다. latest가 있으면 항상 우선한다.
+  const candidates = document.queries.filter((item) => (
+    item.queryKey?.[0] === 'ChartsWeeklyTopSellers'
+    && item.queryKey?.[1] === 'KR'
+    && item.queryKey?.[3] === 20
+    && item.queryKey?.[4] === true
+    && item.state?.data?.strCountryCode === 'KR'
+    && item.state?.data?.rgRanks?.length === 20
   ));
+  const query = candidates.find((item) => item.queryKey[2] === 'latest')
+    ?? candidates.sort((a, b) => Number(b.queryKey[2]) - Number(a.queryKey[2]))[0];
   const rows = query?.state?.data?.rgRanks;
   if (!rows || rows.length !== 20) throw new TypeError('Steam 주간 매출 Top 20을 읽지 못했다');
   const items = storeItems(document.queries);
