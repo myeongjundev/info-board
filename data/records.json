@@ -17,6 +17,15 @@
       "sourceLabel": "Stack Overflow · 신규 질문",
       "timezone": "UTC",
       "fetchedAt": "2026-08-26T15:08:00.793Z"
+    },
+    {
+      "value": 67,
+      "unit": "건",
+      "date": "2026-08-26",
+      "sourceUrl": "https://api.stackexchange.com/2.3/questions?site=stackoverflow&fromdate=1787702400&todate=1787788800&filter=total",
+      "sourceLabel": "Stack Overflow · 신규 질문",
+      "timezone": "UTC",
+      "fetchedAt": "2026-08-27T00:04:09.957Z"
     }
   ]
 }
