@@ -56,32 +56,68 @@ function textOf(fragment, className) {
   return match ? decodeHtml(match[1].replace(/<[^>]+>/g, '').trim()) : null;
 }
 
-export function parseFreeToKeepResults(body, now = new Date()) {
+function wonValue(text) {
+  if (typeof text !== 'string') return null;
+  const value = Number(text.replace(/[^0-9]/g, ''));
+  return Number.isInteger(value) && value > 0 ? value : null;
+}
+
+export function parseSteamFreeSearchResults(body, now = new Date()) {
   if (!body || body.success !== 1 || typeof body.results_html !== 'string' || !Number.isInteger(body.total_count)) {
-    throw new TypeError('Steam 무료 소장 검색 응답을 읽을 수 없다');
+    throw new TypeError('Steam 무료 이벤트 검색 응답을 읽을 수 없다');
   }
-  if (body.total_count === 0) return [];
+  if (body.total_count === 0) return { giveaways: [], weekendCandidates: [] };
   const rows = body.results_html.match(/<a\b[^>]*class="[^"]*search_result_row[^"]*"[\s\S]*?<\/a>/g) ?? [];
-  const readings = [];
+  const giveaways = [];
+  const weekendCandidates = [];
   for (const row of rows) {
     const appid = Number(row.match(/data-ds-appid="(\d+)"/)?.[1]);
     const href = decodeHtml(row.match(/href="([^"]+)"/)?.[1] ?? '');
     const discountText = textOf(row, 'discount_pct');
     const title = textOf(row, 'title');
     const originalText = textOf(row, 'discount_original_price');
+    const finalText = textOf(row, 'discount_final_price');
     const imageUrl = decodeHtml(row.match(/<img[^>]+src="([^"]+)"/)?.[1] ?? '');
-    if (!appid || discountText !== '-100%' || !title || !href || !originalText) continue;
-    const originalWon = Number(originalText.replace(/[^0-9]/g, ''));
-    if (!Number.isInteger(originalWon) || originalWon <= 0) continue;
-    readings.push({
-      appid, title, originalWon, currency: 'KRW', imageUrl: imageUrl || null,
+    const originalWon = wonValue(originalText);
+    if (!appid || !title || !href || !originalWon) continue;
+    const common = {
+      appid, title, currency: 'KRW', imageUrl: imageUrl || null,
       storeUrl: href.replace(/^http:/, 'https:'), fetchedAt: now.toISOString(), endAt: null,
+    };
+    if (discountText === '-100%') {
+      giveaways.push({ ...common, originalWon });
+      continue;
+    }
+    const discountPercent = Number(discountText?.replace(/[^0-9]/g, '')) || 0;
+    const finalWon = wonValue(finalText);
+    weekendCandidates.push({
+      ...common, originalWon, finalWon, discountPercent,
     });
   }
-  if (body.total_count > 0 && readings.length === 0) {
-    throw new TypeError(`무료 소장 후보 ${body.total_count}개가 있지만 100% 할인 항목을 해석하지 못했다`);
+  if (body.total_count > 0 && giveaways.length === 0 && weekendCandidates.length === 0) {
+    throw new TypeError(`무료 이벤트 후보 ${body.total_count}개를 해석하지 못했다`);
   }
-  return readings;
+  return { giveaways, weekendCandidates };
+}
+
+export function parseFreeToKeepResults(body, now = new Date()) {
+  return parseSteamFreeSearchResults(body, now).giveaways;
+}
+
+export function parseFreeWeekendStorePage(html, candidate) {
+  if (typeof html !== 'string' || !candidate || typeof candidate !== 'object') return null;
+  const plain = decodeHtml(html.replace(/<script\b[\s\S]*?<\/script>/gi, ' ').replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '));
+  const explicitWeekend = /free\s+weekend|무료\s*주말/i.test(plain);
+  const temporaryPlay = /play\s+(?:the\s+game\s+)?for\s+free|무료로\s*(?:플레이|체험)|무료\s*(?:플레이|체험)/i.test(plain);
+  if (!explicitWeekend && !temporaryPlay) return null;
+
+  // 구매 할인 종료 시각과 무료 플레이 종료 시각은 다를 수 있다. 전용 키만 신뢰한다.
+  const epoch = Number(html.match(/(?:free[_-]?weekend|free[_-]?(?:play|license))[_-]?(?:end|expiration)[^0-9]{0,40}(\d{10})/i)?.[1]);
+  return {
+    ...candidate,
+    endAt: Number.isInteger(epoch) && epoch > 0 ? new Date(epoch * 1000).toISOString() : null,
+  };
 }
 
 export function parseDiscountEndFromHtml(html) {
@@ -103,9 +139,15 @@ export function validatePopularDiscountSnapshot(data) {
 
 export function validateFreeToKeepSnapshot(data) {
   return Boolean(
-    data && data.schemaVersion === 1 && Number.isFinite(Date.parse(data.completedAt))
+    data && (data.schemaVersion === 1 || data.schemaVersion === 2) && Number.isFinite(Date.parse(data.completedAt))
     && Array.isArray(data.giveaways)
     && data.giveaways.every((item) => Number.isInteger(item.appid) && item.originalWon > 0
-      && item.currency === 'KRW' && typeof item.storeUrl === 'string'),
+      && item.currency === 'KRW' && typeof item.storeUrl === 'string')
+    && (data.schemaVersion === 1 || (Array.isArray(data.freeWeekends)
+      && data.freeWeekends.every((item) => Number.isInteger(item.appid) && item.originalWon > 0
+        && (item.finalWon === null || (Number.isInteger(item.finalWon) && item.finalWon > 0))
+        && Number.isInteger(item.discountPercent) && item.discountPercent >= 0
+        && item.currency === 'KRW'
+        && typeof item.storeUrl === 'string'))),
   );
 }

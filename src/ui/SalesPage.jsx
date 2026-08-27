@@ -31,6 +31,7 @@ export default function SalesPage() {
   const [epicState, setEpicState] = useState({ status: 'loading', data: null });
   const [popularState, setPopularState] = useState({ status: 'loading', data: null });
   const [steamFreeState, setSteamFreeState] = useState({ status: 'loading', data: null });
+  const [steamFreeTab, setSteamFreeTab] = useState('keep');
   const [nowMs, setNowMs] = useState(() => Date.now());
   const [query, setQuery] = useState('');
   const [genre, setGenre] = useState('전체');
@@ -62,9 +63,9 @@ export default function SalesPage() {
         return data;
       }),
       fetch(STEAM_FREE_DATA_URL, { cache: 'no-store' }).then(async (response) => {
-        if (!response.ok) throw new Error(`무료 소장 HTTP ${response.status}`);
+        if (!response.ok) throw new Error(`무료 이벤트 HTTP ${response.status}`);
         const data = await response.json();
-        if (!validateFreeToKeepSnapshot(data)) throw new Error('Steam 무료 소장 파일 형식이 맞지 않는다');
+        if (!validateFreeToKeepSnapshot(data)) throw new Error('Steam 무료 이벤트 파일 형식이 맞지 않는다');
         return data;
       }),
     ].map((request) => request.then(
@@ -196,15 +197,23 @@ export default function SalesPage() {
 
         <section className="steam-free-section" aria-labelledby="steam-free-title">
           <header>
-            <div><p>STEAM · FREE TO KEEP</p><h2 id="steam-free-title">Steam 기간 한정 무료 소장</h2></div>
+            <div><p>STEAM · LIMITED FREE EVENTS</p><h2 id="steam-free-title">Steam 무료 이벤트</h2></div>
             <a href="https://store.steampowered.com/search/?category1=998&hidef2p=1&maxprice=free&specials=1" target="_blank" rel="noreferrer">Steam에서 확인 ↗</a>
           </header>
-          {steamFreeState.status === 'loading' && <p className="steam-free-empty">무료 소장 혜택을 확인하는 중…</p>}
-          {steamFreeState.status === 'error' && <p className="steam-free-empty is-error">Steam 무료 소장 자료를 읽지 못했다. <span>{steamFreeState.message}</span></p>}
-          {steamFreeState.status === 'ok' && steamFreeState.data.giveaways.length === 0 && (
-            <div className="steam-free-empty"><b>현재 확인된 무료 소장 게임이 없다.</b><span>상시 무료와 무료 주말은 이 목록에 포함하지 않는다.</span></div>
+          <div className="steam-free-tabs" role="tablist" aria-label="Steam 무료 이벤트 유형">
+            <button type="button" role="tab" aria-selected={steamFreeTab === 'keep'} className={steamFreeTab === 'keep' ? 'is-active' : ''} onClick={() => setSteamFreeTab('keep')}>
+              무료 소장 <span>{steamFreeState.data?.giveaways.length ?? '—'}</span>
+            </button>
+            <button type="button" role="tab" aria-selected={steamFreeTab === 'weekend'} className={steamFreeTab === 'weekend' ? 'is-active' : ''} onClick={() => setSteamFreeTab('weekend')}>
+              무료 플레이 주말 <span>{steamFreeState.data?.freeWeekends?.length ?? '—'}</span>
+            </button>
+          </div>
+          {steamFreeState.status === 'loading' && <p className="steam-free-empty">무료 이벤트를 확인하는 중…</p>}
+          {steamFreeState.status === 'error' && <p className="steam-free-empty is-error">Steam 무료 이벤트 자료를 읽지 못했다. <span>{steamFreeState.message}</span></p>}
+          {steamFreeState.status === 'ok' && steamFreeTab === 'keep' && steamFreeState.data.giveaways.length === 0 && (
+            <div className="steam-free-empty"><b>현재 확인된 무료 소장 게임이 없다.</b><span>받아 두면 행사 종료 후에도 라이브러리에 남는 게임만 표시한다.</span></div>
           )}
-          {steamFreeState.data?.giveaways.length > 0 && (
+          {steamFreeTab === 'keep' && steamFreeState.data?.giveaways.length > 0 && (
             <div className="steam-free-grid">
               {steamFreeState.data.giveaways.map((item) => (
                 <article key={item.appid}>
@@ -217,7 +226,29 @@ export default function SalesPage() {
               ))}
             </div>
           )}
-          {steamFreeState.data && <footer>마지막 확인 {formatKst(steamFreeState.data.completedAt)} KST · 상점 검색 결과가 비면 0건으로 표시</footer>}
+          {steamFreeState.status === 'ok' && steamFreeTab === 'weekend' && (steamFreeState.data.freeWeekends?.length ?? 0) === 0 && (
+            <div className="steam-free-empty"><b>현재 확인된 무료 플레이 주말 게임이 없다.</b><span>무료 주말은 행사 종료 후 구매해야 계속 플레이할 수 있다.</span></div>
+          )}
+          {steamFreeTab === 'weekend' && steamFreeState.data?.freeWeekends?.length > 0 && (
+            <div className="steam-free-grid">
+              {steamFreeState.data.freeWeekends.map((item) => (
+                <article className="is-weekend" key={item.appid}>
+                  {item.imageUrl && <img src={item.imageUrl} alt="" />}
+                  <div><span>기간 한정 · 무료 플레이</span><h3>{item.title}</h3>
+                    <p>
+                      {item.discountPercent > 0 && <b>-{item.discountPercent}%</b>}
+                      <del>{won.format(item.originalWon)}</del>
+                      <strong>{item.finalWon ? won.format(item.finalWon) : '구매 가격 확인'}</strong>
+                    </p>
+                    <small>{item.endAt ? `${remainingLabel(item.endAt, nowMs)} · ${formatKst(item.endAt)} KST 종료` : '무료 플레이 종료 시각은 Steam 상점에서 확인'}</small>
+                    <em>행사 종료 후 계속 플레이하려면 구매가 필요하다.</em>
+                    <a href={item.storeUrl} target="_blank" rel="noreferrer">Steam에서 플레이 ↗</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+          {steamFreeState.data && <footer>마지막 확인 {formatKst(steamFreeState.data.completedAt)} KST · 무료 소장과 임시 플레이를 구분 · 검색 결과가 비면 0건으로 표시</footer>}
         </section>
 
         <section className="popular-deals-section" aria-labelledby="popular-deals-title">

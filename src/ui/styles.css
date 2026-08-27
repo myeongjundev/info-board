@@ -1977,6 +1977,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .tracked-deals-heading h2 { display: inline; margin: 0; font-size: 19px; }
 .steam-free-section > header > a { color: var(--text-faint); font-size: 10px; }
 .steam-free-section > header > a:hover { color: var(--accent); }
+.steam-free-tabs { display: flex; gap: 7px; padding: 12px 23px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.012); }
+.steam-free-tabs button { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 12px; border: 1px solid var(--border-2); border-radius: 6px; background: transparent; color: var(--text-dim); font: 700 10px/1 var(--sans); cursor: pointer; }
+.steam-free-tabs button:hover { border-color: #66c0f4; color: #fff; }
+.steam-free-tabs button.is-active { border-color: rgba(102,192,244,.55); background: rgba(102,192,244,.12); color: #fff; box-shadow: inset 0 -2px #66c0f4; }
+.steam-free-tabs button span { color: #66c0f4; font: 800 9px/1 var(--mono); }
 .steam-free-empty { min-height: 112px; margin: 0; padding: 35px 24px; color: var(--text-dim); text-align: center; }
 .steam-free-empty b,
 .steam-free-empty span { display: block; }
@@ -1991,11 +1996,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .steam-free-grid img { width: 100%; height: 100%; min-height: 190px; object-fit: cover; }
 .steam-free-grid article > div { align-self: center; padding: 19px; }
 .steam-free-grid article > div > span { color: var(--up); font: 700 9px/1 var(--mono); }
+.steam-free-grid article.is-weekend > div > span { color: #66c0f4; }
 .steam-free-grid h3 { margin: 8px 0 11px; font-size: 18px; }
 .steam-free-grid p { display: flex; align-items: baseline; gap: 8px; margin: 0; }
 .steam-free-grid del { color: var(--text-faint); font-size: 11px; }
 .steam-free-grid p strong { font-size: 17px; }
+.steam-free-grid p b { padding: 4px 6px; border-radius: 4px; background: rgba(102,192,244,.14); color: #66c0f4; font: 800 9px/1 var(--mono); }
 .steam-free-grid small { display: block; margin: 8px 0 14px; color: var(--text-faint); font-size: 9.5px; }
+.steam-free-grid em { display: block; margin: -5px 0 13px; color: var(--text-dim); font-size: 9px; font-style: normal; line-height: 1.5; }
 .steam-free-grid a { color: var(--accent); font-size: 10px; font-weight: 700; }
 
 .popular-deals-section > header { box-shadow: inset 3px 0 #66c0f4; }
@@ -2170,6 +2178,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .popular-deals-section > header div > span { display: block; margin: 6px 0 0; }
   .steam-free-section > header { display: block; }
   .steam-free-section > header > a { display: inline-block; margin-top: 11px; }
+  .steam-free-tabs { padding: 10px 14px; }
+  .steam-free-tabs button { flex: 1; justify-content: center; padding: 0 8px; }
   .steam-free-grid article { grid-template-columns: 1fr; }
   .steam-free-grid img { min-height: 0; aspect-ratio: 460 / 215; }
   .tracked-deals-heading { padding: 18px 0; }
