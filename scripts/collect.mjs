@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 
 import { SOURCE, GAMES, HERO_APPID, todayLocal, assertMeasurableNow, gameOf } from '../src/source/definition.js';
 import { fetchReading, FetchFault } from '../src/source/fetchReading.js';
-import { loadRecords, upsertRecord, compare, serialize } from '../src/state/records.js';
+import { loadRecords, upsertRecord, compare, serialize, keepDate } from '../src/state/records.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = resolve(ROOT, 'data/records.json');
@@ -66,6 +66,28 @@ async function main() {
     console.warn(`\n${faults.length}개 실패 — 그 게임은 오늘 기록에서 빠진다. 0 으로 채우지 않는다.`);
   }
 
+  // 자정을 걸친 실행을 잘라 낸다.
+  //
+  // fetchReading 은 호출마다 그 순간의 날짜를 스스로 계산한다. 16개를 도는 데
+  // 5~8초가 걸리므로 23:59:57 에 시작하면 앞뒤가 서로 다른 날짜로 기록된다.
+  // 그냥 두면 다음 날 칸에 00:00 값이 먼저 들어가고, 다음 날 10:10 정규 실행이
+  // upsert 의 kept-first 규칙에 걸려 그 자정 값을 지키고 진짜 10:10 값을 버린다.
+  // "매일 같은 시각에 잰다" 가 조용히 깨지는데 화면에는 아무 티도 안 난다.
+  //
+  // 그래서 맨 앞에서 확인받은 날짜와 다른 것은 버린다. 그 게임들은 다음 실행에서
+  // 제 시각에 다시 잰다. 잃는 것은 그날 그 게임 한 칸뿐이다.
+  const { kept: sameDay, spilled } = keepDate(readings, date);
+  if (spilled.length) {
+    console.warn(`\n자정을 걸쳤다 — ${spilled.length}개가 ${spilled[0].date} 로 넘어가 버린다.`);
+    console.warn('한 실행에 두 날짜를 섞지 않는다. 넘어간 것은 다음 실행에서 제 시각에 다시 잰다.');
+    for (const r of spilled) console.warn(`  · appid ${r.appid}`);
+  }
+
+  if (sameDay.length === 0) {
+    console.error(`\n${date} 로 남길 것이 하나도 없다. 기록하지 않고 끝낸다.`);
+    return 1;
+  }
+
   let raw = null;
   try {
     raw = await readFile(FILE, 'utf8');
@@ -84,7 +106,7 @@ async function main() {
   let added = 0;
   let kept = 0;
 
-  for (const reading of readings) {
+  for (const reading of sameDay) {
     const out = upsertRecord(records, reading);
     records = out.records;
     if (out.kind === 'added') added += 1;

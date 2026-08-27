@@ -64,6 +64,17 @@ export default function App() {
 
   useEffect(() => { load(); }, [load]);
 
+  // 시계를 계속 돌린다.
+  //
+  // now 를 로드 성공 때만 갱신하면, 페이지를 열어 둔 채로 두었을 때 "34분 전" 이
+  // 영원히 34분 전으로 남는다. 자정을 넘겨도 `오늘 잰 값` 배지가 그대로 붙어 있다.
+  // 값은 안 건드렸는데 시각에 대해 거짓말을 하는 셈이고, 이 정보판이 잡으려는
+  // 거짓말과 정확히 같은 종류다. 30초마다 다시 센다 — 자료를 다시 부르지는 않는다.
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 30_000);
+    return () => clearInterval(t);
+  }, []);
+
   const today = todayLocal(now);
   const board = payload ? buildBoard({ data: payload.data, today, now }) : null;
 
@@ -88,7 +99,7 @@ export default function App() {
         </p>
       )}
 
-      <div className="columns">
+      <main className="columns">
         <div>
           <section className="panel" aria-label="현재값">
             {status === 'loading' && !showing ? (
@@ -117,7 +128,7 @@ export default function App() {
             <RecordList board={showing} data={payload?.data} />
           </section>
         </div>
-      </div>
+      </main>
 
       <section className="panel faults" aria-label="장애 재현">
         <h2 className="panel-title">장애 재현 — 카드 3</h2>

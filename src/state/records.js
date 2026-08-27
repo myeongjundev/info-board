@@ -144,3 +144,19 @@ export function datesOf(records) {
 export function serialize(records, meta) {
   return JSON.stringify({ schemaVersion: SCHEMA_VERSION, ...meta, records: sortRecords(records) }, null, 2) + '\n';
 }
+
+/**
+ * 한 실행이 자정을 걸쳐 두 날짜가 섞였을 때, 약속한 날짜의 것만 남긴다.
+ *
+ * 수집기는 게임 16개를 5~8초에 걸쳐 돌고 각 값은 불린 순간의 날짜를 갖는다.
+ * 23:59:57 에 시작하면 앞뒤가 서로 다른 날로 기록된다. 그대로 두면 다음 날 칸에
+ * 00:00 값이 먼저 들어가고, 다음 날 정규 실행이 upsert 의 first-wins 규칙에 걸려
+ * 그 자정 값을 지키고 제 시각 값을 버린다. "매일 같은 시각에 잰다" 가 조용히
+ * 깨지는데 화면에는 아무 티도 안 난다.
+ */
+export function keepDate(readings, date) {
+  const kept = [];
+  const spilled = [];
+  for (const r of readings) (r.date === date ? kept : spilled).push(r);
+  return { kept, spilled };
+}

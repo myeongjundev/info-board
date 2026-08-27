@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   validateRecord, loadRecords, upsertRecord,
-  seriesOf, compare, movingAverage, datesOf, serialize, keyOf,
+  seriesOf, compare, movingAverage, datesOf, serialize, keyOf, keepDate,
 } from '../src/state/records.js';
 
 const rec = (date, appid, value, extra = {}) => ({
@@ -170,4 +170,37 @@ test('직렬화하면 다시 읽을 수 있다', () => {
   const { records: back, quarantined } = loadRecords(serialize(records, { source: { unit: '명' } }));
   assert.equal(quarantined.length, 0);
   assert.deepEqual(back, records);
+});
+
+test('자정을 걸치면 약속한 날짜의 것만 남긴다', () => {
+  const readings = [
+    rec('2026-08-27', 730, 551673),
+    rec('2026-08-27', 570, 405221),
+    rec('2026-08-28', 10, 5884),      // 자정을 넘겨 버린 것
+  ];
+  const { kept, spilled } = keepDate(readings, '2026-08-27');
+  assert.equal(kept.length, 2);
+  assert.equal(spilled.length, 1);
+  assert.equal(spilled[0].appid, 10);
+});
+
+test('자정을 안 걸치면 전부 남는다', () => {
+  const readings = [rec('2026-08-27', 730, 1), rec('2026-08-27', 570, 2)];
+  const { kept, spilled } = keepDate(readings, '2026-08-27');
+  assert.equal(kept.length, 2);
+  assert.equal(spilled.length, 0);
+});
+
+test('넘어간 값이 다음 날 칸을 선점하지 못한다', () => {
+  // 이걸 막지 않으면: 자정 00:00 값이 8/28 칸에 먼저 들어가고,
+  // 8/28 10:10 정규 실행이 kept-first 에 걸려 제 시각 값을 버린다.
+  const midnight = rec('2026-08-28', 730, 480000);
+  const { kept } = keepDate([midnight], '2026-08-27');
+  assert.equal(kept.length, 0, '자정 값이 다음 날 칸에 들어갔다');
+
+  // 다음 날 제 시각 값이 첫 번째로 들어가야 한다
+  const proper = rec('2026-08-28', 730, 551673);
+  const out = upsertRecord([], proper);
+  assert.equal(out.kind, 'added');
+  assert.equal(out.records[0].value, 551673);
 });
