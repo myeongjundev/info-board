@@ -215,6 +215,7 @@ export default function App() {
             <Genres
               data={byGenre(payload.data.records, games, showing.reading.date)}
               games={games}
+              onPickGame={pickGame}
             />
           </section>
 

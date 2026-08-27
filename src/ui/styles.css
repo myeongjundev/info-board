@@ -843,8 +843,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .genre-list li:first-child { border-top: 0; }
 
 .genre-head {
+  width: 100%;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto auto;
+  grid-template-columns: 14px minmax(0, auto) minmax(0, 1fr) auto auto;
   align-items: baseline;
   gap: 4px 10px;
 }
@@ -955,4 +963,80 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .rank-art-slot { display: none; }
   .rank-list li { grid-template-columns: 22px minmax(0, 1fr) auto; }
   .rank-bar { left: 32px; }
+}
+
+/* ── 장르 펼치기 ── */
+.genre-caret {
+  font-size: 10px;
+  color: var(--text-faint);
+  line-height: 1.6;
+}
+.genre-head:hover .genre-name { color: var(--accent); }
+.genre-list li.is-open { background: var(--surface-2); border-radius: 4px; padding-left: 10px; padding-right: 10px; }
+
+.genre-chart { margin: 10px 0 0; }
+.genre-chart > ol { list-style: none; margin: 0 0 8px; padding: 0; }
+.genre-chart > ol > li + li { margin-top: 3px; }
+
+.genre-chart button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 5px 6px 8px;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.genre-chart button:hover { background: var(--surface); }
+.genre-chart button:hover .gchart-name { color: var(--accent); }
+
+.gchart-art {
+  display: block;
+  width: 52px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.gchart-name {
+  font-size: 12.5px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gchart-value {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+/* 막대는 그 장르 안 1위 대비 길이다. 글자 아래 바닥에 깔린다. */
+.gchart-bar {
+  position: absolute;
+  left: 67px;
+  right: 6px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--border);
+}
+.gchart-bar::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--w, 0%);
+  background: var(--text-faint);
+}
+.genre-chart > ol > li:first-child .gchart-bar::before { background: var(--accent); }
+
+@media (max-width: 560px) {
+  .gchart-art { display: none; }
+  .genre-chart button { grid-template-columns: minmax(0, 1fr) auto; }
+  .gchart-bar { left: 6px; }
 }

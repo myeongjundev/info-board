@@ -245,6 +245,17 @@ export function byGenre(records, games, date, { previousDate = null } = {}) {
     .filter((b) => b.rows.length > 0)
     .map((b) => {
       b.rows.sort((x, y) => y.value - x.value || x.appid - y.appid);
+
+      // 펼쳤을 때 그리는 막대 길이. **그 장르 안 1위 대비**다.
+      //
+      // 전체 1위에 맞추면 작은 장르는 전부 실선이 되어 서로 견줄 수가 없다.
+      // 대신 기준이 장르마다 달라지므로 화면이 그 사실을 적어야 한다.
+      // 여기서 내는 이유는 ui 가 나눗셈을 하면 손계산 대조를 못 하기 때문이다.
+      const top = b.rows[0].value;
+      for (const r of b.rows) {
+        r.relativeInGenre = top > 0 ? (r.value / top) * 100 : null;
+      }
+
       const delta = b.paired > 0 ? b.pairedTotal - b.pairedPrevTotal : null;
       return {
         genre: b.genre,

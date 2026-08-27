@@ -379,3 +379,24 @@ test('코드 표에 없는 게임도 지우지 않는다 — 그날 잰 값이 �
 test('빈 입력에도 터지지 않는다', () => {
   assert.deepEqual(withGenres(null, null), []);
 });
+
+test('장르 안 막대 길이는 그 장르 1위 대비다 — 전체 1위가 아니다', () => {
+  const records = [
+    rec('2026-08-27', 730, 800000), rec('2026-08-27', 578080, 200000),  // 슈터: 1위 800000
+    rec('2026-08-27', 570, 1000), rec('2026-08-27', 72850, 500),        // MOBA 1000 · RPG 500
+  ];
+  const b = byGenre(records, GG, '2026-08-27');
+  const fps = b.genres.find((g) => g.genre === '슈터');
+  assert.equal(fps.rows[0].relativeInGenre, 100);
+  assert.equal(fps.rows[1].relativeInGenre, 25);   // 200000 / 800000
+
+  // 작은 장르도 자기 1위가 100 이다. 전체 1위(800000)에 맞추면 0.1% 라 안 보인다.
+  const moba = b.genres.find((g) => g.genre === 'MOBA');
+  assert.equal(moba.rows[0].relativeInGenre, 100);
+});
+
+test('장르 안이 전부 0 이면 막대를 그리지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 0), rec('2026-08-27', 578080, 0)];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.genres[0].rows[0].relativeInGenre, null);
+});
