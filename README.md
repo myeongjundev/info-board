@@ -100,7 +100,7 @@ git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
 node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 87건
+npm test                   # 단위 테스트 97건
 
 npm install
 npm run dev                # 화면
@@ -125,6 +125,7 @@ data/           진실의 원천
 | | |
 |---|---|
 | [docs/DECISIONS.md](docs/DECISIONS.md) | **상태를 적는 유일한 곳.** 결정과 근거, 탈락시킨 후보, 고친 결함 |
+| [docs/DEFECTS.md](docs/DEFECTS.md) | 찾아서 고친 결함 13개와 그 패턴 |
 | [docs/VERIFY.md](docs/VERIFY.md) | 검증 안내서 — 30초, 3단계 |
 | [docs/CROSSCHECK.md](docs/CROSSCHECK.md) | 원자료·저장값·계산값·화면값 대조표 |
 | [CLAUDE.md](CLAUDE.md) | 작업 규칙 — 깨면 안 되는 7가지 |
