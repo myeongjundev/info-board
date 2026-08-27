@@ -6,6 +6,17 @@
   "scripts": {
     "collect": "node scripts/collect.mjs",
     "test": "node --test test/*.test.js",
-    "test:tap": "node --test --test-reporter=tap test/*.test.js"
+    "test:tap": "node --test --test-reporter=tap test/*.test.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.0",
+    "vite": "^8.2.2"
   }
 }

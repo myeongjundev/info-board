@@ -1,0 +1,81 @@
+name: 배포
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pages 배포에 필요한 것만 준다.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 수집 커밋과 배포가 겹칠 수 있다. 배포는 마지막 것만 살린다.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # 테스트가 통과해야 배포한다. 그리고 통과 개수가 0 이면 실패로 만든다 —
+      # node --test 는 파일을 못 찾아도 exit 0 이라 "전부 통과" 와 "아무것도
+      # 실행 안 함" 이 똑같이 초록불로 보인다. T03 에서 겪은 일이다.
+      - name: 테스트
+        run: |
+          set -euo pipefail
+          npm run test:tap | tee test.tap
+          passed=$(sed -n 's/^# pass \([0-9]*\)$/\1/p' test.tap)
+          failed=$(sed -n 's/^# fail \([0-9]*\)$/\1/p' test.tap)
+          echo "통과 ${passed:-0}건 · 실패 ${failed:-0}건"
+          if [ -z "${passed:-}" ] || [ -z "${failed:-}" ]; then
+            echo "::error::테스트 요약을 읽지 못했다"
+            exit 1
+          fi
+          if [ "$failed" -ne 0 ] || [ "$passed" -lt 1 ]; then
+            echo "::error::실패 ${failed}건 · 통과 ${passed}건 — 배포하지 않는다"
+            exit 1
+          fi
+
+      # 화면이 읽는 기록 파일이 실제로 있는지. 없으면 빈 정보판이 배포된다.
+      - name: 기록 파일 확인
+        run: |
+          set -euo pipefail
+          count=$(node -e "
+            const j = require('./data/records.json');
+            const dates = new Set(j.records.map(r => r.date));
+            process.stdout.write(String(dates.size));
+          ")
+          echo "기록된 날짜 ${count}일치"
+          if [ "$count" -lt 1 ]; then
+            echo "::error::기록이 0일치다"
+            exit 1
+          fi
+
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
