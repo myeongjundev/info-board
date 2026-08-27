@@ -193,3 +193,113 @@ function daysApart(from, to) {
   if (Number.isNaN(a) || Number.isNaN(b)) return 1;
   return Math.round((b - a) / 86400000);
 }
+
+/**
+ * 장르별로 묶어서 본다.
+ *
+ * **장르는 원자료가 주지 않는다.** GAMES 표에 우리가 적은 것이다. 그래서 이 패널은
+ * "Steam 의 장르 판도" 가 아니라 **"우리가 고른 16개를 우리 기준으로 묶은 것"**
+ * 이고, 화면이 그렇게 말해야 한다.
+ *
+ * 장르마다 `listed`(그 장르로 분류한 게임 수)를 함께 준다. 1개짜리 장르의 1등은
+ * 순위가 아니라 그냥 그 게임 하나다 — 화면이 왕관을 씌우지 않도록 개수를 넘긴다.
+ *
+ * 어제 대비는 **양쪽 날에 다 있는 게임만** 더해서 낸다. 한쪽에만 있는 것을 섞으면
+ * 서로 다른 바구니를 견주게 되어, 게임 하나를 못 가져온 것이 장르가 줄어든 것처럼
+ * 보인다. 짝이 안 맞으면 `paired` 가 `measured` 보다 작아지고 화면이 그 사실을 적는다.
+ *
+ * @returns {{genres:Array, total:number, previousDate:string|null, unit:string}|null}
+ */
+export function byGenre(records, games, date, { previousDate = null } = {}) {
+  const prevDate = previousDate ?? previousDateOf(records, date);
+  const buckets = new Map();
+
+  for (const g of games) {
+    const key = g.genre ?? '분류 없음';
+    if (!buckets.has(key)) {
+      buckets.set(key, {
+        genre: key, listed: 0, rows: [], total: 0,
+        paired: 0, pairedTotal: 0, pairedPrevTotal: 0,
+      });
+    }
+    const b = buckets.get(key);
+    b.listed += 1;
+
+    const series = seriesOf(records, g.appid);
+    const today = series.find((x) => x.date === date);
+    if (!today) continue;                    // 못 잰 게임은 더하지 않는다. 0 으로 채우지 않는다.
+
+    b.rows.push({ appid: g.appid, name: g.name, year: g.year, value: today.value, unit: today.unit });
+    b.total += today.value;
+
+    // 어제 대비는 양쪽 날에 다 있는 게임만 더한다.
+    const before = prevDate ? series.find((x) => x.date === prevDate) : null;
+    if (before) {
+      b.paired += 1;
+      b.pairedTotal += today.value;
+      b.pairedPrevTotal += before.value;
+    }
+  }
+
+  const genres = [...buckets.values()]
+    .filter((b) => b.rows.length > 0)
+    .map((b) => {
+      b.rows.sort((x, y) => y.value - x.value || x.appid - y.appid);
+      const delta = b.paired > 0 ? b.pairedTotal - b.pairedPrevTotal : null;
+      return {
+        genre: b.genre,
+        listed: b.listed,
+        measured: b.rows.length,
+        rows: b.rows,
+        total: b.total,
+        // 1위. 다만 measured 가 1 이면 "1등" 이 아니라 그냥 그 게임 하나다.
+        leader: b.rows[0],
+        // 짝이 맞는 것만으로 낸 변화. 없으면 만들지 않는다.
+        paired: b.paired,
+        delta,
+        percent: delta !== null && b.pairedPrevTotal > 0
+          ? (delta / b.pairedPrevTotal) * 100
+          : null,
+        pairedPrevTotal: b.paired > 0 ? b.pairedPrevTotal : null,
+      };
+    })
+    .sort((a, b) => b.total - a.total || a.genre.localeCompare(b.genre));
+
+  if (genres.length === 0) return null;
+
+  const total = genres.reduce((sum, g) => sum + g.total, 0);
+  for (const g of genres) {
+    g.shareOfMeasured = total > 0 ? (g.total / total) * 100 : null;
+    g.relative = genres[0].total > 0 ? (g.total / genres[0].total) * 100 : null;
+  }
+
+  return { genres, total, previousDate: prevDate, unit: genres[0].rows[0].unit };
+}
+
+/** 그 날짜 바로 앞에 기록이 있는 날. 없으면 null. */
+function previousDateOf(records, date) {
+  const dates = [...new Set(records.map((r) => r.date))].sort();
+  const i = dates.indexOf(date);
+  return i > 0 ? dates[i - 1] : null;
+}
+
+/**
+ * 기록 파일의 게임 표에 지금 코드의 분류를 얹는다.
+ *
+ * 기록 파일은 **잰 것**을 담는다. 장르·tier 는 잰 것이 아니라 우리가 붙인 이름이라
+ * 코드 쪽 표가 최신이다. 나중에 분류를 고치면 지난 기록도 새 분류로 보이는데,
+ * 그게 맞다 — 분류를 바꾼 것이지 그날 잰 값이 바뀐 것이 아니다.
+ *
+ * 반대로 **값과 이어지는 것(appid·name·year)은 파일 것을 그대로 둔다.** 그날
+ * 그 이름으로 쟀다는 사실은 기록이다.
+ *
+ * 코드 표에 없는 게임(뒤에 목록에서 뺀 게임)은 파일 것을 그대로 살린다. 지우면
+ * 그날 잰 값이 화면에서 사라진다.
+ */
+export function withGenres(fileGames, catalog) {
+  const byId = new Map((catalog ?? []).map((g) => [g.appid, g]));
+  return (fileGames ?? []).map((g) => {
+    const known = byId.get(g.appid);
+    return known ? { ...g, genre: known.genre, tier: known.tier ?? g.tier } : { ...g };
+  });
+}

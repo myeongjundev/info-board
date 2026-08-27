@@ -30,30 +30,42 @@ const ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurren
 /**
  * 재는 게임들.
  *
- * tier 는 화면에서 쓰는 분류일 뿐 원자료에는 없다.
- *   active — 지금 현역인 게임
- *   legacy — 나온 지 오래된 게임. "아직 살아 있는가" 를 묻는 자리에 쓴다
+ * tier 와 genre 는 **우리가 붙인 분류다. 원자료에 없다.**
+ *   tier   active — 지금 현역 / legacy — 나온 지 오래된 게임
+ *   genre  아래 GENRES 의 값 하나
+ *
+ * 장르를 손으로 적는 이유는 공식 API 가 장르를 주지 않기 때문이다. 장르를 주는
+ * `store.steampowered.com/api/appdetails` 는 문서화되지 않은 경로라 쓰지 않는다
+ * (CLAUDE.md 5). 이름·연도를 우리가 적어 둔 것과 같은 취급이고, 화면에도
+ * "우리가 붙인 것" 이라고 적는다.
+ *
+ * 경계가 애매한 것은 애매한 대로 둔다. HELLDIVERS 2 는 3인칭이지만 쏘는 게임이라
+ * 슈터에 넣었고, PAYDAY 2 와 Left 4 Dead 2 도 마찬가지다. 이 판단은 우리 것이므로
+ * 화면에서 장르별 합계를 낼 때 **어느 게임이 그 장르에 들었는지 함께 보인다.**
  *
  * 2026-08-27 에 16개 전부 실제로 불러 result:1 을 확인하고 넣었다.
  */
 export const GAMES = [
-  { appid: 730,     name: 'Counter-Strike 2',            year: 2012, tier: 'active' },
-  { appid: 570,     name: 'Dota 2',                      year: 2013, tier: 'active' },
-  { appid: 1623730, name: 'Palworld',                    year: 2024, tier: 'active' },
-  { appid: 578080,  name: 'PUBG: BATTLEGROUNDS',         year: 2017, tier: 'active' },
-  { appid: 1172470, name: 'Apex Legends',                year: 2020, tier: 'active' },
-  { appid: 553850,  name: 'HELLDIVERS 2',                year: 2024, tier: 'active' },
-  { appid: 271590,  name: 'Grand Theft Auto V',          year: 2015, tier: 'active' },
-  { appid: 105600,  name: 'Terraria',                    year: 2011, tier: 'legacy' },
-  { appid: 440,     name: 'Team Fortress 2',             year: 2007, tier: 'legacy' },
-  { appid: 218620,  name: 'PAYDAY 2',                    year: 2013, tier: 'legacy' },
-  { appid: 550,     name: 'Left 4 Dead 2',               year: 2009, tier: 'legacy' },
-  { appid: 4000,    name: "Garry's Mod",                 year: 2006, tier: 'legacy' },
-  { appid: 8930,    name: "Sid Meier's Civilization V",  year: 2010, tier: 'legacy' },
-  { appid: 10,      name: 'Counter-Strike',              year: 2000, tier: 'legacy' },
-  { appid: 620,     name: 'Portal 2',                    year: 2011, tier: 'legacy' },
-  { appid: 72850,   name: 'The Elder Scrolls V: Skyrim', year: 2011, tier: 'legacy' },
+  { appid: 730,     name: 'Counter-Strike 2',            year: 2012, tier: 'active', genre: '슈터' },
+  { appid: 570,     name: 'Dota 2',                      year: 2013, tier: 'active', genre: 'MOBA' },
+  { appid: 1623730, name: 'Palworld',                    year: 2024, tier: 'active', genre: '생존·제작' },
+  { appid: 578080,  name: 'PUBG: BATTLEGROUNDS',         year: 2017, tier: 'active', genre: '슈터' },
+  { appid: 1172470, name: 'Apex Legends',                year: 2020, tier: 'active', genre: '슈터' },
+  { appid: 553850,  name: 'HELLDIVERS 2',                year: 2024, tier: 'active', genre: '슈터' },
+  { appid: 271590,  name: 'Grand Theft Auto V',          year: 2015, tier: 'active', genre: '오픈월드' },
+  { appid: 105600,  name: 'Terraria',                    year: 2011, tier: 'legacy', genre: '생존·제작' },
+  { appid: 440,     name: 'Team Fortress 2',             year: 2007, tier: 'legacy', genre: '슈터' },
+  { appid: 218620,  name: 'PAYDAY 2',                    year: 2013, tier: 'legacy', genre: '슈터' },
+  { appid: 550,     name: 'Left 4 Dead 2',               year: 2009, tier: 'legacy', genre: '슈터' },
+  { appid: 4000,    name: "Garry's Mod",                 year: 2006, tier: 'legacy', genre: '생존·제작' },
+  { appid: 8930,    name: "Sid Meier's Civilization V",  year: 2010, tier: 'legacy', genre: '전략' },
+  { appid: 10,      name: 'Counter-Strike',              year: 2000, tier: 'legacy', genre: '슈터' },
+  { appid: 620,     name: 'Portal 2',                    year: 2011, tier: 'legacy', genre: '퍼즐' },
+  { appid: 72850,   name: 'The Elder Scrolls V: Skyrim', year: 2011, tier: 'legacy', genre: 'RPG' },
 ];
+
+/** 화면에 나오는 순서. 여기 없는 장르가 GAMES 에 있으면 테스트가 잡는다. */
+export const GENRES = ['슈터', 'MOBA', '생존·제작', '오픈월드', '전략', '퍼즐', 'RPG'];
 
 /** 카드 1·5 가 쓰는 대표값. 화면에서 제일 큰 숫자가 이 게임이다. */
 export const HERO_APPID = 730;

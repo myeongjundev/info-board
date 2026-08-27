@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { SOURCE, todayLocal } from '../source/definition.js';
+import { SOURCE, GAMES, todayLocal } from '../source/definition.js';
 import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
-import { movers, graveyard, leaderboard, dayStrip } from '../view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres } from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
@@ -22,6 +22,7 @@ import SectionNav from './SectionNav.jsx';
 import SettingsModal from './SettingsModal.jsx';
 import DayStrip from './DayStrip.jsx';
 import SymbolRail from './SymbolRail.jsx';
+import Genres from './Genres.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 
@@ -32,6 +33,7 @@ const NAV = [
   { id: 'sec-now', label: '현재' },
   { id: 'sec-days', label: '잰 날' },
   { id: 'sec-fault', label: '장애' },
+  { id: 'sec-genre', label: '장르' },
   { id: 'sec-rank', label: '순위' },
   { id: 'sec-move', label: '움직임' },
   { id: 'sec-old', label: '오래된 게임' },
@@ -117,7 +119,9 @@ export default function App() {
   // board.reading 이 그대로 남아 있으므로 시각도 그때 것이 그대로 쓰인다.
   const showing = board && board.state !== STATE.EMPTY ? board : null;
 
-  const games = payload?.data?.games ?? [];
+  // 장르·tier 는 잰 것이 아니라 우리가 붙인 이름이라 코드 표가 최신이다.
+  // 값과 이어지는 이름·연도는 기록 파일 것을 그대로 쓴다.
+  const games = withGenres(payload?.data?.games, GAMES);
   // 화면이 크게 띄운 게임과 목록에서 강조되는 게임은 같아야 한다.
   const selectedAppid = board?.selectedAppid ?? payload?.data?.source?.heroAppid;
 
@@ -204,7 +208,15 @@ export default function App() {
       {/* 3층 — 같은 기록에서 꺼낸 이야기들. API 를 더 붙이지 않았다. */}
       {showing && (
         <>
-          <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 셋은 전부 위와 같은 파일에서 나온다." />
+          <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 넷은 전부 위와 같은 파일에서 나온다." />
+
+          <section className="panel" id="sec-genre" aria-label="장르로 묶어 보기">
+            <h2 className="panel-title">장르로 묶어 보기</h2>
+            <Genres
+              data={byGenre(payload.data.records, games, showing.reading.date)}
+              games={games}
+            />
+          </section>
 
           <div className="columns">
             <section className="panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
@@ -213,7 +225,7 @@ export default function App() {
                   실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
               <h2 className="panel-title">오늘 잰 것 — 사람 수 순</h2>
               <Leaderboard
-                data={leaderboard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                data={leaderboard(payload.data.records, games, showing.reading.date)}
                 heroAppid={selectedAppid}
               />
             </section>
@@ -222,7 +234,7 @@ export default function App() {
               <section className="panel" id="sec-move" aria-label="오른 게임과 내린 게임">
                 <h2 className="panel-title">어제보다 움직인 게임</h2>
                 <Movers
-                  data={movers(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                  data={movers(payload.data.records, games, showing.reading.date)}
                   dates={showing.dates}
                 />
               </section>
@@ -230,7 +242,7 @@ export default function App() {
               <section className="panel" id="sec-old" aria-label="오래된 게임">
                 <h2 className="panel-title">아직 살아 있는가</h2>
                 <Graveyard
-                  rows={graveyard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                  rows={graveyard(payload.data.records, games, showing.reading.date)}
                   date={showing.reading.date}
                 />
               </section>

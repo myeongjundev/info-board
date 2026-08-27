@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   SOURCE, GAMES, HERO_APPID, gameOf, buildUrl,
-  todayLocal, assertMeasurableNow, parse, SchemaError,
+  todayLocal, assertMeasurableNow, parse, SchemaError, GENRES,
 } from '../src/source/definition.js';
 
 // 2026-08-27 01:00 UTC = 2026-08-27 10:00 KST
@@ -89,4 +89,20 @@ test('출처 정의에 단위와 기준 시간대가 있다', () => {
   assert.equal(SOURCE.unit, '명');
   assert.equal(SOURCE.timezone, 'Asia/Seoul');
   assert.ok(SOURCE.measuredAtLocal, '매일 재는 시각이 없다');
+});
+
+test('GAMES 의 모든 장르가 GENRES 에 있다 — 표가 갈라지지 않게', () => {
+  for (const g of GAMES) {
+    assert.ok(GENRES.includes(g.genre), `${g.name} 의 장르 '${g.genre}' 가 GENRES 에 없다`);
+  }
+});
+
+test('GENRES 에 아무 게임도 없는 장르를 두지 않는다', () => {
+  for (const name of GENRES) {
+    assert.ok(GAMES.some((g) => g.genre === name), `장르 '${name}' 에 게임이 하나도 없다`);
+  }
+});
+
+test('모든 게임에 장르가 붙어 있다', () => {
+  for (const g of GAMES) assert.equal(typeof g.genre, 'string', `${g.name} 에 장르가 없다`);
 });

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, dayStrip, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -258,4 +258,124 @@ test('다른 게임 기록이 섞여도 고른 게임만 센다', () => {
   const s = dayStrip(records, 570, '2026-08-28');
   assert.deepEqual(s.cards.map((c) => c.value), [400000, 390000]);
   assert.equal(s.cards[1].delta, -10000);
+});
+
+// ── 장르로 묶기 ───────────────────────────────────────────
+
+const GG = [
+  { appid: 730, name: 'Counter-Strike 2', year: 2012, tier: 'active', genre: '슈터' },
+  { appid: 578080, name: 'PUBG', year: 2017, tier: 'active', genre: '슈터' },
+  { appid: 570, name: 'Dota 2', year: 2013, tier: 'active', genre: 'MOBA' },
+  { appid: 72850, name: 'Skyrim', year: 2011, tier: 'legacy', genre: 'RPG' },
+];
+
+test('장르마다 분류한 개수와 실제로 잰 개수를 따로 준다', () => {
+  // 슈터 2개를 분류했는데 오늘 잰 것은 1개다.
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-27', 570, 400000)];
+  const b = byGenre(records, GG, '2026-08-27');
+  const fps = b.genres.find((g) => g.genre === '슈터');
+  assert.equal(fps.listed, 2);
+  assert.equal(fps.measured, 1);
+  assert.equal(fps.total, 500000);
+});
+
+test('한 개짜리 장르도 1등을 주되 measured 로 그 사실을 알 수 있다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-27', 570, 400000)];
+  const b = byGenre(records, GG, '2026-08-27');
+  const moba = b.genres.find((g) => g.genre === 'MOBA');
+  assert.equal(moba.leader.name, 'Dota 2');
+  assert.equal(moba.measured, 1);   // 1등이 아니라 그냥 하나뿐이다
+});
+
+test('못 가져온 게임은 장르 합계에 0 으로 안 들어간다', () => {
+  const records = [rec('2026-08-27', 730, 500000)];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.genres.length, 1);
+  assert.equal(b.genres[0].genre, '슈터');
+  assert.equal(b.total, 500000);
+});
+
+test('장르 합계 비중의 분모는 잰 것의 합이다', () => {
+  const records = [
+    rec('2026-08-27', 730, 600000), rec('2026-08-27', 578080, 150000),  // 슈터 750000
+    rec('2026-08-27', 570, 250000),                                      // MOBA 250000
+  ];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.total, 1000000);
+  assert.equal(b.genres[0].genre, '슈터');
+  assert.equal(b.genres[0].shareOfMeasured, 75);
+  assert.equal(b.genres[1].shareOfMeasured, 25);
+});
+
+test('어제 대비는 양쪽 날에 다 있는 게임만 더한다', () => {
+  const records = [
+    rec('2026-08-26', 730, 500000), rec('2026-08-27', 730, 550000),   // 짝 맞음
+    rec('2026-08-27', 578080, 900000),                                 // 어제가 없다
+  ];
+  const b = byGenre(records, GG, '2026-08-27');
+  const fps = b.genres.find((g) => g.genre === '슈터');
+  assert.equal(fps.total, 1450000);          // 오늘 합계는 둘 다 센다
+  assert.equal(fps.measured, 2);
+  assert.equal(fps.paired, 1);               // 견줄 수 있는 것은 하나뿐
+  assert.equal(fps.delta, 50000);            // 900000 을 증가로 세지 않는다
+  assert.equal(fps.percent, 10);
+  assert.equal(fps.pairedPrevTotal, 500000);
+});
+
+test('이전 날이 없으면 변화를 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500000)];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.previousDate, null);
+  assert.equal(b.genres[0].delta, null);
+  assert.equal(b.genres[0].percent, null);
+  assert.equal(b.genres[0].paired, 0);
+});
+
+test('바로 앞에 기록이 있는 날을 이전 날로 삼는다 — 달력상 어제가 아니어도', () => {
+  const records = [rec('2026-08-24', 730, 400000), rec('2026-08-27', 730, 440000)];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.previousDate, '2026-08-24');
+  assert.equal(b.genres[0].delta, 40000);
+});
+
+test('장르를 안 적은 게임은 분류 없음 으로 모인다', () => {
+  const games = [{ appid: 730, name: 'CS2', year: 2012, tier: 'active' }];
+  const b = byGenre([rec('2026-08-27', 730, 100)], games, '2026-08-27');
+  assert.equal(b.genres[0].genre, '분류 없음');
+});
+
+test('그 날짜에 잰 것이 없으면 null 이다', () => {
+  assert.equal(byGenre([rec('2026-08-26', 730, 1)], GG, '2026-08-27'), null);
+});
+
+test('이전 합이 0 이면 변화율을 만들지 않는다', () => {
+  const records = [rec('2026-08-26', 730, 0), rec('2026-08-27', 730, 500)];
+  const b = byGenre(records, GG, '2026-08-27');
+  assert.equal(b.genres[0].delta, 500);
+  assert.equal(b.genres[0].percent, null);
+});
+
+test('기록 파일에 장르가 없어도 코드 표에서 얹어 준다', () => {
+  const file = [{ appid: 730, name: 'Counter-Strike 2', year: 2012, tier: 'active' }];
+  const out = withGenres(file, [{ appid: 730, name: 'CS2', year: 2012, tier: 'active', genre: '슈터' }]);
+  assert.equal(out[0].genre, '슈터');
+});
+
+test('값과 이어지는 이름·연도는 파일 것을 지킨다', () => {
+  const file = [{ appid: 730, name: '그날의 이름', year: 2012, tier: 'active' }];
+  const out = withGenres(file, [{ appid: 730, name: '바뀐 이름', year: 1999, tier: 'active', genre: '슈터' }]);
+  assert.equal(out[0].name, '그날의 이름');
+  assert.equal(out[0].year, 2012);
+});
+
+test('코드 표에 없는 게임도 지우지 않는다 — 그날 잰 값이 사라지면 안 된다', () => {
+  const file = [{ appid: 111, name: '뺀 게임', year: 2020, tier: 'active' }];
+  const out = withGenres(file, []);
+  assert.equal(out.length, 1);
+  assert.equal(out[0].name, '뺀 게임');
+  assert.equal(out[0].genre, undefined);
+});
+
+test('빈 입력에도 터지지 않는다', () => {
+  assert.deepEqual(withGenres(null, null), []);
 });
