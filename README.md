@@ -28,8 +28,8 @@
 - 🚀 **어제보다 움직인 게임** — 오른 게임과 내린 게임
 - 💀 **아직 살아 있는가** — 26년 된 게임에 아직 몇 명이 남아 있는가
 
-**API 를 더 붙이지 않았다.** 매일 재는 게임 16개의 같은 기록에서 전부 나온다.
-순위 옆의 %는 **이 16개 안에서의 비중**이다. Steam 전체 동시접속자는 이
+**API 를 더 붙이지 않았다.** 매일 재는 게임 36개의 같은 기록에서 전부 나온다.
+순위 옆의 %는 **이 36개 안에서의 비중**이다. Steam 전체 동시접속자는 이
 엔드포인트가 주지 않으므로 모르고, 모르는 것을 분모로 쓰지 않는다.
 
 ## 왜 이렇게 만드는가
@@ -86,7 +86,7 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
 ```
 GitHub Actions (매일 01:10 UTC)
         ↓
-게임 16개 조회 → 날짜+appid 로 upsert
+게임 36개 조회 → 날짜+appid 로 upsert
         ↓
 data/records.json 에 커밋          ← git 이력이 그대로 감사 로그
         ↓
@@ -107,7 +107,7 @@ git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
 node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 138건
+npm test                   # 단위 테스트 145건
 
 npm install
 npm run dev                # 화면

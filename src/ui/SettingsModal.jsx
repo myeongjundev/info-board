@@ -30,7 +30,7 @@ export default function SettingsModal({ games, selectedAppid, defaultAppid, sour
           <h3>대표값으로 볼 게임</h3>
           <p className="modal-note">
             매일 재는 {games.length}개 중에서 고른다. <b>고른다고 새로 부르지 않는다</b> —
-            16개를 이미 같은 시각에 다 재 뒀고, 어느 줄을 크게 볼지만 바뀐다.
+            {games.length}개를 이미 같은 시각에 다 재 뒀고, 어느 줄을 크게 볼지만 바뀐다.
           </p>
           <ul className="modal-games">
             {games.map((g) => (

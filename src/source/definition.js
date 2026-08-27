@@ -43,29 +43,70 @@ const ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurren
  * 슈터에 넣었고, PAYDAY 2 와 Left 4 Dead 2 도 마찬가지다. 이 판단은 우리 것이므로
  * 화면에서 장르별 합계를 낼 때 **어느 게임이 그 장르에 들었는지 함께 보인다.**
  *
- * 2026-08-27 에 16개 전부 실제로 불러 result:1 을 확인하고 넣었다.
+ * **appid·이름·연도는 전부 우리가 적은 주장이다.** 이 엔드포인트는 숫자만 주고
+ * 이름도 연도도 주지 않는다. 그래서 잘못 짝지으면 화면이 조용히 거짓말을 한다.
+ * 2026-08-27 에 36개 전부 두 가지로 확인했다.
+ *   · 공식 엔드포인트로 불러 result:1 과 사람 수를 받았다 (appid 가 실존한다)
+ *   · 공개 상점 페이지에서 제목과 출시연도를 눈으로 맞췄다 (짝이 맞는다)
+ * 두 번째는 **일회성 개발 확인이고 제품 코드에는 없다.** 리뷰 2-1 검사가 그것을
+ * 지킨다 — src/ 와 scripts/ 어디에도 store 주소가 나오면 안 된다.
  */
 export const GAMES = [
+  // ── 슈터 8 ──
   { appid: 730,     name: 'Counter-Strike 2',            year: 2012, tier: 'active', genre: '슈터' },
-  { appid: 570,     name: 'Dota 2',                      year: 2013, tier: 'active', genre: 'MOBA' },
-  { appid: 1623730, name: 'Palworld',                    year: 2024, tier: 'active', genre: '생존·제작' },
   { appid: 578080,  name: 'PUBG: BATTLEGROUNDS',         year: 2017, tier: 'active', genre: '슈터' },
   { appid: 1172470, name: 'Apex Legends',                year: 2020, tier: 'active', genre: '슈터' },
   { appid: 553850,  name: 'HELLDIVERS 2',                year: 2024, tier: 'active', genre: '슈터' },
-  { appid: 271590,  name: 'Grand Theft Auto V',          year: 2015, tier: 'active', genre: '오픈월드' },
-  { appid: 105600,  name: 'Terraria',                    year: 2011, tier: 'legacy', genre: '생존·제작' },
   { appid: 440,     name: 'Team Fortress 2',             year: 2007, tier: 'legacy', genre: '슈터' },
   { appid: 218620,  name: 'PAYDAY 2',                    year: 2013, tier: 'legacy', genre: '슈터' },
   { appid: 550,     name: 'Left 4 Dead 2',               year: 2009, tier: 'legacy', genre: '슈터' },
-  { appid: 4000,    name: "Garry's Mod",                 year: 2006, tier: 'legacy', genre: '생존·제작' },
-  { appid: 8930,    name: "Sid Meier's Civilization V",  year: 2010, tier: 'legacy', genre: '전략' },
   { appid: 10,      name: 'Counter-Strike',              year: 2000, tier: 'legacy', genre: '슈터' },
-  { appid: 620,     name: 'Portal 2',                    year: 2011, tier: 'legacy', genre: '퍼즐' },
+
+  // ── 생존·제작 8 ──
+  { appid: 1623730, name: 'Palworld',                    year: 2024, tier: 'active', genre: '생존·제작' },
+  { appid: 252490,  name: 'Rust',                        year: 2018, tier: 'active', genre: '생존·제작' },
+  { appid: 892970,  name: 'Valheim',                     year: 2021, tier: 'active', genre: '생존·제작' },
+  { appid: 322330,  name: "Don't Starve Together",       year: 2016, tier: 'active', genre: '생존·제작' },
+  { appid: 251570,  name: '7 Days to Die',               year: 2024, tier: 'active', genre: '생존·제작' },
+  { appid: 105600,  name: 'Terraria',                    year: 2011, tier: 'legacy', genre: '생존·제작' },
+  { appid: 108600,  name: 'Project Zomboid',             year: 2013, tier: 'legacy', genre: '생존·제작' },
+  { appid: 4000,    name: "Garry's Mod",                 year: 2006, tier: 'legacy', genre: '생존·제작' },
+
+  // ── RPG 6 ──
+  { appid: 1245620, name: 'ELDEN RING',                  year: 2022, tier: 'active', genre: 'RPG' },
+  { appid: 1086940, name: "Baldur's Gate 3",             year: 2023, tier: 'active', genre: 'RPG' },
+  { appid: 1091500, name: 'Cyberpunk 2077',              year: 2020, tier: 'active', genre: 'RPG' },
+  { appid: 292030,  name: 'The Witcher 3: Wild Hunt',    year: 2015, tier: 'active', genre: 'RPG' },
+  { appid: 377160,  name: 'Fallout 4',                   year: 2015, tier: 'active', genre: 'RPG' },
   { appid: 72850,   name: 'The Elder Scrolls V: Skyrim', year: 2011, tier: 'legacy', genre: 'RPG' },
+
+  // ── 전략 5 ──
+  { appid: 289070,  name: "Sid Meier's Civilization VI", year: 2016, tier: 'active', genre: '전략' },
+  { appid: 394360,  name: 'Hearts of Iron IV',           year: 2016, tier: 'active', genre: '전략' },
+  { appid: 281990,  name: 'Stellaris',                   year: 2016, tier: 'active', genre: '전략' },
+  { appid: 236850,  name: 'Europa Universalis IV',       year: 2013, tier: 'legacy', genre: '전략' },
+  { appid: 8930,    name: "Sid Meier's Civilization V",  year: 2010, tier: 'legacy', genre: '전략' },
+
+  // ── 오픈월드 3 ──
+  { appid: 271590,  name: 'Grand Theft Auto V',          year: 2015, tier: 'active', genre: '오픈월드' },
+  { appid: 1174180, name: 'Red Dead Redemption 2',       year: 2019, tier: 'active', genre: '오픈월드' },
+  { appid: 1151640, name: 'Horizon Zero Dawn',           year: 2020, tier: 'active', genre: '오픈월드' },
+
+  // ── MOBA 2 ──
+  { appid: 570,     name: 'Dota 2',                      year: 2013, tier: 'active', genre: 'MOBA' },
+  { appid: 386360,  name: 'SMITE',                       year: 2015, tier: 'active', genre: 'MOBA' },
+
+  // ── 퍼즐 2 ──
+  { appid: 620,     name: 'Portal 2',                    year: 2011, tier: 'legacy', genre: '퍼즐' },
+  { appid: 400,     name: 'Portal',                      year: 2007, tier: 'legacy', genre: '퍼즐' },
+
+  // ── 시뮬레이션 2 ──
+  { appid: 255710,  name: 'Cities: Skylines',            year: 2015, tier: 'active', genre: '시뮬레이션' },
+  { appid: 413150,  name: 'Stardew Valley',              year: 2016, tier: 'active', genre: '시뮬레이션' },
 ];
 
 /** 화면에 나오는 순서. 여기 없는 장르가 GAMES 에 있으면 테스트가 잡는다. */
-export const GENRES = ['슈터', 'MOBA', '생존·제작', '오픈월드', '전략', '퍼즐', 'RPG'];
+export const GENRES = ['슈터', '생존·제작', 'RPG', '전략', '오픈월드', 'MOBA', '퍼즐', '시뮬레이션'];
 
 /** 카드 1·5 가 쓰는 대표값. 화면에서 제일 큰 숫자가 이 게임이다. */
 export const HERO_APPID = 730;

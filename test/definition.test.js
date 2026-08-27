@@ -106,3 +106,48 @@ test('GENRES 에 아무 게임도 없는 장르를 두지 않는다', () => {
 test('모든 게임에 장르가 붙어 있다', () => {
   for (const g of GAMES) assert.equal(typeof g.genre, 'string', `${g.name} 에 장르가 없다`);
 });
+
+// 표를 늘리다 생기는 사고를 막는다. appid·이름·연도는 전부 우리가 적은 주장이고,
+// 원자료가 안 주므로 틀려도 API 가 알려주지 않는다. 형식만이라도 기계가 본다.
+
+test('appid 가 겹치지 않는다', () => {
+  const ids = GAMES.map((g) => g.appid);
+  assert.equal(new Set(ids).size, ids.length, '같은 appid 를 두 번 넣었다');
+});
+
+test('appid 는 양의 정수다', () => {
+  for (const g of GAMES) {
+    assert.ok(Number.isInteger(g.appid) && g.appid > 0, `${g.name} 의 appid 가 이상하다`);
+  }
+});
+
+test('이름이 비어 있지 않다', () => {
+  for (const g of GAMES) {
+    assert.equal(typeof g.name, 'string');
+    assert.ok(g.name.trim().length > 0, `appid ${g.appid} 에 이름이 없다`);
+  }
+});
+
+test('이름이 겹치지 않는다 — 붙여넣다 같은 줄을 두 번 넣으면 잡힌다', () => {
+  const names = GAMES.map((g) => g.name);
+  assert.equal(new Set(names).size, names.length);
+});
+
+test('연도가 Steam 이 있던 기간 안이다', () => {
+  const thisYear = new Date().getUTCFullYear();
+  for (const g of GAMES) {
+    assert.ok(Number.isInteger(g.year), `${g.name} 의 연도가 정수가 아니다`);
+    // Steam 은 2003 년에 나왔지만 그 전에 낸 게임(Counter-Strike 2000)도 올라와 있다.
+    assert.ok(g.year >= 1998 && g.year <= thisYear, `${g.name} 의 연도 ${g.year} 가 범위 밖이다`);
+  }
+});
+
+test('tier 는 둘 중 하나다', () => {
+  for (const g of GAMES) {
+    assert.ok(['active', 'legacy'].includes(g.tier), `${g.name} 의 tier 가 이상하다: ${g.tier}`);
+  }
+});
+
+test('대표값 게임이 표 안에 있다', () => {
+  assert.ok(GAMES.some((g) => g.appid === HERO_APPID));
+});
