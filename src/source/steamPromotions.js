@@ -1,3 +1,4 @@
+import { isAdultItem, toDescriptorIds } from './contentDescriptors.js';
 export const MOST_PLAYED_URL = 'https://store.steampowered.com/charts/mostplayed/?cc=KR&l=koreana';
 export const FREE_TO_KEEP_URL = 'https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana';
 
@@ -28,11 +29,15 @@ export function parsePopularPriceResponse(body, chartRow, now = new Date()) {
     || !Number.isInteger(price.discount_percent) || price.final > price.initial
   ) throw new TypeError(`appid ${chartRow.appid} 한국 가격 형식이 잘못됐다`);
   if (price.discount_percent <= 0 || price.final === price.initial) return { kind: 'regular', reading: null };
+  const descriptorIds = toDescriptorIds(data.content_descriptors);
   return {
     kind: 'discount',
     reading: {
       ...chartRow,
       name: data.name,
+      // Steam 이 나이 확인 뒤에 두는 항목. 순위·가격은 그대로, 표시만 접는다.
+      adult: isAdultItem(descriptorIds),
+      descriptorIds,
       imageUrl: typeof data.header_image === 'string' ? data.header_image : null,
       initialMinor: price.initial,
       finalMinor: price.final,

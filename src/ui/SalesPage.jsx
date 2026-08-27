@@ -4,6 +4,7 @@ import { headerUrl } from '../source/artwork.js';
 import { krwFromMinor, validateDiscountSnapshot } from '../source/discounts.js';
 import { remainingLabel, validateEpicFreeSnapshot } from '../source/epicFree.js';
 import { validateFreeToKeepSnapshot, validatePopularDiscountSnapshot } from '../source/steamPromotions.js';
+import { countAdult, displayArt, displayName } from '../view/gameDisplay.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
@@ -264,10 +265,10 @@ export default function SalesPage() {
                 {popularState.data.discounts.map((item) => (
                   <article key={item.appid}>
                     <a className="popular-deal-art" href={item.storeUrl} target="_blank" rel="noreferrer">
-                      <GameArt src={item.imageUrl || headerUrl(item.appid)} width={460} height={215} />
+                      <GameArt src={item.adult ? null : (item.imageUrl || headerUrl(item.appid))} width={460} height={215} />
                       <b>TOP {item.rank}</b><span>-{item.discountPercent}%</span>
                     </a>
-                    <div className="popular-deal-body"><h3>{item.name}</h3><p><del>{formatWon(item.initialMinor)}</del><strong>{formatWon(item.finalMinor)}</strong></p><small>수집 시 동시접속자 {new Intl.NumberFormat('ko-KR').format(item.currentPlayers)}명</small></div>
+                    <div className="popular-deal-body"><h3>{displayName(item)}</h3><p><del>{formatWon(item.initialMinor)}</del><strong>{formatWon(item.finalMinor)}</strong></p><small>수집 시 동시접속자 {new Intl.NumberFormat('ko-KR').format(item.currentPlayers)}명</small></div>
                   </article>
                 ))}
               </div>
@@ -321,7 +322,7 @@ export default function SalesPage() {
                     </a>
                     <div className="deal-body">
                       <div className="deal-meta"><span>{item.genre}</span><span>{item.year}</span></div>
-                      <h2>{item.name}</h2>
+                      <h2>{displayName(item)}</h2>
                       <div className="deal-price">
                         <del>{formatWon(item.initialMinor)}</del>
                         <strong>{formatWon(item.finalMinor)}</strong>

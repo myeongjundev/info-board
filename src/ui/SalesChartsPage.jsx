@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { rankMovement, validateSalesChartSnapshot } from '../source/salesCharts.js';
+import { countAdult, displayArt, displayName } from '../view/gameDisplay.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/sales-charts.json`;
@@ -31,9 +32,25 @@ function monthLabel(iso) {
   return new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: 'long' }).format(new Date(iso));
 }
 
+function monthKeyLabel(key) {
+  const [year, month] = key.split('-').map(Number);
+  return `${year}년 ${month}월`;
+}
+
+function releaseTiming(item, upcoming) {
+  if (!item.releaseDate) return upcoming ? '날짜 미정' : '이번 달 출시';
+  if (!upcoming) return 'NEW RELEASE';
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date());
+  const days = Math.round((Date.parse(`${item.releaseDate}T00:00:00+09:00`) - Date.parse(`${today}T00:00:00+09:00`)) / 86_400_000);
+  return days > 0 ? `D-${days}` : days === 0 ? '오늘 출시' : '일정 확인';
+}
+
 export default function SalesChartsPage() {
   const [state, setState] = useState({ status: 'loading', data: null });
   const [region, setRegion] = useState('korea');
+  const [releaseTab, setReleaseTab] = useState('current');
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
   useEffect(() => {
@@ -50,6 +67,13 @@ export default function SalesChartsPage() {
   }, []);
 
   const liveItems = state.data?.live[region] ?? [];
+  const releaseItems = state.data?.releaseCalendar?.[releaseTab] ?? [];
+  // 접힌 항목이 몇 개인지 화면이 스스로 밝힌다. 조용히 가리면 그것도 숨기는 것이다.
+  const adultOnScreen = countAdult([
+    ...liveItems, ...releaseItems,
+    ...(state.data?.weekly?.items ?? []), ...(state.data?.monthly?.items ?? []),
+  ]);
+  const releaseMonth = state.data?.releaseCalendar?.[releaseTab === 'current' ? 'currentMonth' : 'nextMonth'];
 
   return (
     <div className="page charts-page">
@@ -82,7 +106,7 @@ export default function SalesChartsPage() {
               {liveItems.map((item) => <li key={`${region}-${item.appid}`}>
                 <b className="sales-rank-no">{String(item.rank).padStart(2, '0')}</b>
                 <a className="sales-rank-game" href={item.storeUrl} target="_blank" rel="noreferrer">
-                  <GameArt src={item.imageUrl} width={184} height={86} /><strong>{item.name}</strong>
+                  <GameArt src={displayArt(item)} width={184} height={86} /><strong>{displayName(item)}</strong>
                 </a>
                 <div className="sales-rank-price">{priceLabel(item)}</div>
                 <a className="sales-rank-link" href={item.storeUrl} target="_blank" rel="noreferrer">상점 ↗</a>
@@ -100,13 +124,47 @@ export default function SalesChartsPage() {
                 const movement = rankMovement(item);
                 return <li key={`weekly-${item.appid}`}>
                   <b>{String(item.rank).padStart(2, '0')}</b>
-                  <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={item.imageUrl} width={184} height={86} /><strong>{item.name}</strong></a>
+                  <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={displayArt(item)} width={184} height={86} /><strong>{displayName(item)}</strong></a>
                   <span className={`rank-movement is-${movement.kind}`}>{movement.label}</span>
                   <span className="rank-weeks">{item.consecutiveWeeks}주</span>
                   <div>{priceLabel(item)}</div>
                 </li>;
               })}
             </ol>
+          </section>
+
+          <section className="release-calendar-section" aria-labelledby="release-calendar-title">
+            <header className="charts-section-heading">
+              <div><p>STEAM RELEASE CALENDAR · POPULAR SAMPLE</p><h2 id="release-calendar-title">신작 출시 캘린더</h2><span>한국 상점의 인기 신작·주요 출시 예정작 각 최대 20개</span></div>
+              <a href={state.data.source.releaseCalendar[releaseTab === 'current' ? 'recent' : 'upcoming']} target="_blank" rel="noreferrer">검색 원자료 ↗</a>
+            </header>
+            <div className="release-calendar-tabs" role="tablist" aria-label="출시 월 선택">
+              <button type="button" role="tab" aria-selected={releaseTab === 'current'} className={releaseTab === 'current' ? 'is-active' : ''} onClick={() => setReleaseTab('current')}>
+                {monthKeyLabel(state.data.releaseCalendar.currentMonth)} 신작 <span>{state.data.releaseCalendar.current.length}</span>
+              </button>
+              <button type="button" role="tab" aria-selected={releaseTab === 'upcoming'} className={releaseTab === 'upcoming' ? 'is-active' : ''} onClick={() => setReleaseTab('upcoming')}>
+                {monthKeyLabel(state.data.releaseCalendar.nextMonth)} 출시 예정 <span>{state.data.releaseCalendar.upcoming.length}</span>
+              </button>
+            </div>
+            {releaseItems.length === 0 ? (
+              <p className="release-calendar-empty">{monthKeyLabel(releaseMonth)}에 공개 날짜가 확인된 인기 게임이 없다.</p>
+            ) : (
+              <div className="release-calendar-grid" role="tabpanel">
+                {releaseItems.map((item) => <article key={`${releaseTab}-${item.appid}`}>
+                  <a className="release-calendar-art" href={item.storeUrl} target="_blank" rel="noreferrer">
+                    <GameArt src={displayArt(item)} width={460} height={215} />
+                    <b>{releaseTiming(item, releaseTab === 'upcoming')}</b>
+                  </a>
+                  <div>
+                    <span className="release-calendar-date">{item.releaseLabel}</span>
+                    <h3>{displayName(item)}</h3>
+                    <p>{priceLabel(item)}</p>
+                    <a href={item.storeUrl} target="_blank" rel="noreferrer">{releaseTab === 'upcoming' ? '찜 목록·상점 보기 ↗' : 'Steam에서 보기 ↗'}</a>
+                  </div>
+                </article>)}
+              </div>
+            )}
+            <footer className="release-calendar-foot">Steam 인기 검색 표본 · 전체 출시작 목록이 아님 · 공개된 날짜 표현만 사용</footer>
           </section>
 
           <section className="monthly-releases-section" aria-labelledby="monthly-releases-title">
@@ -116,15 +174,22 @@ export default function SalesChartsPage() {
             </header>
             <div className="monthly-release-grid">
               {state.data.monthly.items.map((item) => <article key={`monthly-${item.appid}`}>
-                <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={item.imageUrl} width={460} height={215} /></a>
-                <div><h3>{item.name}</h3><p>{priceLabel(item)}</p><a href={item.storeUrl} target="_blank" rel="noreferrer">Steam에서 보기 ↗</a></div>
+                <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={displayArt(item)} width={460} height={215} /></a>
+                <div><h3>{displayName(item)}</h3><p>{priceLabel(item)}</p><a href={item.storeUrl} target="_blank" rel="noreferrer">Steam에서 보기 ↗</a></div>
               </article>)}
             </div>
           </section>
 
           <section className="charts-quality-note">
             <div><p>DATA QUALITY</p><h2>순위가 말하지 않는 것</h2></div>
-            <p>현재·주간 차트는 판매 수량이 아니라 매출 순위다. Steam은 판매량과 매출액을 공개하지 않는다. 월간 자료는 해당 월 출시작의 인기 목록이며 전체 게임의 월간 판매 순위도, 항목 사이의 세부 순위도 아니다.</p>
+            <p>현재·주간 차트는 판매 수량이 아니라 매출 순위다. Steam은 판매량과 매출액을 공개하지 않는다. 출시 캘린더는 인기 검색 결과 중 달력 범위에 맞는 최대 20개 표본이며 전체 출시작 목록이 아니다. 월간 자료는 해당 월 출시작의 인기 목록으로 항목 사이의 세부 순위는 제공되지 않는다.</p>
+            <p className="adult-policy-note">
+              Steam이 성인 콘텐츠로 분류한 항목(content descriptor 3·4)은 제목과 표지를 접어서 보여준다.
+              <b> 순위·가격·할인율은 그대로 둔다</b> — 공개된 순위를 지우지 않는다. Steam도 이 항목의 상점
+              페이지를 나이 확인 뒤에 두므로, 접는 쪽이 원본의 표시 방식에 가깝다. 제목을 보려면 상점 링크로
+              가면 되고 확인은 Steam이 한다.
+              {adultOnScreen > 0 && <> 이 화면에서 접힌 항목은 <b>{adultOnScreen}개</b>다.</>}
+            </p>
             <div><a href={state.data.source.korea} target="_blank" rel="noreferrer">한국 Top Sellers ↗</a><a href={state.data.source.global} target="_blank" rel="noreferrer">Global Top Sellers ↗</a></div>
           </section>
         </>}

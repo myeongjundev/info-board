@@ -1,3 +1,6 @@
+import { validateReleaseCalendar } from './releaseCalendar.js';
+import { assertDescriptorsPresent, isAdultItem, toDescriptorIds } from './contentDescriptors.js';
+
 export const SALES_CHART_URLS = {
   korea: 'https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana',
   global: 'https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana',
@@ -51,8 +54,12 @@ function itemReading(appid, rank, items) {
   const finalMinor = Number(price?.final_price_in_cents);
   const initialMinor = Number(price?.original_price_in_cents ?? price?.final_price_in_cents);
   const discountPercent = Number(price?.discount_pct ?? 0);
+  const descriptorIds = toDescriptorIds(item.content_descriptorids);
   return {
     appid, rank, name: item.name,
+    // Steam 이 나이 확인 뒤에 두는 항목이다. 순위·가격은 그대로 두고 표시만 접는다.
+    adult: isAdultItem(descriptorIds),
+    descriptorIds,
     imageUrl: imageFromAssets(item.assets),
     storeUrl: `https://store.steampowered.com/${item.store_url_path ?? `app/${appid}/`}?cc=KR&l=koreana`,
     isFree: item.is_free === true,
@@ -122,6 +129,12 @@ export function buildSalesChartSnapshot(krHtml, globalHtml, overviewHtml, now = 
   if (snapshot.live.korea.length !== 20 || snapshot.live.global.length !== 20 || snapshot.weekly.items.length !== 20) {
     throw new TypeError('Steam 판매 차트 필수 20개가 빠졌다');
   }
+  // 성인 분류를 한 건도 못 읽었으면 응답 형식이 바뀐 것이다. 그대로 두면 접혀야 할
+  // 항목이 조용히 펼쳐진 채 배포된다.
+  assertDescriptorsPresent(
+    [...snapshot.live.korea, ...snapshot.live.global, ...snapshot.weekly.items, ...snapshot.monthly.items],
+    'Steam 판매 차트',
+  );
   return snapshot;
 }
 
@@ -132,6 +145,7 @@ export function validateSalesChartSnapshot(data) {
     data && data.schemaVersion === 1 && Number.isFinite(Date.parse(data.completedAt))
     && data.live?.korea?.length === 20 && data.live?.global?.length === 20
     && data.weekly?.items?.length === 20 && data.monthly?.items?.length > 0
+    && validateReleaseCalendar(data.releaseCalendar)
     && [...data.live.korea, ...data.live.global, ...data.weekly.items, ...data.monthly.items].every(validItem),
   );
 }

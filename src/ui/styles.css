@@ -2208,6 +2208,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 
 .live-sales-section,
 .weekly-sales-section,
+.release-calendar-section,
 .monthly-releases-section { overflow: hidden; margin-bottom: 28px; border: 1px solid var(--border-2); border-radius: 13px; background: var(--surface); }
 .charts-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 23px 25px 20px; border-bottom: 1px solid var(--border); }
 .charts-section-heading > div > p { margin: 0 0 6px; color: #bca8ff; font: 700 9px/1 var(--mono); letter-spacing: .13em; }
@@ -2252,6 +2253,27 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .weekly-rank-list li > div { display: flex; align-items: baseline; justify-content: flex-end; gap: 7px; font-size: 12px; }
 .weekly-rank-list li > div del { color: var(--text-faint); font-size: 9px; }
 
+.release-calendar-tabs { display: flex; gap: 8px; padding: 12px 25px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.012); }
+.release-calendar-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 36px; padding: 0 14px; border: 1px solid var(--border-2); border-radius: 7px; background: transparent; color: var(--text-dim); font: 700 10px/1 var(--sans); cursor: pointer; }
+.release-calendar-tabs button:hover { border-color: #bca8ff; color: #fff; }
+.release-calendar-tabs button.is-active { border-color: rgba(188,168,255,.58); background: rgba(188,168,255,.12); color: #fff; box-shadow: inset 0 -2px #bca8ff; }
+.release-calendar-tabs button span { color: #bca8ff; font: 800 9px/1 var(--mono); }
+.release-calendar-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.release-calendar-grid article { min-width: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.release-calendar-grid article:nth-child(4n) { border-right: 0; }
+.release-calendar-art { position: relative; display: block; aspect-ratio: 460 / 215; overflow: hidden; background: var(--surface-2); }
+.release-calendar-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.release-calendar-art:hover img { transform: scale(1.025); }
+.release-calendar-art b { position: absolute; right: 9px; bottom: 9px; padding: 5px 7px; border-radius: 4px; background: rgba(8,10,14,.9); color: #bca8ff; box-shadow: 0 5px 16px rgba(0,0,0,.35); font: 800 8.5px/1 var(--mono); }
+.release-calendar-grid article > div { padding: 15px 16px 17px; }
+.release-calendar-date { color: #bca8ff; font: 700 9px/1 var(--mono); }
+.release-calendar-grid h3 { min-height: 39px; margin: 8px 0 11px; font-size: 13.5px; line-height: 1.4; overflow-wrap: anywhere; }
+.release-calendar-grid p { display: flex; align-items: baseline; gap: 7px; min-height: 24px; margin: 0; font-size: 13px; }
+.release-calendar-grid p del { color: var(--text-faint); font-size: 9px; }
+.release-calendar-grid article > div > a { display: inline-block; margin-top: 10px; color: #bca8ff; font-size: 9.5px; }
+.release-calendar-foot { display: block; padding: 10px 25px; border-top: 1px solid var(--border); color: var(--text-faint); font-size: 9px; }
+.release-calendar-empty { margin: 0; padding: 42px 24px; color: var(--text-dim); text-align: center; }
+
 .monthly-release-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .monthly-release-grid article { min-width: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .monthly-release-grid article:nth-child(3n) { border-right: 0; }
@@ -2271,6 +2293,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .charts-quality-note > div:last-child a { color: var(--text-faint); font-size: 9.5px; }
 
 @media (max-width: 900px) {
+  .release-calendar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .release-calendar-grid article:nth-child(4n) { border-right: 1px solid var(--border); }
+  .release-calendar-grid article:nth-child(2n) { border-right: 0; }
   .monthly-release-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .monthly-release-grid article:nth-child(3n) { border-right: 1px solid var(--border); }
   .monthly-release-grid article:nth-child(2n) { border-right: 0; }
@@ -2296,6 +2321,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .charts-section-heading > div > span { display: block; margin: 6px 0 0; }
   .region-switch { display: inline-flex; margin-top: 15px; }
   .charts-section-heading > a { display: inline-block; margin-top: 12px; }
+  .release-calendar-tabs { padding: 10px 14px; }
+  .release-calendar-tabs button { flex: 1; min-width: 0; padding: 7px 8px; line-height: 1.35; }
+  .release-calendar-grid { grid-template-columns: 1fr; }
+  .release-calendar-grid article { border-right: 0 !important; }
   .monthly-release-grid { grid-template-columns: 1fr; }
   .monthly-release-grid article { border-right: 0 !important; }
   .sales-rank-price del { display: none; }
@@ -2478,4 +2507,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .stream-rank-panel > header { padding: 20px 18px; }
   .stream-empty { grid-template-columns: 1fr; }
   .stream-empty > span { display: none; }
+}
+
+/* 성인 분류 항목의 접힘 안내. 가린 사실 자체를 화면이 말한다. */
+.adult-policy-note {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--line, #d7d7de);
+  background: var(--surface-2, rgba(0, 0, 0, 0.03));
+  font-size: 13px;
+  line-height: 1.7;
 }
