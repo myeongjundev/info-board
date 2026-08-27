@@ -15,7 +15,11 @@ on:
   # 카드 4·5 의 통과 기준이 "공개 주소에서 보인다" 이므로 그대로 낙제다.
   # 사람이 아무거나 push 하기 전까지 아무도 눈치채지 못한다.
   workflow_run:
-    workflows: ["하루 한 번 기록"]
+    workflows:
+      - "하루 한 번 기록"
+      - "무료 배포 갱신"
+      - "Steam 판매 차트 갱신"
+      - "스트리밍 게임 Top 10 갱신"
     types: [completed]
 
   workflow_dispatch:
