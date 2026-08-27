@@ -28,6 +28,18 @@ const GAP_MS = 200;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function main() {
+  // 날짜 인자를 조용히 무시하지 않는다.
+  //
+  // 앞선 소재에서는 `collect.mjs 2026-08-25` 로 빈 날을 메울 수 있었다. 습관이
+  // 남아 있으면 같은 명령을 치고는 그 날짜가 채워졌다고 믿게 된다. 실제로는
+  // 오늘 값이 들어간다 — 값은 멀쩡한데 사람이 잘못 안다. 그래서 막고 이유를 말한다.
+  if (process.argv[2]) {
+    console.error(`거부 — 날짜 인자를 받지 않는다: ${process.argv[2]}`);
+    console.error('동시접속자는 부르는 순간의 값이라 지나간 날을 잴 수 없다.');
+    console.error('인자 없이 다시 실행하면 오늘 값을 잰다.');
+    return 1;
+  }
+
   const date = todayLocal();
 
   console.log(`대상 날짜   ${date} (${SOURCE.timezone} 기준)`);

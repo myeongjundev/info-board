@@ -5,11 +5,13 @@ on:
     # 매일 01:10 UTC (10:10 KST). 대상은 그 시점 기준 어제(UTC) 하루이므로
     # 자정 직후에 돌려도 대상 날짜는 이미 끝나 있다.
     - cron: '10 1 * * *'
+  # 날짜 입력을 받지 않는다.
+  #
+  # 앞선 소재(하루치 확정 집계)에서는 빈 날을 나중에 메울 수 있어서 `메울 날짜`
+  # 입력이 있었다. 동시접속자는 그럴 수 없다 — 어제 10:10 에 몇 명이었는지는
+  # 그때 재지 않았으면 영영 모르고, 지금 재서 어제 칸에 넣으면 측정이 아니라
+  # 조작이다. 입력칸을 남겨 두면 할 수 있는 일처럼 보이므로 아예 없앤다.
   workflow_dispatch:
-    inputs:
-      date:
-        description: '메울 날짜 (YYYY-MM-DD, UTC). 비우면 어제'
-        required: false
 
 permissions:
   contents: write
@@ -42,7 +44,7 @@ jobs:
 
       # 이 출처는 인증 키를 요구하지 않는다. 저장소에도 워크플로에도 비밀값이 없다.
       - name: 값 재기
-        run: node scripts/collect.mjs ${{ inputs.date }}
+        run: node scripts/collect.mjs
 
       - name: 바뀐 게 있을 때만 커밋
         run: |

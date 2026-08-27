@@ -3,6 +3,21 @@ name: 배포
 on:
   push:
     branches: [main]
+
+  # 수집이 끝나면 배포한다.
+  #
+  # 이게 없으면 조용히 상한다. 수집 워크플로는 기본 GITHUB_TOKEN 으로 커밋하는데,
+  # GITHUB_TOKEN 이 만든 push 는 **새 워크플로 실행을 만들지 않는다** (GitHub 이
+  # 무한 재귀를 막으려고 그렇게 해 두었다). 그래서 저장소의 records.json 은 매일
+  # 늘어나는데 배포된 화면은 첫 배포 때 굳은 파일을 계속 내주게 된다.
+  #
+  # 저장소에는 기록이 2일치인데 공개 주소에는 1일치만 보이는 상태가 된다.
+  # 카드 4·5 의 통과 기준이 "공개 주소에서 보인다" 이므로 그대로 낙제다.
+  # 사람이 아무거나 push 하기 전까지 아무도 눈치채지 못한다.
+  workflow_run:
+    workflows: ["하루 한 번 기록"]
+    types: [completed]
+
   workflow_dispatch:
 
 # Pages 배포에 필요한 것만 준다.
@@ -18,9 +33,18 @@ concurrency:
 
 jobs:
   build:
+    # 수집이 실패했으면 배포하지 않는다. workflow_run 은 성공·실패를 가리지 않고
+    # 완료되면 울리므로 여기서 걸러야 한다.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # workflow_run 으로 깨어났을 때는 기본 참조가 그 실행이 시작된 시점을
+          # 가리킬 수 있다. 방금 들어온 기록을 배포해야 하므로 main 의 최신을 집는다.
+          ref: main
 
       - uses: actions/setup-node@v5
         with:
