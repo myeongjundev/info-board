@@ -2518,3 +2518,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   font-size: 13px;
   line-height: 1.7;
 }
+
+/* 자료의 출처와 가져오는 경로는 다른 주장이다. 갈라 적는다. */
+.source-path-note {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
