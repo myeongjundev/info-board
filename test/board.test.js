@@ -186,3 +186,47 @@ test('7일이 차면 평균을 준다 — 요일 차이를 전일 대비로만 �
   assert.equal(b.average.from, '2026-08-21');
   assert.equal(b.average.to, '2026-08-27');
 });
+
+// ── 대표값 자리에 다른 게임 놓기 ──────────────────────────
+
+test('appid 를 주면 그 게임이 대표값 자리에 온다', () => {
+  const records = [rec('2026-08-27', 730, 551673), rec('2026-08-27', 570, 405221)];
+  const b = buildBoard({ data: data(records), today: '2026-08-27', now: NOW, appid: 570 });
+  assert.equal(b.reading.value, 405221);
+  assert.equal(b.game.name, 'Dota 2');
+  assert.equal(b.selectedAppid, 570);
+});
+
+test('안 주면 기본 대표값이다', () => {
+  const records = [rec('2026-08-27', 730, 551673), rec('2026-08-27', 570, 405221)];
+  const b = buildBoard({ data: data(records), today: '2026-08-27', now: NOW });
+  assert.equal(b.reading.value, 551673);
+  assert.equal(b.selectedAppid, 730);
+});
+
+test('고른 게임의 출처 주소가 그 게임 것이다 — 이름과 링크가 어긋나지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 551673), rec('2026-08-27', 570, 405221)];
+  const b = buildBoard({ data: data(records), today: '2026-08-27', now: NOW, appid: 570 });
+  assert.equal(b.reading.appid, 570);
+  assert.match(b.reading.sourceUrl, /appid=570$/);
+});
+
+test('고른 게임의 비교도 그 게임 것이다', () => {
+  const records = [
+    rec('2026-08-26', 730, 500000), rec('2026-08-27', 730, 551673),
+    rec('2026-08-26', 570, 400000), rec('2026-08-27', 570, 405221),
+  ];
+  const b = buildBoard({ data: data(records), today: '2026-08-27', now: NOW, appid: 570 });
+  assert.equal(b.comparison.delta, 5221);
+});
+
+test('고른 게임에 기록이 없으면 기본값으로 되돌아가지 않는다 — EMPTY 다', () => {
+  // 되돌아가면 화면은 CS2 값을 보여주면서 고른 것은 Dota 2 인 상태가 된다.
+  const records = [rec('2026-08-27', 730, 551673)];
+  const b = buildBoard({ data: data(records), today: '2026-08-27', now: NOW, appid: 570 });
+  assert.equal(b.state, STATE.EMPTY);
+  assert.equal(b.reading, null);
+  // 값이 없어도 무엇을 고른 상태인지는 말할 수 있어야 한다.
+  assert.equal(b.game.name, 'Dota 2');
+  assert.equal(b.selectedAppid, 570);
+});

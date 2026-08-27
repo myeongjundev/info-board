@@ -62,18 +62,30 @@ export function elapsedSince(iso, now = new Date()) {
  * @param {string} p.today  오늘 날짜 (KST). definition.todayLocal() 이 준다
  * @param {Date}   p.now
  */
-export function buildBoard({ data, today, now = new Date() }) {
+/**
+ * `appid` 를 주면 그 게임을 대표값 자리에 놓는다. 안 주면 기본 대표값이다.
+ *
+ * 고른 게임에 기록이 없으면 **기본값으로 되돌아가지 않는다.** EMPTY 를 준다.
+ * 되돌아가면 화면은 CS2 를 보여주면서 고른 것은 Skyrim 인 상태가 되고, 값과
+ * 이름이 어긋난다 — 이 정보판이 막으려는 바로 그 거짓말이다.
+ */
+export function buildBoard({ data, today, now = new Date(), appid = null }) {
   const records = data?.records ?? [];
   const source = data?.source ?? {};
   const games = data?.games ?? [];
-  const heroAppid = source.heroAppid;
+  const heroAppid = appid ?? source.heroAppid;
 
   const series = seriesOf(records, heroAppid);
   const latest = series.at(-1) ?? null;
 
   if (!latest) {
     // 정상값이 한 번도 없으면 숫자를 만들어내지 않는다.
-    return { state: STATE.EMPTY, reading: null, game: null, comparison: null, dates: [], source, elapsed: null };
+    return {
+      state: STATE.EMPTY, reading: null, comparison: null, dates: [], source, elapsed: null,
+      // 이름은 기록이 없어도 안다. 화면이 "무엇을 고른 상태인지" 를 말할 수 있어야 한다.
+      game: games.find((g) => g.appid === heroAppid) ?? null,
+      selectedAppid: heroAppid,
+    };
   }
 
   const state = latest.date === today ? STATE.FRESH : STATE.STALE;
@@ -97,6 +109,8 @@ export function buildBoard({ data, today, now = new Date() }) {
     // 그러면 staleDays 가 음수가 되어 화면에 "-1일 밀림" 같은 말이 나온다.
     // 밀린 것이 아니라 셀 수 없는 것이므로 따로 알린다.
     clockSkew: staleDays < 0,
+    // 지금 대표값 자리에 있는 게임. 기본값과 다를 수 있다.
+    selectedAppid: heroAppid,
   };
 }
 

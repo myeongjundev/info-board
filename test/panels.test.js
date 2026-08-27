@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -202,4 +202,60 @@ test('값이 같으면 appid 로 갈라 순서가 흔들리지 않는다', () =>
   const b = leaderboard(records, GAMES, '2026-08-27');
   assert.deepEqual(b.rows.map((r) => r.appid), [570, 730]);
   assert.deepEqual(b.rows.map((r) => r.rank), [1, 2]);
+});
+
+// ── 날짜 카드 줄 ──────────────────────────────────────────
+
+test('기록이 있는 날짜만 카드가 된다 — 미래 칸을 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-28', 730, 510000)];
+  const s = dayStrip(records, 730, '2026-08-28');
+  assert.deepEqual(s.cards.map((c) => c.date), ['2026-08-27', '2026-08-28']);
+  assert.equal(s.cards.at(-1).isToday, true);
+  assert.equal(s.cards[0].isToday, false);
+});
+
+test('빠진 날의 카드를 만들지 않고 빈 날이 있었다고만 알린다', () => {
+  const records = [
+    rec('2026-08-25', 730, 500000),
+    rec('2026-08-28', 730, 530000),   // 26·27 이 없다
+  ];
+  const s = dayStrip(records, 730, '2026-08-28');
+  assert.equal(s.cards.length, 2);
+  assert.equal(s.cards[1].gapBefore, 2);
+  assert.equal(s.gaps, 1);
+});
+
+test('이어진 날짜면 빈 날이 없다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-28', 730, 510000)];
+  const s = dayStrip(records, 730, '2026-08-28');
+  assert.equal(s.cards[1].gapBefore, 0);
+  assert.equal(s.gaps, 0);
+});
+
+test('첫 카드는 견줄 앞 카드가 없어 차이를 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-28', 730, 510000)];
+  const s = dayStrip(records, 730, '2026-08-28');
+  assert.equal(s.cards[0].delta, null);
+  assert.equal(s.cards[1].delta, 10000);
+});
+
+test('오래된 것부터 잘라 최근 것만 남긴다', () => {
+  const records = ['2026-08-24', '2026-08-25', '2026-08-26'].map((d, i) => rec(d, 730, 100 + i));
+  const s = dayStrip(records, 730, '2026-08-26', { limit: 2 });
+  assert.deepEqual(s.cards.map((c) => c.date), ['2026-08-25', '2026-08-26']);
+});
+
+test('그 게임 기록이 없으면 줄을 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500000)];
+  assert.equal(dayStrip(records, 570, '2026-08-27'), null);
+});
+
+test('다른 게임 기록이 섞여도 고른 게임만 센다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500000), rec('2026-08-27', 570, 400000),
+    rec('2026-08-28', 730, 510000), rec('2026-08-28', 570, 390000),
+  ];
+  const s = dayStrip(records, 570, '2026-08-28');
+  assert.deepEqual(s.cards.map((c) => c.value), [400000, 390000]);
+  assert.equal(s.cards[1].delta, -10000);
 });

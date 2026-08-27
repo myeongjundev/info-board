@@ -151,3 +151,45 @@ export function leaderboard(records, games, date) {
 
   return { rows, total, measured: rows.length, missing, unit: rows[0].unit };
 }
+
+/**
+ * 날짜 카드 줄. MSN 날씨의 `26 어제 · 27 오늘 · 28 금` 가로 스트립에 대응한다.
+ *
+ * **그 참고 화면과 결정적으로 다른 점이 하나 있다.** 날씨는 앞날을 예보로 채우지만
+ * 우리는 **미래 칸을 만들지 않는다.** 동시접속자는 부르는 순간의 값이라 예보가
+ * 없고, 빈 칸을 그려 두면 "곧 채워질 값" 이 아니라 "우리가 아는 척하는 값" 이 된다.
+ *
+ * 지나간 빈 날도 만들지 않는다. 수집이 빠진 날은 영영 빈칸이고, 카드를 그리면
+ * 그날 값을 잰 것처럼 보인다. **기록이 있는 날짜만 카드가 된다.**
+ *
+ * @returns {{cards:Array, gaps:number}|null}
+ */
+export function dayStrip(records, appid, today, { limit = 14 } = {}) {
+  const series = seriesOf(records, appid);
+  if (series.length === 0) return null;
+
+  const recent = series.slice(-limit);
+
+  const cards = recent.map((r, i) => {
+    const prev = i > 0 ? recent[i - 1] : null;
+    return {
+      date: r.date,
+      value: r.value,
+      unit: r.unit,
+      isToday: r.date === today,
+      // 바로 앞 카드 대비. 카드끼리 눈으로 견주는 값이라 series 순서를 따른다.
+      delta: prev ? r.value - prev.value : null,
+      // 앞 카드가 달력상 하루 전이 아니면 사이에 빈 날이 있다는 뜻이다.
+      gapBefore: prev ? daysApart(prev.date, r.date) - 1 : 0,
+    };
+  });
+
+  return { cards, gaps: cards.reduce((n, c) => n + (c.gapBefore > 0 ? 1 : 0), 0) };
+}
+
+function daysApart(from, to) {
+  const a = Date.parse(`${from}T00:00:00Z`);
+  const b = Date.parse(`${to}T00:00:00Z`);
+  if (Number.isNaN(a) || Number.isNaN(b)) return 1;
+  return Math.round((b - a) / 86400000);
+}

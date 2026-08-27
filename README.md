@@ -103,7 +103,7 @@ git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
 node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 105건
+npm test                   # 단위 테스트 117건
 
 npm install
 npm run dev                # 화면

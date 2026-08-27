@@ -7,7 +7,7 @@ import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
-import { movers, graveyard, leaderboard } from '../view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip } from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
@@ -17,8 +17,25 @@ import FaultSwitch from './FaultSwitch.jsx';
 import Movers from './Movers.jsx';
 import Graveyard from './Graveyard.jsx';
 import Leaderboard from './Leaderboard.jsx';
+import TopBar from './TopBar.jsx';
+import SectionNav from './SectionNav.jsx';
+import SettingsModal from './SettingsModal.jsx';
+import DayStrip from './DayStrip.jsx';
+import SymbolRail from './SymbolRail.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
+
+// 구획 나브에 들어가는 줄. 참고한 화면과 달리 **누르면 갈아끼우지 않고 내려간다.**
+// 브리프가 카드 1·5 의 통과 기준을 `한 화면에 보인다` 로 못박아서, 탭 뒤로 숨기면
+// 그 순간 조건이 깨진다. 여기 있는 id 는 전부 같은 페이지에 실제로 있어야 한다.
+const NAV = [
+  { id: 'sec-now', label: '현재' },
+  { id: 'sec-days', label: '잰 날' },
+  { id: 'sec-fault', label: '장애' },
+  { id: 'sec-rank', label: '순위' },
+  { id: 'sec-move', label: '움직임' },
+  { id: 'sec-old', label: '오래된 게임' },
+];
 
 export default function App() {
   const [status, setStatus] = useState('loading');   // loading | ok | fault
@@ -30,6 +47,23 @@ export default function App() {
   const simulate = faultFromSearch(window.location.search);
   // 마지막 정상값조차 없는 상태를 보려면 ?empty=1
   const noLastGood = new URLSearchParams(window.location.search).get('empty') === '1';
+
+  // 대표값 자리에 놓을 게임. 주소에 남겨 둔다 — ?fault= 와 같은 방식이고,
+  // 그래야 "내가 본 화면" 을 링크로 그대로 넘길 수 있다.
+  const [picked, setPicked] = useState(() => {
+    const raw = new URLSearchParams(window.location.search).get('game');
+    const n = Number(raw);
+    return raw !== null && Number.isInteger(n) ? n : null;
+  });
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const pickGame = useCallback((appid) => {
+    setPicked(appid);
+    setSettingsOpen(false);
+    const url = new URL(window.location.href);
+    url.searchParams.set('game', String(appid));
+    window.history.replaceState(null, '', url);
+  }, []);
 
   const load = useCallback(async () => {
     setStatus('loading');
@@ -77,21 +111,40 @@ export default function App() {
   }, []);
 
   const today = todayLocal(now);
-  const board = payload ? buildBoard({ data: payload.data, today, now }) : null;
+  const board = payload ? buildBoard({ data: payload.data, today, now, appid: picked }) : null;
 
   // 장애 중에는 마지막 정상값을 보여주되 잰 시각을 갱신하지 않는다.
   // board.reading 이 그대로 남아 있으므로 시각도 그때 것이 그대로 쓰인다.
   const showing = board && board.state !== STATE.EMPTY ? board : null;
 
+  const games = payload?.data?.games ?? [];
+  // 화면이 크게 띄운 게임과 목록에서 강조되는 게임은 같아야 한다.
+  const selectedAppid = board?.selectedAppid ?? payload?.data?.source?.heroAppid;
+
   return (
     <div className="page">
-      <header className="masthead">
-        <div>
-          <h1 className="wordmark">GAME PULSE</h1>
-          <p>오늘 Steam 에 몇 명이 있는가</p>
-        </div>
-        <StateBadge status={status} board={board} />
-      </header>
+      <TopBar
+        games={games}
+        selectedAppid={selectedAppid}
+        onPick={pickGame}
+        onOpenSettings={() => setSettingsOpen(true)}
+        badge={<StateBadge status={status} board={board} />}
+      />
+
+      <SectionNav items={NAV} />
+
+      <SymbolRail onRefresh={load} busy={status === 'loading'} />
+
+      {settingsOpen && (
+        <SettingsModal
+          games={games}
+          selectedAppid={selectedAppid}
+          defaultAppid={payload?.data?.source?.heroAppid}
+          source={payload?.data?.source}
+          onPick={pickGame}
+          onClose={() => setSettingsOpen(false)}
+        />
+      )}
 
       {simulate && (
         <p className="sim-banner" role="status">
@@ -100,7 +153,7 @@ export default function App() {
         </p>
       )}
 
-      <main className="columns">
+      <main className="columns" id="sec-now">
         <div>
           <section className="panel" aria-label="현재값">
             {status === 'loading' && !showing ? (
@@ -131,7 +184,19 @@ export default function App() {
         </div>
       </main>
 
-      <section className="panel faults" aria-label="장애 재현">
+      {showing && (
+        <section className="panel" id="sec-days" aria-label="날짜 카드">
+          <h2 className="panel-title">
+            잰 날 — {showing.game?.name ?? '대표값'}
+          </h2>
+          <DayStrip
+            strip={dayStrip(payload.data.records, showing.selectedAppid, today)}
+            unit={showing.reading.unit}
+          />
+        </section>
+      )}
+
+      <section className="panel faults" id="sec-fault" aria-label="장애 재현">
         <h2 className="panel-title">장애 재현 — 카드 3</h2>
         <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
       </section>
@@ -142,19 +207,19 @@ export default function App() {
           <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 셋은 전부 위와 같은 파일에서 나온다." />
 
           <div className="columns">
-            <section className="panel" aria-label="오늘 잰 게임 순위">
+            <section className="panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
               {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
                   '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
                   실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
               <h2 className="panel-title">오늘 잰 것 — 사람 수 순</h2>
               <Leaderboard
                 data={leaderboard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
-                heroAppid={payload.data.source?.heroAppid}
+                heroAppid={selectedAppid}
               />
             </section>
 
             <div>
-              <section className="panel" aria-label="오른 게임과 내린 게임">
+              <section className="panel" id="sec-move" aria-label="오른 게임과 내린 게임">
                 <h2 className="panel-title">어제보다 움직인 게임</h2>
                 <Movers
                   data={movers(payload.data.records, payload.data.games ?? [], showing.reading.date)}
@@ -162,7 +227,7 @@ export default function App() {
                 />
               </section>
 
-              <section className="panel" aria-label="오래된 게임">
+              <section className="panel" id="sec-old" aria-label="오래된 게임">
                 <h2 className="panel-title">아직 살아 있는가</h2>
                 <Graveyard
                   rows={graveyard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
