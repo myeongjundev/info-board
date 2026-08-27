@@ -1,0 +1,50 @@
+name: 무료 배포 갱신
+
+on:
+  schedule:
+    # 매시간 17분. Epic 무료 배포는 주간 변경이고 화면의 남은 시간은 브라우저가
+    # 1분마다 계산하므로, 원자료 확인은 시간 단위면 충분하다.
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-epic-free
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: 현재 무료 배포 확인
+        run: node scripts/collect-epic-free.mjs
+
+      - name: Steam 무료 소장 확인
+        run: node scripts/collect-steam-free.mjs
+
+      - name: 바뀐 게 있을 때만 커밋
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/epic-free.json data/steam-free.json; then
+            echo "무료 배포 스냅샷이 그대로다."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/epic-free.json data/steam-free.json
+          git commit -m "data: refresh free game giveaways"
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push 실패 — 원격을 당겨 되감고 다시 시도한다 ($i/3)"
+            git pull --rebase origin main
+          done
+          echo "::error::세 번 시도했으나 push 하지 못했다"
+          exit 1

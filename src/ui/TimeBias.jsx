@@ -60,11 +60,13 @@ export default function TimeBias({ data }) {
         아침이라 낮게 잡히고, 서구권 게임은 저녁이라 높게 잡힌다.
       </p>
 
-      <p className="source-url">
-        표본 {data.measured}개 게임 · 이 표본은 <code>data/timeprobe.json</code> 에
-        따로 쌓이고 <b>날짜별 기록을 건드리지 않는다.</b> 하루에 한 번 같은 시각에
-        재는 규칙은 그대로다 — 그래야 어제와 오늘을 견줄 때 시각 차이가 섞이지 않는다.
-      </p>
+      <details className="method-note">
+        <summary>표본 {data.measured}개 · 별도 시각 표본</summary>
+        <p>
+          이 표본은 <code>data/timeprobe.json</code>에 따로 쌓이고 날짜별 기록을
+          건드리지 않는다. 하루에 한 번 같은 시각에 재는 규칙은 그대로 유지한다.
+        </p>
+      </details>
     </>
   );
 }

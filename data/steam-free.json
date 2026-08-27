@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "scope": "한국 Steam 상점의 상시 무료 제외 100% 할인 게임",
+  "source": {
+    "label": "Steam Store 검색 결과",
+    "url": "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana",
+    "warning": "문서화된 공개 API가 아닌 상점 검색 응답이다."
+  },
+  "completedAt": "2026-08-27T16:12:31.877Z",
+  "giveaways": []
+}

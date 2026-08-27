@@ -1,0 +1,46 @@
+name: Steam 판매 차트 갱신
+
+on:
+  schedule:
+    # 현재 매출 순위가 바뀌므로 매시간 확인한다. 주간·월간 자료도 같은 스냅샷에 묶는다.
+    - cron: '27 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-sales-charts
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Steam 공식 판매 차트 확인
+        run: node scripts/collect-sales-charts.mjs
+
+      - name: 바뀐 게 있을 때만 커밋
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/sales-charts.json; then
+            echo "판매 차트 스냅샷이 그대로다."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sales-charts.json
+          git commit -m "data: refresh Steam sales charts"
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push 실패 — 원격을 당겨 되감고 다시 시도한다 ($i/3)"
+            git pull --rebase origin main
+          done
+          echo "::error::세 번 시도했으나 push 하지 못했다"
+          exit 1

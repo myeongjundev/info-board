@@ -95,20 +95,14 @@ export default function Genres({ data, games, onPickGame }) {
         })}
       </ol>
 
-      <p className="source-url">
-        <b>장르는 원자료가 주지 않는다. 우리가 붙인 것이다.</b> 공식 API 는 장르를
-        주지 않고, 장르를 주는 store 경로는 문서화돼 있지 않아 쓰지 않았다. 그래서
-        이것은 <b>Steam 의 장르 판도가 아니라 우리가 고른 {games.length}개를 우리
-        기준으로 묶은 것</b>이다. %의 분모는 위 값들의 합{' '}
-        <b>{formatNumber(data.total)} {data.unit}</b> 이고, 어느 게임이 어느 장르에
-        들었는지는 각 줄에 그대로 적었다.
-      </p>
-
-      <p className="source-url">
-        <b>장르가 크게 나오는 것이 그 장르가 큰 것은 아니다.</b> 우리가 그 장르에
-        게임을 많이 넣은 것일 수 있다 — 줄마다 게임 수를 함께 적은 이유다.
-        게임을 고른 것도 우리이고, 고를 때 이미 한쪽으로 기울었을 수 있다.
-      </p>
+      <details className="method-note">
+        <summary>자체 분류 · Steam 공식 장르 통계가 아님</summary>
+        <p>
+          장르는 원자료가 주지 않아 우리가 붙였다. 이것은 Steam 전체의 장르 판도가
+          아니라 우리가 고른 {games.length}개를 묶은 결과다. %의 분모는 측정값 합계{' '}
+          <b>{formatNumber(data.total)} {data.unit}</b>이며, 장르별 게임 수를 함께 표시한다.
+        </p>
+      </details>
     </>
   );
 }

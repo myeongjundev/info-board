@@ -46,17 +46,25 @@ jobs:
       - name: 값 재기
         run: node scripts/collect.mjs
 
+      # 가격은 순간 동시접속자와 별개 스냅샷이다. 사용자가 비공식 Store API를
+      # 임시 허용했고, 제출 전 유지 여부를 다시 검토한다 (CLAUDE.md 5-1).
+      - name: 한국 할인 확인
+        run: node scripts/collect-discounts.mjs
+
+      - name: Steam 인기 Top 100 할인 확인
+        run: node scripts/collect-popular-discounts.mjs
+
       - name: 바뀐 게 있을 때만 커밋
         run: |
           set -euo pipefail
-          if git diff --quiet -- data/records.json; then
+          if git diff --quiet -- data/records.json data/discounts.json data/popular-discounts.json; then
             echo "기록이 그대로다. 커밋하지 않는다."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/records.json
-          git commit -m "data: record $(node -e "
+          git add data/records.json data/discounts.json data/popular-discounts.json
+          git commit -m "data: refresh daily snapshots $(node -e "
             const j = require('./data/records.json');
             const hero = j.source.heroAppid;
             const r = j.records.filter(x => x.appid === hero).at(-1);

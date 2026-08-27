@@ -64,7 +64,7 @@ Left 4 Dead 2  25,947 →  17,045    -34%
 
 ### 5. 문서화되지 않은 엔드포인트를 쓰지 않는다
 
-쓰는 것은 하나뿐이다.
+동시접속자 데이터에 쓰는 것은 하나뿐이다. 가격 실험은 5-1의 임시 예외다.
 
 ```
 GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<id>
@@ -90,6 +90,102 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
    그림이 안 온 것이 자료가 안 온 것처럼 보이면 안 된다.
 
 이 경로에서 그림 말고 다른 것을 가져오지 않는다. 테스트가 `.jpg` 만 나가는지 본다.
+
+### 5-1. 임시 실험 예외 — 한국 할인 페이지
+
+**2026-08-27 사용자가 명시적으로 허용했다. 제출 전에 반드시 유지 여부를 다시
+판단한다.** `scripts/collect-discounts.mjs`만 아래 비공식 Store 경로를 쓸 수 있다.
+
+```
+GET https://store.steampowered.com/api/appdetails?appids=<id>&cc=KR&l=koreana
+```
+
+- 목적은 `GAMES` 고정 목록과 수집 당시 Steam 공식 동시접속 상위 100개 중 한국에서
+  현재 할인 중인 게임을 할인 페이지에 서로 구분해 모으는 것이다.
+- 고정 목록을 Steam 전체 할인이라고 부르지 않고, Top 100은 수집 당시 순위임을 적는다.
+- 가격·할인율·통화·국가·appid·출처·조회시각은 하나의 PriceReading으로 묶는다.
+- 실패·가격 없음·무료·정가는 서로 다르다. 실패를 0원이나 0%로 만들지 않는다.
+- 원화 가격은 응답의 1/100원 정수이므로 `initialMinor`·`finalMinor`라고 저장한다.
+- `data/discounts.json`은 현재 스냅샷이고 동시접속자 `records.json`과 섞지 않는다.
+- 성공률이 80% 미만이면 기존 파일을 덮지 않는다.
+- 다른 비공식 Store 경로로 넓히지 않는다.
+
+**제출 전 체크:** 비공식 경로 허용 여부를 과제 평가 기준과 다시 대조한다. 허용하기
+어렵다면 할인 페이지·수집기·워크플로 단계·이 절을 함께 제거한다. 공식 위젯만 남기는
+방안도 있다.
+
+### 5-2. 임시 실험 예외 — Epic 기간 한정 무료 배포
+
+**2026-08-28 사용자가 무료 배포 구역 추가를 요청했다. 제출 전에 반드시 유지 여부를
+다시 판단한다.** 공식 무료 게임 페이지는 자동 요청에 Cloudflare 보안 화면을 반환하므로,
+`scripts/collect-epic-free.mjs`만 아래 공개 프로모션 응답을 쓸 수 있다.
+
+```
+GET https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR
+```
+
+- 한국 Epic Games Store에서 **현재 진행 중인 기간 한정 100% 무료 배포**만 대상으로 한다.
+- 상시 무료 플레이 게임과 아직 시작하지 않은 다음 배포는 섞지 않는다.
+- 제목·원래 가격·통화·시작·종료·이미지·상점 링크·조회시각을 한 Reading으로 묶는다.
+- 수집 장애나 응답 형식 변경을 무료 게임 0개로 만들지 않고 기존 파일을 지킨다.
+- `data/epic-free.json`은 Steam 할인·동시접속자와 섞지 않는 현재 스냅샷이다.
+- 이 경로를 Epic의 문서화된 공식 API라고 부르지 않는다.
+
+**제출 전 체크:** 비공식 응답 허용 여부를 평가 기준과 다시 대조한다. 허용하기 어렵다면
+Epic 무료 배포 UI·수집기·워크플로 단계·이 절을 함께 제거하고 공식 무료 게임 페이지
+링크만 남긴다.
+
+### 5-3. 임시 실험 예외 — Steam 기간 한정 무료 소장
+
+**2026-08-28 사용자가 기간 한정 무료 소장 확인을 요청했다. 제출 전에 유지 여부를
+다시 판단한다.** `scripts/collect-steam-free.mjs`만 Steam 상점 검색 결과 응답을 쓴다.
+
+- `specials=1 · maxprice=free · hidef2p=1 · category1=998` 조건으로 상시 무료와
+  게임 외 항목을 제외한다.
+- 검색 결과에서 정가가 있고 100% 할인된 게임만 무료 소장 후보로 저장한다.
+- 무료 주말처럼 가격이 100% 할인되지 않은 체험은 포함하지 않는다.
+- 검색 결과가 정상적으로 0건이면 `현재 없음`이고, 응답 형식 오류는 기존 파일을 지킨다.
+- 종료 epoch를 상점 페이지에서 확인하지 못하면 임의 시각을 만들지 않는다.
+- 이 검색 응답을 문서화된 Steam Web API라고 부르지 않는다.
+
+### 5-4. Steam 공식 판매 차트 페이지
+
+`scripts/collect-sales-charts.mjs`는 Steam이 공개하는 차트 페이지 세 곳의 서버 렌더링
+데이터를 읽는다. 별도의 판매량이나 매출액을 추정하지 않는다.
+
+```
+https://store.steampowered.com/charts/topselling/KR
+https://store.steampowered.com/charts/topselling/global
+https://store.steampowered.com/charts/
+```
+
+- 현재 차트는 한국·글로벌 각각 매출 Top 20만 저장한다.
+- 주간 차트는 한국 공식 Top 20과 전주 순위·신규 진입·연속 순위권 주차를 저장한다.
+- 월간은 Steam이 공개한 해당 월 인기 신작 목록이다. 전체 게임의 월간 판매 순위나
+  항목별 세부 순위를 만들지 않는다.
+- 차트는 판매 수량 순위가 아니라 매출 순위다. Steam이 공개하지 않은 판매량·매출액은
+  화면과 파일 어디에도 채우지 않는다.
+- 페이지 구조가 바뀌거나 필수 Top 20이 빠지면 기존 스냅샷을 덮지 않는다.
+- 화면에는 조회 시각과 원자료 링크를 함께 둔다.
+
+### 5-5. 공식 스트리밍 게임 Top 10
+
+`scripts/collect-streaming.mjs`는 공식 인증 정보가 연결된 플랫폼만 수집한다. CHZZK와
+Twitch 각각 상위 라이브 방송 100개 표본을 게임 카테고리별로 묶고, 표본 시청자 합계가 큰
+게임 10개만 화면에 표시한다. 이는 플랫폼 전체의 확정 시청률이 아니라 수집 시각의
+상위 방송 표본이다.
+
+- CHZZK: `CHZZK_CLIENT_ID`·`CHZZK_CLIENT_SECRET`으로 공식 `/open/v1/lives`를
+  최대 100개까지 순회한다.
+- Twitch: `TWITCH_CLIENT_ID`·`TWITCH_CLIENT_SECRET`으로 App Access Token을 받은 뒤
+  공식 `helix/streams?first=100`을 읽는다.
+- 게임 카테고리가 아닌 방송, 카테고리 없는 방송은 집계하지 않는다.
+- 인증 부재·수집 실패를 시청자 0명이나 빈 정상 순위로 바꾸지 않는다.
+- Client Secret과 API 키는 저장소 파일에 쓰지 않고 GitHub Actions Secrets로만 넣는다.
+- `data/streaming-history.json`은 플랫폼별 최근 168회 정상 표본만 보존한다. 현재 순위와
+  바로 전 정상 표본 사이에서만 순위·시청자 증감을 계산하고, 첫 표본에는 변화를 만들지 않는다.
+- 두 플랫폼 공통 게임은 동일 제목 또는 검토된 한글·영문 별칭으로만 연결한다. 플랫폼
+  시청자 수를 더하거나 하나의 통합 순위를 만들지 않는다.
 
 ### 6. `LIVE` 라고 쓰지 않는다
 

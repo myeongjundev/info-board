@@ -5,9 +5,10 @@
 
 import { formatNumber } from '../view/board.js';
 import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
+import { steamStoreUrl } from '../source/steamLinks.js';
 import GameArt from './GameArt.jsx';
 
-export default function Leaderboard({ data, heroAppid }) {
+export default function Leaderboard({ data, heroAppid, onShowPrice }) {
   if (!data) {
     return <p className="empty-note">오늘 잰 기록이 없다.</p>;
   }
@@ -22,19 +23,39 @@ export default function Leaderboard({ data, heroAppid }) {
                 대표값 쪽은 하나뿐이라 자리째 접지만, 목록은 그러면 안 된다 —
                 16줄 중 하나만 안 왔을 때 그 줄만 밀리면 그게 더 고장 나 보인다.
                 CDN 이 통째로 막히면 왼쪽에 빈 칸이 남는데, 줄이 어긋나는 것보다 낫다. */}
-            <span className="rank-art-slot">
+            <a
+              className="rank-art-slot rank-art-link"
+              href={steamStoreUrl(r.appid)}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${r.name} Steam 상점 열기`}
+            >
               <GameArt className="rank-art" src={capsuleUrl(r.appid)} width={231} height={87} />
-            </span>
-            <span className="rank-name" title={r.name}>
+            </a>
+            <a
+              className="rank-name steam-game-link"
+              href={steamStoreUrl(r.appid)}
+              target="_blank"
+              rel="noreferrer"
+              title={`${r.name} Steam 상점 열기`}
+            >
               {r.name}
               <span className="rank-year">{r.year}</span>
-            </span>
+            </a>
             <span className="rank-value">
               {formatNumber(r.value)}
               <span className="rank-share">
                 {r.shareOfMeasured === null ? '—' : `${r.shareOfMeasured.toFixed(1)}%`}
               </span>
             </span>
+            <button
+              type="button"
+              className="price-button rank-price-button"
+              onClick={() => onShowPrice(r.appid)}
+              aria-label={`${r.name} 한국 가격과 할인 보기`}
+            >
+              가격
+            </button>
             {/* 막대는 장식이 아니라 눈으로 하는 나눗셈이다. 1등 대비 길이라
                 옆줄과 견주는 것이 곧 값끼리 견주는 것이 된다. 비율을 만들 수
                 없으면(합이 0) 그리지 않는다. */}
@@ -47,14 +68,15 @@ export default function Leaderboard({ data, heroAppid }) {
         ))}
       </ol>
 
-      <p className="source-url">
-        {ARTWORK_NOTE}{' '}
-        <b>%는 이 {data.measured}개 안에서의 비중이다.</b> Steam 전체에서의 비중이
-        아니다 — 전체 동시접속자는 이 엔드포인트가 주지 않으므로 모르고,
-        모르는 것을 분모로 쓰지 않는다. 분모는 위 값들의 합{' '}
-        <b>{formatNumber(data.total)} {data.unit}</b> 이고 손으로 더해 확인할 수 있다.
-        {data.missing > 0 && ` 오늘 못 가져온 ${data.missing}개는 줄에 없다 — 0 으로 채우지 않는다.`}
-      </p>
+      <details className="method-note">
+        <summary>%는 측정한 {data.measured}개 안에서 계산</summary>
+        <p>
+          {ARTWORK_NOTE} Steam 전체 동시접속자는 이 엔드포인트가 주지 않으므로
+          분모로 쓰지 않는다. 분모는 측정값 합계{' '}
+          <b>{formatNumber(data.total)} {data.unit}</b>다.
+          {data.missing > 0 && ` 못 가져온 ${data.missing}개는 0으로 채우지 않고 제외했다.`}
+        </p>
+      </details>
     </>
   );
 }

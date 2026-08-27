@@ -15,6 +15,13 @@ import { resolve } from 'node:path';
 const FILES = [
   { path: 'data/records.json', required: true },
   { path: 'data/timeprobe.json', required: false },
+  { path: 'data/discounts.json', required: true },
+  { path: 'data/streaming.json', required: true },
+  { path: 'data/streaming-history.json', required: true },
+  { path: 'data/epic-free.json', required: true },
+  { path: 'data/popular-discounts.json', required: true },
+  { path: 'data/steam-free.json', required: true },
+  { path: 'data/sales-charts.json', required: true },
 ];
 
 function serveData() {

@@ -28,6 +28,7 @@ import Genres from './Genres.jsx';
 import TimeBias from './TimeBias.jsx';
 import RankMovement from './RankMovement.jsx';
 import DataProof from './DataProof.jsx';
+import StorePriceModal from './StorePriceModal.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -37,15 +38,10 @@ const PROBE_URL = `${import.meta.env.BASE_URL}data/timeprobe.json`;
 // 브리프가 카드 1·5 의 통과 기준을 `한 화면에 보인다` 로 못박아서, 탭 뒤로 숨기면
 // 그 순간 조건이 깨진다. 여기 있는 id 는 전부 같은 페이지에 실제로 있어야 한다.
 const NAV = [
-  { id: 'sec-now', label: '현재' },
-  { id: 'sec-days', label: '잰 날' },
-  { id: 'sec-proof', label: '대조' },
-  { id: 'sec-fault', label: '장애' },
-  { id: 'sec-when', label: '시각' },
-  { id: 'sec-genre', label: '장르' },
-  { id: 'sec-rank', label: '순위' },
-  { id: 'sec-move', label: '움직임' },
-  { id: 'sec-rankmove', label: '순위 이동' },
+  { id: 'sec-now', label: '개요' },
+  { id: 'sec-proof', label: '데이터 품질' },
+  { id: 'sec-when', label: '시각·장르' },
+  { id: 'sec-rank', label: '순위·변화' },
   { id: 'sec-old', label: '오래된 게임' },
 ];
 
@@ -68,6 +64,7 @@ export default function App() {
     return raw !== null && Number.isInteger(n) ? n : null;
   });
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [priceAppid, setPriceAppid] = useState(null);
 
   // 다른 시각 표본. **보조 자료라 실패해도 화면이 멀쩡해야 한다.**
   // 이 파일이 없어도 값·단위·날짜·비교는 하나도 안 바뀐다 — 못 읽으면 그 패널만
@@ -147,6 +144,15 @@ export default function App() {
   const games = withGenres(payload?.data?.games, GAMES);
   // 화면이 크게 띄운 게임과 목록에서 강조되는 게임은 같아야 한다.
   const selectedAppid = board?.selectedAppid ?? payload?.data?.source?.heroAppid;
+  const ranking = showing
+    ? leaderboard(payload.data.records, games, showing.reading.date)
+    : null;
+  // 운영 상태의 분모는 기록 파일에 이미 들어온 게임이 아니라 코드에 확정한 수집 대상이다.
+  // 첫날 파일은 16개뿐이지만 다음 정규 측정 대상은 75개이므로 16/16 이라고 쓰면
+  // 준비가 끝난 것처럼 보인다.
+  const coverage = showing
+    ? leaderboard(payload.data.records, GAMES, showing.reading.date)
+    : null;
 
   return (
     <div className="page">
@@ -173,6 +179,13 @@ export default function App() {
         />
       )}
 
+      {priceAppid !== null && (
+        <StorePriceModal
+          game={games.find((game) => game.appid === priceAppid)}
+          onClose={() => setPriceAppid(null)}
+        />
+      )}
+
       {simulate && (
         <p className="sim-banner" role="status">
           재현 모드 — 실제 자료를 부르지 않고 <b>{simulate}</b> 상태를 만들어 보이는 중이다.
@@ -180,76 +193,152 @@ export default function App() {
         </p>
       )}
 
-      <main className="columns" id="sec-now">
-        <div>
-          <section className="panel" aria-label="현재값">
+      <main id="sec-now">
+        <section className="dashboard-summary" aria-labelledby="dashboard-title">
+          <header className="dashboard-heading">
+            <div>
+              <p className="dashboard-eyebrow">DAILY STEAM CONCURRENCY MONITOR</p>
+              <h2 id="dashboard-title">Steam 동시접속자 일일 현황</h2>
+              <p>매일 같은 시각에 측정한 기록으로 현재 규모와 변화를 확인한다.</p>
+            </div>
+            {showing?.reading && (
+              <p className="dashboard-date">
+                <span>{showing.reading.date}</span>
+                {showing.reading.timezone}
+              </p>
+            )}
+          </header>
+
+          <div className="kpi-grid">
+            <section className="kpi kpi-primary" aria-label="현재 접속자">
+              <h3>현재 접속자</h3>
             {status === 'loading' && !showing ? (
               <div className="skeleton" />
             ) : status === 'fault' && !showing ? (
               <FaultPanel fault={fault} onRetry={load} busy={status === 'loading'} />
             ) : (
-              <HeroValue board={showing} status={status} fault={fault} onRetry={load} />
+              <HeroValue
+                board={showing}
+                status={status}
+                fault={fault}
+                onRetry={load}
+                showTiming={false}
+                showArtwork
+                onShowPrice={() => setPriceAppid(showing.reading.appid)}
+              />
             )}
-          </section>
+            </section>
 
-          <section className="panel" aria-label="이전 기록 대비 변화">
-            <h2 className="panel-title">어제와 비교</h2>
-            <Comparison board={showing} />
-          </section>
-        </div>
+            <section className="kpi" aria-label="이전 측정 대비">
+              <h3>이전 측정 대비</h3>
+              <Comparison board={showing} compact />
+            </section>
 
-        <div>
-          <section className="panel" aria-label="출처">
-            <h2 className="panel-title">출처</h2>
+            <section className="kpi" aria-label="측정 시각">
+              <h3>측정 시각</h3>
+              {showing?.reading ? (
+                <>
+                  <p className="kpi-time">
+                    {formatInstant(showing.reading.fetchedAt, SOURCE.timezone)}
+                  </p>
+                  <p className="kpi-meta">
+                    {showing.elapsed?.text ?? '경과 시간 확인 불가'} · {showing.reading.timezone}
+                  </p>
+                </>
+              ) : (
+                <p className="kpi-empty">정상 측정값 없음</p>
+              )}
+            </section>
+
+            <section className="kpi" aria-label="데이터 상태">
+              <h3>데이터 상태</h3>
+              <div className="kpi-status"><StateBadge status={status} board={board} /></div>
+              <p className="kpi-coverage">
+                <b>{coverage?.measured ?? 0}</b>
+                <span>/ {GAMES.length} games measured</span>
+              </p>
+              {coverage?.missing > 0 && (
+                <p className="kpi-meta">나머지 {coverage.missing}개는 다음 정규 측정 대상</p>
+              )}
+            </section>
+          </div>
+        </section>
+
+        <section className="history-block" aria-labelledby="history-title">
+          <header className="section-heading">
+            <p>MEASUREMENT HISTORY</p>
+            <h2 id="history-title">측정 이력</h2>
+          </header>
+          <div className="history-grid">
+            <section className="panel" aria-label="날짜별 기록">
+              <h3 className="panel-title">날짜별 기록</h3>
+              <RecordList board={showing} data={payload?.data} />
+            </section>
+
+            {showing && (
+              <section className="panel" id="sec-days" aria-label="날짜 카드">
+                <h3 className="panel-title">{showing.game?.name ?? '대표값'} 추이</h3>
+                <DayStrip
+                  strip={dayStrip(payload.data.records, showing.selectedAppid, today)}
+                  unit={showing.reading.unit}
+                />
+              </section>
+            )}
+          </div>
+        </section>
+
+      {/* 2층 — 근거. 심사자가 화면에서 바로 검산하는 자리다. */}
+      <section className="quality-section" id="sec-proof" aria-labelledby="quality-title">
+        <header className="quality-heading">
+          <div>
+            <p>DATA QUALITY</p>
+            <h2 id="quality-title">데이터 품질</h2>
+          </div>
+          <span>출처부터 장애 상태까지 한곳에서 검증</span>
+        </header>
+
+        <div className="quality-grid">
+          <section className="quality-item" aria-label="출처">
+            <h3>01 · 출처</h3>
             <SourceBlock reading={showing?.reading} />
           </section>
 
-          <section className="panel" aria-label="날짜별 기록">
-            <h2 className="panel-title">날짜별 기록</h2>
-            <RecordList board={showing} data={payload?.data} />
+          <section className="quality-item" aria-label="원자료 대조">
+            <h3>02 · 검증 경로</h3>
+            <DataProof board={showing} />
+          </section>
+
+          <section className="quality-item faults" id="sec-fault" aria-label="장애 재현">
+            <h3>03 · 상태 테스트</h3>
+            <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
           </section>
         </div>
-      </main>
-
-      {showing && (
-        <section className="panel" id="sec-days" aria-label="날짜 카드">
-          <h2 className="panel-title">
-            잰 날 — {showing.game?.name ?? '대표값'}
-          </h2>
-          <DayStrip
-            strip={dayStrip(payload.data.records, showing.selectedAppid, today)}
-            unit={showing.reading.unit}
-          />
-        </section>
-      )}
-
-      {/* 2층 — 근거. 심사자가 화면에서 바로 검산하는 자리다. */}
-      <section className="panel" id="sec-proof" aria-label="원자료 대조">
-        <h2 className="panel-title">대조 — 원자료 · 저장값 · 계산값 · 화면값</h2>
-        <DataProof board={showing} />
-      </section>
-
-      <section className="panel faults" id="sec-fault" aria-label="장애 재현">
-        <h2 className="panel-title">장애 재현 — 카드 3</h2>
-        <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
       </section>
 
       {/* 3층 — 같은 기록에서 꺼낸 이야기들. API 를 더 붙이지 않았다. */}
       {showing && (
         <>
-          <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 넷은 전부 위와 같은 파일에서 나온다." />
+          <TierRule label="데이터 인사이트" note="추가 API 없이 동일한 측정 기록에서 계산한 분석이다." />
 
           {/* 재현 모드에서는 안 보인다. 장애를 흉내내는 화면에 멀쩡히 받아온
               보조 자료가 섞이면 무엇이 실패한 것인지 헷갈린다. */}
           {!simulate && (
-            <section className="panel" id="sec-when" aria-label="시각에 따른 차이">
-              <h2 className="panel-title">같은 날, 다른 시각 — 이 숫자의 한계</h2>
+            <section className="panel insight-panel" id="sec-when" aria-label="시각에 따른 차이">
+              <PanelHeading
+                eyebrow="TIME BIAS"
+                title="시간대에 따른 편향"
+                note="같은 날 다른 시각의 실제 측정값 비교"
+              />
               <TimeBias data={timeBias(payload.data.records, probe, games, showing.reading.date)} />
             </section>
           )}
 
-          <section className="panel" id="sec-genre" aria-label="장르로 묶어 보기">
-            <h2 className="panel-title">장르로 묶어 보기</h2>
+          <section className="panel insight-panel" id="sec-genre" aria-label="장르로 묶어 보기">
+            <PanelHeading
+              eyebrow="DISTRIBUTION"
+              title="장르별 구성"
+              note="측정 대상 안에서 장르별 규모를 비교"
+            />
             <Genres
               data={byGenre(payload.data.records, games, showing.reading.date)}
               games={games}
@@ -258,28 +347,41 @@ export default function App() {
           </section>
 
           <div className="columns">
-            <section className="panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
+            <section className="panel insight-panel ranking-panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
               {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
                   '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
                   실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
-              <h2 className="panel-title">오늘 잰 것 — 사람 수 순</h2>
+              <PanelHeading
+                eyebrow="RANKING"
+                title="측정 게임 순위"
+                note="측정 시각의 동시접속자 기준"
+              />
               <Leaderboard
-                data={leaderboard(payload.data.records, games, showing.reading.date)}
+                data={ranking}
                 heroAppid={selectedAppid}
+                onShowPrice={setPriceAppid}
               />
             </section>
 
             <div>
-              <section className="panel" id="sec-move" aria-label="오른 게임과 내린 게임">
-                <h2 className="panel-title">어제보다 움직인 게임</h2>
+              <section className="panel insight-panel" id="sec-move" aria-label="오른 게임과 내린 게임">
+                <PanelHeading
+                  eyebrow="MOVEMENT"
+                  title="이전 측정 대비 변화"
+                  note="양쪽 날짜에 모두 있는 게임만 비교"
+                />
                 <Movers
                   data={movers(payload.data.records, games, showing.reading.date)}
                   dates={showing.dates}
                 />
               </section>
 
-              <section className="panel" id="sec-old" aria-label="오래된 게임">
-                <h2 className="panel-title">아직 살아 있는가</h2>
+              <section className="panel insight-panel" id="sec-old" aria-label="오래된 게임">
+                <PanelHeading
+                  eyebrow="LONGEVITY"
+                  title="장기 생존 게임"
+                  note="출시 13년 이상 게임의 현재 접속자"
+                />
                 <Graveyard
                   rows={graveyard(payload.data.records, games, showing.reading.date)}
                   date={showing.reading.date}
@@ -288,8 +390,12 @@ export default function App() {
             </div>
           </div>
 
-          <section className="panel" id="sec-rankmove" aria-label="순위 이동">
-            <h2 className="panel-title">순위 이동 — 어제와 견줄 수 있는 것만</h2>
+          <section className="panel insight-panel" id="sec-rankmove" aria-label="순위 이동">
+            <PanelHeading
+              eyebrow="RANK MOVEMENT"
+              title="순위 이동"
+              note="비교 가능한 공통 게임만 같은 분모로 계산"
+            />
             <RankMovement
               data={rankMovement(payload.data.records, games, showing.reading.date)}
               onPickGame={pickGame}
@@ -297,6 +403,7 @@ export default function App() {
           </section>
         </>
       )}
+      </main>
 
       <footer className="foot">
         <div>
@@ -330,6 +437,18 @@ function TierRule({ label, note }) {
   );
 }
 
+function PanelHeading({ eyebrow, title, note }) {
+  return (
+    <header className="panel-heading">
+      <div>
+        <p>{eyebrow}</p>
+        <h2>{title}</h2>
+      </div>
+      {note && <span>{note}</span>}
+    </header>
+  );
+}
+
 function StateBadge({ status, board }) {
   if (status === 'loading' && !board) {
     return <span className="badge">읽는 중</span>;
@@ -357,15 +476,23 @@ function SourceBlock({ reading }) {
   }
   return (
     <>
+      <span className="source-kicker">공식 원자료</span>
       <a className="source-link" href={reading.sourceUrl} target="_blank" rel="noreferrer">
         {reading.sourceLabel} ↗
       </a>
-      <p className="source-url">{reading.sourceUrl}</p>
-      <p className="caveat">
-        <b>이 링크는 지금 값을 연다.</b> 동시접속자는 부르는 순간의 사람 수라,
-        위 숫자와 링크 속 숫자는 <b>일치하지 않는다.</b> 위 숫자는{' '}
-        {formatInstant(reading.fetchedAt, SOURCE.timezone)} 에 잰 값이다.
+      <p className="source-url raw-url">{reading.sourceUrl}</p>
+      <p className="source-summary">
+        <b>화면값은 측정 당시 값</b>
+        <span>원자료 링크는 지금 값을 열어 숫자가 다를 수 있다.</span>
       </p>
+      <details className="source-details">
+        <summary>숫자가 다른 이유</summary>
+        <p>
+          동시접속자는 부르는 순간의 사람 수다. 화면 숫자는{' '}
+          <b>{formatInstant(reading.fetchedAt, SOURCE.timezone)}</b>에 저장한 값이고,
+          링크 속 숫자는 현재 값이라 서로 일치하지 않는다.
+        </p>
+      </details>
     </>
   );
 }

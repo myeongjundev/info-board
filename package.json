@@ -5,6 +5,12 @@
   "type": "module",
   "scripts": {
     "collect": "node scripts/collect.mjs",
+    "collect:discounts": "node scripts/collect-discounts.mjs",
+    "collect:epic-free": "node scripts/collect-epic-free.mjs",
+    "collect:popular-discounts": "node scripts/collect-popular-discounts.mjs",
+    "collect:steam-free": "node scripts/collect-steam-free.mjs",
+    "collect:sales-charts": "node scripts/collect-sales-charts.mjs",
+    "collect:streaming": "node scripts/collect-streaming.mjs",
     "test": "node --test test/*.test.js",
     "test:tap": "node --test --test-reporter=tap test/*.test.js",
     "dev": "vite",

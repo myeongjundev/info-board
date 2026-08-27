@@ -2,11 +2,14 @@
 
 import { SOURCE } from '../source/definition.js';
 import { headerUrl } from '../source/artwork.js';
+import { steamStoreUrl } from '../source/steamLinks.js';
 import GameArt from './GameArt.jsx';
 import { formatNumber, formatInstant, STATE } from '../view/board.js';
 import { FAULT_COPY } from '../source/loadRecordsFile.js';
 
-export default function HeroValue({ board, status, fault, onRetry }) {
+export default function HeroValue({
+  board, status, fault, onRetry, onShowPrice, showTiming = true, showArtwork = true,
+}) {
   if (!board || board.state === STATE.EMPTY) {
     // 정상값이 한 번도 없으면 숫자를 만들어내지 않는다.
     return (
@@ -36,34 +39,59 @@ export default function HeroValue({ board, status, fault, onRetry }) {
       )}
 
       {/* 그림은 이름을 대신하지 않는다. 안 오면 이 자리가 통째로 접힌다. */}
-      <GameArt className="hero-art" src={headerUrl(reading.appid)} width={460} height={215} lazy={false} />
+      {showArtwork && (
+        <a
+          className="hero-art-link"
+          href={steamStoreUrl(reading.appid)}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${game?.name ?? `appid ${reading.appid}`} Steam 상점 열기`}
+        >
+          <GameArt className="hero-art" src={headerUrl(reading.appid)} width={460} height={215} lazy={false} />
+        </a>
+      )}
 
       <p className="hero-game">
-        {game?.name ?? `appid ${reading.appid}`}
+        <a
+          className="steam-game-link"
+          href={steamStoreUrl(reading.appid)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {game?.name ?? `appid ${reading.appid}`} ↗
+        </a>
         {game?.year && <span>{game.year}</span>}
       </p>
+
+      {onShowPrice && (
+        <button type="button" className="price-button hero-price-button" onClick={onShowPrice}>
+          한국 가격·할인 보기
+        </button>
+      )}
 
       <div className="hero-value">
         <span className="hero-number">{formatNumber(reading.value)}</span>
         <span className="hero-unit">{reading.unit}</span>
       </div>
 
-      <dl className="timing">
-        <div>
-          <dt>잰 날</dt>
-          <dd>
-            {reading.date}
-            <small>{reading.timezone}</small>
-          </dd>
-        </div>
-        <div>
-          <dt>잰 시각</dt>
-          <dd>
-            {formatInstant(reading.fetchedAt, SOURCE.timezone)}
-            {elapsed && <small>{elapsed.text}</small>}
-          </dd>
-        </div>
-      </dl>
+      {showTiming && (
+        <dl className="timing">
+          <div>
+            <dt>잰 날</dt>
+            <dd>
+              {reading.date}
+              <small>{reading.timezone}</small>
+            </dd>
+          </div>
+          <div>
+            <dt>잰 시각</dt>
+            <dd>
+              {formatInstant(reading.fetchedAt, SOURCE.timezone)}
+              {elapsed && <small>{elapsed.text}</small>}
+            </dd>
+          </div>
+        </dl>
+      )}
 
       {board.clockSkew ? (
         <p className="caveat">

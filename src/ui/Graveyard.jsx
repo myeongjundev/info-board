@@ -11,7 +11,7 @@ export default function Graveyard({ rows, date }) {
 
   return (
     <>
-      <table className="records">
+      <table className="records longevity-table">
         <thead>
           <tr>
             <th>게임</th>
@@ -39,11 +39,13 @@ export default function Graveyard({ rows, date }) {
         </tbody>
       </table>
 
-      <p className="source-url">
-        <b>오른쪽 말은 원자료가 아니라 우리가 붙인 분류다.</b> 기준은 이것뿐이고
-        손으로 확인할 수 있다 —{' '}
-        {ALIVE_RULE.map((r) => `${formatNumber(r.min)}명 이상 → ${r.label}`).join(' · ')}.
-      </p>
+      <details className="method-note">
+        <summary>생존 상태는 자체 기준</summary>
+        <p>
+          오른쪽 상태 문구는 원자료가 아니라 우리가 붙인 분류다. 기준은{' '}
+          {ALIVE_RULE.map((r) => `${formatNumber(r.min)}명 이상 → ${r.label}`).join(' · ')}이다.
+        </p>
+      </details>
     </>
   );
 }

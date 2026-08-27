@@ -1,6 +1,6 @@
 // 출처 정의 — 이 파일 하나만 바꾸면 다른 데이터로 옮길 수 있게 둔다.
 //
-// 쓰는 엔드포인트는 하나뿐이다.
+// 동시접속자 데이터가 쓰는 엔드포인트는 하나뿐이다.
 //
 //   GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<id>
 //   → {"response":{"player_count":551673,"result":1}}
@@ -35,8 +35,9 @@ const ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurren
  *   genre  아래 GENRES 의 값 하나
  *
  * 장르를 손으로 적는 이유는 공식 API 가 장르를 주지 않기 때문이다. 장르를 주는
- * `store.steampowered.com/api/appdetails` 는 문서화되지 않은 경로라 쓰지 않는다
- * (CLAUDE.md 5). 이름·연도를 우리가 적어 둔 것과 같은 취급이고, 화면에도
+ * 장르를 얻기 위해 `store.steampowered.com/api/appdetails` 를 쓰지 않는다.
+ * 할인 페이지가 같은 경로를 쓰는 것은 가격에만 한정한 임시 예외다(CLAUDE.md 5-1).
+ * 이름·연도를 우리가 적어 둔 것과 같은 취급이고, 화면에도
  * "우리가 붙인 것" 이라고 적는다.
  *
  * 경계가 애매한 것은 애매한 대로 둔다. HELLDIVERS 2 는 3인칭이지만 쏘는 게임이라
@@ -49,7 +50,8 @@ const ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurren
  *   · 공식 엔드포인트로 불러 result:1 과 사람 수를 받았다 (appid 가 실존한다)
  *   · 공개 상점 페이지에서 제목과 출시연도를 눈으로 맞췄다 (짝이 맞는다)
  * 두 번째는 **일회성 개발 확인이고 제품 코드에는 없다.** 리뷰 2-1 검사가 그것을
- * 지킨다 — src/ 와 scripts/ 어디에도 store 주소가 나오면 안 된다.
+ * 지킨다. 할인 실험 전에는 src/ 와 scripts/ 어디에도 store API 주소가 없었다.
+ * 지금은 `src/source/discounts.js` 한 곳만 CLAUDE.md 5-1 예외로 허용한다.
  *
  * 그 확인이 실제로 셋을 잡았다. 기억으로 적었으면 그대로 화면에 나갔을 것들이다.
  *   · 594570 을 `Total War: THREE KINGDOMS` 로 알고 있었다 → 실제는 `WARHAMMER II`

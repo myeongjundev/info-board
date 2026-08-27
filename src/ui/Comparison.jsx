@@ -2,7 +2,7 @@
 
 import { formatNumber, crosscheckRows, STATE } from '../view/board.js';
 
-export default function Comparison({ board }) {
+export default function Comparison({ board, compact = false }) {
   if (!board || board.state === STATE.EMPTY) {
     return <p className="delta-none">정상값이 없어 비교하지 않는다.</p>;
   }
@@ -11,6 +11,14 @@ export default function Comparison({ board }) {
 
   if (!x) {
     // 비교할 이전 기록이 없다. 변화값을 만들어내지 않는다.
+    if (compact) {
+      return (
+        <div className="kpi-no-comparison">
+          <strong>비교 준비 중</strong>
+          <span>{board.dates.length}일치 기록 · 다음 측정 후 활성화</span>
+        </div>
+      );
+    }
     return (
       <p className="delta-none">
         비교할 이전 기록이 아직 없다. 기록이 <b>{board.dates.length}일치</b>뿐이라
@@ -20,6 +28,19 @@ export default function Comparison({ board }) {
   }
 
   const sign = x.delta > 0 ? '+' : '';
+
+  if (compact) {
+    return (
+      <>
+        <p className={`delta is-${x.direction}`}>
+          <span>{x.arrow}</span>
+          <span>{sign}{formatNumber(x.delta)} {x.unit}</span>
+          {x.percent !== null && <small>{sign}{x.percent.toFixed(2)}%</small>}
+        </p>
+        <p className="kpi-meta">기준 {x.previous.date}</p>
+      </>
+    );
+  }
 
   return (
     <>

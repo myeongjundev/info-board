@@ -17,8 +17,8 @@ export default function Movers({ data, dates }) {
   return (
     <>
       <div className="movers">
-        <MoverColumn kind="up" title="🚀 오른 게임" rows={data.risers} />
-        <MoverColumn kind="down" title="📉 내린 게임" rows={data.fallers} />
+        <MoverColumn kind="up" title="상승" rows={data.risers} />
+        <MoverColumn kind="down" title="하락" rows={data.fallers} />
       </div>
       <p className="source-url">
         <b>{data.previousDate}</b> 기록과 견줬다. 우리가 재는 <b>{data.compared}개</b> 중에서

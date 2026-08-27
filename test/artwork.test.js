@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { capsuleUrl, headerUrl, ARTWORK_NOTE } from '../src/source/artwork.js';
+import { steamStoreUrl, steamWidgetUrl } from '../src/source/steamLinks.js';
 import { GAMES } from '../src/source/definition.js';
 
 test('appid 로 주소를 만든다', () => {
@@ -13,12 +14,19 @@ test('appid 로 주소를 만든다', () => {
     headerUrl(730),
     'https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg',
   );
+  assert.equal(steamStoreUrl(730), 'https://store.steampowered.com/app/730/');
+  assert.equal(
+    steamWidgetUrl(730),
+    'https://store.steampowered.com/widget/730/?cc=KR&l=koreana',
+  );
 });
 
 test('재는 게임 전부에 대해 주소가 만들어진다', () => {
   for (const g of GAMES) {
     assert.match(capsuleUrl(g.appid), /^https:\/\/cdn\.cloudflare\.steamstatic\.com\/steam\/apps\/\d+\/capsule_231x87\.jpg$/);
     assert.match(headerUrl(g.appid), /^https:\/\/cdn\.cloudflare\.steamstatic\.com\/steam\/apps\/\d+\/header\.jpg$/);
+    assert.match(steamStoreUrl(g.appid), /^https:\/\/store\.steampowered\.com\/app\/\d+\/$/);
+    assert.match(steamWidgetUrl(g.appid), /^https:\/\/store\.steampowered\.com\/widget\/\d+\/\?cc=KR&l=koreana$/);
   }
 });
 
