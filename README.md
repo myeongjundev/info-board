@@ -138,7 +138,7 @@ data/           진실의 원천
 | [docs/VERIFY.md](docs/VERIFY.md) | 검증 안내서 — 30초, 3단계 |
 | [docs/CROSSCHECK.md](docs/CROSSCHECK.md) | 원자료·저장값·계산값·화면값 대조표 |
 | [CLAUDE.md](CLAUDE.md) | 작업 규칙 — 깨면 안 되는 7가지 |
-| [work-log/](work-log/) | 날짜별 작업 기록과 인계 문서 |
+| [work-log/](work-log/README.md) | **작업 기록 목차 — 이어서 작업할 때 여기서 시작** |
 | [docs/research/](docs/research/) | 소재를 고르며 남긴 조사 기록 |
 
 ---
