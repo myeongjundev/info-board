@@ -17,6 +17,14 @@ grep -rnE "\|\| *0|\?\? *0|catch.*return 0" src/ scripts/ --include="*.js"
 # 2. 비공식 엔드포인트
 grep -rnE "store\.steampowered|appdetails|appreviews|ISteamCharts" src/ scripts/ --include="*.js"
 
+# 2-1. 표지 그림 예외가 넓어지지 않았는가 — CLAUDE.md 5 의 유일한 예외다.
+#   steamstatic 은 src/source/artwork.js 에서만 나와야 한다.
+#   다른 파일이 뱉으면 예외가 새어 나간 것이다.
+grep -rln "steamstatic" src/ scripts/ --include="*.js" --include="*.jsx"
+
+#   그림을 fetch 로 가져오면 값 경로가 될 수 있다. 한 줄도 나오면 안 된다.
+grep -rn "fetch(.*steamstatic" src/ scripts/ --include="*.js" --include="*.jsx"
+
 # 3. LIVE 표기
 grep -rniE "\bLIVE\b|right now|실시간" src/ui/ --include="*.jsx" --include="*.js"
 

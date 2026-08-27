@@ -76,6 +76,9 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
 표에 적었고, 원자료와 잇는 열쇠는 appid 다. 이름을 얻자고 문서화되지 않은
 `store.steampowered.com` 경로를 부르지 않는다.
 
+표지 그림만 Steam CDN 에서 온다 — 값이 아니라 그림이고, 안 오면 조용히 사라진다.
+규칙과 조건은 [CLAUDE.md](CLAUDE.md) 5번에 예외로 적었다.
+
 비밀값은 없다. **SECRET COUNT = 0** — 검사 내역은 [대조표](docs/CROSSCHECK.md) 5절.
 
 ## 어떻게 도는가
@@ -104,7 +107,7 @@ git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
 node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 134건
+npm test                   # 단위 테스트 138건
 
 npm install
 npm run dev                # 화면

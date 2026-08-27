@@ -4,6 +4,8 @@
 // 꺼져 있어도 여기는 채워진다 — 재놓고 안 보여주던 15개를 꺼내는 자리다.
 
 import { formatNumber } from '../view/board.js';
+import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
+import GameArt from './GameArt.jsx';
 
 export default function Leaderboard({ data, heroAppid }) {
   if (!data) {
@@ -16,6 +18,13 @@ export default function Leaderboard({ data, heroAppid }) {
         {data.rows.map((r) => (
           <li key={r.appid} className={r.appid === heroAppid ? 'is-hero' : undefined}>
             <span className="rank-no">{r.rank}</span>
+            {/* 자리는 남기고 그림만 사라진다.
+                대표값 쪽은 하나뿐이라 자리째 접지만, 목록은 그러면 안 된다 —
+                16줄 중 하나만 안 왔을 때 그 줄만 밀리면 그게 더 고장 나 보인다.
+                CDN 이 통째로 막히면 왼쪽에 빈 칸이 남는데, 줄이 어긋나는 것보다 낫다. */}
+            <span className="rank-art-slot">
+              <GameArt className="rank-art" src={capsuleUrl(r.appid)} width={231} height={87} />
+            </span>
             <span className="rank-name" title={r.name}>
               {r.name}
               <span className="rank-year">{r.year}</span>
@@ -39,6 +48,7 @@ export default function Leaderboard({ data, heroAppid }) {
       </ol>
 
       <p className="source-url">
+        {ARTWORK_NOTE}{' '}
         <b>%는 이 {data.measured}개 안에서의 비중이다.</b> Steam 전체에서의 비중이
         아니다 — 전체 동시접속자는 이 엔드포인트가 주지 않으므로 모르고,
         모르는 것을 분모로 쓰지 않는다. 분모는 위 값들의 합{' '}

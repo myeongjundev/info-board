@@ -1,6 +1,8 @@
 // 대표값 — 카드 1. 값·단위·출처·잰 시각이 한 자리에서 나온다.
 
 import { SOURCE } from '../source/definition.js';
+import { headerUrl } from '../source/artwork.js';
+import GameArt from './GameArt.jsx';
 import { formatNumber, formatInstant, STATE } from '../view/board.js';
 import { FAULT_COPY } from '../source/loadRecordsFile.js';
 
@@ -32,6 +34,9 @@ export default function HeroValue({ board, status, fault, onRetry }) {
           잰 시각을 지금으로 바꾸지 않는다.
         </p>
       )}
+
+      {/* 그림은 이름을 대신하지 않는다. 안 오면 이 자리가 통째로 접힌다. */}
+      <GameArt className="hero-art" src={headerUrl(reading.appid)} width={460} height={215} lazy={false} />
 
       <p className="hero-game">
         {game?.name ?? `appid ${reading.appid}`}
