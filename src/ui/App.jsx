@@ -7,7 +7,9 @@ import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias } from '../view/panels.js';
+import {
+  movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement,
+} from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
@@ -24,6 +26,8 @@ import DayStrip from './DayStrip.jsx';
 import SymbolRail from './SymbolRail.jsx';
 import Genres from './Genres.jsx';
 import TimeBias from './TimeBias.jsx';
+import RankMovement from './RankMovement.jsx';
+import DataProof from './DataProof.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -35,11 +39,13 @@ const PROBE_URL = `${import.meta.env.BASE_URL}data/timeprobe.json`;
 const NAV = [
   { id: 'sec-now', label: '현재' },
   { id: 'sec-days', label: '잰 날' },
+  { id: 'sec-proof', label: '대조' },
   { id: 'sec-fault', label: '장애' },
   { id: 'sec-when', label: '시각' },
   { id: 'sec-genre', label: '장르' },
   { id: 'sec-rank', label: '순위' },
   { id: 'sec-move', label: '움직임' },
+  { id: 'sec-rankmove', label: '순위 이동' },
   { id: 'sec-old', label: '오래된 게임' },
 ];
 
@@ -217,6 +223,12 @@ export default function App() {
         </section>
       )}
 
+      {/* 2층 — 근거. 심사자가 화면에서 바로 검산하는 자리다. */}
+      <section className="panel" id="sec-proof" aria-label="원자료 대조">
+        <h2 className="panel-title">대조 — 원자료 · 저장값 · 계산값 · 화면값</h2>
+        <DataProof board={showing} />
+      </section>
+
       <section className="panel faults" id="sec-fault" aria-label="장애 재현">
         <h2 className="panel-title">장애 재현 — 카드 3</h2>
         <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
@@ -275,6 +287,14 @@ export default function App() {
               </section>
             </div>
           </div>
+
+          <section className="panel" id="sec-rankmove" aria-label="순위 이동">
+            <h2 className="panel-title">순위 이동 — 어제와 견줄 수 있는 것만</h2>
+            <RankMovement
+              data={rankMovement(payload.data.records, games, showing.reading.date)}
+              onPickGame={pickGame}
+            />
+          </section>
         </>
       )}
 

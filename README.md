@@ -20,6 +20,7 @@
 - 원자료 주소 — 누르면 실제 응답이 열린다
 - 이전 기록과의 차이·방향·단위, 그리고 **손계산 식**
 - 날짜별 기록 — 같은 날짜가 중복되지 않는다
+- **대조** — 원자료·저장값·계산값·화면값을 접이식으로 편다. 손계산이 그 자리에서 맞는다
 
 그 아래에 이야기가 넷 더 있다.
 
@@ -108,7 +109,7 @@ git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
 node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 154건
+npm test                   # 단위 테스트 162건
 
 npm install
 npm run dev                # 화면

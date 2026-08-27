@@ -370,3 +370,77 @@ export function timeBias(records, probe, games, date) {
 
   return { rows, recordAt, probeAt: sample.at, measured: rows.length };
 }
+
+/**
+ * 어제와 오늘의 순위 이동.
+ *
+ * **양쪽 날에 다 있는 게임만으로 양쪽 순위를 다시 매긴다.** 이게 이 함수의 전부다.
+ *
+ * 그냥 그날의 전체 순위끼리 견주면 안 된다. 재는 게임을 16개에서 75개로 늘린
+ * 다음 날, 어제 16개 중 3위였던 게임이 오늘 75개 중 20위가 된다. 이건 하락이
+ * 아니라 **분모가 바뀐 것**인데 화면에는 `▼17` 로 나온다. 값은 멀쩡한데 화면이
+ * 거짓말을 하는, 이 정보판이 잡아내려는 바로 그 종류다.
+ *
+ * 그래서 교집합 안에서만 순위를 매기고, 그 개수(`basis`)를 화면이 적는다.
+ * 순위 매기는 규칙은 leaderboard 와 같다 — 사람 수 내림차순, 같으면 appid.
+ *
+ * `movement` 는 **양수가 올라간 것**이다. 순위는 숫자가 작아지는 것이 상승이라
+ * `previousRank - currentRank` 로 낸다.
+ *
+ * @returns {{rows:Array, basis:number, previousDate:string, excludedToday:number, excludedBefore:number}|null}
+ */
+export function rankMovement(records, games, date, { previousDate = null } = {}) {
+  const prevDate = previousDate ?? previousDateOf(records, date);
+  if (!prevDate) return null;
+
+  const both = [];
+  let excludedToday = 0;
+  let excludedBefore = 0;
+
+  for (const g of games) {
+    const series = seriesOf(records, g.appid);
+    const now = series.find((x) => x.date === date);
+    const before = series.find((x) => x.date === prevDate);
+    if (now && before) {
+      both.push({ appid: g.appid, name: g.name, genre: g.genre, now, before, unit: now.unit });
+    } else if (now) {
+      excludedToday += 1;      // 오늘은 있는데 어제가 없다 — 순위 이동을 낼 수 없다
+    } else if (before) {
+      excludedBefore += 1;     // 어제는 있는데 오늘이 없다
+    }
+  }
+
+  if (both.length === 0) return null;
+
+  const rankOf = (key) => {
+    const sorted = [...both].sort((a, b) => b[key].value - a[key].value || a.appid - b.appid);
+    const map = new Map();
+    sorted.forEach((r, i) => map.set(r.appid, i + 1));
+    return map;
+  };
+
+  const nowRank = rankOf('now');
+  const beforeRank = rankOf('before');
+
+  const rows = both.map((r) => {
+    const currentRank = nowRank.get(r.appid);
+    const previousRank = beforeRank.get(r.appid);
+    return {
+      appid: r.appid,
+      name: r.name,
+      genre: r.genre,
+      unit: r.unit,
+      currentRank,
+      previousRank,
+      // 양수가 올라간 것이다. 순위는 숫자가 작아지는 쪽이 상승이다.
+      movement: previousRank - currentRank,
+      currentValue: r.now.value,
+      previousValue: r.before.value,
+      delta: r.now.value - r.before.value,
+    };
+  });
+
+  rows.sort((a, b) => a.currentRank - b.currentRank);
+
+  return { rows, basis: both.length, previousDate: prevDate, excludedToday, excludedBefore };
+}

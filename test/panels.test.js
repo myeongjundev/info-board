@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -461,4 +461,86 @@ test('그 날짜 기록이 없으면 만들지 않는다', () => {
   const records = [rec('2026-08-26', 730, 100)];
   const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110 });
   assert.equal(timeBias(records, probe, GAMES, '2026-08-27'), null);
+});
+
+// ── 순위 이동 ─────────────────────────────────────────────
+
+test('양수가 올라간 것이다 — 순위는 숫자가 작아지는 쪽이 상승이다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500), rec('2026-08-27', 570, 900),   // 어제: 570 1위, 730 2위
+    rec('2026-08-28', 730, 900), rec('2026-08-28', 570, 500),   // 오늘: 730 1위, 570 2위
+  ];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  const cs = m.rows.find((r) => r.appid === 730);
+  assert.equal(cs.previousRank, 2);
+  assert.equal(cs.currentRank, 1);
+  assert.equal(cs.movement, 1);
+  const dota = m.rows.find((r) => r.appid === 570);
+  assert.equal(dota.movement, -1);
+});
+
+// 이 테스트 하나가 이 함수의 존재 이유다.
+test('분모가 바뀐 것을 하락으로 만들지 않는다', () => {
+  const records = [
+    // 어제는 두 개만 쟀다. 730 이 2위였다.
+    rec('2026-08-27', 570, 900), rec('2026-08-27', 730, 500),
+    // 오늘은 다섯 개를 쟀고 730 은 여전히 570 다음이다.
+    rec('2026-08-28', 570, 900), rec('2026-08-28', 730, 500),
+    rec('2026-08-28', 550, 800), rec('2026-08-28', 10, 700), rec('2026-08-28', 72850, 600),
+  ];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  // 교집합은 둘뿐이다. 그 안에서 730 은 어제도 오늘도 2위다.
+  assert.equal(m.basis, 2);
+  assert.equal(m.excludedToday, 3);
+  const cs = m.rows.find((r) => r.appid === 730);
+  assert.equal(cs.previousRank, 2);
+  assert.equal(cs.currentRank, 2);
+  assert.equal(cs.movement, 0);   // 전체 순위로 보면 2위 → 5위지만 하락이 아니다
+});
+
+test('어제만 있는 게임도 세어 둔다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500), rec('2026-08-27', 570, 400),
+    rec('2026-08-28', 730, 500),
+  ];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  assert.equal(m.basis, 1);
+  assert.equal(m.excludedBefore, 1);
+  assert.equal(m.excludedToday, 0);
+});
+
+test('이전 날이 없으면 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500)];
+  assert.equal(rankMovement(records, GAMES, '2026-08-27'), null);
+});
+
+test('겹치는 게임이 하나도 없으면 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500), rec('2026-08-28', 570, 400)];
+  assert.equal(rankMovement(records, GAMES, '2026-08-28'), null);
+});
+
+test('값이 같으면 appid 로 갈라 순위가 흔들리지 않는다', () => {
+  const records = [
+    rec('2026-08-27', 730, 100), rec('2026-08-27', 570, 100),
+    rec('2026-08-28', 730, 100), rec('2026-08-28', 570, 100),
+  ];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  assert.deepEqual(m.rows.map((r) => r.appid), [570, 730]);
+  assert.deepEqual(m.rows.map((r) => r.movement), [0, 0]);
+});
+
+test('오늘 순위 차례로 세운다', () => {
+  const records = [
+    rec('2026-08-27', 730, 100), rec('2026-08-27', 570, 200), rec('2026-08-27', 550, 300),
+    rec('2026-08-28', 730, 300), rec('2026-08-28', 570, 200), rec('2026-08-28', 550, 100),
+  ];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  assert.deepEqual(m.rows.map((r) => r.currentRank), [1, 2, 3]);
+  assert.deepEqual(m.rows.map((r) => r.movement), [2, 0, -2]);
+});
+
+test('바로 앞에 기록이 있는 날을 이전 날로 삼는다', () => {
+  const records = [rec('2026-08-24', 730, 100), rec('2026-08-28', 730, 200)];
+  const m = rankMovement(records, GAMES, '2026-08-28');
+  assert.equal(m.previousDate, '2026-08-24');
 });
