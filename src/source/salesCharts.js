@@ -7,6 +7,7 @@ export const SALES_CHART_URLS = {
   korea: 'https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana',
   global: 'https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana',
   overview: 'https://store.steampowered.com/charts/?cc=KR&l=koreana',
+  weekly: 'https://store.steampowered.com/charts/topsellers/KR?cc=KR&l=koreana',
 };
 
 function between(source, startMarker, endMarker) {
@@ -141,16 +142,17 @@ function monthlyReleases(document) {
   };
 }
 
-export function buildSalesChartSnapshot(krHtml, globalHtml, overviewHtml, now = new Date()) {
+export function buildSalesChartSnapshot(krHtml, globalHtml, overviewHtml, weeklyHtml, now = new Date()) {
   const kr = parseSsrChartDocument(krHtml);
   const global = parseSsrChartDocument(globalHtml);
   const overview = parseSsrChartDocument(overviewHtml);
+  const weekly = parseSsrChartDocument(weeklyHtml);
   const snapshot = {
     schemaVersion: 1,
     completedAt: now.toISOString(),
     source: { ...SALES_CHART_URLS, metric: 'revenue_rank', valuesPublished: false },
     live: { korea: liveTop20(kr, 10), global: liveTop20(global, 11) },
-    weekly: weeklyTop20(overview),
+    weekly: weeklyTop20(weekly),
     monthly: monthlyReleases(overview),
   };
   if (snapshot.live.korea.length !== 20 || snapshot.live.global.length !== 20 || snapshot.weekly.items.length !== 20) {

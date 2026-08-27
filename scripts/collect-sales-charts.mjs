@@ -15,8 +15,9 @@ async function get(url) {
 }
 
 async function main() {
-  const [kr, global, overview, recentResponse, upcomingResponse] = await Promise.all([
+  const [kr, global, overview, weekly, recentResponse, upcomingResponse] = await Promise.all([
     get(SALES_CHART_URLS.korea), get(SALES_CHART_URLS.global), get(SALES_CHART_URLS.overview),
+    get(SALES_CHART_URLS.weekly),
     fetch(RELEASE_CALENDAR_URLS.recent, { headers: { Accept: 'application/json' } }),
     fetch(RELEASE_CALENDAR_URLS.upcoming, { headers: { Accept: 'application/json' } }),
   ]);
@@ -24,7 +25,7 @@ async function main() {
     throw new Error(`출시 캘린더 HTTP ${recentResponse.status}/${upcomingResponse.status}`);
   }
   const now = new Date();
-  const snapshot = buildSalesChartSnapshot(kr, global, overview, now);
+  const snapshot = buildSalesChartSnapshot(kr, global, overview, weekly, now);
   snapshot.source.releaseCalendar = RELEASE_CALENDAR_URLS;
   snapshot.releaseCalendar = buildReleaseCalendar(
     await recentResponse.json(), await upcomingResponse.json(), now,
