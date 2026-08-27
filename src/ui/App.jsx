@@ -7,7 +7,7 @@ import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
-import { movers, graveyard } from '../view/panels.js';
+import { movers, graveyard, leaderboard } from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
@@ -16,6 +16,7 @@ import FaultPanel from './FaultPanel.jsx';
 import FaultSwitch from './FaultSwitch.jsx';
 import Movers from './Movers.jsx';
 import Graveyard from './Graveyard.jsx';
+import Leaderboard from './Leaderboard.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 
@@ -137,23 +138,40 @@ export default function App() {
 
       {/* 3층 — 같은 기록에서 꺼낸 이야기들. API 를 더 붙이지 않았다. */}
       {showing && (
-        <div className="columns">
-          <section className="panel" aria-label="오른 게임과 내린 게임">
-            <h2 className="panel-title">어제보다 움직인 게임</h2>
-            <Movers
-              data={movers(payload.data.records, payload.data.games ?? [], showing.reading.date)}
-              dates={showing.dates}
-            />
-          </section>
+        <>
+          <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 셋은 전부 위와 같은 파일에서 나온다." />
 
-          <section className="panel" aria-label="오래된 게임">
-            <h2 className="panel-title">아직 살아 있는가</h2>
-            <Graveyard
-              rows={graveyard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
-              date={showing.reading.date}
-            />
-          </section>
-        </div>
+          <div className="columns">
+            <section className="panel" aria-label="오늘 잰 게임 순위">
+              {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
+                  '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
+                  실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
+              <h2 className="panel-title">오늘 잰 것 — 사람 수 순</h2>
+              <Leaderboard
+                data={leaderboard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                heroAppid={payload.data.source?.heroAppid}
+              />
+            </section>
+
+            <div>
+              <section className="panel" aria-label="오른 게임과 내린 게임">
+                <h2 className="panel-title">어제보다 움직인 게임</h2>
+                <Movers
+                  data={movers(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                  dates={showing.dates}
+                />
+              </section>
+
+              <section className="panel" aria-label="오래된 게임">
+                <h2 className="panel-title">아직 살아 있는가</h2>
+                <Graveyard
+                  rows={graveyard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+                  date={showing.reading.date}
+                />
+              </section>
+            </div>
+          </div>
+        </>
       )}
 
       <footer className="foot">
@@ -168,6 +186,22 @@ export default function App() {
           </a>
         </div>
       </footer>
+    </div>
+  );
+}
+
+/**
+ * 층을 가르는 줄.
+ *
+ * 문서에는 `1층 판정 · 2층 근거 · 3층 확장` 이라고 적어 두고 화면에서는 패널
+ * 여섯 개가 전부 같은 모양이었다. 구조를 적어만 두고 보여주지 않으면 스크롤한
+ * 사람에게는 없는 구조다.
+ */
+function TierRule({ label, note }) {
+  return (
+    <div className="tier-rule">
+      <h2>{label}</h2>
+      {note && <p>{note}</p>}
     </div>
   );
 }

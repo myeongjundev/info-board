@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -125,4 +125,81 @@ test('원하면 자를 수 있다', () => {
   const legacy = GAMES.filter((g) => g.tier === 'legacy');
   const records = legacy.map((g) => rec('2026-08-27', g.appid, 100));
   assert.equal(graveyard(records, GAMES, '2026-08-27', { limit: 2 }).length, 2);
+});
+
+// ── 줄세우기 ──────────────────────────────────────────────
+
+test('첫날에도 줄세우기는 성립한다 — 이전 기록이 필요 없다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500000),
+    rec('2026-08-27', 570, 300000),
+    rec('2026-08-27', 550, 200000),
+  ];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.deepEqual(b.rows.map((r) => r.name), ['Counter-Strike 2', 'Dota 2', 'Left 4 Dead 2']);
+  assert.equal(b.total, 1000000);
+  assert.equal(b.measured, 3);
+});
+
+test('못 가져온 게임은 행을 만들지 않는다 — 0 으로 채우지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-27', 570, 300000)];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.equal(b.measured, 2);
+  assert.equal(b.missing, 3);
+  assert.equal(b.rows.some((r) => r.value === 0), false);
+});
+
+test('비중의 분모는 잰 것의 합이다 — 손으로 맞아떨어진다', () => {
+  const records = [
+    rec('2026-08-27', 730, 750000),
+    rec('2026-08-27', 570, 250000),
+  ];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.equal(b.total, 1000000);
+  assert.equal(b.rows[0].shareOfMeasured, 75);
+  assert.equal(b.rows[1].shareOfMeasured, 25);
+  assert.equal(b.rows[0].relative, 100);
+  // 부동소수 나눗셈이라 자릿수 끝은 안 맞는다. 화면이 쓰는 자리까지만 견준다.
+  assert.equal(b.rows[1].relative.toFixed(4), (100 / 3).toFixed(4));
+});
+
+test('진짜 0 명인 게임은 행을 만들되 비중이 0 이다', () => {
+  const records = [rec('2026-08-27', 730, 100), rec('2026-08-27', 72850, 0)];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.equal(b.measured, 2);
+  const dead = b.rows.find((r) => r.appid === 72850);
+  assert.equal(dead.value, 0);
+  assert.equal(dead.shareOfMeasured, 0);
+  assert.equal(dead.rank, 2);
+});
+
+test('합이 0 이면 비율을 만들지 않는다 — 0 으로 나누지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 0), rec('2026-08-27', 570, 0)];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.equal(b.total, 0);
+  assert.equal(b.rows[0].shareOfMeasured, null);
+  assert.equal(b.rows[0].relative, null);
+});
+
+test('그 날짜에 잰 것이 없으면 null 이다', () => {
+  const records = [rec('2026-08-26', 730, 500000)];
+  assert.equal(leaderboard(records, GAMES, '2026-08-27'), null);
+});
+
+test('다른 날짜 기록이 섞여도 그 날짜만 센다', () => {
+  const records = [
+    rec('2026-08-26', 730, 900000),
+    rec('2026-08-27', 730, 500000),
+    rec('2026-08-27', 570, 500000),
+  ];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.equal(b.total, 1000000);
+  assert.equal(b.rows[0].value, 500000);
+});
+
+test('값이 같으면 appid 로 갈라 순서가 흔들리지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 1000), rec('2026-08-27', 570, 1000)];
+  const b = leaderboard(records, GAMES, '2026-08-27');
+  assert.deepEqual(b.rows.map((r) => r.appid), [570, 730]);
+  assert.deepEqual(b.rows.map((r) => r.rank), [1, 2]);
 });

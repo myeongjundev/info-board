@@ -103,3 +103,51 @@ export function ageOf(year, date) {
   const age = y - year;
   return age >= 0 ? age : null;
 }
+
+/**
+ * 그 날짜에 잰 게임을 사람 수 순으로 줄 세운다.
+ *
+ * **이전 기록이 필요 없다.** 그날 값만으로 성립하므로 기록이 하루뿐인 첫날에도
+ * 보인다 — movers 가 꺼져 있는 날 화면을 채우는 것이 이 패널이다.
+ *
+ * `shareOfMeasured` 는 이름 그대로 **우리가 잰 것 안에서의 비중**이다. Steam
+ * 전체에서의 비중이 아니다. 전체 동시접속자는 이 엔드포인트가 주지 않으므로
+ * 알 수 없고, 모르는 것을 비율의 분모로 쓰지 않는다. 화면에도 그렇게 적는다.
+ *
+ * 못 가져온 게임은 행을 만들지 않는다. 0 으로 채우면 "아무도 안 한다" 와
+ * "못 쟀다" 가 같은 모양이 된다.
+ *
+ * @returns {{rows:Array, total:number, measured:number, missing:number, unit:string}|null}
+ */
+export function leaderboard(records, games, date) {
+  const rows = [];
+  let missing = 0;
+
+  for (const g of games) {
+    const r = seriesOf(records, g.appid).find((x) => x.date === date);
+    if (!r) { missing += 1; continue; }
+    rows.push({
+      appid: g.appid,
+      name: g.name,
+      year: g.year,
+      tier: g.tier,
+      value: r.value,
+      unit: r.unit,
+    });
+  }
+
+  if (rows.length === 0) return null;
+
+  rows.sort((a, b) => b.value - a.value || a.appid - b.appid);
+
+  const total = rows.reduce((sum, r) => sum + r.value, 0);
+  for (const [i, r] of rows.entries()) {
+    r.rank = i + 1;
+    // 분모가 0 이면 비율을 만들지 않는다. null 은 화면에서 막대를 안 그린다.
+    r.shareOfMeasured = total > 0 ? (r.value / total) * 100 : null;
+    // 1등 대비 길이. 막대가 눈으로 견주는 대상은 합계가 아니라 1등이다.
+    r.relative = rows[0].value > 0 ? (r.value / rows[0].value) * 100 : null;
+  }
+
+  return { rows, total, measured: rows.length, missing, unit: rows[0].unit };
+}
