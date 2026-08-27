@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   parseDiscountEndFromHtml, parseFreeToKeepResults, parseFreeWeekendStorePage,
-  parseMostPlayedHtml, parseSteamFreeSearchResults, validateFreeToKeepSnapshot,
+  parseMostPlayedHtml, parsePopularPriceResponse, parseSteamFreeSearchResults, validateFreeToKeepSnapshot,
 } from '../src/source/steamPromotions.js';
 
 test('Steam Top 100 HTML에서 순위와 동시접속자를 읽는다', () => {
@@ -31,6 +31,22 @@ test('상시 무료가 아닌 100% 할인만 무료 소장으로 읽는다', () 
 test('상점 페이지의 할인 종료 epoch를 ISO 시각으로 바꾼다', () => {
   assert.equal(parseDiscountEndFromHtml('<div data-discount-expiration="1788451200">'), '2026-09-03T16:00:00.000Z');
   assert.equal(parseDiscountEndFromHtml('<html>없음</html>'), null);
+});
+
+test('인기 게임 가격 응답에서 descriptor 원본 필드 존재 여부를 보존한다', () => {
+  const row = { rank: 1, appid: 42, currentPlayers: 100, peakToday: 200 };
+  const price = { currency: 'KRW', initial: 3000000, final: 2400000, discount_percent: 20 };
+  const present = parsePopularPriceResponse({ 42: { success: true, data: {
+    name: '테스트', price_overview: price, content_descriptors: { ids: [] },
+  } } }, row);
+  assert.equal(present.descriptorAvailable, true);
+  assert.equal(present.reading.descriptorAvailable, true);
+
+  const missing = parsePopularPriceResponse({ 42: { success: true, data: {
+    name: '테스트', price_overview: price,
+  } } }, row);
+  assert.equal(missing.descriptorAvailable, false);
+  assert.equal(missing.reading.descriptorAvailable, false);
 });
 
 test('무료 검색 결과에서 무료 소장과 무료 주말 후보를 분리한다', () => {

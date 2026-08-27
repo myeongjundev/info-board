@@ -6,6 +6,7 @@ import { buildDiscountUrl } from '../src/source/discounts.js';
 import {
   MOST_PLAYED_URL, parseMostPlayedHtml, parsePopularPriceResponse,
 } from '../src/source/steamPromotions.js';
+import { assertDescriptorsPresent } from '../src/source/contentDescriptors.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = resolve(ROOT, 'data/popular-discounts.json');
@@ -28,12 +29,14 @@ async function main() {
   const counts = { ranked: chart.length, checked: 0, discount: 0, regular: 0, permanent_free: 0, unpriced: 0, failed: 0 };
   const discounts = [];
   const failures = [];
+  const descriptorChecks = [];
 
   for (const row of chart) {
     try {
       const result = parsePopularPriceResponse(await get(buildDiscountUrl(row.appid), 'json'), row, new Date());
       counts.checked += 1;
       counts[result.kind] += 1;
+      descriptorChecks.push({ descriptorAvailable: result.descriptorAvailable });
       if (result.reading) discounts.push(result.reading);
     } catch (error) {
       counts.failed += 1;
@@ -42,6 +45,7 @@ async function main() {
     await sleep(220);
   }
   if (counts.checked < 80) throw new Error(`가격 성공 ${counts.checked}/100 — 기존 스냅샷을 덮지 않는다`);
+  assertDescriptorsPresent(descriptorChecks, 'Steam 인기 Top 100 appdetails');
   discounts.sort((a, b) => a.rank - b.rank);
   const snapshot = {
     schemaVersion: 1,

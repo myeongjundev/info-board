@@ -182,21 +182,23 @@ export default function SalesChartsPage() {
 
           <section className="charts-quality-note">
             <div><p>DATA QUALITY</p><h2>순위가 말하지 않는 것</h2></div>
-            <p>현재·주간 차트는 판매 수량이 아니라 매출 순위다. Steam은 판매량과 매출액을 공개하지 않는다. 출시 캘린더는 인기 검색 결과 중 달력 범위에 맞는 최대 20개 표본이며 전체 출시작 목록이 아니다. 월간 자료는 해당 월 출시작의 인기 목록으로 항목 사이의 세부 순위는 제공되지 않는다.</p>
-            <p className="source-path-note">
-              <b>자료는 공식, 경로는 아니다.</b> 여기 순위는 Steam이 스스로 공개한 공식 차트다.
-              다만 가져오는 방법은 문서화된 API가 아니라 차트 페이지의 서버 렌더링 응답을 읽는 것이다.
-              이 둘은 다른 주장이라 갈라 적는다. 이 화면의 어떤 값도 대표값(동시접속자) 계산에
-              들어가지 않는다.
-            </p>
-            <p className="adult-policy-note">
-              Steam이 성인 콘텐츠로 분류한 항목(content descriptor 3·4)은 제목과 표지를 접어서 보여준다.
-              <b> 순위·가격·할인율은 그대로 둔다</b> — 공개된 순위를 지우지 않는다. Steam도 이 항목의 상점
-              페이지를 나이 확인 뒤에 두므로, 접는 쪽이 원본의 표시 방식에 가깝다. 제목을 보려면 상점 링크로
-              가면 되고 확인은 Steam이 한다.
-              {adultOnScreen > 0 && <> 이 화면에서 접힌 항목은 <b>{adultOnScreen}개</b>다.</>}
-            </p>
-            <div><a href={state.data.source.korea} target="_blank" rel="noreferrer">한국 Top Sellers ↗</a><a href={state.data.source.global} target="_blank" rel="noreferrer">Global Top Sellers ↗</a></div>
+            <div className="charts-quality-copy">
+              <p>현재·주간 차트는 판매 수량이 아니라 매출 순위다. Steam은 판매량과 매출액을 공개하지 않는다. 출시 캘린더는 인기 검색 결과 중 달력 범위에 맞는 최대 20개 표본이며 전체 출시작 목록이 아니다. 월간 자료는 해당 월 출시작의 인기 목록으로 항목 사이의 세부 순위는 제공되지 않는다.</p>
+              <p className="source-path-note">
+                <b>자료는 공식, 경로는 아니다.</b> 여기 순위는 Steam이 스스로 공개한 공식 차트다.
+                다만 가져오는 방법은 문서화된 API가 아니라 차트 페이지의 서버 렌더링 응답을 읽는 것이다.
+                이 둘은 다른 주장이라 갈라 적는다. 이 화면의 어떤 값도 대표값(동시접속자) 계산에
+                들어가지 않는다.
+              </p>
+              <p className="adult-policy-note">
+                Steam이 성인 콘텐츠로 분류한 항목(content descriptor 3·4)은 제목과 표지를 접어서 보여준다.
+                <b> 순위·가격·할인율은 그대로 둔다</b> — 공개된 순위를 지우지 않는다. Steam도 이 항목의 상점
+                페이지를 나이 확인 뒤에 두므로, 접는 쪽이 원본의 표시 방식에 가깝다. 제목을 보려면 상점 링크로
+                가면 되고 확인은 Steam이 한다.
+                {adultOnScreen > 0 && <> 이 화면에서 접힌 항목은 <b>{adultOnScreen}개</b>다.</>}
+              </p>
+            </div>
+            <div className="charts-quality-links"><a href={state.data.source.korea} target="_blank" rel="noreferrer">한국 Top Sellers ↗</a><a href={state.data.source.global} target="_blank" rel="noreferrer">Global Top Sellers ↗</a></div>
           </section>
         </>}
       </main>

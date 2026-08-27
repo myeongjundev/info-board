@@ -58,6 +58,25 @@ export function toDescriptorIds(raw) {
   return [];
 }
 
+/**
+ * 원본 응답에 descriptor 필드가 실제로 있었고, 우리가 아는 형식인가.
+ *
+ * 빈 배열은 "분류 없음"이라는 정상 값이다. 반대로 undefined, 필드 없는 객체,
+ * 깨진 JSON 문자열은 스키마가 바뀐 것일 수 있으므로 정상 값으로 세지 않는다.
+ */
+export function hasDescriptorSource(raw) {
+  if (Array.isArray(raw)) return true;
+  if (raw && typeof raw === 'object') return Array.isArray(raw.ids);
+  if (typeof raw === 'string' && raw.trim() !== '') {
+    try {
+      return Array.isArray(JSON.parse(raw));
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
+
 /** 출처가 무엇이든 한 줄로 쓴다. */
 export function isAdultItem(raw) {
   return hasAdultDescriptor(toDescriptorIds(raw));
@@ -70,7 +89,10 @@ export function isAdultItem(raw) {
  * 빠지면 덮지 않는다" 와 같은 이유로, 여기서도 기존 스냅샷을 지킨다.
  */
 export function assertDescriptorsPresent(items, where) {
-  const seen = items.filter((item) => Array.isArray(item?.descriptorIds)).length;
+  // 정상 빈 결과에는 검사할 행 자체가 없다. 응답이 한 건이라도 왔을 때만
+  // descriptor 필드가 함께 왔는지 확인한다.
+  if (items.length === 0) return;
+  const seen = items.filter((item) => item?.descriptorAvailable === true).length;
   if (seen === 0) {
     throw new TypeError(
       `${where}: 성인 분류(content descriptor)를 한 건도 읽지 못했다. `

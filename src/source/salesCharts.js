@@ -1,5 +1,7 @@
 import { validateReleaseCalendar } from './releaseCalendar.js';
-import { assertDescriptorsPresent, isAdultItem, toDescriptorIds } from './contentDescriptors.js';
+import {
+  assertDescriptorsPresent, hasDescriptorSource, isAdultItem, toDescriptorIds,
+} from './contentDescriptors.js';
 
 export const SALES_CHART_URLS = {
   korea: 'https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana',
@@ -54,12 +56,14 @@ function itemReading(appid, rank, items) {
   const finalMinor = Number(price?.final_price_in_cents);
   const initialMinor = Number(price?.original_price_in_cents ?? price?.final_price_in_cents);
   const discountPercent = Number(price?.discount_pct ?? 0);
-  const descriptorIds = toDescriptorIds(item.content_descriptorids);
+  const descriptorRaw = item.content_descriptorids;
+  const descriptorIds = toDescriptorIds(descriptorRaw);
   return {
     appid, rank, name: item.name,
     // Steam 이 나이 확인 뒤에 두는 항목이다. 순위·가격은 그대로 두고 표시만 접는다.
     adult: isAdultItem(descriptorIds),
     descriptorIds,
+    descriptorAvailable: hasDescriptorSource(descriptorRaw),
     imageUrl: imageFromAssets(item.assets),
     storeUrl: `https://store.steampowered.com/${item.store_url_path ?? `app/${appid}/`}?cc=KR&l=koreana`,
     isFree: item.is_free === true,
@@ -77,7 +81,9 @@ function liveTop20(document, sort) {
   const ids = query?.state?.data?.rgItemIDs?.map((item) => item.appid).slice(0, 20);
   if (!ids || ids.length !== 20) throw new TypeError(`Steam 현재 매출 Top 20(${sort})을 읽지 못했다`);
   const items = storeItems(document.queries);
-  return ids.map((appid, index) => itemReading(appid, index + 1, items)).filter(Boolean);
+  const readings = ids.map((appid, index) => itemReading(appid, index + 1, items)).filter(Boolean);
+  assertDescriptorsPresent(readings, `Steam 현재 매출 Top 20(${sort})`);
+  return readings;
 }
 
 function weeklyTop20(document) {
@@ -88,18 +94,20 @@ function weeklyTop20(document) {
   const rows = query?.state?.data?.rgRanks;
   if (!rows || rows.length !== 20) throw new TypeError('Steam 주간 매출 Top 20을 읽지 못했다');
   const items = storeItems(document.queries);
+  const readings = rows.map((row) => {
+    const reading = itemReading(row.itemKey.appid, row.nRank, items);
+    if (!reading) return null;
+    return {
+      ...reading,
+      previousRank: row.nRankLastWeek || null,
+      consecutiveWeeks: row.nConsecutiveWeeks,
+      firstTop100: row.bFirstTop100 === true,
+    };
+  }).filter(Boolean);
+  assertDescriptorsPresent(readings, 'Steam 주간 매출 Top 20');
   return {
     weekStart: new Date(query.state.data.rtWeekStart * 1000).toISOString(),
-    items: rows.map((row) => {
-      const reading = itemReading(row.itemKey.appid, row.nRank, items);
-      if (!reading) return null;
-      return {
-        ...reading,
-        previousRank: row.nRankLastWeek || null,
-        consecutiveWeeks: row.nConsecutiveWeeks,
-        firstTop100: row.bFirstTop100 === true,
-      };
-    }).filter(Boolean),
+    items: readings,
   };
 }
 
@@ -107,10 +115,12 @@ function monthlyReleases(document) {
   const monthly = document.loaderData.find((item) => item.monthly)?.monthly;
   if (!monthly?.rgAppIDs?.length) throw new TypeError('Steam 월간 인기 신작을 읽지 못했다');
   const items = storeItems(document.queries);
+  const readings = monthly.rgAppIDs.map((appid) => itemReading(appid, null, items)).filter(Boolean);
+  assertDescriptorsPresent(readings, 'Steam 월간 인기 신작');
   return {
     monthAt: new Date(monthly.rtMonth * 1000).toISOString(),
     saleName: monthly.strSaleName,
-    items: monthly.rgAppIDs.map((appid) => itemReading(appid, null, items)).filter(Boolean),
+    items: readings,
   };
 }
 
@@ -129,12 +139,6 @@ export function buildSalesChartSnapshot(krHtml, globalHtml, overviewHtml, now = 
   if (snapshot.live.korea.length !== 20 || snapshot.live.global.length !== 20 || snapshot.weekly.items.length !== 20) {
     throw new TypeError('Steam 판매 차트 필수 20개가 빠졌다');
   }
-  // 성인 분류를 한 건도 못 읽었으면 응답 형식이 바뀐 것이다. 그대로 두면 접혀야 할
-  // 항목이 조용히 펼쳐진 채 배포된다.
-  assertDescriptorsPresent(
-    [...snapshot.live.korea, ...snapshot.live.global, ...snapshot.weekly.items, ...snapshot.monthly.items],
-    'Steam 판매 차트',
-  );
   return snapshot;
 }
 

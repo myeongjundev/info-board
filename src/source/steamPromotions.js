@@ -1,4 +1,4 @@
-import { isAdultItem, toDescriptorIds } from './contentDescriptors.js';
+import { hasDescriptorSource, isAdultItem, toDescriptorIds } from './contentDescriptors.js';
 export const MOST_PLAYED_URL = 'https://store.steampowered.com/charts/mostplayed/?cc=KR&l=koreana';
 export const FREE_TO_KEEP_URL = 'https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana';
 
@@ -21,15 +21,19 @@ export function parsePopularPriceResponse(body, chartRow, now = new Date()) {
     throw new TypeError(`appid ${chartRow.appid} 가격 응답을 읽을 수 없다`);
   }
   const data = item.data;
-  if (data.is_free === true) return { kind: 'permanent_free', reading: null };
-  if (!data.price_overview) return { kind: 'unpriced', reading: null };
+  const descriptorRaw = data.content_descriptors;
+  const descriptorAvailable = hasDescriptorSource(descriptorRaw);
+  if (data.is_free === true) return { kind: 'permanent_free', reading: null, descriptorAvailable };
+  if (!data.price_overview) return { kind: 'unpriced', reading: null, descriptorAvailable };
   const price = data.price_overview;
   if (
     price.currency !== 'KRW' || !Number.isInteger(price.initial) || !Number.isInteger(price.final)
     || !Number.isInteger(price.discount_percent) || price.final > price.initial
   ) throw new TypeError(`appid ${chartRow.appid} 한국 가격 형식이 잘못됐다`);
-  if (price.discount_percent <= 0 || price.final === price.initial) return { kind: 'regular', reading: null };
-  const descriptorIds = toDescriptorIds(data.content_descriptors);
+  if (price.discount_percent <= 0 || price.final === price.initial) {
+    return { kind: 'regular', reading: null, descriptorAvailable };
+  }
+  const descriptorIds = toDescriptorIds(descriptorRaw);
   return {
     kind: 'discount',
     reading: {
@@ -38,6 +42,7 @@ export function parsePopularPriceResponse(body, chartRow, now = new Date()) {
       // Steam 이 나이 확인 뒤에 두는 항목. 순위·가격은 그대로, 표시만 접는다.
       adult: isAdultItem(descriptorIds),
       descriptorIds,
+      descriptorAvailable,
       imageUrl: typeof data.header_image === 'string' ? data.header_image : null,
       initialMinor: price.initial,
       finalMinor: price.final,
@@ -47,6 +52,7 @@ export function parsePopularPriceResponse(body, chartRow, now = new Date()) {
       fetchedAt: now.toISOString(),
       storeUrl: `https://store.steampowered.com/app/${chartRow.appid}/?cc=KR&l=koreana`,
     },
+    descriptorAvailable,
   };
 }
 

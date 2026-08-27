@@ -1,4 +1,6 @@
-import { isAdultItem, toDescriptorIds } from './contentDescriptors.js';
+import {
+  assertDescriptorsPresent, hasDescriptorSource, isAdultItem, toDescriptorIds,
+} from './contentDescriptors.js';
 
 export const RELEASE_CALENDAR_URLS = {
   recent: 'https://store.steampowered.com/search/results/?query&start=0&count=100&dynamic_data=&sort_by=Released_DESC&filter=popularnew&category1=998&infinite=1&cc=KR&l=koreana',
@@ -76,11 +78,13 @@ export function parseReleaseSearchResults(body) {
     // 이 검색 응답은 비로그인 기본 설정에서 성인 항목을 이미 걸러 내보내는 것으로
     // 보인다 (2026-08-28 실측: 100건 중 3·4 를 가진 항목 0건). 그래도 같은 가드를
     // 단다 — "지금 안 온다" 는 "앞으로도 안 온다" 가 아니다.
-    const descriptorIds = toDescriptorIds(row.match(/data-ds-descids="([^"]+)"/)?.[1]);
+    const descriptorRaw = row.match(/data-ds-descids="([^"]+)"/)?.[1];
+    const descriptorIds = toDescriptorIds(descriptorRaw);
     items.push({
       appid, name: title, imageUrl: imageUrl || null,
       adult: isAdultItem(descriptorIds),
       descriptorIds,
+      descriptorAvailable: hasDescriptorSource(descriptorRaw),
       storeUrl: `${href.split('?')[0]}?cc=KR&l=koreana`,
       ...release,
       isFree: /무료|free/i.test(finalText ?? ''),
@@ -110,6 +114,8 @@ export function buildReleaseCalendar(recentBody, upcomingBody, now = new Date())
   const months = monthKeysKst(now);
   const recent = parseReleaseSearchResults(recentBody);
   const upcoming = parseReleaseSearchResults(upcomingBody);
+  assertDescriptorsPresent(recent, 'Steam 이번 달 출시작 검색');
+  assertDescriptorsPresent(upcoming, 'Steam 다음 달 출시 예정 검색');
   return {
     currentMonth: months.current,
     nextMonth: months.next,

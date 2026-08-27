@@ -41,7 +41,7 @@ test('KST 기준 이번 달과 다음 달을 연말에도 계산한다', () => {
 });
 
 test('Steam 검색 카드에서 이미지·공개 출시일·한국 가격을 읽는다', () => {
-  const html = `<a href="https://store.steampowered.com/app/42/test/?snr=x" class="search_result_row" data-ds-appid="42">
+  const html = `<a href="https://store.steampowered.com/app/42/test/?snr=x" class="search_result_row" data-ds-appid="42" data-ds-descids="[]">
     <img src="https://cdn.example/42.jpg"><span class="title">테스트 &amp; 게임</span>
     <div class="search_released">2026년 9월 3일</div><div class="discount_pct">-20%</div>
     <div class="discount_original_price">₩ 30,000</div><div class="discount_final_price">₩ 24,000</div></a>`;
@@ -55,7 +55,7 @@ test('Steam 검색 카드에서 이미지·공개 출시일·한국 가격을 �
 });
 
 test('달력 범위에 맞는 인기 신작과 출시 예정작만 고른다', () => {
-  const row = (appid, title, date) => `<a href="https://store.steampowered.com/app/${appid}/" class="search_result_row" data-ds-appid="${appid}">
+  const row = (appid, title, date) => `<a href="https://store.steampowered.com/app/${appid}/" class="search_result_row" data-ds-appid="${appid}" data-ds-descids="[]">
     <span class="title">${title}</span><div class="search_released">${date}</div></a>`;
   const body = (html) => ({ success: 1, total_count: 2, results_html: html });
   const calendar = buildReleaseCalendar(
@@ -65,4 +65,24 @@ test('달력 범위에 맞는 인기 신작과 출시 예정작만 고른다', (
   );
   assert.deepEqual(calendar.current.map((item) => item.appid), [1]);
   assert.deepEqual(calendar.upcoming.map((item) => item.appid), [4, 3]);
+});
+
+test('출시 캘린더 원본에서 성인 분류 필드가 사라지면 중단한다', () => {
+  const row = (appid, date) => `<a href="https://store.steampowered.com/app/${appid}/" class="search_result_row" data-ds-appid="${appid}">
+    <span class="title">게임 ${appid}</span><div class="search_released">${date}</div></a>`;
+  const body = (html) => ({ success: 1, total_count: 1, results_html: html });
+  assert.throws(
+    () => buildReleaseCalendar(
+      body(row(1, '2026년 8월 20일')), body(row(2, '2026년 9월 2일')),
+      new Date('2026-08-28T00:00:00Z'),
+    ),
+    /성인 분류/,
+  );
+});
+
+test('출시 검색의 정상 빈 결과는 스키마 오류로 만들지 않는다', () => {
+  const empty = { success: 1, total_count: 0, results_html: '' };
+  const calendar = buildReleaseCalendar(empty, empty, new Date('2026-08-28T00:00:00Z'));
+  assert.deepEqual(calendar.current, []);
+  assert.deepEqual(calendar.upcoming, []);
 });

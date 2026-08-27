@@ -2,7 +2,8 @@ import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
 
 import {
-  ADULT_DESCRIPTOR_IDS, assertDescriptorsPresent, hasAdultDescriptor, isAdultItem, toDescriptorIds,
+  ADULT_DESCRIPTOR_IDS, assertDescriptorsPresent, hasAdultDescriptor, hasDescriptorSource,
+  isAdultItem, toDescriptorIds,
 } from '../src/source/contentDescriptors.js';
 import { ADULT_LABEL, countAdult, displayArt, displayName } from '../src/view/gameDisplay.js';
 
@@ -52,13 +53,27 @@ test('망가진 문자열을 성인 판정으로 만들지 않는다', () => {
   assert.deepEqual(toDescriptorIds('[3,"4"]'), [3, 4]);
 });
 
+test('빈 분류와 원본 필드 누락을 구분한다', () => {
+  assert.equal(hasDescriptorSource([]), true);
+  assert.equal(hasDescriptorSource({ ids: [] }), true);
+  assert.equal(hasDescriptorSource('[]'), true);
+  assert.equal(hasDescriptorSource(undefined), false);
+  assert.equal(hasDescriptorSource({}), false);
+  assert.equal(hasDescriptorSource('[3,'), false);
+});
+
 test('descriptor 를 한 건도 못 읽으면 스냅샷을 덮지 않는다', () => {
+  assert.doesNotThrow(() => assertDescriptorsPresent([], '정상 빈 결과'));
   assert.throws(
     () => assertDescriptorsPresent([{ appid: 1 }, { appid: 2 }], '판매 차트'),
     /성인 분류/,
   );
   assert.doesNotThrow(
-    () => assertDescriptorsPresent([{ appid: 1, descriptorIds: [] }, { appid: 2 }], '판매 차트'),
+    () => assertDescriptorsPresent([{ appid: 1, descriptorIds: [], descriptorAvailable: true }, { appid: 2 }], '판매 차트'),
+  );
+  assert.throws(
+    () => assertDescriptorsPresent([{ appid: 1, descriptorIds: [] }], '판매 차트'),
+    /성인 분류/,
   );
 });
 
