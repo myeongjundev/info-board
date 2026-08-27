@@ -314,3 +314,59 @@ export function withGenres(fileGames, catalog) {
     return known ? { ...g, genre: known.genre, tier: known.tier ?? g.tier } : { ...g };
   });
 }
+
+/**
+ * 같은 게임을 하루 중 다른 시각에 잰 값과 견준다.
+ *
+ * **이것은 어제와 오늘의 비교가 아니다.** 같은 날 안에서 시각만 다른 두 측정이다.
+ * 동시접속자는 순간값이라 "몇 명이 하는 게임인가" 가 아니라 "그 순간 접속해
+ * 있던 사람이 몇 명인가" 를 재는데, 그 순간이 지역별로 아침·저녁·새벽이라
+ * 게임마다 결과가 반대로 나온다.
+ *
+ * 정규 기록(10:10 KST)과 표본은 **둘 다 진짜 측정이고 각자 잰 시각을 갖는다.**
+ * 어느 쪽도 "진짜 값" 이 아니다 — 둘 다 그 순간의 값일 뿐이고, 그 사실이 이
+ * 패널이 말하려는 전부다.
+ *
+ * @returns {{rows:Array, recordAt:string, probeAt:string, measured:number}|null}
+ */
+export function timeBias(records, probe, games, date) {
+  const sample = probe?.samples?.at(-1);
+  if (!sample) return null;
+
+  const rows = [];
+  let recordAt = null;
+
+  for (const g of games) {
+    const r = seriesOf(records, g.appid).find((x) => x.date === date);
+    if (!r) continue;
+    const later = sample.values?.[g.appid];
+    if (typeof later !== 'number' || !Number.isFinite(later)) continue;
+
+    if (recordAt === null || r.fetchedAt < recordAt) recordAt = r.fetchedAt;
+
+    const delta = later - r.value;
+    rows.push({
+      appid: g.appid,
+      name: g.name,
+      genre: g.genre,
+      atRecord: r.value,
+      atProbe: later,
+      recordFetchedAt: r.fetchedAt,
+      delta,
+      // 이전 값이 0 이면 변화율을 만들 수 없다.
+      percent: r.value > 0 ? (delta / r.value) * 100 : null,
+      unit: r.unit,
+    });
+  }
+
+  if (rows.length === 0) return null;
+
+  // 많이 오른 것부터. 비율을 못 낸 것은 맨 뒤로 보낸다 — 0 인 척하지 않는다.
+  rows.sort((a, b) => {
+    if (a.percent === null) return 1;
+    if (b.percent === null) return -1;
+    return b.percent - a.percent;
+  });
+
+  return { rows, recordAt, probeAt: sample.at, measured: rows.length };
+}

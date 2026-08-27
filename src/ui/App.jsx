@@ -7,7 +7,7 @@ import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres } from '../view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias } from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
@@ -23,8 +23,11 @@ import SettingsModal from './SettingsModal.jsx';
 import DayStrip from './DayStrip.jsx';
 import SymbolRail from './SymbolRail.jsx';
 import Genres from './Genres.jsx';
+import TimeBias from './TimeBias.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
+// 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
+const PROBE_URL = `${import.meta.env.BASE_URL}data/timeprobe.json`;
 
 // 구획 나브에 들어가는 줄. 참고한 화면과 달리 **누르면 갈아끼우지 않고 내려간다.**
 // 브리프가 카드 1·5 의 통과 기준을 `한 화면에 보인다` 로 못박아서, 탭 뒤로 숨기면
@@ -33,6 +36,7 @@ const NAV = [
   { id: 'sec-now', label: '현재' },
   { id: 'sec-days', label: '잰 날' },
   { id: 'sec-fault', label: '장애' },
+  { id: 'sec-when', label: '시각' },
   { id: 'sec-genre', label: '장르' },
   { id: 'sec-rank', label: '순위' },
   { id: 'sec-move', label: '움직임' },
@@ -58,6 +62,19 @@ export default function App() {
     return raw !== null && Number.isInteger(n) ? n : null;
   });
   const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // 다른 시각 표본. **보조 자료라 실패해도 화면이 멀쩡해야 한다.**
+  // 이 파일이 없어도 값·단위·날짜·비교는 하나도 안 바뀐다 — 못 읽으면 그 패널만
+  // 안 나온다. 그래서 본문 로딩과 상태를 섞지 않는다.
+  const [probe, setProbe] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    fetch(PROBE_URL)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => { if (alive) setProbe(json); })
+      .catch(() => { if (alive) setProbe(null); });
+    return () => { alive = false; };
+  }, []);
 
   const pickGame = useCallback((appid) => {
     setPicked(appid);
@@ -209,6 +226,15 @@ export default function App() {
       {showing && (
         <>
           <TierRule label="같은 기록에서 꺼낸 이야기" note="API 를 더 붙이지 않았다. 아래 넷은 전부 위와 같은 파일에서 나온다." />
+
+          {/* 재현 모드에서는 안 보인다. 장애를 흉내내는 화면에 멀쩡히 받아온
+              보조 자료가 섞이면 무엇이 실패한 것인지 헷갈린다. */}
+          {!simulate && (
+            <section className="panel" id="sec-when" aria-label="시각에 따른 차이">
+              <h2 className="panel-title">같은 날, 다른 시각 — 이 숫자의 한계</h2>
+              <TimeBias data={timeBias(payload.data.records, probe, games, showing.reading.date)} />
+            </section>
+          )}
 
           <section className="panel" id="sec-genre" aria-label="장르로 묶어 보기">
             <h2 className="panel-title">장르로 묶어 보기</h2>

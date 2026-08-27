@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -399,4 +399,66 @@ test('장르 안이 전부 0 이면 막대를 그리지 않는다', () => {
   const records = [rec('2026-08-27', 730, 0), rec('2026-08-27', 578080, 0)];
   const b = byGenre(records, GG, '2026-08-27');
   assert.equal(b.genres[0].rows[0].relativeInGenre, null);
+});
+
+// ── 시각이 값을 흔든다 ────────────────────────────────────
+
+const probeOf = (at, values) => ({ schemaVersion: 1, samples: [{ at, values }] });
+
+test('정규 기록과 다른 시각 표본을 견준다', () => {
+  const records = [rec('2026-08-27', 730, 500000), rec('2026-08-27', 570, 400000)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 600000, 570: 380000 });
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.equal(t.measured, 2);
+  assert.equal(t.rows[0].name, 'Counter-Strike 2');
+  assert.equal(t.rows[0].delta, 100000);
+  assert.equal(t.rows[0].percent, 20);
+  assert.equal(t.rows[1].delta, -20000);
+  assert.equal(t.probeAt, '2026-08-27T07:30:00.000Z');
+});
+
+test('많이 오른 것부터 세운다', () => {
+  const records = [rec('2026-08-27', 730, 100), rec('2026-08-27', 570, 100), rec('2026-08-27', 550, 100)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110, 570: 300, 550: 50 });
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.deepEqual(t.rows.map((r) => r.percent), [200, 10, -50]);
+});
+
+test('표본에 없는 게임은 행을 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 100), rec('2026-08-27', 570, 100)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110 });
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.equal(t.measured, 1);
+});
+
+test('표본이 없으면 만들지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 100)];
+  assert.equal(timeBias(records, null, GAMES, '2026-08-27'), null);
+  assert.equal(timeBias(records, { samples: [] }, GAMES, '2026-08-27'), null);
+});
+
+test('가장 최근 표본을 쓴다', () => {
+  const records = [rec('2026-08-27', 730, 100)];
+  const probe = { schemaVersion: 1, samples: [
+    { at: '2026-08-27T03:00:00.000Z', values: { 730: 200 } },
+    { at: '2026-08-27T09:00:00.000Z', values: { 730: 300 } },
+  ] };
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.equal(t.probeAt, '2026-08-27T09:00:00.000Z');
+  assert.equal(t.rows[0].atProbe, 300);
+});
+
+test('정규 기록이 0 이면 변화율을 만들지 않고 맨 뒤로 보낸다', () => {
+  const records = [rec('2026-08-27', 730, 0), rec('2026-08-27', 570, 100)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 50, 570: 110 });
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.equal(t.rows.at(-1).appid, 730);
+  assert.equal(t.rows.at(-1).percent, null);
+  assert.equal(t.rows.at(-1).delta, 50);
+});
+
+test('그 날짜 기록이 없으면 만들지 않는다', () => {
+  const records = [rec('2026-08-26', 730, 100)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110 });
+  assert.equal(timeBias(records, probe, GAMES, '2026-08-27'), null);
 });
