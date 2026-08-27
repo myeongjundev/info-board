@@ -357,3 +357,68 @@ body {
 .foot a { color: var(--text-dim); }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 3층: 움직인 게임 ── */
+.movers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 520px) {
+  .movers { grid-template-columns: 1fr; }
+}
+
+.mover-head {
+  margin: 0 0 9px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.mover-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: mover;
+}
+.mover-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1px 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.mover-name {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mover-pct {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.mover-pct.is-up { color: var(--up); }
+.mover-pct.is-down { color: var(--down); }
+.mover-raw {
+  grid-column: 1 / -1;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 3층: 아직 살아 있는가 ── */
+.alive {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-faint);
+  margin-top: 1px;
+}

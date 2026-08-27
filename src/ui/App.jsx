@@ -7,12 +7,15 @@ import {
   loadRecordsFile, faultFromSearch, FAULT_BY_PARAM, FAULT_COPY, FetchFault,
 } from '../source/loadRecordsFile.js';
 import { buildBoard, formatInstant, STATE } from '../view/board.js';
+import { movers, graveyard } from '../view/panels.js';
 
 import HeroValue from './HeroValue.jsx';
 import Comparison from './Comparison.jsx';
 import RecordList from './RecordList.jsx';
 import FaultPanel from './FaultPanel.jsx';
 import FaultSwitch from './FaultSwitch.jsx';
+import Movers from './Movers.jsx';
+import Graveyard from './Graveyard.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 
@@ -120,6 +123,27 @@ export default function App() {
         <h2 className="panel-title">장애 재현 — 카드 3</h2>
         <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
       </section>
+
+      {/* 3층 — 같은 기록에서 꺼낸 이야기들. API 를 더 붙이지 않았다. */}
+      {showing && (
+        <div className="columns">
+          <section className="panel" aria-label="오른 게임과 내린 게임">
+            <h2 className="panel-title">어제보다 움직인 게임</h2>
+            <Movers
+              data={movers(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+              dates={showing.dates}
+            />
+          </section>
+
+          <section className="panel" aria-label="오래된 게임">
+            <h2 className="panel-title">아직 살아 있는가</h2>
+            <Graveyard
+              rows={graveyard(payload.data.records, payload.data.games ?? [], showing.reading.date)}
+              date={showing.reading.date}
+            />
+          </section>
+        </div>
+      )}
 
       <footer className="foot">
         <div>

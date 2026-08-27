@@ -1,0 +1,128 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+
+import { movers, graveyard, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+
+const rec = (date, appid, value) => ({
+  value, unit: '명', appid, date,
+  sourceUrl: `https://x?appid=${appid}`, sourceLabel: 'Steam · 동시접속자',
+  timezone: 'Asia/Seoul', fetchedAt: `${date}T01:10:00.000Z`,
+});
+
+const GAMES = [
+  { appid: 730, name: 'Counter-Strike 2', year: 2012, tier: 'active' },
+  { appid: 570, name: 'Dota 2', year: 2013, tier: 'active' },
+  { appid: 550, name: 'Left 4 Dead 2', year: 2009, tier: 'legacy' },
+  { appid: 10, name: 'Counter-Strike', year: 2000, tier: 'legacy' },
+  { appid: 72850, name: 'Skyrim', year: 2011, tier: 'legacy' },
+];
+
+test('이전 기록이 없으면 급상승·급하락을 만들지 않는다', () => {
+  const records = GAMES.map((g) => rec('2026-08-27', g.appid, 1000));
+  assert.equal(movers(records, GAMES, '2026-08-27'), null);
+});
+
+test('이틀이 모이면 오른 게임과 내린 게임을 나눈다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500000), rec('2026-08-28', 730, 550000),   // +10%
+    rec('2026-08-27', 570, 400000), rec('2026-08-28', 570, 380000),   // -5%
+    rec('2026-08-27', 550, 20000), rec('2026-08-28', 550, 30000),     // +50%
+  ];
+  const m = movers(records, GAMES, '2026-08-28');
+  assert.deepEqual(m.risers.map((r) => r.name), ['Left 4 Dead 2', 'Counter-Strike 2']);
+  assert.deepEqual(m.fallers.map((r) => r.name), ['Dota 2']);
+  assert.equal(m.compared, 3);
+  assert.equal(m.previousDate, '2026-08-27');
+});
+
+test('변화율이 큰 순으로 세운다 — 절대량이 아니다', () => {
+  const records = [
+    rec('2026-08-27', 730, 500000), rec('2026-08-28', 730, 550000),   // +50,000 · +10%
+    rec('2026-08-27', 550, 1000), rec('2026-08-28', 550, 2000),       // +1,000 · +100%
+  ];
+  const m = movers(records, GAMES, '2026-08-28');
+  assert.equal(m.risers[0].name, 'Left 4 Dead 2', '절대량으로 세웠다');
+  assert.equal(m.risers[0].percent, 100);
+});
+
+test('이전 값이 0 이면 변화율을 만들지 않고 건너뛴다', () => {
+  const records = [
+    rec('2026-08-27', 550, 0), rec('2026-08-28', 550, 500),
+    rec('2026-08-27', 730, 100), rec('2026-08-28', 730, 200),
+  ];
+  const m = movers(records, GAMES, '2026-08-28');
+  assert.equal(m.compared, 1, '0 에서 늘어난 것을 변화율로 만들었다');
+  assert.equal(m.skipped >= 1, true);
+});
+
+test('변화 없는 게임은 양쪽 어디에도 넣지 않는다', () => {
+  const records = [rec('2026-08-27', 730, 500), rec('2026-08-28', 730, 500)];
+  const m = movers(records, GAMES, '2026-08-28');
+  assert.equal(m.risers.length, 0);
+  assert.equal(m.fallers.length, 0);
+  assert.equal(m.compared, 1);
+});
+
+test('무엇과 견줬는지 날짜를 함께 준다', () => {
+  const records = [rec('2026-08-25', 730, 100), rec('2026-08-28', 730, 200)];
+  // 사흘 건너뛴 기록이라도 '어제' 라고 하면 거짓말이 된다
+  assert.equal(movers(records, GAMES, '2026-08-28').previousDate, '2026-08-25');
+});
+
+test('오래된 게임은 첫날부터 보인다 — 이전 기록이 필요 없다', () => {
+  const records = [
+    rec('2026-08-27', 550, 25947), rec('2026-08-27', 10, 5884),
+    rec('2026-08-27', 72850, 998), rec('2026-08-27', 730, 551673),
+  ];
+  const g = graveyard(records, GAMES, '2026-08-27');
+  assert.equal(g.length, 3, '현역 게임이 섞였다');
+  assert.deepEqual(g.map((x) => x.year), [2000, 2009, 2011], '오래된 순이 아니다');
+});
+
+test('그날 기록이 없는 게임은 빼고, 하나도 없으면 null', () => {
+  assert.equal(graveyard([], GAMES, '2026-08-27'), null);
+  const one = graveyard([rec('2026-08-27', 10, 5884)], GAMES, '2026-08-27');
+  assert.equal(one.length, 1);
+});
+
+test('생존 분류는 정해진 경계만 쓴다 — 무작위가 아니다', () => {
+  assert.equal(aliveLabel(551673), '아직 붐빈다');
+  assert.equal(aliveLabel(10000), '아직 붐빈다');
+  assert.equal(aliveLabel(9999), '살아 있다');
+  assert.equal(aliveLabel(1000), '살아 있다');
+  assert.equal(aliveLabel(999), '드물다');
+  assert.equal(aliveLabel(100), '드물다');
+  assert.equal(aliveLabel(99), '거의 비었다');
+  assert.equal(aliveLabel(0), '거의 비었다');
+});
+
+test('값이 없으면 분류하지 않는다', () => {
+  for (const bad of [null, undefined, NaN, -1, '1000']) {
+    assert.equal(aliveLabel(bad), null, `분류해버림: ${bad}`);
+  }
+});
+
+test('분류 경계가 내림차순이라 첫 일치가 곧 정답이다', () => {
+  const mins = ALIVE_RULE.map((r) => r.min);
+  assert.deepEqual(mins, [...mins].sort((a, b) => b - a));
+  assert.equal(mins.at(-1), 0, '0 을 받아 줄 칸이 없다');
+});
+
+test('게임 나이를 센다', () => {
+  assert.equal(ageOf(2000, '2026-08-27'), 26);
+  assert.equal(ageOf(2026, '2026-08-27'), 0);
+  assert.equal(ageOf(2030, '2026-08-27'), null, '미래 게임을 음수로 셌다');
+  assert.equal(ageOf('2000', '2026-08-27'), null);
+});
+
+test('오래된 게임을 기본으로 자르지 않는다 — 사람 적은 줄이 곧 답이다', () => {
+  const legacy = GAMES.filter((g) => g.tier === 'legacy');
+  const records = legacy.map((g) => rec('2026-08-27', g.appid, 100));
+  assert.equal(graveyard(records, GAMES, '2026-08-27').length, legacy.length);
+});
+
+test('원하면 자를 수 있다', () => {
+  const legacy = GAMES.filter((g) => g.tier === 'legacy');
+  const records = legacy.map((g) => rec('2026-08-27', g.appid, 100));
+  assert.equal(graveyard(records, GAMES, '2026-08-27', { limit: 2 }).length, 2);
+});
