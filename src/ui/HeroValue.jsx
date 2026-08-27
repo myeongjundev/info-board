@@ -60,7 +60,13 @@ export default function HeroValue({ board, status, fault, onRetry }) {
         </div>
       </dl>
 
-      {stale && (
+      {board.clockSkew ? (
+        <p className="caveat">
+          <b>이 브라우저 시계가 어긋나 있다.</b> 기록의 날짜({reading.date})가 이
+          브라우저가 아는 오늘보다 뒤에 있다. 값과 잰 시각은 위에 적힌 그대로이고,
+          <b> 얼마나 지났는지만 셀 수 없다.</b> 기기 시간을 맞추면 다시 보인다.
+        </p>
+      ) : stale && (
         <p className="caveat">
           <b>오래된 자료다.</b>{' '}
           {status === 'fault'

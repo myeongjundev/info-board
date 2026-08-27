@@ -48,6 +48,18 @@ export default function Comparison({ board }) {
       <p className="hand">
         손계산 <b>{x.hand}</b> {x.unit}
       </p>
+
+      {/* 요일 차이가 커서 전일 대비만 보면 노이즈를 정보인 척하게 된다.
+          7일이 안 차면 movingAverage 가 null 을 줘서 이 줄이 아예 안 나온다. */}
+      {board.average && (
+        <p className="hand">
+          {board.average.window}일 평균{' '}
+          <b>{formatNumber(Math.round(board.average.value))}</b> {x.unit}
+          <span className="muted">
+            {' '}· {board.average.from} ~ {board.average.to}
+          </span>
+        </p>
+      )}
     </>
   );
 }

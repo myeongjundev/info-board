@@ -183,6 +183,10 @@ function StateBadge({ status, board }) {
   if (status === 'fault') {
     return <span className="badge is-stale">오래된 자료</span>;
   }
+  // 기록이 방문자의 오늘보다 뒤면 밀린 것이 아니라 방문자 시계가 뒤처진 것이다.
+  if (board.clockSkew) {
+    return <span className="badge is-stale">이 브라우저 시계가 어긋남</span>;
+  }
   if (board.state === STATE.STALE) {
     return <span className="badge is-stale">오래된 자료 · {board.staleDays}일 밀림</span>;
   }

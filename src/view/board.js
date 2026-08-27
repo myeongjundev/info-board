@@ -3,7 +3,7 @@
 // 여기서 다 계산하고 src/ui 는 받아서 그리기만 한다. 그래야 브라우저 없이
 // 테스트할 수 있고, 카드 5 의 손계산 대조를 할 자리가 생긴다.
 
-import { compare, seriesOf, datesOf } from '../state/records.js';
+import { compare, seriesOf, datesOf, movingAverage } from '../state/records.js';
 
 /** 화면 전체의 상태. 값이 없으면 숫자 자리에 넣을 것이 없다. */
 export const STATE = {
@@ -27,11 +27,24 @@ export function formatInstant(iso, timeZone) {
   return `${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`;
 }
 
-/** 그 시각 이후로 얼마나 지났는가. 오래된 값에 지금 시각을 붙이지 않기 위해 쓴다. */
+/** 이만큼까지는 시계가 조금 어긋난 것으로 본다. */
+export const SKEW_TOLERANCE_MS = 60_000;
+
+/**
+ * 그 시각 이후로 얼마나 지났는가. 오래된 값에 지금 시각을 붙이지 않기 위해 쓴다.
+ *
+ * 경과 시간은 **방문자의 시계**로 센다. 그 시계가 틀려 있으면 우리가 알 수 없는
+ * 것을 아는 척하게 된다. 기록이 방문자 기준으로 미래에 있으면 — 즉 방문자 시계가
+ * 뒤처져 있으면 — 21시간 전 기록도 "방금" 이 된다. 그래서 그럴 땐 세지 않고
+ * 세지 못한다고 말한다.
+ */
 export function elapsedSince(iso, now = new Date()) {
   const t = Date.parse(iso);
   if (Number.isNaN(t)) return null;
   const ms = now.getTime() - t;
+  if (ms < -SKEW_TOLERANCE_MS) {
+    return { ms, text: '이 브라우저 시계로는 셀 수 없다', skewed: true };
+  }
   if (ms < 0) return { ms, text: '방금' };
   const min = Math.floor(ms / 60000);
   if (min < 1) return { ms, text: '방금' };
@@ -65,18 +78,25 @@ export function buildBoard({ data, today, now = new Date() }) {
 
   const state = latest.date === today ? STATE.FRESH : STATE.STALE;
   const comparison = compare(records, heroAppid, latest.date);
+  const staleDays = state === STATE.STALE ? daysBetween(latest.date, today) : 0;
 
   return {
     state,
     reading: latest,
     game: games.find((g) => g.appid === heroAppid) ?? null,
     comparison,
+    // 요일 차이가 커서 추세는 따로 본다. 7일이 안 차면 null 이라 화면에 안 나온다.
+    average: movingAverage(records, heroAppid, latest.date),
     dates: datesOf(records),
     source,
     // 잰 시각 기준 경과. 화면의 '조회 시각' 옆에 붙는다.
     elapsed: elapsedSince(latest.fetchedAt, now),
     // STALE 이면 며칠치가 비었는지
-    staleDays: state === STATE.STALE ? daysBetween(latest.date, today) : 0,
+    staleDays,
+    // 기록 날짜가 방문자의 오늘보다 뒤라면 방문자 시계가 뒤처진 것이다.
+    // 그러면 staleDays 가 음수가 되어 화면에 "-1일 밀림" 같은 말이 나온다.
+    // 밀린 것이 아니라 셀 수 없는 것이므로 따로 알린다.
+    clockSkew: staleDays < 0,
   };
 }
 
