@@ -118,7 +118,7 @@ export default function SalesChartsPage() {
               {liveItems.map((item) => <li key={`${region}-${item.appid}`}>
                 <b className="sales-rank-no">{String(item.rank).padStart(2, '0')}</b>
                 <a className="sales-rank-game" href={item.storeUrl} target="_blank" rel="noreferrer">
-                  <GameArt src={displayArt(item)} width={184} height={86} /><strong>{displayName(item)}</strong>
+                  <GameArt src={displayArt(item)} folded={item.adult} width={184} height={86} /><strong>{displayName(item)}</strong>
                 </a>
                 <div className="sales-rank-price">{priceLabel(item)}</div>
                 <a className="sales-rank-link" href={item.storeUrl} target="_blank" rel="noreferrer">상점 ↗</a>
@@ -136,7 +136,7 @@ export default function SalesChartsPage() {
                 const movement = rankMovement(item);
                 return <li key={`weekly-${item.appid}`}>
                   <b>{String(item.rank).padStart(2, '0')}</b>
-                  <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={displayArt(item)} width={184} height={86} /><strong>{displayName(item)}</strong></a>
+                  <a href={item.storeUrl} target="_blank" rel="noreferrer"><GameArt src={displayArt(item)} folded={item.adult} width={184} height={86} /><strong>{displayName(item)}</strong></a>
                   <span className={`rank-movement is-${movement.kind}`}>{movement.label}</span>
                   <span className="rank-weeks">{item.consecutiveWeeks}주</span>
                   <div>{priceLabel(item)}</div>

@@ -2263,7 +2263,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .weekly-rank-list li:first-child { border-top: 0; }
 .sales-rank-no { color: #bca8ff; font: 750 12px/1 var(--mono); }
 .sales-rank-game { display: flex; align-items: center; min-width: 0; color: var(--text); }
-.sales-rank-game img { flex: none; width: 92px; height: 43px; margin-right: 14px; border-radius: 4px; object-fit: cover; }
+.sales-rank-game img,
+.sales-rank-game .art-hold { flex: none; width: 92px; height: 43px; margin-right: 14px; border-radius: 4px; object-fit: cover; }
 .sales-rank-game strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
 .sales-rank-price { display: flex; align-items: baseline; justify-content: flex-end; gap: 8px; }
 .sales-rank-price strong { font-size: 13px; }
@@ -2277,7 +2278,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .weekly-rank-list li { display: grid; grid-template-columns: 44px minmax(0, 1fr) 65px 60px minmax(190px, auto); align-items: center; min-height: 70px; padding: 0 24px; border-top: 1px solid var(--border); }
 .weekly-rank-list li > b { color: #bca8ff; font: 750 12px/1 var(--mono); }
 .weekly-rank-list li > a { display: flex; align-items: center; min-width: 0; color: var(--text); }
-.weekly-rank-list li > a img { flex: none; width: 82px; height: 38px; margin-right: 13px; border-radius: 4px; object-fit: cover; }
+.weekly-rank-list li > a img,
+.weekly-rank-list li > a .art-hold { flex: none; width: 82px; height: 38px; margin-right: 13px; border-radius: 4px; object-fit: cover; }
 .weekly-rank-list li > a strong { overflow: hidden; font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
 .rank-movement { font: 750 10px/1 var(--mono); text-align: center; }
 .rank-movement.is-up { color: var(--up); }
@@ -2345,10 +2347,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .charts-hero { grid-template-columns: 1fr; gap: 25px; padding: 42px 0 29px; }
   .charts-updated { padding: 0; border-left: 0; }
   .sales-rank-list li { grid-template-columns: 34px minmax(0, 1fr) auto; padding: 0 15px; }
-  .sales-rank-game img { display: none; }
+  .sales-rank-game img,
+  .sales-rank-game .art-hold { display: none; }
   .sales-rank-link { display: none; }
   .weekly-rank-list li { grid-template-columns: 34px minmax(0, 1fr) 54px; padding: 0 15px; }
   .weekly-rank-list li > a img,
+  .weekly-rank-list li > a .art-hold,
   .weekly-rank-list .rank-weeks { display: none; }
   .weekly-rank-list li > div { display: none; }
 }
@@ -2563,3 +2567,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   line-height: 1.7;
   opacity: 0.85;
 }
+
+/* 성인 분류로 접은 표지의 자리지기. 폭만 지키고 아무것도 말하지 않는다.
+   그림이 안 온 자리에는 이것을 쓰지 않는다 — GameArt 주석 참고. */
+.art-hold { display: inline-block; background: var(--surface-2); }
