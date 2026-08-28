@@ -72,7 +72,18 @@ export function dealsAxis({ epicFree, steamFree, discounts, popularDiscounts } =
   const freeNow = (epicFree?.giveaways?.length ?? 0)
     + (steamFree?.giveaways?.length ?? 0)
     + (steamFree?.freeWeekends?.length ?? 0);
-  const onSale = (discounts?.counts?.discount ?? 0) + (popularDiscounts?.counts?.discount ?? 0);
+  const discountRows = [
+    ...(discounts?.discounts ?? []),
+    ...(popularDiscounts?.discounts ?? []),
+  ];
+  const discountIds = new Set(
+    discountRows.map((row) => row?.appid).filter((appid) => Number.isInteger(appid)),
+  );
+  // 실제 스냅샷은 appid 합집합으로 센다. 작은 테스트 fixture처럼 행이 없고 counts만
+  // 있으면 그 파일의 명시 집계를 쓴다.
+  const onSale = discountRows.length > 0
+    ? discountIds.size
+    : (discounts?.counts?.discount ?? 0) + (popularDiscounts?.counts?.discount ?? 0);
 
   if (freeNow === 0 && onSale === 0) {
     return { state: AXIS.EMPTY, freeNow: 0, onSale: 0, reason: '지금 공짜도 할인도 없다' };

@@ -160,6 +160,11 @@ function LiveApp() {
   const coverage = showing
     ? leaderboard(payload.data.records, GAMES, showing.reading.date)
     : null;
+  // 시각 편향 표본은 최신 일일 Reading이 아니라 표본 자신과 같은 KST 날짜의
+  // 대표 배치와 견준다. 날짜가 지난 뒤에도 역사적 실측 근거가 거짓 비교로 바뀌지 않는다.
+  const probeDate = probe?.samples?.at(-1)?.at
+    ? todayLocal(new Date(probe.samples.at(-1).at))
+    : showing?.reading.date;
 
   return (
     <div className="page">
@@ -204,7 +209,7 @@ function LiveApp() {
       )}
 
       <main id="sec-now">
-        <OverviewStrip board={showing} />
+        <OverviewStrip board={showing} faulted={status === 'fault'} />
 
         <section className="dashboard-summary" aria-labelledby="dashboard-title">
           <header className="dashboard-heading">
@@ -341,7 +346,9 @@ function LiveApp() {
                 title="시간대에 따른 편향"
                 note="같은 날 다른 시각의 실제 측정값 비교"
               />
-              <TimeBias data={timeBias(payload.data.records, probe, games, showing.reading.date)} />
+              <TimeBias data={timeBias(payload.data.records, probe, games, probeDate, {
+                anchorAppid: payload.data.source.heroAppid,
+              })} />
             </section>
           )}
 
@@ -383,7 +390,9 @@ function LiveApp() {
                   note="양쪽 날짜에 모두 있는 게임만 비교"
                 />
                 <Movers
-                  data={movers(payload.data.records, games, showing.reading.date)}
+                  data={movers(payload.data.records, games, showing.reading.date, {
+                    anchorAppid: payload.data.source.heroAppid,
+                  })}
                   dates={showing.dates}
                 />
               </section>

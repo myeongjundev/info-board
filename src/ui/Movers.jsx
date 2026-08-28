@@ -1,6 +1,7 @@
 // 🚀 급상승 · 📉 급하락 — 같은 기록에서 나온다. API 를 더 붙이지 않았다.
 
-import { formatNumber } from '../view/board.js';
+import { formatNumber, formatInstant } from '../view/board.js';
+import { SOURCE } from '../source/definition.js';
 
 export default function Movers({ data, dates }) {
   if (!data) {
@@ -21,8 +22,11 @@ export default function Movers({ data, dates }) {
         <MoverColumn kind="down" title="하락" rows={data.fallers} />
       </div>
       <p className="source-url">
-        <b>{data.previousDate}</b> 기록과 견줬다. 우리가 재는 <b>{data.compared}개</b> 중에서
+        대표 배치 <b>{formatInstant(data.previousAt, SOURCE.timezone)}</b> →{' '}
+        <b>{formatInstant(data.currentAt, SOURCE.timezone)}</b>끼리 견줬다. 우리가 재는{' '}
+        <b>{data.compared}개</b> 중에서
         고른 것이고, Steam 전체를 훑은 순위가 아니다.
+        {data.batchExcluded > 0 && ` 대표값과 다른 시각에 수집된 ${data.batchExcluded}개는 비교에서 뺐다.`}
         {data.skipped > 0 && ` 견줄 값이 없는 ${data.skipped}개는 뺐다.`}
       </p>
     </>

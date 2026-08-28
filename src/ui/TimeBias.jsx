@@ -61,7 +61,10 @@ export default function TimeBias({ data }) {
       </p>
 
       <details className="method-note">
-        <summary>표본 {data.measured}개 · 별도 시각 표본</summary>
+        <summary>
+          표본 {data.measured}개 · 별도 시각 표본
+          {data.batchExcluded > 0 && ` · 다른 배치 ${data.batchExcluded}개 제외`}
+        </summary>
         <p>
           이 표본은 <code>data/timeprobe.json</code>에 따로 쌓이고 날짜별 기록을
           건드리지 않는다. 하루에 한 번 같은 시각에 재는 규칙은 그대로 유지한다.

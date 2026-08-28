@@ -69,6 +69,19 @@ test('무엇과 견줬는지 날짜를 함께 준다', () => {
   assert.equal(movers(records, GAMES, '2026-08-28').previousDate, '2026-08-25');
 });
 
+test('대표 Reading과 다른 시각의 같은 날짜 배치는 변화 비교에서 제외한다', () => {
+  const records = [
+    rec('2026-08-27', 730, 100),
+    { ...rec('2026-08-27', 570, 100), fetchedAt: '2026-08-27T11:09:00.000Z' },
+    rec('2026-08-28', 730, 110),
+    rec('2026-08-28', 570, 200),
+  ];
+  const m = movers(records, GAMES, '2026-08-28');
+  assert.equal(m.compared, 1);
+  assert.equal(m.batchExcluded, 1);
+  assert.deepEqual(m.risers.map((row) => row.appid), [730]);
+});
+
 test('오래된 게임은 첫날부터 보인다 — 이전 기록이 필요 없다', () => {
   const records = [
     rec('2026-08-27', 550, 25947), rec('2026-08-27', 10, 5884),
@@ -461,6 +474,24 @@ test('그 날짜 기록이 없으면 만들지 않는다', () => {
   const records = [rec('2026-08-26', 730, 100)];
   const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110 });
   assert.equal(timeBias(records, probe, GAMES, '2026-08-27'), null);
+});
+
+test('다른 KST 날짜의 표본을 같은 날 시각 비교로 만들지 않는다', () => {
+  const records = [rec('2026-08-28', 730, 100)];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110 });
+  assert.equal(timeBias(records, probe, GAMES, '2026-08-28'), null);
+});
+
+test('대표 Reading과 다른 배치거나 표본보다 늦은 기록은 시각 비교에서 제외한다', () => {
+  const records = [
+    rec('2026-08-27', 730, 100),
+    { ...rec('2026-08-27', 570, 100), fetchedAt: '2026-08-27T11:09:00.000Z' },
+  ];
+  const probe = probeOf('2026-08-27T07:30:00.000Z', { 730: 110, 570: 200 });
+  const t = timeBias(records, probe, GAMES, '2026-08-27');
+  assert.equal(t.measured, 1);
+  assert.equal(t.batchExcluded, 1);
+  assert.deepEqual(t.rows.map((row) => row.appid), [730]);
 });
 
 // ── 순위 이동 ─────────────────────────────────────────────

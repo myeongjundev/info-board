@@ -10,6 +10,24 @@
 
 import { compare, seriesOf } from '../state/records.js';
 
+// 한 collect 실행은 75개를 수십 초 안에 순서대로 잰다. 실행 ID가 저장돼 있지
+// 않으므로 대표 Reading과 5분 이내인 행을 같은 수집 배치로 본다. 이것은 날짜 사이
+// 시각 차이를 허용하는 임계가 아니라, 한 실행에 속한 행을 복원하는 운영 경계다.
+export const COLLECTION_BATCH_MS = 5 * 60 * 1000;
+
+function sameCollectionBatch(reading, anchor, windowMs = COLLECTION_BATCH_MS) {
+  if (!reading?.fetchedAt || !anchor?.fetchedAt) return false;
+  return Math.abs(new Date(reading.fetchedAt) - new Date(anchor.fetchedAt)) <= windowMs;
+}
+
+function dateInTimezone(instant, timeZone = 'Asia/Seoul') {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date(instant));
+  const get = (type) => parts.find((part) => part.type === type)?.value;
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+
 /**
  * 그 날짜에 이전 기록 대비 오른 게임과 내린 게임.
  *
@@ -17,13 +35,29 @@ import { compare, seriesOf } from '../state/records.js';
  *
  * @returns {{risers:Array, fallers:Array, compared:number, skipped:number}|null}
  */
-export function movers(records, games, date, { limit = 3 } = {}) {
+export function movers(records, games, date, {
+  limit = 3,
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
   const rows = [];
   let skipped = 0;
+  let batchExcluded = 0;
+
+  const anchors = seriesOf(records, anchorAppid);
+  const currentAnchor = anchors.find((reading) => reading.date === date);
+  const previousAnchor = anchors.filter((reading) => reading.date < date).at(-1);
+  if (!currentAnchor || !previousAnchor) return null;
 
   for (const g of games) {
     const diff = compare(records, g.appid, date);
     if (!diff) { skipped += 1; continue; }
+    if (diff.previous.date !== previousAnchor.date
+      || !sameCollectionBatch(diff.previous, previousAnchor, batchWindowMs)
+      || !sameCollectionBatch(diff.current, currentAnchor, batchWindowMs)) {
+      batchExcluded += 1;
+      continue;
+    }
     // 이전 값이 0 이면 변화율을 만들 수 없다. 0 에서 늘어난 것은 ∞ 다.
     if (diff.percent === null) { skipped += 1; continue; }
     rows.push({
@@ -51,8 +85,11 @@ export function movers(records, games, date, { limit = 3 } = {}) {
     fallers: down.slice(0, limit),
     compared: rows.length,
     skipped,
+    batchExcluded,
     // 무엇과 견줬는지. 화면에 적어야 "어제 대비" 가 거짓말이 되지 않는다.
     previousDate: rows[0].previousDate,
+    previousAt: previousAnchor.fetchedAt,
+    currentAt: currentAnchor.fetchedAt,
   };
 }
 
@@ -329,20 +366,29 @@ export function withGenres(fileGames, catalog) {
  *
  * @returns {{rows:Array, recordAt:string, probeAt:string, measured:number}|null}
  */
-export function timeBias(records, probe, games, date) {
+export function timeBias(records, probe, games, date, {
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
   const sample = probe?.samples?.at(-1);
   if (!sample) return null;
 
+  const anchor = seriesOf(records, anchorAppid).find((reading) => reading.date === date);
+  if (!anchor || dateInTimezone(sample.at, anchor.timezone) !== date) return null;
+
   const rows = [];
-  let recordAt = null;
+  let batchExcluded = 0;
 
   for (const g of games) {
     const r = seriesOf(records, g.appid).find((x) => x.date === date);
     if (!r) continue;
     const later = sample.values?.[g.appid];
     if (typeof later !== 'number' || !Number.isFinite(later)) continue;
-
-    if (recordAt === null || r.fetchedAt < recordAt) recordAt = r.fetchedAt;
+    if (!sameCollectionBatch(r, anchor, batchWindowMs)
+      || new Date(sample.at) <= new Date(r.fetchedAt)) {
+      batchExcluded += 1;
+      continue;
+    }
 
     const delta = later - r.value;
     rows.push({
@@ -368,7 +414,13 @@ export function timeBias(records, probe, games, date) {
     return b.percent - a.percent;
   });
 
-  return { rows, recordAt, probeAt: sample.at, measured: rows.length };
+  return {
+    rows,
+    recordAt: anchor.fetchedAt,
+    probeAt: sample.at,
+    measured: rows.length,
+    batchExcluded,
+  };
 }
 
 /**

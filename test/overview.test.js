@@ -30,6 +30,10 @@ test('정상값이 없으면 숫자를 만들지 않는다', () => {
   assert.equal(playingAxis(undefined).state, AXIS.UNAVAILABLE);
 });
 
+test('마지막 정상값을 쓰는 장애 상태를 요약 축까지 전달한다', () => {
+  assert.equal(playingAxis({ ...board, state: 'STALE' }).stale, true);
+});
+
 test('파는 축은 한국 매출 1위를 그대로 옮긴다', () => {
   const a = sellingAxis({ live: { korea: [{ name: '붉은사막', adult: false, isFree: false, priceText: '$55.99', discountPercent: 20 }] } });
   assert.equal(a.state, AXIS.OK);
@@ -71,6 +75,14 @@ test('일부만 읽혔으면 세되 일부라고 밝힌다', () => {
   assert.equal(a.freeNow, 1);
   assert.equal(a.onSale, 8);
   assert.equal(a.partial, true);
+});
+
+test('두 할인 목록에 같은 게임이 있으면 appid 합집합으로 한 번만 센다', () => {
+  const a = dealsAxis({
+    discounts: { discounts: [{ appid: 10 }, { appid: 20 }] },
+    popularDiscounts: { discounts: [{ appid: 20 }, { appid: 30 }] },
+  });
+  assert.equal(a.onSale, 3);
 });
 
 test('보는 축은 두 플랫폼 시청자를 더하지 않는다', () => {

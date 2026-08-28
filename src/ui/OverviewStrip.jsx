@@ -22,7 +22,9 @@ function axisCopy(axis) {
 
   switch (axis.id) {
     case 'playing': {
-      const delta = axis.delta === null
+      const delta = axis.stale
+        ? '오래된 값 · 제품 장애 시 마지막 정상 Reading'
+        : axis.delta === null
         ? '이전 날짜 비교 전'
         : `이전 기록 대비 ${axis.delta > 0 ? '+' : ''}${number(axis.delta)} ${axis.unit}`;
       return { metric: `${number(axis.value)} ${axis.unit}`, subject: axis.subject, detail: delta };
@@ -35,7 +37,7 @@ function axisCopy(axis) {
       };
     case 'deals':
       return {
-        metric: `무료 ${number(axis.freeNow)} · 할인 목록 ${number(axis.onSale)}`,
+        metric: `무료 ${number(axis.freeNow)} · 할인 ${number(axis.onSale)}`,
         subject: '한국 상점 행사',
         detail: axis.partial ? '일부 자료 기준' : 'Epic·Steam 정적 수집본 기준',
       };
@@ -50,9 +52,15 @@ function axisCopy(axis) {
   }
 }
 
-export default function OverviewStrip({ board }) {
+export default function OverviewStrip({ board, faulted = false }) {
   const axes = overview({
-    board, salesCharts, epicFree, steamFree, discounts, popularDiscounts, streaming,
+    board: faulted && board ? { ...board, state: 'STALE' } : board,
+    salesCharts,
+    epicFree,
+    steamFree,
+    discounts,
+    popularDiscounts,
+    streaming,
   });
 
   return (
@@ -68,7 +76,11 @@ export default function OverviewStrip({ board }) {
         {axes.map((axis, index) => {
           const copy = axisCopy(axis);
           return (
-            <a key={axis.id} className={`overview-axis is-${axis.state}`} href={axis.href}>
+            <a
+              key={axis.id}
+              className={`overview-axis is-${axis.state}${axis.stale ? ' is-stale' : ''}`}
+              href={axis.href}
+            >
               <span className="overview-axis-number">0{index + 1}</span>
               <span className="overview-axis-question">{axis.question}</span>
               <strong>{copy.metric}</strong>
