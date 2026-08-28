@@ -108,7 +108,7 @@ test('플랫폼이 연결됐는데 집계된 방송이 없는 것과 연결 실�
 test('요약은 네 칸이고 순서가 고정이다', () => {
   const rows = overview({ board });
   assert.deepEqual(rows.map((r) => r.id), ['playing', 'selling', 'deals', 'watching']);
-  assert.deepEqual(rows.map((r) => r.question), ['얼마나 하나', '뭐가 팔리나', '뭐가 싸나', '뭘 보나']);
+  assert.deepEqual(rows.map((r) => r.question), ['몇 명이 하나', '무엇이 팔리나', '얼마나 싸나', '몇 명이 보나']);
   // 자료가 board 뿐이어도 나머지 셋이 사라지지 않는다. 모른다고 말한다.
   assert.equal(rows[0].state, AXIS.OK);
   assert.equal(rows[1].state, AXIS.UNAVAILABLE);

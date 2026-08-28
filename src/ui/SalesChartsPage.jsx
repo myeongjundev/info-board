@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { SUBPAGE_AXES } from '../view/overview.js';
+import SubpageTopBar from './SubpageTopBar.jsx';
 
 import { rankMovement, validateSalesChartSnapshot } from '../source/salesCharts.js';
 import { countAdult, displayArt, displayName, priceMarksOnScreen } from '../view/gameDisplay.js';
@@ -91,18 +91,7 @@ export default function SalesChartsPage() {
 
   return (
     <div className="page charts-page">
-      <header className="sales-topbar">
-        <a className="sales-back" href="#sec-now">← 전체 현황</a>
-        <nav className="subpage-nav" aria-label="별도 페이지">
-          {SUBPAGE_AXES.map((axis) => (
-            <a
-              key={axis.id}
-              className={axis.href === '#/charts' ? 'is-current' : undefined}
-              href={axis.href}
-            >{axis.question}</a>
-          ))}
-        </nav>
-      </header>
+      <SubpageTopBar current="#/charts" caption="Steam 한국·글로벌 매출 순위" />
 
       <main>
         <section className="charts-hero">

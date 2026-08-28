@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { SUBPAGE_AXES } from '../view/overview.js';
+import SubpageTopBar from './SubpageTopBar.jsx';
 
 import { headerUrl } from '../source/artwork.js';
 import { krwFromMinor, validateDiscountSnapshot } from '../source/discounts.js';
@@ -131,18 +131,7 @@ export default function SalesPage() {
 
   return (
     <div className="page sales-page">
-      <header className="sales-topbar">
-        <a className="sales-back" href="#sec-now">← 전체 현황</a>
-        <nav className="subpage-nav" aria-label="별도 페이지">
-          {SUBPAGE_AXES.map((axis) => (
-            <a
-              key={axis.id}
-              className={axis.href === '#/sales' ? 'is-current' : undefined}
-              href={axis.href}
-            >{axis.question}</a>
-          ))}
-        </nav>
-      </header>
+      <SubpageTopBar current="#/sales" caption="한국 상점 할인과 무료 배포" />
 
       <main>
         <section className="sales-hero">

@@ -625,6 +625,12 @@ a { text-decoration: none; }
   justify-content: flex-end;
   gap: 8px;
 }
+/* 하위 페이지는 대표값도 설정도 없어 가운데·오른쪽 묶음이 없다. 두 칸으로 선다.
+ * 나머지 — 워드마크, 나브 모양, 아래 선 — 는 첫 화면과 같은 것을 쓴다. */
+.topbar.is-subpage { grid-template-columns: minmax(0, 1fr) max-content; }
+.topbar.is-subpage .topbar-service-links { padding-right: 0; border-right: 0; }
+a.wordmark:hover { color: var(--accent); }
+
 /* 나브는 어디로 갈까, 배지와 설정은 지금 어떤 상태인가다. 다른 일이라 선으로 가른다. */
 .topbar-service-links { padding-right: 8px; border-right: 1px solid var(--border); }
 /* 좁으면 한 줄에 다 못 선다. 전에는 나브를 display:none 으로 지웠는데, 길을 지우면
@@ -2041,6 +2047,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
  * 그래서 평소에는 셋 다 같은 회색 글자로 두고, 축 색은 hover 와 focus 에만 나온다.
  * 축과 색의 짝은 남되 줄이 조용해진다. */
 .topbar-service-links { display: flex; align-items: center; gap: 2px; }
+.play-nav-link,
 .sales-nav-link,
 .stream-nav-link,
 .sales-chart-nav-link {
@@ -2056,31 +2063,32 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   font-weight: var(--w-medium);
   white-space: nowrap;
 }
+.play-nav-link:hover,        .play-nav-link:focus-visible        { background: var(--surface-2); color: var(--axis-playing); }
 .sales-nav-link:hover,       .sales-nav-link:focus-visible       { background: var(--surface-2); color: var(--axis-deals); }
 .sales-chart-nav-link:hover, .sales-chart-nav-link:focus-visible { background: var(--surface-2); color: var(--axis-selling); }
 .stream-nav-link:hover,      .stream-nav-link:focus-visible      { background: var(--surface-2); color: var(--axis-watching); }
+
+/* 지금 있는 칸. 네 화면 어디서나 나브는 네 칸이고, 그중 하나가 눌려 있다.
+ * 눌린 칸은 그 축의 색을 띤다 — 색이 여기서는 길이 아니라 위치를 말한다. */
+.topbar-service-links .is-current {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--axis, var(--text));
+}
+.play-nav-link        { --axis: var(--axis-playing); }
+.sales-chart-nav-link { --axis: var(--axis-selling); }
+.sales-nav-link       { --axis: var(--axis-deals); }
+.stream-nav-link      { --axis: var(--axis-watching); }
 /* 375px 에서 나브 · 배지 · 설정이 한 줄에 357px 이라 10px 이 넘쳐 설정만 다음 줄로
  * 떨어졌다. 글자는 그대로 두고 좌우 여백만 줄여 333px 으로 맞춘다. */
 @media (max-width: 560px) {
-  .topbar-service-links { padding-right: 6px; }
-  .sales-nav-link, .stream-nav-link, .sales-chart-nav-link { padding: 0 6px; }
+  /* 여기서는 나브가 줄을 통째로 쓰고 배지·설정이 아래로 내려간다. 뒤에 아무것도
+     없는 자리에 남은 세로선은 가르는 선이 아니라 떠 있는 눈금이라 지운다. */
+  .topbar-service-links { padding-right: 0; border-right: 0; }
+  .play-nav-link, .sales-nav-link, .stream-nav-link, .sales-chart-nav-link { padding: 0 6px; }
 }
 
 .sales-page { max-width: 1200px; }
-.sales-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 48px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-faint);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .12em;
-}
-.sales-back { color: var(--text-dim); letter-spacing: 0; }
-.sales-back:hover { color: var(--accent); }
 .sales-hero {
   display: flex;
   align-items: flex-end;
@@ -2391,7 +2399,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 440px) {
-  .sales-topbar > span { display: none; }
   .sales-kpis article { min-height: 112px; padding: 17px 15px; }
   .sales-kpis strong { font-size: 26px; }
   .sales-kpis small { display: block; margin: 4px 0 0; }
@@ -2542,10 +2549,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 
 /* ══ 스트리밍 게임 순위 별도 페이지 ══ */
 .streaming-page { max-width: 1200px; padding-bottom: 72px; }
-.subpage-nav { display: flex; align-items: center; gap: 18px; }
-.subpage-nav a { color: var(--text-faint); letter-spacing: 0; }
-.subpage-nav a:hover,
-.subpage-nav .is-current { color: var(--text); }
 
 .streaming-hero {
   display: grid;
@@ -2711,7 +2714,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 440px) {
-  .subpage-nav a:first-child { display: none; }
   .stream-rank-panel > header { padding: 20px 18px; }
   .stream-empty { grid-template-columns: 1fr; }
   .stream-empty > span { display: none; }

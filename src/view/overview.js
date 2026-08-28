@@ -129,16 +129,24 @@ export function watchingAxis(streaming) {
  * 이름이 질문형인 이유. 각 페이지의 제목은 이미 질문이다 —
  * `무엇이 지금 팔리고 있을까`, `지금, 어디서 어떤 게임을 볼까`.
  * **나브만 명사형이라 어긋나 있었다.** 새 말투를 만든 것이 아니라 맞춘 것이다.
+ *
+ * 질문의 말이 그 축이 실제로 세는 것과 같아야 한다.
+ *
+ *   playing   동시접속자 **수**        →  몇 명이 하나
+ *   selling   매출 순위의 **대상**      →  무엇이 팔리나
+ *   deals     무료와 할인의 **정도**    →  얼마나 싸나
+ *   watching  시청자 **수**            →  몇 명이 보나
+ *
+ * 앞의 `뭐가 팔리나 · 뭐가 싸나 · 뭘 보나` 는 구어 축약이었고, 무엇보다
+ * `싸나` 가 그 축보다 좁았다. deals 는 할인만이 아니라 무료 배포도 센다 —
+ * 카드가 실제로 `무료 1 · 할인 18` 을 띄운다. `얼마나` 로 둘을 다 담는다.
  */
 export const SERVICE_AXES = [
-  { id: 'playing', question: '얼마나 하나', href: '#sec-now', navClass: 'play-nav-link' },
-  { id: 'selling', question: '뭐가 팔리나', href: '#/charts', navClass: 'sales-chart-nav-link' },
-  { id: 'deals', question: '뭐가 싸나', href: '#/sales', navClass: 'sales-nav-link' },
-  { id: 'watching', question: '뭘 보나', href: '#/streaming', navClass: 'stream-nav-link' },
+  { id: 'playing', question: '몇 명이 하나', href: '#sec-now', navClass: 'play-nav-link' },
+  { id: 'selling', question: '무엇이 팔리나', href: '#/charts', navClass: 'sales-chart-nav-link' },
+  { id: 'deals', question: '얼마나 싸나', href: '#/sales', navClass: 'sales-nav-link' },
+  { id: 'watching', question: '몇 명이 보나', href: '#/streaming', navClass: 'stream-nav-link' },
 ];
-
-/** 별도 페이지 셋. 첫 화면(`playing`)은 페이지가 아니라 이 화면 자신이다. */
-export const SUBPAGE_AXES = SERVICE_AXES.filter((axis) => axis.href.startsWith('#/'));
 
 /** 첫 화면 요약 네 칸. 순서는 하는 것 → 사는 것 → 공짜 → 보는 것. */
 export function overview(sources = {}) {

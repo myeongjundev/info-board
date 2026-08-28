@@ -1,7 +1,7 @@
 // 상단 띠. MSN 날씨의 top-container 배치를 따랐다 —
 // 왼쪽 로고 · 가운데 검색 · 오른쪽 설정 버튼.
 
-import { SUBPAGE_AXES } from '../view/overview.js';
+import { SERVICE_AXES } from '../view/overview.js';
 import GameSearch from './GameSearch.jsx';
 
 function measuredTime(reading) {
@@ -34,8 +34,13 @@ export default function TopBar({
 
       <div className="topbar-right">
         <nav className="topbar-service-links" aria-label="서비스 페이지">
-          {SUBPAGE_AXES.map((axis) => (
-            <a key={axis.id} className={axis.navClass} href={axis.href}>{axis.question}</a>
+          {SERVICE_AXES.map((axis) => (
+            <a
+              key={axis.id}
+              className={`${axis.navClass}${axis.href === '#sec-now' ? ' is-current' : ''}`}
+              href={axis.href}
+              aria-current={axis.href === '#sec-now' ? 'page' : undefined}
+            >{axis.question}</a>
           ))}
         </nav>
         {badge}
