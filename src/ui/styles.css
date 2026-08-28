@@ -82,7 +82,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.18em;
   margin: 0;
-  color: #fff;
+  color: var(--text);
 }
 
 /* ── 상태 배지 ── */
@@ -730,7 +730,7 @@ body {
   border-bottom: 2px solid transparent;
 }
 .secnav a:hover { color: var(--text); }
-.secnav a.is-on { color: #fff; border-bottom-color: var(--accent); }
+.secnav a.is-on { color: var(--text); border-bottom-color: var(--accent); }
 
 html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -1475,11 +1475,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 .overview-strip-heading p {
   margin: 0 0 7px;
-  color: var(--accent);
-  font: 700 11px/1 var(--mono);
+  color: var(--text-faint);
+  font: 600 11px/1 var(--mono);
   letter-spacing: .12em;
 }
-.overview-strip-heading h2 { margin: 0; color: #fff; font-size: 19px; }
+.overview-strip-heading h2 { margin: 0; color: var(--text); font-size: 19px; }
 .overview-strip-heading > span { max-width: 330px; color: var(--text-faint); font-size: 11px; text-align: right; }
 .overview-axis-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .overview-axis {
@@ -1497,7 +1497,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .overview-axis:hover { background: rgba(255, 255, 255, .035); }
 .overview-axis-number { position: absolute; top: 21px; right: 20px; color: var(--text-faint); font: 700 11px/1 var(--mono); }
 .overview-axis-question { font: 700 11px/1 var(--mono); letter-spacing: .04em; }
-.overview-axis strong { margin-top: 24px; color: #fff; font-size: clamp(18px, 2vw, 25px); line-height: 1.1; overflow-wrap: anywhere; }
+.overview-axis strong { margin-top: 24px; color: var(--text); font-size: clamp(18px, 2vw, 25px); line-height: 1.1; overflow-wrap: anywhere; }
 .overview-axis b { margin-top: 9px; color: var(--text); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .overview-axis small { margin-top: auto; padding-top: 15px; color: var(--text-faint); font-size: 11px; line-height: 1.35; }
 .overview-axis.is-empty strong { color: var(--text-dim); }
@@ -1520,7 +1520,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .overview-axis:nth-child(2) { --axis: var(--axis-selling); }
 .overview-axis:nth-child(3) { --axis: var(--axis-deals); }
 .overview-axis:nth-child(4) { --axis: var(--axis-watching); }
-.overview-axis.is-stale small { color: #fbbf24; }
+.overview-axis.is-stale small { color: var(--warn); }
 
 .dashboard-summary {
   margin-top: 28px;
@@ -1528,7 +1528,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   border: 1px solid var(--border-2);
   border-radius: 8px;
   background: var(--surface);
-
 }
 
 .dashboard-heading {
@@ -1539,21 +1538,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   padding: 26px 28px 24px;
   border-bottom: 1px solid var(--border);
 }
+/* 구획 라벨은 라벨답게 물러선다.
+ *
+ * 전에는 전부 --accent + 700 이라 바로 아래 제목과 같은 무게로 읽혔다.
+ * 같은 형식의 구획이 열 개 넘게 이어지니 반복이 리듬이 아니라 벽지가 됐다.
+ * 라벨을 죽이고 제목만 살리면 스크롤할 때 구획이 하나씩 세어진다. */
 .dashboard-eyebrow,
 .section-heading > p,
 .quality-heading p {
   margin: 0 0 7px;
-  color: var(--accent);
+  color: var(--text-faint);
   font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: .14em;
 }
 .dashboard-heading h2,
 .section-heading h2,
 .quality-heading h2 {
   margin: 0;
-  color: #fff;
+  color: var(--text);
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -.025em;
@@ -1635,7 +1639,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   padding: 0;
   font-size: 13px;
 }
-.kpi-primary .hero-number { font-size: clamp(48px, 5.4vw, 68px); }
+/* 위계는 크기로 낸다. 칸 폭을 넓히는 쪽은 시도했다가 되돌렸다 (위 .kpi-grid 주석). */
+.kpi-primary .hero-number { font-size: clamp(52px, 6vw, 84px); letter-spacing: -.03em; }
 .kpi-primary .hero-unit { font-size: 15px; }
 .kpi-primary .hero-value { margin: 0; }
 .kpi-primary .caveat { margin-bottom: 0; }
@@ -1685,7 +1690,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   overflow: hidden;
   border: 1px solid var(--border-2);
   border-radius: 8px;
-  background: #0d131c;
+  background: var(--surface);
 
 }
 .quality-heading {
@@ -1794,7 +1799,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 .panel-heading p {
   margin: 0 0 5px;
-  color: var(--accent);
+  color: var(--text-faint);
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 700;
@@ -2001,22 +2006,22 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   align-items: center;
   min-height: 36px;
   padding: 0 13px;
-  border: 1px solid rgba(0, 231, 120, .3);
+  border: 1px solid rgba(251, 113, 133, .3);
   border-radius: 999px;
-  background: rgba(0, 231, 120, .055);
-  color: #5de7a4;
+  background: rgba(251, 113, 133, .055);
+  color: var(--axis-watching);
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
 }
-.stream-nav-link:hover { border-color: #5de7a4; background: rgba(0, 231, 120, .1); }
+.stream-nav-link:hover { border-color: var(--axis-watching); background: rgba(251, 113, 133, .1); }
 .sales-chart-nav-link {
   display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px;
   border: 1px solid rgba(167, 139, 250, .32); border-radius: 999px;
-  background: rgba(167, 139, 250, .055); color: #bca8ff;
+  background: rgba(167, 139, 250, .055); color: var(--axis-selling);
   font-size: 11px; font-weight: 700; white-space: nowrap;
 }
-.sales-chart-nav-link:hover { border-color: #bca8ff; background: rgba(167, 139, 250, .1); }
+.sales-chart-nav-link:hover { border-color: var(--axis-selling); background: rgba(167, 139, 250, .1); }
 
 .sales-page { max-width: 1200px; }
 .sales-topbar {
@@ -2076,11 +2081,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   border-bottom: 1px solid var(--border);
 
 }
-.epic-giveaway-heading p { margin: 0 0 7px; color: #fff; font: 700 11px/1 var(--mono); letter-spacing: .14em; }
+.epic-giveaway-heading p { margin: 0 0 7px; color: var(--text); font: 700 11px/1 var(--mono); letter-spacing: .14em; }
 .epic-giveaway-heading h2 { display: inline; margin: 0; font-size: 19px; letter-spacing: -.025em; }
 .epic-giveaway-heading div > span { margin-left: 10px; color: var(--text-faint); font-size: 11px; }
 .epic-giveaway-heading > a { color: var(--text-dim); font-size: 11px; }
-.epic-giveaway-heading > a:hover { color: #fff; }
+.epic-giveaway-heading > a:hover { color: var(--text); }
 .epic-giveaway-grid { display: grid; grid-template-columns: 1fr; }
 .epic-giveaway-card { display: grid; grid-template-columns: minmax(260px, .9fr) minmax(280px, 1.1fr); min-width: 0; }
 .epic-giveaway-card + .epic-giveaway-card { border-top: 1px solid var(--border); }
@@ -2096,26 +2101,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   padding: 7px 9px;
   border-radius: 6px;
   background: #fff;
-  color: #090b0f;
+  color: var(--bg);
 
   font: 850 11px/1 var(--mono);
 }
 .epic-giveaway-body { align-self: center; padding: 25px 28px; }
 .epic-free-meta { display: flex; align-items: center; gap: 9px; }
-.epic-free-meta span { padding: 4px 7px; border-radius: 4px; background: #fff; color: #090b0f; font-size: 11px; font-weight: 800; }
+.epic-free-meta span { padding: 4px 7px; border-radius: 4px; background: #fff; color: var(--bg); font-size: 11px; font-weight: 800; }
 .epic-free-meta b { color: var(--up); font: 700 11px/1 var(--mono); }
 .epic-giveaway-body h3 { margin: 13px 0 15px; font-size: clamp(22px, 3vw, 31px); line-height: 1.15; letter-spacing: -.04em; }
 .epic-original-price { display: flex; align-items: baseline; gap: 9px; margin: 0; }
 .epic-original-price span { color: var(--text-faint); font-size: 11px; }
 .epic-original-price del { color: var(--text-faint); font-size: 11px; }
-.epic-original-price strong { color: #fff; font-size: 19px; }
+.epic-original-price strong { color: var(--text); font-size: 19px; }
 .epic-giveaway-body dl { margin: 19px 0; padding: 13px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .epic-giveaway-body dl > div { display: flex; justify-content: space-between; gap: 15px; }
 .epic-giveaway-body dl > div + div { margin-top: 7px; }
 .epic-giveaway-body dt { color: var(--text-faint); font-size: 11px; }
 .epic-giveaway-body dd { margin: 0; color: var(--text-dim); font: 600 11px/1.4 var(--mono); text-align: right; }
-.epic-store-button { display: inline-flex; align-items: center; min-height: 39px; padding: 0 14px; border-radius: 6px; background: #fff; color: #090b0f; font-size: 11px; font-weight: 800; }
-.epic-store-button:hover { background: #dfe5ec; }
+.epic-store-button { display: inline-flex; align-items: center; min-height: 39px; padding: 0 14px; border-radius: 6px; background: #fff; color: var(--bg); font-size: 11px; font-weight: 800; }
+.epic-store-button:hover { background: var(--text); }
 .epic-source-line { display: flex; justify-content: space-between; gap: 20px; padding: 11px 24px; border-top: 1px solid var(--border); color: var(--text-faint); font-size: 11px; }
 .epic-state { margin: 0; padding: 34px 24px; color: var(--text-dim); font-size: 11px; text-align: center; }
 .epic-state.is-error { color: var(--warn); }
@@ -2136,9 +2141,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .steam-free-section > header > a:hover { color: var(--accent); }
 .steam-free-tabs { display: flex; gap: 7px; padding: 12px 23px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.012); }
 .steam-free-tabs button { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 12px; border: 1px solid var(--border-2); border-radius: 6px; background: transparent; color: var(--text-dim); font: 700 11px/1 var(--sans); cursor: pointer; }
-.steam-free-tabs button:hover { border-color: #66c0f4; color: #fff; }
-.steam-free-tabs button.is-active { border-color: rgba(102,192,244,.55); background: rgba(102,192,244,.12); color: #fff; }
-.steam-free-tabs button span { color: #66c0f4; font: 800 11px/1 var(--mono); }
+.steam-free-tabs button:hover { border-color: var(--axis-deals); color: var(--text); }
+.steam-free-tabs button.is-active { border-color: rgba(52, 211, 153,.55); background: rgba(52, 211, 153,.12); color: var(--text); }
+.steam-free-tabs button span { color: var(--axis-deals); font: 800 11px/1 var(--mono); }
 .steam-free-empty { min-height: 112px; margin: 0; padding: 35px 24px; color: var(--text-dim); text-align: center; }
 .steam-free-empty b,
 .steam-free-empty span { display: block; }
@@ -2153,19 +2158,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .steam-free-grid img { width: 100%; height: 100%; min-height: 190px; object-fit: cover; }
 .steam-free-grid article > div { align-self: center; padding: 19px; }
 .steam-free-grid article > div > span { color: var(--up); font: 700 11px/1 var(--mono); }
-.steam-free-grid article.is-weekend > div > span { color: #66c0f4; }
+.steam-free-grid article.is-weekend > div > span { color: var(--axis-deals); }
 .steam-free-grid h3 { margin: 8px 0 11px; font-size: 19px; }
 .steam-free-grid p { display: flex; align-items: baseline; gap: 8px; margin: 0; }
 .steam-free-grid del { color: var(--text-faint); font-size: 11px; }
 .steam-free-grid p strong { font-size: 15px; }
-.steam-free-grid p b { padding: 4px 6px; border-radius: 4px; background: rgba(102,192,244,.14); color: #66c0f4; font: 800 11px/1 var(--mono); }
+.steam-free-grid p b { padding: 4px 6px; border-radius: 4px; background: rgba(52, 211, 153,.14); color: var(--axis-deals); font: 800 11px/1 var(--mono); }
 .steam-free-grid small { display: block; margin: 8px 0 14px; color: var(--text-faint); font-size: 11px; }
 .steam-free-grid em { display: block; margin: -5px 0 13px; color: var(--text-dim); font-size: 11px; font-style: normal; line-height: 1.5; }
 .steam-free-grid a { color: var(--accent); font-size: 11px; font-weight: 700; }
 
 .popular-deals-section > header { }
 .popular-deals-section > header div > span { margin-left: 9px; color: var(--text-faint); font-size: 11px; }
-.popular-deals-section > header > strong { color: #66c0f4; font: 700 26px/1 var(--mono); }
+.popular-deals-section > header > strong { color: var(--axis-deals); font: 700 26px/1 var(--mono); }
 .popular-deals-section > header > strong i { color: var(--text-faint); font-size: 13px; font-style: normal; }
 .popular-deals-section > header > strong small { display: block; margin-top: 5px; color: var(--text-faint); font: 400 11px/1 var(--sans); text-align: right; }
 .popular-deal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -2176,8 +2181,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .popular-deal-art:hover img { transform: scale(1.02); }
 .popular-deal-art b,
 .popular-deal-art span { position: absolute; bottom: 10px; padding: 6px 8px; border-radius: 6px; font: 800 11px/1 var(--mono); }
-.popular-deal-art b { left: 10px; background: rgba(9, 13, 18, .9); color: #66c0f4; }
-.popular-deal-art span { right: 10px; background: #16a34a; color: #fff; }
+.popular-deal-art b { left: 10px; background: rgba(9, 13, 18, .9); color: var(--axis-deals); }
+.popular-deal-art span { right: 10px; background: var(--up); color: var(--text); }
 .popular-deal-body { padding: 15px 16px 17px; }
 .popular-deal-body h3 { min-height: 39px; margin: 0 0 11px; overflow-wrap: anywhere; font-size: 13px; line-height: 1.4; }
 .popular-deal-body p { display: flex; align-items: baseline; gap: 8px; margin: 0; }
@@ -2246,7 +2251,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   bottom: 12px;
   padding: 7px 9px;
   border-radius: 6px;
-  background: #16a34a;
+  background: var(--up);
   color: white;
 
   font: 800 15px/1 var(--mono);
@@ -2352,7 +2357,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 /* ══ Steam 판매 차트 별도 페이지 ══ */
 .charts-page { max-width: 1200px; padding-bottom: 72px; }
 .charts-hero { display: grid; grid-template-columns: 1fr 210px; align-items: end; gap: 48px; padding: 65px 0 40px; }
-.charts-hero > div:first-child > p { margin: 0 0 11px; color: #bca8ff; font: 700 11px/1 var(--mono); letter-spacing: .16em; }
+.charts-hero > div:first-child > p { margin: 0 0 11px; color: var(--axis-selling); font: 700 11px/1 var(--mono); letter-spacing: .16em; }
 .charts-hero h1 { margin: 0; font-size: clamp(44px, 6vw, 74px); line-height: 1; letter-spacing: -.06em; }
 .charts-hero > div:first-child > span { display: block; margin-top: 17px; color: var(--text-dim); font-size: 13px; }
 .charts-updated { padding: 17px 0 5px 22px; border-left: 1px solid var(--border-2); }
@@ -2368,21 +2373,21 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .release-calendar-section,
 .monthly-releases-section { overflow: hidden; margin-bottom: 28px; border: 1px solid var(--border-2); border-radius: 13px; background: var(--surface); }
 .charts-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 23px 25px 20px; border-bottom: 1px solid var(--border); }
-.charts-section-heading > div > p { margin: 0 0 6px; color: #bca8ff; font: 700 11px/1 var(--mono); letter-spacing: .13em; }
+.charts-section-heading > div > p { margin: 0 0 6px; color: var(--axis-selling); font: 700 11px/1 var(--mono); letter-spacing: .13em; }
 .charts-section-heading h2 { display: inline; margin: 0; font-size: 19px; letter-spacing: -.025em; }
 .charts-section-heading > div > span { margin-left: 9px; color: var(--text-faint); font-size: 11px; }
 .charts-section-heading > a { color: var(--text-faint); font-size: 11px; }
-.charts-section-heading > a:hover { color: #bca8ff; }
+.charts-section-heading > a:hover { color: var(--axis-selling); }
 .region-switch { display: flex; padding: 3px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
 .region-switch button { min-width: 68px; height: 31px; border: 0; border-radius: 6px; background: transparent; color: var(--text-faint); font: 700 11px/1 var(--sans); cursor: pointer; }
-.region-switch button.is-active { background: #bca8ff; color: #0b0d12; }
+.region-switch button.is-active { background: var(--axis-selling); color: var(--bg); }
 
 .sales-rank-list,
 .weekly-rank-list { margin: 0; padding: 0; list-style: none; }
 .sales-rank-list li { display: grid; grid-template-columns: 46px minmax(0, 1fr) minmax(220px, auto) 70px; align-items: center; min-height: 74px; padding: 0 24px; border-top: 1px solid var(--border); }
 .sales-rank-list li:first-child,
 .weekly-rank-list li:first-child { border-top: 0; }
-.sales-rank-no { color: #bca8ff; font: 700 11px/1 var(--mono); }
+.sales-rank-no { color: var(--axis-selling); font: 700 11px/1 var(--mono); }
 .sales-rank-game { display: flex; align-items: center; min-width: 0; color: var(--text); }
 .sales-rank-game img,
 .sales-rank-game .art-hold { flex: none; width: 92px; height: 43px; margin-right: 14px; border-radius: 4px; object-fit: cover; }
@@ -2394,10 +2399,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .chart-price-free { color: var(--up); }
 .chart-price-missing { color: var(--text-faint); font-size: 11px; }
 .sales-rank-link { text-align: right; color: var(--text-faint); font-size: 11px; }
-.sales-rank-link:hover { color: #bca8ff; }
+.sales-rank-link:hover { color: var(--axis-selling); }
 
 .weekly-rank-list li { display: grid; grid-template-columns: 44px minmax(0, 1fr) 65px 60px minmax(190px, auto); align-items: center; min-height: 70px; padding: 0 24px; border-top: 1px solid var(--border); }
-.weekly-rank-list li > b { color: #bca8ff; font: 700 11px/1 var(--mono); }
+.weekly-rank-list li > b { color: var(--axis-selling); font: 700 11px/1 var(--mono); }
 .weekly-rank-list li > a { display: flex; align-items: center; min-width: 0; color: var(--text); }
 .weekly-rank-list li > a img,
 .weekly-rank-list li > a .art-hold { flex: none; width: 82px; height: 38px; margin-right: 13px; border-radius: 4px; object-fit: cover; }
@@ -2405,7 +2410,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .rank-movement { font: 700 11px/1 var(--mono); text-align: center; }
 .rank-movement.is-up { color: var(--up); }
 .rank-movement.is-down { color: var(--down); }
-.rank-movement.is-new { color: #bca8ff; }
+.rank-movement.is-new { color: var(--axis-selling); }
 .rank-movement.is-same,
 .rank-weeks { color: var(--text-faint); }
 .rank-weeks { font-size: 11px; text-align: center; }
@@ -2414,22 +2419,22 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 
 .release-calendar-tabs { display: flex; gap: 8px; padding: 12px 25px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.012); }
 .release-calendar-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 36px; padding: 0 14px; border: 1px solid var(--border-2); border-radius: 6px; background: transparent; color: var(--text-dim); font: 700 11px/1 var(--sans); cursor: pointer; }
-.release-calendar-tabs button:hover { border-color: #bca8ff; color: #fff; }
-.release-calendar-tabs button.is-active { border-color: rgba(188,168,255,.58); background: rgba(188,168,255,.12); color: #fff; }
-.release-calendar-tabs button span { color: #bca8ff; font: 800 11px/1 var(--mono); }
+.release-calendar-tabs button:hover { border-color: var(--axis-selling); color: var(--text); }
+.release-calendar-tabs button.is-active { border-color: rgba(167, 139, 250,.58); background: rgba(167, 139, 250,.12); color: var(--text); }
+.release-calendar-tabs button span { color: var(--axis-selling); font: 800 11px/1 var(--mono); }
 .release-calendar-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .release-calendar-grid article { min-width: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .release-calendar-grid article:nth-child(4n) { border-right: 0; }
 .release-calendar-art { position: relative; display: block; aspect-ratio: 460 / 215; overflow: hidden; background: var(--surface-2); }
 .release-calendar-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
 .release-calendar-art:hover img { transform: scale(1.025); }
-.release-calendar-art b { position: absolute; right: 9px; bottom: 9px; padding: 5px 7px; border-radius: 4px; background: rgba(8,10,14,.9); color: #bca8ff; font: 800 11px/1 var(--mono); }
+.release-calendar-art b { position: absolute; right: 9px; bottom: 9px; padding: 5px 7px; border-radius: 4px; background: rgba(8,10,14,.9); color: var(--axis-selling); font: 800 11px/1 var(--mono); }
 .release-calendar-grid article > div { padding: 15px 16px 17px; }
-.release-calendar-date { color: #bca8ff; font: 700 11px/1 var(--mono); }
+.release-calendar-date { color: var(--axis-selling); font: 700 11px/1 var(--mono); }
 .release-calendar-grid h3 { min-height: 39px; margin: 8px 0 11px; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
 .release-calendar-grid p { display: flex; align-items: baseline; gap: 7px; min-height: 24px; margin: 0; font-size: 13px; }
 .release-calendar-grid p del { color: var(--text-faint); font-size: 11px; }
-.release-calendar-grid article > div > a { display: inline-block; margin-top: 10px; color: #bca8ff; font-size: 11px; }
+.release-calendar-grid article > div > a { display: inline-block; margin-top: 10px; color: var(--axis-selling); font-size: 11px; }
 .release-calendar-foot { display: block; padding: 10px 25px; border-top: 1px solid var(--border); color: var(--text-faint); font-size: 11px; }
 .release-calendar-empty { margin: 0; padding: 42px 24px; color: var(--text-dim); text-align: center; }
 
@@ -2442,7 +2447,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .monthly-release-grid h3 { min-height: 40px; margin: 0 0 12px; font-size: 13px; line-height: 1.4; }
 .monthly-release-grid p { display: flex; align-items: baseline; gap: 7px; min-height: 24px; margin: 0; font-size: 13px; }
 .monthly-release-grid p del { color: var(--text-faint); font-size: 11px; }
-.monthly-release-grid article > div > a { display: inline-block; margin-top: 9px; color: #bca8ff; font-size: 11px; }
+.monthly-release-grid article > div > a { display: inline-block; margin-top: 9px; color: var(--axis-selling); font-size: 11px; }
 
 .charts-quality-note { display: grid; grid-template-columns: 210px minmax(0, 1fr) 150px; gap: 30px; margin-top: 45px; padding: 24px; border: 1px dashed var(--border-2); border-radius: 8px; }
 .charts-quality-note > div:first-child p { margin: 0 0 6px; color: var(--warn); font: 700 11px/1 var(--mono); letter-spacing: .13em; }
@@ -2675,7 +2680,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .adult-policy-note {
   margin-top: 12px;
   padding: 12px 14px;
-  border-left: 3px solid var(--line, #d7d7de);
+  border-left: 3px solid var(--line, var(--text-dim));
   background: var(--surface-2, rgba(0, 0, 0, 0.03));
   font-size: 13px;
   line-height: 1.7;
