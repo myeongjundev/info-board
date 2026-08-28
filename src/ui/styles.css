@@ -1495,11 +1495,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  padding: 24px 28px 20px;
+  padding: 24px 24px 20px;
   border-bottom: 1px solid var(--border);
 }
 .overview-strip-heading p {
-  margin: 0 0 7px;
+  margin: 0 0 8px;
   color: var(--text-faint);
   font: 600 11px/1 var(--mono);
   letter-spacing: .12em;
@@ -1512,7 +1512,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   display: flex;
   min-width: 0;
   min-height: 176px;
-  padding: 21px 22px 19px;
+  padding: 20px 24px;
   flex-direction: column;
   border-left: 1px solid var(--border);
   color: inherit;
@@ -1520,11 +1520,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 .overview-axis:first-child { border-left: 0; }
 .overview-axis:hover { background: rgba(255, 255, 255, .035); }
-.overview-axis-number { position: absolute; top: 21px; right: 20px; color: var(--text-faint); font: 700 11px/1 var(--mono); }
+.overview-axis-number { position: absolute; top: 20px; right: 24px; color: var(--text-faint); font: 700 11px/1 var(--mono); }
 .overview-axis-question { font: 700 11px/1 var(--mono); letter-spacing: .04em; }
 .overview-axis strong { margin-top: 24px; color: var(--text); font-size: clamp(18px, 2vw, 25px); line-height: 1.1; overflow-wrap: anywhere; }
-.overview-axis b { margin-top: 9px; color: var(--text); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.overview-axis small { margin-top: auto; padding-top: 15px; color: var(--text-faint); font-size: 11px; line-height: 1.35; }
+.overview-axis b { margin-top: 8px; color: var(--text); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.overview-axis small { margin-top: auto; padding-top: 16px; color: var(--text-faint); font-size: 11px; line-height: 1.35; }
 .overview-axis.is-empty strong { color: var(--text-dim); }
 .overview-axis.is-unavailable strong { color: var(--down); }
 .overview-axis.is-stale { }
@@ -1560,7 +1560,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  padding: 26px 28px 24px;
+  padding: 24px 24px 20px;
   border-bottom: 1px solid var(--border);
 }
 /* 구획 라벨은 라벨답게 물러선다.
@@ -1618,7 +1618,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .kpi {
   min-width: 0;
   min-height: 184px;
-  padding: 22px 22px 20px;
+  padding: 20px 24px;
   border-left: 1px solid var(--border);
   background: rgba(255, 255, 255, .008);
 }
@@ -1701,7 +1701,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .kpi-coverage span { color: var(--text-faint); font-size: 11px; }
 
 .history-block { margin-top: 42px; }
-.section-heading { margin: 0 0 15px; padding: 0 2px; }
+.section-heading { margin: 0 0 16px; padding: 0 25px; }
 .section-heading h2 { font-size: 19px; }
 .history-grid {
   display: grid;
@@ -1723,7 +1723,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
-  padding: 24px 26px 21px;
+  padding: 24px 24px 20px;
   border-top: 3px solid var(--accent);
   border-bottom: 1px solid var(--border);
 }
@@ -1783,8 +1783,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 720px) {
-  .overview-strip-heading { align-items: flex-start; padding: 21px 20px 19px; }
-  .dashboard-heading { align-items: flex-start; padding: 21px 20px 19px; }
+  .overview-strip-heading { align-items: flex-start; padding: 20px 20px 16px; }
+  .dashboard-heading { align-items: flex-start; padding: 20px 20px 16px; }
   .dashboard-heading h2 { font-size: 19px; }
   .dashboard-heading > div > p:last-child { max-width: 260px; }
   .dashboard-date { padding-top: 2px; }
@@ -1797,9 +1797,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .overview-strip { margin-top: 18px; border-radius: 11px; }
   .overview-strip-heading { display: block; }
   .overview-strip-heading > span { display: block; margin-top: 8px; max-width: none; text-align: left; }
-  .overview-axis { min-height: 160px; padding: 17px 16px; }
-  .overview-axis-number { top: 17px; right: 15px; }
-  .overview-axis strong { margin-top: 21px; font-size: 19px; }
+  .section-heading { padding: 0 21px; }
+  .overview-axis { min-height: 160px; padding: 16px 20px; }
+  .overview-axis-number { top: 16px; right: 20px; }
+  .overview-axis strong { margin-top: 20px; font-size: 19px; }
   .dashboard-summary { margin-top: 18px; border-radius: 11px; }
   .dashboard-heading { display: block; }
   .dashboard-heading > div > p:last-child { font-size: 11px; }
@@ -2412,7 +2413,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .weekly-sales-section,
 .release-calendar-section,
 .monthly-releases-section { overflow: hidden; margin-bottom: 28px; border: 1px solid var(--border-2); border-radius: 13px; background: var(--surface); }
-.charts-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 23px 25px 20px; border-bottom: 1px solid var(--border); }
+.charts-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 24px; border-bottom: 1px solid var(--border); }
 .charts-section-heading > div > p { margin: 0 0 6px; color: var(--axis-selling); font: 700 11px/1 var(--mono); letter-spacing: .13em; }
 .charts-section-heading h2 { display: inline; margin: 0; font-size: 19px; letter-spacing: -.025em; }
 .charts-section-heading > div > span { margin-left: 9px; color: var(--text-faint); font-size: 11px; }
