@@ -4,16 +4,16 @@
 // 브라우저에 저장하면 심사자 화면에는 기록이 0건이다. 저장소에 커밋하면 누가 열어도
 // 같은 기록을 보고, git 이력이 그대로 "실제로 매일 돌았다" 는 증거가 된다.
 //
-// 열쇠는 날짜 하나가 아니라 (날짜, appid) 다. 게임을 여러 개 재기 때문이다.
-// 카드 4 가 막는 것은 "같은 날 같은 항목이 두 번 들어가는 것" 이므로 이 열쇠가 맞다.
+// 열쇠는 날짜 하나가 아니라 (날짜, 신호) 다. live의 appid와 공개 fixture의
+// signalId를 같은 일별 저장 규칙으로 다루며, 같은 날 같은 항목은 한 행만 둔다.
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 /** 기록 한 건의 열쇠. 이게 같으면 같은 칸이다. */
 export function keyOf(r) {
-  return `${r.date}|${r.appid}`;
+  return `${r.date}|${r.appid ?? r.signalId}`;
 }
 
 /** 기록 한 건이 쓸 만한지. 아니면 이유를 돌려준다. */
@@ -25,16 +25,31 @@ export function validateRecord(r) {
   if (new Date(`${r.date}T00:00:00Z`).toISOString().slice(0, 10) !== r.date) {
     return `달력에 없는 날짜다: ${r.date}`;
   }
-  if (!Number.isInteger(r.appid) || r.appid <= 0) return `appid 가 양의 정수가 아니다: ${JSON.stringify(r.appid)}`;
+  const validAppid = Number.isInteger(r.appid) && r.appid > 0;
+  const validSignal = typeof r.signalId === 'string' && /^[a-z0-9][a-z0-9._-]*$/.test(r.signalId);
+  if (!validAppid && !validSignal) return 'appid 또는 signalId가 올바르지 않다';
   if (typeof r.value !== 'number' || !Number.isFinite(r.value)) return `value 가 숫자가 아니다: ${JSON.stringify(r.value)}`;
   if (r.value < 0) return `value 가 음수다: ${r.value}`;
   if (typeof r.unit !== 'string' || r.unit === '') return 'unit 이 비었다';
+  if (r.sourceTime !== null && (typeof r.sourceTime !== 'string' || Number.isNaN(Date.parse(r.sourceTime)))) {
+    return `sourceTime 이 시각이나 null 이 아니다: ${JSON.stringify(r.sourceTime)}`;
+  }
   if (typeof r.fetchedAt !== 'string' || Number.isNaN(Date.parse(r.fetchedAt))) return `fetchedAt 이 시각이 아니다: ${JSON.stringify(r.fetchedAt)}`;
   return null;
 }
 
 function sortRecords(list) {
-  return list.slice().sort((a, b) => a.date.localeCompare(b.date) || a.appid - b.appid);
+  return list.slice().sort((a, b) => (
+    a.date.localeCompare(b.date)
+    || String(a.appid ?? a.signalId).localeCompare(String(b.appid ?? b.signalId), 'en', { numeric: true })
+  ));
+}
+
+function sameRecord(left, right) {
+  const leftKeys = Object.keys(left).sort();
+  const rightKeys = Object.keys(right).sort();
+  return leftKeys.length === rightKeys.length
+    && leftKeys.every((key, index) => key === rightKeys[index] && Object.is(left[key], right[key]));
 }
 
 /**
@@ -54,7 +69,12 @@ export function loadRecords(raw) {
   const list = Array.isArray(parsed?.records) ? parsed.records : [];
   const seen = new Map();
 
-  for (const r of list) {
+  for (const rawRecord of list) {
+    // v2 기록에는 sourceTime 필드가 없었다. 없는 관측 시각을 만들어내지 않고 null로
+    // 명시해 v3 Reading으로 올린다. 원본 값·조회 시각은 바꾸지 않는다.
+    const r = !Object.hasOwn(rawRecord ?? {}, 'sourceTime') && parsed?.schemaVersion === 2
+      ? { ...rawRecord, sourceTime: null }
+      : rawRecord;
     const reason = validateRecord(r);
     if (reason) { quarantined.push({ reason, raw: r }); continue; }
     const k = keyOf(r);
@@ -69,8 +89,8 @@ export function loadRecords(raw) {
 }
 
 /**
- * 하루 한 건. 같은 (날짜, appid) 가 이미 있으면 새로 넣지 않는다.
- * 같은 날 몇 번을 돌려도 기록이 늘지 않아야 한다.
+ * 하루 한 행. 같은 (날짜, 신호) 가 이미 있으면 Reading 전체를 갱신한다.
+ * 같은 날 몇 번을 돌려도 행 수는 늘지 않아야 한다.
  */
 export function upsertRecord(records, next) {
   const reason = validateRecord(next);
@@ -82,17 +102,15 @@ export function upsertRecord(records, next) {
     return { records: sortRecords([...records, next]), changed: true, kind: 'added' };
   }
 
-  // 이미 있는 칸이다. 값이 같으면 아무것도 하지 않는다.
-  if (records[idx].value === next.value) {
+  // 공개 계약은 같은 날짜의 성공 조회를 같은 행에서 원자적으로 갱신한다.
+  // 값뿐 아니라 출처·두 시각까지 Reading 전체가 같은 경우에만 변경 없음이다.
+  if (sameRecord(records[idx], next)) {
     return { records, changed: false, kind: 'unchanged' };
   }
 
-  // 값이 달라졌다. 같은 날 두 번째로 잰 것이다.
-  //
-  // 동시접속자는 순간값이라 같은 날에도 부를 때마다 다른 값이 나온다. 그때마다
-  // 덮어쓰면 "하루 한 번" 이 아니라 "마지막에 부른 값" 이 되어 매일 같은 시각에
-  // 잰다는 약속이 깨진다. 그래서 첫 값을 지키고 나중 값은 버린다.
-  return { records, changed: false, kind: 'kept-first' };
+  const updated = records.slice();
+  updated[idx] = next;
+  return { records: sortRecords(updated), changed: true, kind: 'updated' };
 }
 
 /**
@@ -103,7 +121,9 @@ export function upsertRecord(records, next) {
  * 비교하고도 조용히 성공한다. 부르는 쪽을 믿지 않는다.
  */
 export function seriesOf(records, appid) {
-  return records.filter((r) => r.appid === appid).sort((a, b) => a.date.localeCompare(b.date));
+  return records.filter((r) => (
+    typeof appid === 'string' ? r.signalId === appid : r.appid === appid
+  )).sort((a, b) => a.date.localeCompare(b.date));
 }
 
 /** 이전 기록 대비 변화. 비교할 게 없으면 만들어내지 않는다. */
@@ -150,9 +170,8 @@ export function serialize(records, meta) {
  *
  * 수집기는 게임 수십 개를 십수 초에 걸쳐 돌고 각 값은 불린 순간의 날짜를 갖는다.
  * 23:59:57 에 시작하면 앞뒤가 서로 다른 날로 기록된다. 그대로 두면 다음 날 칸에
- * 00:00 값이 먼저 들어가고, 다음 날 정규 실행이 upsert 의 first-wins 규칙에 걸려
- * 그 자정 값을 지키고 제 시각 값을 버린다. "매일 같은 시각에 잰다" 가 조용히
- * 깨지는데 화면에는 아무 티도 안 난다.
+ * 00:00 값이 먼저 들어가면 다음 날 칸이 정규 실행 전부터 존재하게 된다. 이 함수는
+ * 날짜 경계를 넘은 Reading을 분리해 한 번의 수집 결과가 두 날짜를 차지하지 않게 한다.
  */
 export function keepDate(readings, date) {
   const kept = [];

@@ -66,7 +66,14 @@ export default function DataProof({ board }) {
             <ProofRow label="저장값" value={`${reading.value} ${reading.unit}`} mono />
             <ProofRow label="저장 위치" value={`data/records.json · 열쇠 ${reading.date}|${reading.appid}`} mono />
             <ProofRow label="잰 날" value={`${reading.date} (${reading.timezone})`} mono />
-            <ProofRow label="잰 시각" value={`${formatInstant(reading.fetchedAt, SOURCE.timezone)} · ${reading.fetchedAt}`} mono />
+            <ProofRow
+              label="출처 관측 시각"
+              value={reading.sourceTime
+                ? `${formatInstant(reading.sourceTime, SOURCE.timezone)} · ${reading.sourceTime}`
+                : '제공되지 않음 · Steam API 미제공'}
+              mono
+            />
+            <ProofRow label="조회 시각" value={`${formatInstant(reading.fetchedAt, SOURCE.timezone)} · ${reading.fetchedAt}`} mono />
 
             {cross ? (
               <>

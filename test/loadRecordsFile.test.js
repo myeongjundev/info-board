@@ -9,6 +9,7 @@ const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
   sourceUrl: `https://api.steampowered.com/x?appid=${appid}`,
   sourceLabel: 'Steam · 동시접속자',
+  sourceTime: null,
   timezone: 'Asia/Seoul',
   fetchedAt: `${date}T01:10:00.000Z`,
 });
@@ -65,7 +66,7 @@ test('재현한 장애가 그대로 나온다', async () => {
 });
 
 test('정상 파일은 읽힌다', async () => {
-  const body = { records: [rec('2026-08-27', 730, 551673)], source: { heroAppid: 730 } };
+  const body = { schemaVersion: 3, records: [rec('2026-08-27', 730, 551673)], source: { heroAppid: 730 } };
   const { data, quarantined } = await loadRecordsFile({ url: '/x', fetchImpl: respond(200, body) });
   assert.equal(data.records.length, 1);
   assert.equal(data.source.heroAppid, 730);
@@ -73,7 +74,7 @@ test('정상 파일은 읽힌다', async () => {
 });
 
 test('깨진 항목만 격리하고 성한 항목은 살린다', async () => {
-  const body = { records: [rec('2026-08-27', 730, 551673), { junk: 1 }], source: {} };
+  const body = { schemaVersion: 3, records: [rec('2026-08-27', 730, 551673), { junk: 1 }], source: {} };
   const { data, quarantined } = await loadRecordsFile({ url: '/x', fetchImpl: respond(200, body) });
   assert.equal(data.records.length, 1);
   assert.equal(quarantined.length, 1);

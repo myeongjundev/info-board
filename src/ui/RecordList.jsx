@@ -35,7 +35,7 @@ export default function RecordList({ board, data }) {
         </tbody>
       </table>
       <p className="source-url">
-        날짜마다 한 건씩만 쌓인다. 같은 날 다시 재도 첫 값을 지킨다.
+        날짜마다 한 건씩만 쌓인다. 같은 날짜의 재조회는 새 행을 만들지 않고 같은 행을 갱신한다.
       </p>
     </>
   );

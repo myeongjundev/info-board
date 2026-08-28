@@ -29,6 +29,7 @@ import TimeBias from './TimeBias.jsx';
 import RankMovement from './RankMovement.jsx';
 import DataProof from './DataProof.jsx';
 import StorePriceModal from './StorePriceModal.jsx';
+import ReplayPage from './ReplayPage.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -46,6 +47,11 @@ const NAV = [
 ];
 
 export default function App() {
+  const replay = new URLSearchParams(window.location.search).get('replay');
+  return replay ? <ReplayPage mode={replay} /> : <LiveApp />;
+}
+
+function LiveApp() {
   const [status, setStatus] = useState('loading');   // loading | ok | fault
   const [payload, setPayload] = useState(null);      // { data, quarantined }
   const [fault, setFault] = useState(null);          // FetchFault
@@ -481,6 +487,18 @@ function SourceBlock({ reading }) {
         {reading.sourceLabel} ↗
       </a>
       <p className="source-url raw-url">{reading.sourceUrl}</p>
+      <dl className="source-times">
+        <div>
+          <dt>출처 관측 시각</dt>
+          <dd>{reading.sourceTime
+            ? formatInstant(reading.sourceTime, reading.timezone)
+            : '제공되지 않음 · Steam API 미제공'}</dd>
+        </div>
+        <div>
+          <dt>조회 시각</dt>
+          <dd>{formatInstant(reading.fetchedAt, reading.timezone)}</dd>
+        </div>
+      </dl>
       <p className="source-summary">
         <b>화면값은 측정 당시 값</b>
         <span>원자료 링크는 지금 값을 열어 숫자가 다를 수 있다.</span>

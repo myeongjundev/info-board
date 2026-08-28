@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "source": {
     "id": "steam-concurrent-players",
     "label": "Steam · 동시접속자",
@@ -546,7 +546,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=10",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:21.873Z"
+      "fetchedAt": "2026-08-27T00:59:21.873Z",
+      "sourceTime": null
     },
     {
       "value": 371,
@@ -556,7 +557,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=400",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:18.509Z"
+      "fetchedAt": "2026-08-27T11:09:18.509Z",
+      "sourceTime": null
     },
     {
       "value": 44758,
@@ -566,7 +568,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=440",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:20.343Z"
+      "fetchedAt": "2026-08-27T00:59:20.343Z",
+      "sourceTime": null
     },
     {
       "value": 25947,
@@ -576,7 +579,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=550",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:20.960Z"
+      "fetchedAt": "2026-08-27T00:59:20.960Z",
+      "sourceTime": null
     },
     {
       "value": 405221,
@@ -586,7 +590,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=570",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:17.857Z"
+      "fetchedAt": "2026-08-27T00:59:17.857Z",
+      "sourceTime": null
     },
     {
       "value": 1198,
@@ -596,7 +601,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=620",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:22.112Z"
+      "fetchedAt": "2026-08-27T00:59:22.112Z",
+      "sourceTime": null
     },
     {
       "value": 551673,
@@ -606,7 +612,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:17.522Z"
+      "fetchedAt": "2026-08-27T00:59:17.522Z",
+      "sourceTime": null
     },
     {
       "value": 19862,
@@ -616,7 +623,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=4000",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:21.194Z"
+      "fetchedAt": "2026-08-27T00:59:21.194Z",
+      "sourceTime": null
     },
     {
       "value": 11407,
@@ -626,7 +634,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=8930",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:21.645Z"
+      "fetchedAt": "2026-08-27T00:59:21.645Z",
+      "sourceTime": null
     },
     {
       "value": 998,
@@ -636,7 +645,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=72850",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:22.346Z"
+      "fetchedAt": "2026-08-27T00:59:22.346Z",
+      "sourceTime": null
     },
     {
       "value": 41467,
@@ -646,7 +656,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=105600",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:20.109Z"
+      "fetchedAt": "2026-08-27T00:59:20.109Z",
+      "sourceTime": null
     },
     {
       "value": 49235,
@@ -656,7 +667,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=108600",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:08.429Z"
+      "fetchedAt": "2026-08-27T11:09:08.429Z",
+      "sourceTime": null
     },
     {
       "value": 13,
@@ -666,7 +678,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=204300",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:21.186Z"
+      "fetchedAt": "2026-08-27T11:09:21.186Z",
+      "sourceTime": null
     },
     {
       "value": 170,
@@ -676,7 +689,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=210970",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:18.760Z"
+      "fetchedAt": "2026-08-27T11:09:18.760Z",
+      "sourceTime": null
     },
     {
       "value": 32557,
@@ -686,7 +700,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=218620",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:20.576Z"
+      "fetchedAt": "2026-08-27T00:59:20.576Z",
+      "sourceTime": null
     },
     {
       "value": 7,
@@ -696,7 +711,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=219890",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:20.114Z"
+      "fetchedAt": "2026-08-27T11:09:20.114Z",
+      "sourceTime": null
     },
     {
       "value": 31185,
@@ -706,7 +722,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=227300",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:16.007Z"
+      "fetchedAt": "2026-08-27T11:09:16.007Z",
+      "sourceTime": null
     },
     {
       "value": 45116,
@@ -716,7 +733,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=230410",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:05.151Z"
+      "fetchedAt": "2026-08-27T11:09:05.151Z",
+      "sourceTime": null
     },
     {
       "value": 9029,
@@ -726,7 +744,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=236850",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:12.761Z"
+      "fetchedAt": "2026-08-27T11:09:12.761Z",
+      "sourceTime": null
     },
     {
       "value": 21529,
@@ -736,7 +755,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=251570",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:07.563Z"
+      "fetchedAt": "2026-08-27T11:09:07.563Z",
+      "sourceTime": null
     },
     {
       "value": 83840,
@@ -746,7 +766,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=252490",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:06.917Z"
+      "fetchedAt": "2026-08-27T11:09:06.917Z",
+      "sourceTime": null
     },
     {
       "value": 9449,
@@ -756,7 +777,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=255710",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:16.654Z"
+      "fetchedAt": "2026-08-27T11:09:16.654Z",
+      "sourceTime": null
     },
     {
       "value": 56,
@@ -766,7 +788,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=257510",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:19.898Z"
+      "fetchedAt": "2026-08-27T11:09:19.898Z",
+      "sourceTime": null
     },
     {
       "value": 30524,
@@ -776,7 +799,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=261550",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:13.869Z"
+      "fetchedAt": "2026-08-27T11:09:13.869Z",
+      "sourceTime": null
     },
     {
       "value": 4078,
@@ -786,7 +810,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=270880",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:17.148Z"
+      "fetchedAt": "2026-08-27T11:09:17.148Z",
+      "sourceTime": null
     },
     {
       "value": 38891,
@@ -796,7 +821,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=271590",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:19.709Z"
+      "fetchedAt": "2026-08-27T00:59:19.709Z",
+      "sourceTime": null
     },
     {
       "value": 6700,
@@ -806,7 +832,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=275850",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:14.084Z"
+      "fetchedAt": "2026-08-27T11:09:14.084Z",
+      "sourceTime": null
     },
     {
       "value": 9633,
@@ -816,7 +843,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=281990",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:11.468Z"
+      "fetchedAt": "2026-08-27T11:09:11.468Z",
+      "sourceTime": null
     },
     {
       "value": 29335,
@@ -826,7 +854,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=289070",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:11.041Z"
+      "fetchedAt": "2026-08-27T11:09:11.041Z",
+      "sourceTime": null
     },
     {
       "value": 15963,
@@ -836,7 +865,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=292030",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:10.386Z"
+      "fetchedAt": "2026-08-27T11:09:10.386Z",
+      "sourceTime": null
     },
     {
       "value": 25944,
@@ -846,7 +876,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=294100",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:15.790Z"
+      "fetchedAt": "2026-08-27T11:09:15.790Z",
+      "sourceTime": null
     },
     {
       "value": 7541,
@@ -856,7 +887,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=306130",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:09.960Z"
+      "fetchedAt": "2026-08-27T11:09:09.960Z",
+      "sourceTime": null
     },
     {
       "value": 31280,
@@ -866,7 +898,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=322330",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:07.351Z"
+      "fetchedAt": "2026-08-27T11:09:07.351Z",
+      "sourceTime": null
     },
     {
       "value": 8206,
@@ -876,7 +909,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=377160",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:10.600Z"
+      "fetchedAt": "2026-08-27T11:09:10.600Z",
+      "sourceTime": null
     },
     {
       "value": 525,
@@ -886,7 +920,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=386360",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:20.760Z"
+      "fetchedAt": "2026-08-27T11:09:20.760Z",
+      "sourceTime": null
     },
     {
       "value": 40021,
@@ -896,7 +931,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=394360",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:11.256Z"
+      "fetchedAt": "2026-08-27T11:09:11.256Z",
+      "sourceTime": null
     },
     {
       "value": 59212,
@@ -906,7 +942,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=413150",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:16.927Z"
+      "fetchedAt": "2026-08-27T11:09:16.927Z",
+      "sourceTime": null
     },
     {
       "value": 13842,
@@ -916,7 +953,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=427520",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:08.002Z"
+      "fetchedAt": "2026-08-27T11:09:08.002Z",
+      "sourceTime": null
     },
     {
       "value": 1478,
@@ -926,7 +964,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=477160",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:18.083Z"
+      "fetchedAt": "2026-08-27T11:09:18.083Z",
+      "sourceTime": null
     },
     {
       "value": 478,
@@ -936,7 +975,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=493340",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:17.865Z"
+      "fetchedAt": "2026-08-27T11:09:17.865Z",
+      "sourceTime": null
     },
     {
       "value": 27,
@@ -946,7 +986,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=504370",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:20.973Z"
+      "fetchedAt": "2026-08-27T11:09:20.973Z",
+      "sourceTime": null
     },
     {
       "value": 62103,
@@ -956,7 +997,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=553850",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:19.243Z"
+      "fetchedAt": "2026-08-27T00:59:19.243Z",
+      "sourceTime": null
     },
     {
       "value": 102136,
@@ -966,7 +1008,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=578080",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:18.525Z"
+      "fetchedAt": "2026-08-27T00:59:18.525Z",
+      "sourceTime": null
     },
     {
       "value": 13048,
@@ -976,7 +1019,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=582010",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:09.496Z"
+      "fetchedAt": "2026-08-27T11:09:09.496Z",
+      "sourceTime": null
     },
     {
       "value": 908,
@@ -986,7 +1030,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=594570",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:11.902Z"
+      "fetchedAt": "2026-08-27T11:09:11.902Z",
+      "sourceTime": null
     },
     {
       "value": 3094,
@@ -996,7 +1041,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=703080",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:17.630Z"
+      "fetchedAt": "2026-08-27T11:09:17.630Z",
+      "sourceTime": null
     },
     {
       "value": 159,
@@ -1006,7 +1052,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=736260",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:18.975Z"
+      "fetchedAt": "2026-08-27T11:09:18.975Z",
+      "sourceTime": null
     },
     {
       "value": 12896,
@@ -1016,7 +1063,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=813780",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:12.334Z"
+      "fetchedAt": "2026-08-27T11:09:12.334Z",
+      "sourceTime": null
     },
     {
       "value": 10180,
@@ -1026,7 +1074,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=892970",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:07.130Z"
+      "fetchedAt": "2026-08-27T11:09:07.130Z",
+      "sourceTime": null
     },
     {
       "value": 722,
@@ -1036,7 +1085,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=899770",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:10.173Z"
+      "fetchedAt": "2026-08-27T11:09:10.173Z",
+      "sourceTime": null
     },
     {
       "value": 3598,
@@ -1046,7 +1096,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=990080",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:14.297Z"
+      "fetchedAt": "2026-08-27T11:09:14.297Z",
+      "sourceTime": null
     },
     {
       "value": 77,
@@ -1056,7 +1107,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1003590",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:19.647Z"
+      "fetchedAt": "2026-08-27T11:09:19.647Z",
+      "sourceTime": null
     },
     {
       "value": 112,
@@ -1066,7 +1118,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1049410",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:19.410Z"
+      "fetchedAt": "2026-08-27T11:09:19.410Z",
+      "sourceTime": null
     },
     {
       "value": 14948,
@@ -1076,7 +1129,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1049590",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:20.546Z"
+      "fetchedAt": "2026-08-27T11:09:20.546Z",
+      "sourceTime": null
     },
     {
       "value": 31659,
@@ -1086,7 +1140,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1086940",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:09.068Z"
+      "fetchedAt": "2026-08-27T11:09:09.068Z",
+      "sourceTime": null
     },
     {
       "value": 33030,
@@ -1096,7 +1151,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1091500",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:13.443Z"
+      "fetchedAt": "2026-08-27T11:09:13.443Z",
+      "sourceTime": null
     },
     {
       "value": 27349,
@@ -1106,7 +1162,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1142710",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:11.689Z"
+      "fetchedAt": "2026-08-27T11:09:11.689Z",
+      "sourceTime": null
     },
     {
       "value": 416,
@@ -1116,7 +1173,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1151640",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:15.154Z"
+      "fetchedAt": "2026-08-27T11:09:15.154Z",
+      "sourceTime": null
     },
     {
       "value": 18091,
@@ -1126,7 +1184,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1158310",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:12.120Z"
+      "fetchedAt": "2026-08-27T11:09:12.120Z",
+      "sourceTime": null
     },
     {
       "value": 65473,
@@ -1136,7 +1195,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1172470",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:18.910Z"
+      "fetchedAt": "2026-08-27T00:59:18.910Z",
+      "sourceTime": null
     },
     {
       "value": 27769,
@@ -1146,7 +1206,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1174180",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:13.656Z"
+      "fetchedAt": "2026-08-27T11:09:13.656Z",
+      "sourceTime": null
     },
     {
       "value": 19290,
@@ -1156,7 +1217,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1222670",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:16.220Z"
+      "fetchedAt": "2026-08-27T11:09:16.220Z",
+      "sourceTime": null
     },
     {
       "value": 19308,
@@ -1166,7 +1228,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1245620",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:08.855Z"
+      "fetchedAt": "2026-08-27T11:09:08.855Z",
+      "sourceTime": null
     },
     {
       "value": 5318,
@@ -1176,7 +1239,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1248130",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:17.414Z"
+      "fetchedAt": "2026-08-27T11:09:17.414Z",
+      "sourceTime": null
     },
     {
       "value": 186,
@@ -1186,7 +1250,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1435790",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:19.191Z"
+      "fetchedAt": "2026-08-27T11:09:19.191Z",
+      "sourceTime": null
     },
     {
       "value": 8001,
@@ -1196,7 +1261,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1466860",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:12.548Z"
+      "fetchedAt": "2026-08-27T11:09:12.548Z",
+      "sourceTime": null
     },
     {
       "value": 122871,
@@ -1206,7 +1272,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1623730",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T00:59:18.125Z"
+      "fetchedAt": "2026-08-27T00:59:18.125Z",
+      "sourceTime": null
     },
     {
       "value": 5244,
@@ -1216,7 +1283,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1817070",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:14.511Z"
+      "fetchedAt": "2026-08-27T11:09:14.511Z",
+      "sourceTime": null
     },
     {
       "value": 1279,
@@ -1226,7 +1294,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=1817190",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:14.723Z"
+      "fetchedAt": "2026-08-27T11:09:14.723Z",
+      "sourceTime": null
     },
     {
       "value": 11802,
@@ -1236,7 +1305,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2246340",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:09.727Z"
+      "fetchedAt": "2026-08-27T11:09:09.727Z",
+      "sourceTime": null
     },
     {
       "value": 23234,
@@ -1246,7 +1316,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2300320",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:16.435Z"
+      "fetchedAt": "2026-08-27T11:09:16.435Z",
+      "sourceTime": null
     },
     {
       "value": 1613,
@@ -1256,7 +1327,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2322010",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:14.936Z"
+      "fetchedAt": "2026-08-27T11:09:14.936Z",
+      "sourceTime": null
     },
     {
       "value": 29558,
@@ -1266,7 +1338,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2358720",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:09.282Z"
+      "fetchedAt": "2026-08-27T11:09:09.282Z",
+      "sourceTime": null
     },
     {
       "value": 20280,
@@ -1276,7 +1349,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2399830",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:07.789Z"
+      "fetchedAt": "2026-08-27T11:09:07.789Z",
+      "sourceTime": null
     },
     {
       "value": 71500,
@@ -1286,7 +1360,8 @@
       "sourceUrl": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=2507950",
       "sourceLabel": "Steam · 동시접속자",
       "timezone": "Asia/Seoul",
-      "fetchedAt": "2026-08-27T11:09:04.929Z"
+      "fetchedAt": "2026-08-27T11:09:04.929Z",
+      "sourceTime": null
     }
   ]
 }

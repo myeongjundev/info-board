@@ -39,6 +39,8 @@ test('정상 응답은 Reading 하나로 온다', async () => {
   assert.equal(r.appid, 730);
   assert.equal(r.date, '2026-08-27');
   assert.equal(r.timezone, 'Asia/Seoul');
+  assert.equal(r.sourceTime, null);
+  assert.equal(r.signalId, 'steam-concurrent-players.730');
   assert.equal(r.fetchedAt, '2026-08-27T01:10:00.000Z');
   assert.match(r.sourceUrl, /appid=730/);
 });

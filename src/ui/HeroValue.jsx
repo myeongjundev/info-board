@@ -84,7 +84,7 @@ export default function HeroValue({
             </dd>
           </div>
           <div>
-            <dt>잰 시각</dt>
+            <dt>조회 시각</dt>
             <dd>
               {formatInstant(reading.fetchedAt, SOURCE.timezone)}
               {elapsed && <small>{elapsed.text}</small>}

@@ -13,15 +13,16 @@ Steam 동시접속자를 **매일 같은 시각에 한 번 재서**, 그 값을 
 
 ### 1. Reading 불변식
 
-화면에 보이는 값·단위·출처·날짜·조회시각은 **언제나 하나의 객체에서** 나온다.
+화면에 보이는 값·단위·출처·출처 관측 시각·날짜·조회시각은 **언제나 하나의 객체에서** 나온다.
 따로 전달하지 않는다.
 
 ```js
-Reading = { value, unit, date, appid, sourceUrl, sourceLabel, timezone, fetchedAt }
+Reading = { value, unit, date, appid, signalId, sourceUrl, sourceLabel, sourceTime, timezone, fetchedAt }
 ```
 
-`date` 는 잰 날, `fetchedAt` 은 잰 시각이다. 묶어서만 다루면 "값은 새 것인데 시각은
-옛 것" 이 구조적으로 불가능해진다. `Reading` 이 없으면 숫자 자리에 넣을 것이 없다.
+`sourceTime`은 원천이 밝힌 관측 시각이며 없으면 `null`, `fetchedAt`은 우리가 조회한
+시각이다. Steam 동시접속자 API는 관측 시각을 주지 않으므로 HTTP Date로 대신하지
+않고 `null`과 미제공 이유를 표시한다. `Reading`이 없으면 숫자 자리에 넣을 것이 없다.
 
 ### 2. 실패를 값으로 바꾸지 않는다
 

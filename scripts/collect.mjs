@@ -83,8 +83,8 @@ async function main() {
   // fetchReading 은 호출마다 그 순간의 날짜를 스스로 계산한다. 수십 개를 도는 데
   // 5~8초가 걸리므로 23:59:57 에 시작하면 앞뒤가 서로 다른 날짜로 기록된다.
   // 그냥 두면 다음 날 칸에 00:00 값이 먼저 들어가고, 다음 날 10:10 정규 실행이
-  // upsert 의 kept-first 규칙에 걸려 그 자정 값을 지키고 진짜 10:10 값을 버린다.
-  // "매일 같은 시각에 잰다" 가 조용히 깨지는데 화면에는 아무 티도 안 난다.
+  // 다음 날 행이 정규 실행 전에 생긴다. 같은 날짜 갱신 규칙이 있더라도 애초에
+  // 잘못된 시각의 행을 만들지 않는 편이 측정 약속을 더 정확히 지킨다.
   //
   // 그래서 맨 앞에서 확인받은 날짜와 다른 것은 버린다. 그 게임들은 다음 실행에서
   // 제 시각에 다시 잰다. 잃는 것은 그날 그 게임 한 칸뿐이다.
@@ -116,18 +116,19 @@ async function main() {
 
   let records = existing;
   let added = 0;
-  let kept = 0;
+  let updated = 0;
+  let unchanged = 0;
 
   for (const reading of sameDay) {
     const out = upsertRecord(records, reading);
     records = out.records;
     if (out.kind === 'added') added += 1;
-    else kept += 1;
+    else if (out.kind === 'updated') updated += 1;
+    else unchanged += 1;
   }
 
-  if (added === 0) {
-    console.log(`\n${date} 기록이 이미 있다 (${kept}건). 파일을 건드리지 않는다.`);
-    console.log('같은 날 두 번째로 잰 값은 버린다 — 매일 같은 시각에 잰다는 약속을 지키기 위해서다.');
+  if (added === 0 && updated === 0) {
+    console.log(`\n${date} 기록이 이미 같게 들어 있다 (${unchanged}건). 파일을 건드리지 않는다.`);
     return 0;
   }
 
@@ -157,7 +158,7 @@ async function main() {
     games: GAMES,
   }), 'utf8');
 
-  console.log(`기록 추가 ${added}건${kept ? ` · 이미 있어 건너뜀 ${kept}건` : ''} — 총 ${records.length}건`);
+  console.log(`기록 추가 ${added}건 · 같은 날짜 갱신 ${updated}건${unchanged ? ` · 변경 없음 ${unchanged}건` : ''} — 총 ${records.length}건`);
   return 0;
 }
 

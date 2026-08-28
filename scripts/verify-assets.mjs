@@ -23,9 +23,12 @@ for (const file of manifest.files) {
     failures.push(`${file.path} — 파일이 없다`);
     continue;
   }
-  const sha256 = createHash('sha256').update(bytes).digest('hex');
+  // Git의 Windows 체크아웃은 텍스트 LF를 CRLF로 바꿀 수 있다. 공개 ZIP의 정본은
+  // LF이므로 해시 직전에만 되돌린다. 자산 파일 자체는 수정하지 않는다.
+  const canonicalBytes = Buffer.from(bytes.toString('utf8').replaceAll('\r\n', '\n'), 'utf8');
+  const sha256 = createHash('sha256').update(canonicalBytes).digest('hex');
   if (sha256 !== file.sha256) failures.push(`${file.path} — sha256 ${file.sha256} 이어야 하는데 ${sha256}`);
-  else if (bytes.length !== file.bytes) failures.push(`${file.path} — ${file.bytes} 바이트여야 하는데 ${bytes.length}`);
+  else if (canonicalBytes.length !== file.bytes) failures.push(`${file.path} — ${file.bytes} 바이트여야 하는데 ${canonicalBytes.length}`);
 }
 
 console.log(`package_id  ${manifest.package_id}`);

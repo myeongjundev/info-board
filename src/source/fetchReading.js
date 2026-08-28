@@ -84,9 +84,13 @@ export async function fetchReading(appid, { timeoutMs = 8000, fetchImpl = fetch,
     value,
     unit: SOURCE.unit,
     appid,
+    signalId: `${SOURCE.id}.${appid}`,
     date: todayLocal(now),                 // 잰 시각의 KST 날짜
     sourceUrl: url,                        // 누르면 이 응답이 그대로 열린다
     sourceLabel: SOURCE.label,
+    // 이 API는 값이 원천에서 관측된 시각을 응답하지 않는다. HTTP Date 헤더는
+    // 응답 시각일 뿐 관측 시각이 아니므로 대신 넣지 않는다.
+    sourceTime: null,
     timezone: SOURCE.timezone,
     fetchedAt: now.toISOString(),          // 내가 조회한 시각. 절대 date 와 섞지 않는다
   };
