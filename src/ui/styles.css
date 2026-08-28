@@ -76,6 +76,12 @@ body {
   padding: 28px 28px 64px;
 }
 
+/* 밑줄은 지금까지 링크마다 따로 껐다. 그래서 새 링크를 만들 때마다 잊었고,
+ * 이 화면 링크 178개 중 84개가 밑줄이 그어진 채다 — 첫 화면 요약 카드 넷이 통째로,
+ * 게임 표지 그림 76개, 상단 나브 셋. 어느 것도 문장 속 링크가 아니다.
+ * 기본을 끄고, 밑줄이 뜻을 갖는 자리에만 다시 켠다. */
+a { text-decoration: none; }
+
 .wordmark {
   font-family: var(--mono);
   font-size: 15px;
@@ -90,10 +96,10 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 36px;
+  min-height: 34px;
   font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--fs-meta);
+  font-weight: var(--w-bold);
   letter-spacing: 0.02em;
   padding: 0 11px;
   border: 1px solid var(--border-2);
@@ -617,7 +623,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 8px;
+}
+/* 나브는 어디로 갈까, 배지와 설정은 지금 어떤 상태인가다. 다른 일이라 선으로 가른다. */
+.topbar-service-links { padding-right: 8px; border-right: 1px solid var(--border); }
+/* 좁으면 한 줄에 다 못 선다. 전에는 나브를 display:none 으로 지웠는데, 길을 지우면
+ * 좁은 화면에서 이 판은 첫 화면 하나짜리가 된다. 지우는 대신 아래로 내린다 —
+ * 로고 · (나브+상태+설정) · 검색 세 줄. */
+@media (max-width: 700px) {
+  .topbar { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .topbar-right { grid-column: 1 / -1; justify-content: flex-start; flex-wrap: wrap; }
+  .topbar-mid { grid-column: 1 / -1; order: 3; max-width: none; min-width: 0; }
 }
 @media (max-width: 1120px) {
   .topbar { grid-template-columns: 1fr auto; }
@@ -626,7 +642,7 @@ body {
 
 .gear {
   width: auto;
-  height: 36px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -646,16 +662,20 @@ body {
 
 /* ── 게임 검색 ── */
 .gsearch { position: relative; }
+/* 좁은 화면에서 검색창이 한 줄을 통째로 먹어 668px 짜리 빈 막대가 됐다.
+ * 들어가는 것은 게임 이름 한 줄이라 그만큼 넓을 이유가 없다. */
+.topbar-mid { max-width: 440px; }
 .gsearch-input {
   width: 100%;
-  min-height: 42px;
-  padding: 10px 14px;
+  height: 34px;
+  padding: 0 12px 0 32px;
   border: 1px solid var(--border-2);
-  border-radius: 8px;
-  background: rgba(21, 28, 38, .84);
+  border-radius: 6px;
+  background: var(--surface-2) no-repeat 11px 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.9-3.9'/%3E%3C/svg%3E");
   color: var(--text);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--fs-body);
 }
 .gsearch-input::placeholder { color: var(--text-faint); }
 .gsearch-input:focus { border-color: var(--accent); outline: none; }
@@ -1202,10 +1222,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .page { padding: 16px 14px 40px; }
   .topbar { padding-bottom: 14px; }
   .topbar-left p { font-size: 11px; }
-  .gear { width: 36px; padding: 0; justify-content: center; }
+  .gear { width: 34px; padding: 0; justify-content: center; }
   .gear-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .badge { min-height: 32px; padding: 0 9px; font-size: 11px; }
-  .gsearch-input { min-height: 40px; }
+  .badge { min-height: 32px; padding: 0 9px; font-size: var(--fs-meta); }
   .secnav { margin: 0 -14px; padding: 0 14px; }
   .secnav ul { justify-content: space-between; gap: 0; }
   .secnav a { padding: 12px 6px 10px; font-size: 11px; }
@@ -2010,42 +2029,39 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 /* ══ 한국 할인 게임 별도 페이지 ══ */
-.sales-nav-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 13px;
-  border: 1px solid rgba(56, 189, 248, .35);
-  border-radius: 999px;
-  background: rgba(56, 189, 248, .07);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.sales-nav-link:hover { border-color: var(--accent); background: rgba(56, 189, 248, .12); }
-.topbar-service-links { display: flex; align-items: center; gap: 7px; }
-.stream-nav-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 13px;
-  border: 1px solid rgba(251, 113, 133, .3);
-  border-radius: 999px;
-  background: rgba(251, 113, 133, .055);
-  color: var(--axis-watching);
-  font-size: 11px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.stream-nav-link:hover { border-color: var(--axis-watching); background: rgba(251, 113, 133, .1); }
+/* 서비스 나브 세 개.
+ *
+ * 전에는 축마다 제 색으로 테두리 친 알약이었다. 한 줄에 보라 · 파랑 · 분홍 테두리
+ * 셋과 초록 배지와 회색 버튼이 나란히 서서, 색이 다섯 가지였다. 축 색은 그 축의
+ * 값이 있는 자리에서 뜻을 갖는다. 나브는 값이 아니라 길이라 색이 뜻을 갖지 않는다.
+ *
+ * 그래서 평소에는 셋 다 같은 회색 글자로 두고, 축 색은 hover 와 focus 에만 나온다.
+ * 축과 색의 짝은 남되 줄이 조용해진다. */
+.topbar-service-links { display: flex; align-items: center; gap: 2px; }
+.sales-nav-link,
+.stream-nav-link,
 .sales-chart-nav-link {
-  display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px;
-  border: 1px solid rgba(167, 139, 250, .32); border-radius: 999px;
-  background: rgba(167, 139, 250, .055); color: var(--axis-selling);
-  font-size: 11px; font-weight: 700; white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--text-dim);
+  font-size: var(--fs-meta);
+  font-weight: var(--w-medium);
+  white-space: nowrap;
 }
-.sales-chart-nav-link:hover { border-color: var(--axis-selling); background: rgba(167, 139, 250, .1); }
+.sales-nav-link:hover,       .sales-nav-link:focus-visible       { background: var(--surface-2); color: var(--axis-deals); }
+.sales-chart-nav-link:hover, .sales-chart-nav-link:focus-visible { background: var(--surface-2); color: var(--axis-selling); }
+.stream-nav-link:hover,      .stream-nav-link:focus-visible      { background: var(--surface-2); color: var(--axis-watching); }
+/* 375px 에서 나브 · 배지 · 설정이 한 줄에 357px 이라 10px 이 넘쳐 설정만 다음 줄로
+ * 떨어졌다. 글자는 그대로 두고 좌우 여백만 줄여 333px 으로 맞춘다. */
+@media (max-width: 560px) {
+  .topbar-service-links { padding-right: 6px; }
+  .sales-nav-link, .stream-nav-link, .sales-chart-nav-link { padding: 0 6px; }
+}
 
 .sales-page { max-width: 1200px; }
 .sales-topbar {
@@ -2493,7 +2509,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 700px) {
-  .sales-chart-nav-link { display: none; }
   .charts-hero { grid-template-columns: 1fr; gap: 25px; padding: 42px 0 29px; }
   .charts-updated { padding: 0; border-left: 0; }
   .sales-rank-list li { grid-template-columns: 34px minmax(0, 1fr) auto; padding: 0 15px; }
@@ -2676,7 +2691,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 620px) {
-  .topbar-service-links .sales-nav-link { display: none; }
   .streaming-hero { grid-template-columns: 1fr; gap: 28px; padding: 42px 0 28px; }
   .streaming-readiness { padding: 0; border-left: 0; }
   .streaming-readiness strong { font-size: 34px; }
