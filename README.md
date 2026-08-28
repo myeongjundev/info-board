@@ -1,17 +1,26 @@
 # GAME PULSE
 
-### 오늘 Steam 에 몇 명이 있는가
+### 지금 게임 시장을 네 가지 질문으로 읽는다
 
 **https://myeongjundev.github.io/info-board/**
 
-지금 이 순간 Counter-Strike 2 를 하고 있는 사람이 몇 명인지 보여준다.
-그리고 **그 숫자를 믿어도 되는지 함께 보여준다.**
+Steam 동시접속자, 한국 매출, 할인·무료 배포, 게임 방송을 한 판에서 연결한다.
+그리고 **각 숫자를 믿어도 되는지 근거와 데이터 상태를 함께 보여준다.**
 
 ---
 
 ## 무엇을 보여주는가
 
-값 하나다. **매일 10:10 (KST) 에 잰 Steam 동시접속자 수.**
+첫 화면은 네 축의 대표값을 기존 정적 스냅샷에서 그대로 요약한다.
+
+- **얼마나 하나** — Steam 동시접속자
+- **뭐가 팔리나** — 한국 Steam 매출 1위
+- **뭐가 싸나** — Epic·Steam 무료 배포와 Steam 할인
+- **뭘 보나** — 치지직·Twitch 게임 방송 표본 1위
+
+핵심 일일 기록은 **매일 10:10 KST 수집 예정**인 Steam 동시접속자다. GitHub
+Actions가 늦게 실행될 수 있으므로 예정 시각과 Reading의 실제 조회 시각을 따로
+표시한다.
 
 그 옆에 그 숫자를 읽는 데 필요한 것들이 함께 놓인다.
 
@@ -22,17 +31,21 @@
 - 날짜별 기록 — 같은 날짜가 중복되지 않는다
 - **대조** — 원자료·저장값·계산값·화면값을 접이식으로 편다. 손계산이 그 자리에서 맞는다
 
-그 아래에 이야기가 넷 더 있다.
+그 아래에는 같은 동시접속 기록에서 꺼낸 분석이 이어진다.
 
 - ⏰ **같은 날, 다른 시각** — 이 숫자가 인기 순위가 아니라 그 순간의 값이라는 것을 실측으로 보여준다
 - 🎮 **장르로 묶어 보기** — 장르당 10개씩. 줄을 누르면 그 장르 게임이 막대로 펼쳐진다. 장르는 원자료가 안 줘서 우리가 붙였고, 그래서 든 게임과 개수를 함께 적는다
 - 🏆 **오늘 잰 것 — 사람 수 순** — 재는 게임 전부를 줄 세운다. 이전 기록이 필요 없어 첫날부터 보인다
-- 🚀 **어제보다 움직인 게임** — 오른 게임과 내린 게임
+- 🚀 **이전 측정 대비 움직인 게임** — 대표 수집 배치가 같은 행끼리 비교한 상승·하락
 - 💀 **아직 살아 있는가** — 26년 된 게임에 아직 몇 명이 남아 있는가
 
-**API 를 더 붙이지 않았다.** 매일 재는 게임 75개의 같은 기록에서 전부 나온다.
-순위 옆의 %는 **이 75개 안에서의 비중**이다. Steam 전체 동시접속자는 이
+첫 화면의 장르·순위·변화·오래된 게임 분석은 매일 재는 게임 75개의 같은 기록에서
+나온다. 순위 옆의 %는 **이 75개 안에서의 비중**이다. Steam 전체 동시접속자는 이
 엔드포인트가 주지 않으므로 모르고, 모르는 것을 분모로 쓰지 않는다.
+
+판매·할인·무료 배포·스트리밍은 별도 스냅샷과 페이지다. 핵심 일별 records와
+섞지 않으며, 비공식 Store 응답은 화면과 [CLAUDE.md](CLAUDE.md)에 예외·위험을
+명시한다.
 
 ## 왜 이렇게 만드는가
 
@@ -74,7 +87,7 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
 → {"response":{"player_count":551673,"result":1}}
 ```
 
-**쓰는 엔드포인트는 이것 하나뿐이다.** 게임 이름은 원자료가 주지 않으므로 우리가
+**동시접속자 핵심 기록이 쓰는 엔드포인트는 이것 하나뿐이다.** 게임 이름은 원자료가 주지 않으므로 우리가
 표에 적었고, 원자료와 잇는 열쇠는 appid 다. 이름을 얻자고 문서화되지 않은
 `store.steampowered.com` 경로를 부르지 않는다.
 
@@ -88,7 +101,7 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
 ```
 GitHub Actions (매일 01:10 UTC)
         ↓
-게임 75개 조회 → 날짜+appid 로 upsert
+오늘 빠진 게임만 조회 → 날짜+appid 로 upsert
         ↓
 data/records.json 에 커밋          ← git 이력이 그대로 감사 로그
         ↓
@@ -108,8 +121,8 @@ Steam 은 CORS 를 열어 주지 않아 브라우저가 직접 못 부른다. �
 git clone https://github.com/myeongjundev/info-board.git
 cd info-board
 
-node scripts/collect.mjs   # 값이 제대로 오는지 (설치 필요 없음)
-npm test                   # 단위 테스트 162건
+node scripts/collect.mjs   # 오늘 기록이 이미 있으면 외부 호출 없이 종료
+npm test                   # 전체 회귀 테스트
 
 npm install
 npm run dev                # 화면
@@ -118,12 +131,12 @@ npm run dev                # 화면
 ## 구조
 
 ```
-src/source/     출처. definition.js 하나만 고치면 다른 데이터로 옮겨진다
-src/state/      기록. 날짜+appid 키, 중복 방지, 손상 격리, 비교
-src/view/       화면 계산. React 를 import 하지 않아 브라우저 없이 테스트된다
-src/ui/         React 컴포넌트. 계산을 하지 않는다
-scripts/        Actions 가 돌리는 진입점
-data/           진실의 원천
+src/source/     출처 adapter와 외부 응답 정규화
+src/state/      날짜+신호 키, live/replay 공통 저장, 손상 격리
+src/view/       화면 계산. React 없이 테스트하는 네 축·비교·패널
+src/ui/         React 컴포넌트와 fixture 재생 화면
+scripts/        수집·마이그레이션·자산 검증·T04 감사
+data/           records.json과 서로 분리된 확장 스냅샷
 ```
 
 `view` 와 `ui` 를 나눈 이유는 변화량·방향·경과시간 계산을 브라우저 없이
@@ -134,7 +147,7 @@ data/           진실의 원천
 | | |
 |---|---|
 | [docs/DECISIONS.md](docs/DECISIONS.md) | **상태를 적는 유일한 곳.** 결정과 근거, 탈락시킨 후보, 고친 결함 |
-| [docs/DEFECTS.md](docs/DEFECTS.md) | 찾아서 고친 결함 13개와 그 패턴 |
+| [docs/DEFECTS.md](docs/DEFECTS.md) | 찾아서 고친 결함과 반복 방지 패턴 |
 | [docs/VERIFY.md](docs/VERIFY.md) | 검증 안내서 — 30초, 3단계 |
 | [docs/CROSSCHECK.md](docs/CROSSCHECK.md) | 원자료·저장값·계산값·화면값 대조표 |
 | [CLAUDE.md](CLAUDE.md) | 작업 규칙 — 깨면 안 되는 7가지 |
