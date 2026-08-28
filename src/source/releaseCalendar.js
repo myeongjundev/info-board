@@ -22,8 +22,16 @@ function textOf(fragment, className) {
   return match ? decodeHtml(match[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()) : null;
 }
 
+/**
+ * 검색 결과의 가격 글자에서 원화 최소단위를 읽는다.
+ *
+ * **원화 표기일 때만 읽는다.** 전에는 숫자가 아닌 글자를 전부 지우고 100 을
+ * 곱했는데, 그러면 `$69.99` 가 ₩6,999 로 둔갑한다. 이 검색 응답도 차트와
+ * 마찬가지로 호출한 IP 의 통화로 오므로 (`chartPrice.js` 주석 참고) 미국
+ * 러너에서 수집하는 날 조용히 틀린 값이 들어갔을 자리다.
+ */
 function minorFromWon(text) {
-  if (typeof text !== 'string' || !/[0-9]/.test(text)) return null;
+  if (typeof text !== 'string' || !text.includes('₩') || !/[0-9]/.test(text)) return null;
   const won = Number(text.replace(/[^0-9]/g, ''));
   return Number.isInteger(won) && won > 0 ? won * 100 : null;
 }
@@ -54,6 +62,12 @@ export function parsePublicReleaseLabel(label) {
     releaseDate: day === null ? null : `${english[3]}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
     precision: day === null ? 'month' : 'day',
   };
+}
+
+function cleanPriceText(value) {
+  if (typeof value !== 'string') return null;
+  const text = value.replace(/s+/g, ' ').trim();
+  return text === '' ? null : text;
 }
 
 export function parseReleaseSearchResults(body) {
@@ -88,6 +102,10 @@ export function parseReleaseSearchResults(body) {
       storeUrl: `${href.split('?')[0]}?cc=KR&l=koreana`,
       ...release,
       isFree: /무료|free/i.test(finalText ?? ''),
+      // 가격 글자를 원자료 그대로 함께 남긴다. 화면은 이것을 쓴다.
+      currency: finalMinor == null ? null : 'KRW',
+      priceText: cleanPriceText(finalText),
+      priceTextInitial: cleanPriceText(originalText) ?? cleanPriceText(finalText),
       initialMinor, finalMinor, discountPercent,
     });
   }

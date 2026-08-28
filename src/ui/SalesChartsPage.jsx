@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
 
 import { rankMovement, validateSalesChartSnapshot } from '../source/salesCharts.js';
-import { countAdult, displayArt, displayName } from '../view/gameDisplay.js';
+import { countAdult, displayArt, displayName, priceMarksOnScreen } from '../view/gameDisplay.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/sales-charts.json`;
-const won = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW', maximumFractionDigits: 0 });
 
+// 가격은 Steam 이 표기한 문자열을 그대로 쓴다. 여기서 나눗셈을 하지 않는다 —
+// 전에 `finalMinor / 100` 에 원화 기호를 붙였다가 USD 를 ₩ 로 1000배 틀리게
+// 내보냈다. 통화를 화면이 고르면 언젠가 틀린 통화를 고른다. 근거는 chartPrice.js.
 function priceLabel(item) {
   if (item.isFree) return <strong className="chart-price-free">무료 플레이</strong>;
-  if (item.finalMinor == null) return <span className="chart-price-missing">한국 가격 미표시</span>;
-  const finalWon = item.finalMinor / 100;
-  if (item.discountPercent > 0) return <><span className="chart-discount">-{item.discountPercent}%</span><del>{won.format(item.initialMinor / 100)}</del><strong>{won.format(finalWon)}</strong></>;
-  return <strong>{won.format(finalWon)}</strong>;
+  if (!item.priceText) return <span className="chart-price-missing">가격 미표시</span>;
+  const discounted = item.discountPercent > 0 && item.priceTextInitial && item.priceTextInitial !== item.priceText;
+  if (discounted) {
+    return (
+      <><span className="chart-discount">-{item.discountPercent}%</span>
+        <del>{item.priceTextInitial}</del><strong>{item.priceText}</strong></>
+    );
+  }
+  return <strong>{item.priceText}</strong>;
 }
 
 function formatKst(iso) {
@@ -70,6 +77,11 @@ export default function SalesChartsPage() {
   const releaseItems = state.data?.releaseCalendar?.[releaseTab] ?? [];
   // 접힌 항목이 몇 개인지 화면이 스스로 밝힌다. 조용히 가리면 그것도 숨기는 것이다.
   const adultOnScreen = countAdult([
+    ...liveItems, ...releaseItems,
+    ...(state.data?.weekly?.items ?? []), ...(state.data?.monthly?.items ?? []),
+  ]);
+  // 통화도 같은 이유로 화면이 스스로 밝힌다. 수집 위치에 따라 바뀌기 때문이다.
+  const currencyOnScreen = priceMarksOnScreen([
     ...liveItems, ...releaseItems,
     ...(state.data?.weekly?.items ?? []), ...(state.data?.monthly?.items ?? []),
   ]);
@@ -189,6 +201,14 @@ export default function SalesChartsPage() {
                 다만 가져오는 방법은 문서화된 API가 아니라 차트 페이지의 서버 렌더링 응답을 읽는 것이다.
                 이 둘은 다른 주장이라 갈라 적는다. 이 화면의 어떤 값도 대표값(동시접속자) 계산에
                 들어가지 않는다.
+              </p>
+              <p className="currency-note">
+                <b>가격은 Steam이 표기한 글자를 그대로 옮긴다.</b> 우리가 통화를 붙이거나 단위를
+                환산하지 않는다. 차트 응답에는 통화 코드가 없고, 통화는 <b>수집기가 호출한 위치</b>가
+                정한다 — 주소의 <code>cc=KR</code>은 무시된다(같은 날 KR·US·JP로 불러 같은 값을 받았다).
+                그래서 이 화면의 가격을 &quot;한국 가격&quot;이라고 부르지 않는다.
+                {currencyOnScreen && <> 지금 표기는 <b>{currencyOnScreen}</b>다.</>}{' '}
+                순위는 한국 차트 주소에서 오므로 통화와 무관하다.
               </p>
               <p className="adult-policy-note">
                 Steam이 성인 콘텐츠로 분류한 항목(content descriptor 3·4)은 제목과 표지를 접어서 보여준다.

@@ -2,6 +2,7 @@ import { validateReleaseCalendar } from './releaseCalendar.js';
 import {
   assertDescriptorsPresent, hasDescriptorSource, isAdultItem, toDescriptorIds,
 } from './contentDescriptors.js';
+import { assertPriceTextPresent, readChartPrice } from './chartPrice.js';
 
 export const SALES_CHART_URLS = {
   korea: 'https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana',
@@ -53,10 +54,7 @@ function imageFromAssets(assets) {
 function itemReading(appid, rank, items) {
   const item = items.get(appid);
   if (!item?.name) return null;
-  const price = item.best_purchase_option;
-  const finalMinor = Number(price?.final_price_in_cents);
-  const initialMinor = Number(price?.original_price_in_cents ?? price?.final_price_in_cents);
-  const discountPercent = Number(price?.discount_pct ?? 0);
+  const price = readChartPrice(item.best_purchase_option);
   const descriptorRaw = item.content_descriptorids;
   const descriptorIds = toDescriptorIds(descriptorRaw);
   return {
@@ -68,9 +66,8 @@ function itemReading(appid, rank, items) {
     imageUrl: imageFromAssets(item.assets),
     storeUrl: `https://store.steampowered.com/${item.store_url_path ?? `app/${appid}/`}?cc=KR&l=koreana`,
     isFree: item.is_free === true,
-    initialMinor: Number.isInteger(initialMinor) ? initialMinor : null,
-    finalMinor: Number.isInteger(finalMinor) ? finalMinor : null,
-    discountPercent: Number.isInteger(discountPercent) ? discountPercent : 0,
+    // 가격은 Steam 이 표기한 문자열을 그대로 옮긴다. 단위를 우리가 고르지 않는다.
+    ...price,
   };
 }
 
@@ -84,6 +81,7 @@ function liveTop20(document, sort) {
   const items = storeItems(document.queries);
   const readings = ids.map((appid, index) => itemReading(appid, index + 1, items)).filter(Boolean);
   assertDescriptorsPresent(readings, `Steam 현재 매출 Top 20(${sort})`);
+  assertPriceTextPresent(readings, `Steam 현재 매출 Top 20(${sort})`);
   return readings;
 }
 
@@ -123,6 +121,7 @@ function weeklyTop20(document) {
     };
   }).filter(Boolean);
   assertDescriptorsPresent(readings, 'Steam 주간 매출 Top 20');
+  assertPriceTextPresent(readings, 'Steam 주간 매출 Top 20');
   return {
     weekStart: new Date(query.state.data.rtWeekStart * 1000).toISOString(),
     items: readings,
@@ -135,6 +134,7 @@ function monthlyReleases(document) {
   const items = storeItems(document.queries);
   const readings = monthly.rgAppIDs.map((appid) => itemReading(appid, null, items)).filter(Boolean);
   assertDescriptorsPresent(readings, 'Steam 월간 인기 신작');
+  assertPriceTextPresent(readings, 'Steam 월간 인기 신작');
   return {
     monthAt: new Date(monthly.rtMonth * 1000).toISOString(),
     saleName: monthly.strSaleName,

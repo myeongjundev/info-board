@@ -28,3 +28,20 @@ export function countAdult(items) {
   if (!Array.isArray(items)) return 0;
   return items.filter((item) => item?.adult === true).length;
 }
+
+/**
+ * 화면에 실제로 떠 있는 가격 표기를 모은다.
+ *
+ * 통화를 이름으로 단정하지 않고 **원자료에 있던 기호를 그대로** 보여준다.
+ * 수집 위치에 따라 한 화면에 두 표기가 섞일 수 있고, 섞이면 섞였다고 적는
+ * 것이 맞다. 값이 하나도 없으면 `null` — 없는 것을 적지 않는다.
+ */
+export function priceMarksOnScreen(items) {
+  const marks = new Set();
+  for (const item of items ?? []) {
+    if (!item || item.isFree || typeof item.priceText !== 'string') continue;
+    const mark = item.priceText.replace(/[\d.,\s]/g, '').trim();
+    if (mark !== '') marks.add(mark);
+  }
+  return marks.size === 0 ? null : [...marks].sort().join(' · ');
+}
