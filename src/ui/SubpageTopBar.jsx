@@ -24,7 +24,7 @@ export default function SubpageTopBar({ current, caption }) {
               className={`${axis.navClass}${axis.href === current ? ' is-current' : ''}`}
               href={axis.href}
               aria-current={axis.href === current ? 'page' : undefined}
-            >{axis.question}</a>
+            >{axis.label}</a>
           ))}
         </nav>
       </div>

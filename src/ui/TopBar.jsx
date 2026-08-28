@@ -40,7 +40,7 @@ export default function TopBar({
               className={`${axis.navClass}${axis.href === '#sec-now' ? ' is-current' : ''}`}
               href={axis.href}
               aria-current={axis.href === '#sec-now' ? 'page' : undefined}
-            >{axis.question}</a>
+            >{axis.label}</a>
           ))}
         </nav>
         {badge}

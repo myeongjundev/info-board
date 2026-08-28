@@ -1528,7 +1528,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .overview-axis:first-child { border-left: 0; }
 .overview-axis:hover { background: rgba(255, 255, 255, .035); }
 .overview-axis-number { position: absolute; top: 20px; right: 24px; color: var(--text-faint); font: 700 11px/1 var(--mono); }
-.overview-axis-question { font: 700 11px/1 var(--mono); letter-spacing: .04em; }
+.overview-axis-label { font: 700 11px/1 var(--mono); letter-spacing: .04em; }
 .overview-axis strong { margin-top: 24px; color: var(--text); font-size: clamp(18px, 2vw, 25px); line-height: 1.1; overflow-wrap: anywhere; }
 .overview-axis b { margin-top: 8px; color: var(--text); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .overview-axis small { margin-top: auto; padding-top: 16px; color: var(--text-faint); font-size: 11px; line-height: 1.35; }
@@ -1547,7 +1547,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   opacity: .55;
 }
 .overview-axis:hover::before { opacity: 1; }
-.overview-axis-question { color: var(--axis, var(--text-dim)); }
+.overview-axis-label { color: var(--axis, var(--text-dim)); }
 .overview-axis:nth-child(1) { --axis: var(--axis-playing); }
 .overview-axis:nth-child(2) { --axis: var(--axis-selling); }
 .overview-axis:nth-child(3) { --axis: var(--axis-deals); }
@@ -2084,7 +2084,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 @media (max-width: 560px) {
   /* 여기서는 나브가 줄을 통째로 쓰고 배지·설정이 아래로 내려간다. 뒤에 아무것도
      없는 자리에 남은 세로선은 가르는 선이 아니라 떠 있는 눈금이라 지운다. */
-  .topbar-service-links { padding-right: 0; border-right: 0; }
+  /* 이름이 짧아지자 배지가 나브 옆으로 딸려 올라오고 설정 단추만 다음 줄에
+     혼자 남았다. 나브에 한 줄을 통째로 줘서 나브 / 배지+설정 두 줄로 고정한다. */
+  .topbar-service-links { flex: 1 0 100%; padding-right: 0; border-right: 0; }
   .play-nav-link, .sales-nav-link, .stream-nav-link, .sales-chart-nav-link { padding: 0 6px; }
 }
 

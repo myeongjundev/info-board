@@ -126,26 +126,34 @@ export function watchingAxis(streaming) {
  * 같은 것을 여러 곳에 적으면 언젠가 갈라지고, 그게 이 저장소가 문서에서 이미
  * 한 번 겪은 사고다.
  *
- * 이름이 질문형인 이유. 각 페이지의 제목은 이미 질문이다 —
- * `무엇이 지금 팔리고 있을까`, `지금, 어디서 어떤 게임을 볼까`.
- * **나브만 명사형이라 어긋나 있었다.** 새 말투를 만든 것이 아니라 맞춘 것이다.
+ * 이름을 명사로 둔다 — 그 축이 무엇을 재는지를 그대로 적는다.
  *
- * 질문의 말이 그 축이 실제로 세는 것과 같아야 한다.
+ *   playing   Steam 동시접속자 수        →  동시접속
+ *   selling   Steam 이 공개한 매출 순위   →  매출 순위
+ *   deals     무료 배포와 할인           →  할인·무료
+ *   watching  치지직·Twitch 시청자 순위  →  시청 순위
  *
- *   playing   동시접속자 **수**        →  몇 명이 하나
- *   selling   매출 순위의 **대상**      →  무엇이 팔리나
- *   deals     무료와 할인의 **정도**    →  얼마나 싸나
- *   watching  시청자 **수**            →  몇 명이 보나
+ * 이 파일은 앞서 두 번 다르게 적혀 있었다. 처음에는 명사형이었다가
+ * `페이지 제목이 질문이니 나브도 질문이어야 한다` 는 이유로 질문형으로 갔고
+ * (`뭐가 팔리나`), 그 뒤 구어 축약을 걷어내 `무엇이 팔리나` 로 다듬었다.
  *
- * 앞의 `뭐가 팔리나 · 뭐가 싸나 · 뭘 보나` 는 구어 축약이었고, 무엇보다
- * `싸나` 가 그 축보다 좁았다. deals 는 할인만이 아니라 무료 배포도 센다 —
- * 카드가 실제로 `무료 1 · 할인 18` 을 띄운다. `얼마나` 로 둘을 다 담는다.
+ * **다시 명사로 돌린다.** 질문형을 버리는 이유는 이렇다. 이 이름은 나브와
+ * 요약 카드 라벨 두 곳에 동시에 들어가는데, 나브에서는 길의 이름이라 질문일
+ * 이유가 없다. 페이지 제목(`무엇이 지금 팔리고 있을까`)이 이미 질문을 하고
+ * 있으므로 나브까지 질문이면 같은 말을 두 번 하는 것이다.
+ *
+ * `할인·무료` 에 무료를 같이 적은 것은 남겨 둔다. deals 는 할인만이 아니라
+ * 무료 배포도 세고, 카드가 실제로 `무료 1 · 할인 18` 을 띄운다.
+ * 이름이 내용보다 좁으면 안 된다.
+ *
+ * 필드 이름도 `question` 에서 `label` 로 바꿨다. 명사를 question 이라는
+ * 이름에 담아 두면 다음 사람이 이 표를 잘못 읽는다.
  */
 export const SERVICE_AXES = [
-  { id: 'playing', question: '몇 명이 하나', href: '#sec-now', navClass: 'play-nav-link' },
-  { id: 'selling', question: '무엇이 팔리나', href: '#/charts', navClass: 'sales-chart-nav-link' },
-  { id: 'deals', question: '얼마나 싸나', href: '#/sales', navClass: 'sales-nav-link' },
-  { id: 'watching', question: '몇 명이 보나', href: '#/streaming', navClass: 'stream-nav-link' },
+  { id: 'playing', label: '동시접속', href: '#sec-now', navClass: 'play-nav-link' },
+  { id: 'selling', label: '매출 순위', href: '#/charts', navClass: 'sales-chart-nav-link' },
+  { id: 'deals', label: '할인·무료', href: '#/sales', navClass: 'sales-nav-link' },
+  { id: 'watching', label: '시청 순위', href: '#/streaming', navClass: 'stream-nav-link' },
 ];
 
 /** 첫 화면 요약 네 칸. 순서는 하는 것 → 사는 것 → 공짜 → 보는 것. */
