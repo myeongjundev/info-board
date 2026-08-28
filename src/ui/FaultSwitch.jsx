@@ -16,6 +16,7 @@ export default function FaultSwitch({ active, names }) {
 
   return (
     <>
+      <p className="fixture-switch-title">저장 파일 장애 시연 · 실제 마지막 정상값 사용</p>
       <div className="fault-row">
         {names.map((name) => (
           <a
@@ -29,10 +30,10 @@ export default function FaultSwitch({ active, names }) {
         <a className="fault-btn is-reset" href={url(null)}>정상으로</a>
       </div>
       <p className="source-url">
-        과제 원문이 &quot;모의실험한다&quot; 로 명시한 부분이다. 실제 자료를 부르지 않고
-        그 상태를 만들어 보인다. 재현 중에는 위에 재현 모드 띠가 뜬다.
+        현재 records.json을 먼저 읽고, 그 다음 정적 파일 읽기 실패를 모의한다.
+        실제 마지막 정상값을 보존하는 제품 장애 화면이며 T04 fixture 판정 경로는 아니다.
       </p>
-      <p className="fixture-switch-title">T04 공개 fixture 재생</p>
+      <p className="fixture-switch-title">T04 공개 합성 fixture 재생 · C12~C21·C26</p>
       <div className="fault-row">
         {['timeout', 'auth', 'rate-limit', 'offline', 'schema', 'normal'].map((name) => (
           <a key={`replay-${name}`} className="fault-btn" href={replayUrl(name)}>{name}</a>

@@ -12,18 +12,21 @@
 
 ## 지금 딱 하나만 한다면
 
-**2026-08-28 10:10 KST 이후에 공개 주소를 열고 `날짜별 기록` 이 두 줄인지 본다.**
+35개 조건의 현재 준비상태를 다시 계산한다.
 
-**https://myeongjundev.github.io/info-board/**
+```bash
+npm run audit:t04 -- --online
+```
 
-두 줄이면 C22~C24 의 실제 2일치가 채워진다.
-한 줄이면 [오후 기록](2026-08-27-오후-확장과-시각편향.md) 의 `내일 아침에 할 일` 절.
+두 실제 날짜는 저장되어 있다. 남은 외부 단계와 제출 항목은 명령 출력의 `WAIT`를
+정본으로 삼는다. 기록 수와 조건 상태를 이 문서에 다시 베껴 적지 않는다.
 
-**이어서 작업한다면** 35개 조건 정본과 구조 책임이 정해진 뒤라
-[Codex ↔ Claude 협업 인계](2026-08-28-Codex-Claude-협업-인계.md) 를 먼저 읽는다.
+**이어서 작업한다면** [검토 `88727f7`](2026-08-28-검토-88727f7.md)과
+[Codex ↔ Claude 협업 인계](2026-08-28-Codex-Claude-협업-인계.md)를 먼저 읽는다.
 
-**`collect.mjs` 를 손으로 돌리지 않는다.** 동시접속자는 순간값이라 아무 때나 재면
-"매일 같은 시각에 잰다" 는 약속이 깨진다. 10:10 KST 에 Actions 가 넣는다.
+**`collect.mjs` 를 임의 시각에 손으로 돌리지 않는다.** 동시접속자는 순간값이다.
+10:10 KST는 예약 시각이며, 실제 조회 시각은 Reading에 따로 저장한다. 같은 날짜의
+기록이 이미 있으면 live 수집기는 API 호출 전에 종료해 첫 정상값을 지킨다.
 
 ---
 
@@ -87,13 +90,13 @@
 ## 코드 구조
 
 ```
-src/source/     출처. definition.js 하나만 고치면 다른 데이터로 옮겨진다      486줄
-src/state/      기록. 날짜+appid 키, 중복 방지, 손상 격리, 비교               162줄
-src/view/       화면 계산. React 를 import 하지 않아 브라우저 없이 테스트된다   595줄
-src/ui/         React 컴포넌트. 계산을 하지 않는다                    20파일 1607줄
-scripts/        collect.mjs (Actions) · probe-hours.mjs (손으로)
-test/           node --test, 의존성 없음                          7파일 1379줄
-data/           records.json (진실의 원천) · timeprobe.json (별개 표본)
+src/source/     출처 adapter와 외부 응답 정규화
+src/state/      날짜+신호 키, live/replay 공통 upsert, 손상 격리, 비교
+src/view/       React 없는 화면 계산 — 브라우저 없이 테스트
+src/ui/         React 컴포넌트와 공개 fixture replay 화면
+scripts/        수집·스키마 변환·공개 자산 검증·T04 준비상태 감사
+test/           node --test 회귀·fixture 전이 검증
+data/           records.json(진실의 원천)과 서로 분리된 확장 스냅샷
 ```
 
 **`view` 와 `ui` 를 나눈 이유**는 변화량·방향·경과시간 계산을 브라우저 없이
@@ -129,6 +132,8 @@ data/           records.json (진실의 원천) · timeprobe.json (별개 표본
 ```bash
 npm test                    # 단위 테스트. 의존성 없음
 npm run dev                 # 화면 (5174)
+npm run audit:t04 -- --online  # C01~C35 준비상태와 공개 접근 재검사
+node scripts/verify-assets.mjs # 공개 fixture 원본 17개 hash 대조
 node scripts/collect.mjs    # 하루 한 건. 손으로 돌리지 않는다 ⚠
 node scripts/probe-hours.mjs   # 시각별 표본. 아무 때나 돌려도 된다
 ```
@@ -162,12 +167,13 @@ node scripts/probe-hours.mjs   # 시각별 표본. 아무 때나 돌려도 된�
 **구조와 통합은 Codex 가 맡는다.** 범위와 규칙은
 [협업 인계](2026-08-28-Codex-Claude-협업-인계.md) 에 있다.
 
-1. **10:10 KST 둘째 기록** (C22~C24) — 예약 수집 대기. 손으로 채우지 않는다
+1. **35개 조건 감사 재실행** — `npm run audit:t04 -- --online`
 2. **확인 4줄·AI 3줄** (C27·C28) — 본인 몫. 재료는 [오후 기록](2026-08-27-오후-확장과-시각편향.md) 의
    `AI 3줄 재료` 절에 표로 있다
-3. 눈으로 봐야 하는 것 — 스크롤스파이, 접힌 화면 배치. 브라우저 pane 이 떠야 한다
+3. **결과물·소스 제출 필드** (C34·C35) — 최종 full commit 뒤 확정
 
-닫힌 것: C07(`sourceTime: null`) · fixture replay(C12~C21·C26) · 통화 결함.
+닫힌 것: C07(`sourceTime: null`) · fixture replay(C12~C21·C26) · 통화 결함 ·
+둘째 실제 날짜 · 동일 날짜 live 덮어쓰기 방어.
 
 **확인 못 한 것 7가지**도 오후 기록에 있다. 그중 둘(스크롤스파이, lazy 그림)은
 집에서 화면을 눈으로 보면 바로 지워진다.

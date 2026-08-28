@@ -331,6 +331,8 @@ body {
 .replay-status dl div, .replay-reading dl div { padding: 13px; background: var(--surface-2); }
 .replay-status dt, .replay-reading dt { color: var(--text-faint); font-size: 10px; }
 .replay-status dd, .replay-reading dd { margin: 6px 0 0; color: var(--text); font-size: 13px; overflow-wrap: anywhere; }
+.fixture-source-id { color: var(--text-dim); font-family: var(--mono); font-size: 11px; }
+.replay-reading dd small { color: var(--text-faint); }
 .replay-rows table { width: 100%; border-collapse: collapse; }
 .replay-rows th, .replay-rows td { padding: 10px; border-bottom: 1px solid var(--border); text-align: left; font-size: 11px; }
 .replay-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 50px; }
@@ -1419,6 +1421,53 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 /* ══ 운영 데이터 대시보드 ══ */
+.overview-strip {
+  margin-top: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  background:
+    linear-gradient(120deg, rgba(54, 211, 153, .075), transparent 38%),
+    var(--surface);
+}
+.overview-strip-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.overview-strip-heading p {
+  margin: 0 0 7px;
+  color: var(--accent);
+  font: 700 10px/1 var(--mono);
+  letter-spacing: .12em;
+}
+.overview-strip-heading h2 { margin: 0; color: #fff; font-size: 22px; }
+.overview-strip-heading > span { max-width: 330px; color: var(--text-faint); font-size: 11px; text-align: right; }
+.overview-axis-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.overview-axis {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 176px;
+  padding: 21px 22px 19px;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
+  color: inherit;
+  transition: background .16s ease, transform .16s ease;
+}
+.overview-axis:first-child { border-left: 0; }
+.overview-axis:hover { background: rgba(255, 255, 255, .035); }
+.overview-axis-number { position: absolute; top: 21px; right: 20px; color: var(--text-faint); font: 700 10px/1 var(--mono); }
+.overview-axis-question { color: var(--text-dim); font: 700 11px/1 var(--mono); letter-spacing: .04em; }
+.overview-axis strong { margin-top: 24px; color: #fff; font-size: clamp(18px, 2vw, 25px); line-height: 1.1; overflow-wrap: anywhere; }
+.overview-axis b { margin-top: 9px; color: var(--text); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.overview-axis small { margin-top: auto; padding-top: 15px; color: var(--text-faint); font-size: 10px; line-height: 1.35; }
+.overview-axis.is-empty strong { color: var(--text-dim); }
+.overview-axis.is-unavailable strong { color: var(--down); }
+
 .dashboard-summary {
   margin-top: 28px;
   overflow: hidden;
@@ -1612,6 +1661,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .quality-item .fault-btn { flex: 1 1 calc(50% - 7px); text-align: center; }
 
 @media (max-width: 980px) {
+  .overview-axis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .overview-axis:nth-child(3) { border-left: 0; }
+  .overview-axis:nth-child(n + 3) { border-top: 1px solid var(--border); }
   .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpi:nth-child(3) { border-left: 0; }
   .kpi:nth-child(n + 3) { border-top: 1px solid var(--border); }
@@ -1621,6 +1673,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 720px) {
+  .overview-strip-heading { align-items: flex-start; padding: 21px 20px 19px; }
   .dashboard-heading { align-items: flex-start; padding: 21px 20px 19px; }
   .dashboard-heading h2 { font-size: 20px; }
   .dashboard-heading > div > p:last-child { max-width: 260px; }
@@ -1631,6 +1684,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 @media (max-width: 520px) {
+  .overview-strip { margin-top: 18px; border-radius: 11px; }
+  .overview-strip-heading { display: block; }
+  .overview-strip-heading > span { display: block; margin-top: 8px; max-width: none; text-align: left; }
+  .overview-axis { min-height: 160px; padding: 17px 16px; }
+  .overview-axis-number { top: 17px; right: 15px; }
+  .overview-axis strong { margin-top: 21px; font-size: 18px; }
   .dashboard-summary { margin-top: 18px; border-radius: 11px; }
   .dashboard-heading { display: block; }
   .dashboard-heading > div > p:last-child { font-size: 12px; }

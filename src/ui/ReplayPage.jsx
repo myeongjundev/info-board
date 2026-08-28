@@ -66,7 +66,14 @@ export default function ReplayPage({ mode }) {
             <h2>정규화 Reading</h2>
             <dl>
               <div><dt>값·단위</dt><dd>{reading.value} {reading.unit}</dd></div>
-              <div><dt>출처</dt><dd><a href={reading.sourceUrl}>{reading.sourceLabel}</a></dd></div>
+              <div>
+                <dt>출처</dt>
+                <dd>
+                  {reading.sourceLabel}<br />
+                  <span className="fixture-source-id">{reading.sourceUrl}</span><br />
+                  <small>합성 식별 주소 · 열리지 않음</small>
+                </dd>
+              </div>
               <div><dt>출처 관측 시각</dt><dd>{reading.sourceTime ? formatInstant(reading.sourceTime, reading.timezone) : '제공되지 않음 · fixture source_time=null'}</dd></div>
               <div><dt>조회 시각</dt><dd>{formatInstant(reading.fetchedAt, reading.timezone)}</dd></div>
               <div><dt>기준 시간대</dt><dd>{reading.timezone}</dd></div>

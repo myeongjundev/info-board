@@ -1,7 +1,8 @@
 // 하루 한 번 값을 재서 data/records.json 에 남긴다.
 //
 // GitHub Actions 가 이 스크립트를 돌리고, 파일이 바뀌었을 때만 커밋한다.
-// 같은 날 몇 번을 돌려도 기록이 늘지 않는다 (upsertRecord 가 막는다).
+// 같은 날 다시 돌면 저장된 게임은 외부 호출 전에 제외한다. replay의 same-day
+// update 계약은 지키되, live 순간값이 늦은 실행으로 덮이지 않게 하는 경계다.
 //
 // 사용법:
 //   node scripts/collect.mjs         오늘(KST) 값을 잰다
@@ -19,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { SOURCE, GAMES, HERO_APPID, todayLocal, assertMeasurableNow, gameOf } from '../src/source/definition.js';
 import { fetchReading, FetchFault } from '../src/source/fetchReading.js';
 import { loadRecords, upsertRecord, compare, serialize, keepDate } from '../src/state/records.js';
+import { pendingGamesForDate } from '../src/state/liveCollection.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = resolve(ROOT, 'data/records.json');
@@ -42,10 +44,6 @@ async function main() {
 
   const date = todayLocal();
 
-  console.log(`대상 날짜   ${date} (${SOURCE.timezone} 기준)`);
-  console.log(`출처        ${SOURCE.label}`);
-  console.log(`재는 게임   ${GAMES.length}개\n`);
-
   try {
     assertMeasurableNow(date);
   } catch (err) {
@@ -53,11 +51,40 @@ async function main() {
     return 1;
   }
 
+  let raw = null;
+  try {
+    raw = await readFile(FILE, 'utf8');
+  } catch (err) {
+    if (err.code !== 'ENOENT') throw err;
+    console.log('기록 파일이 없다. 새로 만든다.');
+  }
+
+  const { records: existing, quarantined } = loadRecords(raw);
+  if (quarantined.length) {
+    console.warn(`격리한 항목 ${quarantined.length}건 — 성한 기록 ${existing.length}건은 살린다`);
+    for (const q of quarantined) console.warn(`  · ${q.reason}`);
+  }
+
+  const gamesToMeasure = pendingGamesForDate(existing, GAMES, date);
+  console.log(`대상 날짜   ${date} (${SOURCE.timezone} 기준)`);
+  console.log(`출처        ${SOURCE.label}`);
+  console.log(`전체 게임   ${GAMES.length}개`);
+  console.log(`이번에 측정 ${gamesToMeasure.length}개\n`);
+
+  if (gamesToMeasure.length === 0) {
+    console.log(`${date} 기록이 ${GAMES.length}개 모두 있다. 외부 API를 부르지 않고 기존 Reading을 지킨다.`);
+    return 0;
+  }
+
+  if (gamesToMeasure.length < GAMES.length) {
+    console.log(`이미 저장된 ${GAMES.length - gamesToMeasure.length}개는 다시 재지 않고, 빠진 게임만 채운다.\n`);
+  }
+
   // 하나가 실패해도 나머지는 살린다. 실패한 것은 기록하지 않는다 — 0 을 넣지 않는다.
   const readings = [];
   const faults = [];
 
-  for (const g of GAMES) {
+  for (const g of gamesToMeasure) {
     try {
       const reading = await fetchReading(g.appid);
       readings.push(reading);
@@ -100,36 +127,16 @@ async function main() {
     return 1;
   }
 
-  let raw = null;
-  try {
-    raw = await readFile(FILE, 'utf8');
-  } catch (err) {
-    if (err.code !== 'ENOENT') throw err;
-    console.log('\n기록 파일이 없다. 새로 만든다.');
-  }
-
-  const { records: existing, quarantined } = loadRecords(raw);
-  if (quarantined.length) {
-    console.warn(`격리한 항목 ${quarantined.length}건 — 성한 기록 ${existing.length}건은 살린다`);
-    for (const q of quarantined) console.warn(`  · ${q.reason}`);
-  }
-
   let records = existing;
   let added = 0;
-  let updated = 0;
-  let unchanged = 0;
 
   for (const reading of sameDay) {
     const out = upsertRecord(records, reading);
+    if (out.kind !== 'added') {
+      throw new Error(`live 수집이 기존 일별 행을 ${out.kind} 하려 했다: ${reading.date}|${reading.appid}`);
+    }
     records = out.records;
-    if (out.kind === 'added') added += 1;
-    else if (out.kind === 'updated') updated += 1;
-    else unchanged += 1;
-  }
-
-  if (added === 0 && updated === 0) {
-    console.log(`\n${date} 기록이 이미 같게 들어 있다 (${unchanged}건). 파일을 건드리지 않는다.`);
-    return 0;
+    added += 1;
   }
 
   const hero = gameOf(HERO_APPID);
@@ -158,7 +165,7 @@ async function main() {
     games: GAMES,
   }), 'utf8');
 
-  console.log(`기록 추가 ${added}건 · 같은 날짜 갱신 ${updated}건${unchanged ? ` · 변경 없음 ${unchanged}건` : ''} — 총 ${records.length}건`);
+  console.log(`기록 추가 ${added}건 · 기존 일별 행 갱신 0건 — 총 ${records.length}건`);
   return 0;
 }
 

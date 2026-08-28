@@ -4,12 +4,28 @@
 import { SUBPAGE_AXES } from '../view/overview.js';
 import GameSearch from './GameSearch.jsx';
 
-export default function TopBar({ games, selectedAppid, onPick, onOpenSettings, badge }) {
+function measuredTime(reading) {
+  if (!reading?.fetchedAt) return null;
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: reading.timezone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(new Date(reading.fetchedAt));
+}
+
+export default function TopBar({
+  games, selectedAppid, onPick, onOpenSettings, badge, scheduledAt, reading,
+}) {
+  const actualTime = measuredTime(reading);
   return (
     <header className="topbar">
       <div className="topbar-left">
         <h1 className="wordmark">GAME PULSE</h1>
-        <p>Steam 동시접속자 · 매일 10:10 KST 측정</p>
+        <p>
+          Steam 동시접속자 · 매일 {scheduledAt} KST 예정
+          {actualTime ? ` · 최근 ${actualTime} 측정` : ''}
+        </p>
       </div>
 
       <div className="topbar-mid">

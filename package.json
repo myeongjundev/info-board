@@ -12,6 +12,7 @@
     "collect:sales-charts": "node scripts/collect-sales-charts.mjs",
     "collect:streaming": "node scripts/collect-streaming.mjs",
     "migrate:records": "node scripts/migrate-records-schema.mjs",
+    "audit:t04": "node scripts/audit-t04.mjs",
     "test": "node --test test/*.test.js",
     "test:tap": "node --test --test-reporter=tap test/*.test.js",
     "dev": "vite",

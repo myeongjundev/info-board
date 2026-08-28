@@ -30,6 +30,7 @@ import RankMovement from './RankMovement.jsx';
 import DataProof from './DataProof.jsx';
 import StorePriceModal from './StorePriceModal.jsx';
 import ReplayPage from './ReplayPage.jsx';
+import OverviewStrip from './OverviewStrip.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -168,6 +169,8 @@ function LiveApp() {
         onPick={pickGame}
         onOpenSettings={() => setSettingsOpen(true)}
         badge={<StateBadge status={status} board={board} />}
+        scheduledAt={payload?.data?.source?.measuredAtLocal ?? SOURCE.measuredAtLocal}
+        reading={showing?.reading}
       />
 
       <SectionNav items={NAV} />
@@ -194,18 +197,21 @@ function LiveApp() {
 
       {simulate && (
         <p className="sim-banner" role="status">
-          재현 모드 — 실제 자료를 부르지 않고 <b>{simulate}</b> 상태를 만들어 보이는 중이다.
+          저장 파일 장애 시연 — 실제 마지막 정상값 위에 <b>{simulate}</b> 읽기 실패를 모의하는 중이다.
+          T04 공개 fixture 판정은 아래의 별도 재생 화면을 사용한다.
           주소에서 <code>?fault=</code> 를 빼면 정상으로 돌아온다.
         </p>
       )}
 
       <main id="sec-now">
+        <OverviewStrip board={showing} />
+
         <section className="dashboard-summary" aria-labelledby="dashboard-title">
           <header className="dashboard-heading">
             <div>
               <p className="dashboard-eyebrow">DAILY STEAM CONCURRENCY MONITOR</p>
               <h2 id="dashboard-title">Steam 동시접속자 일일 현황</h2>
-              <p>매일 같은 시각에 측정한 기록으로 현재 규모와 변화를 확인한다.</p>
+              <p>날짜별 실제 조회 시각을 함께 보존한 기록으로 현재 규모와 변화를 확인한다.</p>
             </div>
             {showing?.reading && (
               <p className="dashboard-date">
@@ -315,7 +321,7 @@ function LiveApp() {
           </section>
 
           <section className="quality-item faults" id="sec-fault" aria-label="장애 재현">
-            <h3>03 · 상태 테스트</h3>
+            <h3>03 · 제품 장애 시연과 T04 fixture 재생</h3>
             <FaultSwitch active={simulate} names={Object.keys(FAULT_BY_PARAM)} />
           </section>
         </div>
@@ -413,8 +419,8 @@ function LiveApp() {
 
       <footer className="foot">
         <div>
-          기준 시간대 {SOURCE.timezone} · 매일 {SOURCE.measuredAtLocal} 측정 ·
-          단위 {SOURCE.unit}
+          기준 시간대 {SOURCE.timezone} · 매일 {SOURCE.measuredAtLocal} 수집 예정 ·
+          실제 조회 시각은 각 Reading에 보존 · 단위 {SOURCE.unit}
         </div>
         <div>
           기록은 이 저장소의 <code>data/records.json</code> 에 커밋으로 쌓인다 ·{' '}

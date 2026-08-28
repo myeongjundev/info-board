@@ -64,6 +64,9 @@ export function normalizeFixtureReading(payload) {
   if (payload.source_time !== null && !validInstant(payload.source_time)) throw new TypeError('source_time 형식이 다르다');
   if (!validInstant(payload.fetched_at)) throw new TypeError('fetched_at 형식이 다르다');
   if (payload.record_timezone !== 'Asia/Seoul') throw new TypeError('record_timezone이 다르다');
+  // 공개 참조 adapter도 record_date를 fetched_at의 KST 날짜와 대조한다. 스키마의
+  // 문자열 형식 검사보다 의도적으로 엄격하다. 한 Reading이 서로 다른 두 날짜를
+  // 주장한 채 일별 행에 들어가는 것을 막으며, 공개 불변 fixture는 모두 이 계약을 따른다.
   if (!/^\d{4}-\d{2}-\d{2}$/.test(payload.record_date)
     || payload.record_date !== kstDate(payload.fetched_at)) throw new TypeError('record_date 형식이 다르다');
 
