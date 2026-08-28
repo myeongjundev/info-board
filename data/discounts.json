@@ -9,46 +9,31 @@
     "language": "koreana",
     "warning": "문서화되지 않은 Steam Store 응답이며 예고 없이 바뀔 수 있다."
   },
-  "startedAt": "2026-08-27T13:17:12.373Z",
-  "completedAt": "2026-08-27T13:17:49.110Z",
+  "startedAt": "2026-08-28T12:42:10.451Z",
+  "completedAt": "2026-08-28T12:42:40.553Z",
   "counts": {
     "checked": 75,
-    "discount": 8,
-    "regular": 54,
+    "discount": 6,
+    "regular": 56,
     "free": 11,
     "unpriced": 2,
     "failed": 0
   },
   "discounts": [
     {
-      "appid": 1142710,
-      "name": "Total War: WARHAMMER III",
-      "year": 2022,
-      "genre": "전략",
-      "initialMinor": 6000000,
-      "finalMinor": 900000,
-      "discountPercent": 85,
+      "appid": 990080,
+      "name": "Hogwarts Legacy",
+      "year": 2023,
+      "genre": "오픈월드",
+      "initialMinor": 7980000,
+      "finalMinor": 798000,
+      "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:28.850Z",
-      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1142710&cc=KR&l=koreana",
+      "fetchedAt": "2026-08-28T12:42:29.018Z",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=990080&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/1142710/"
-    },
-    {
-      "appid": 594570,
-      "name": "Total War: WARHAMMER II",
-      "year": 2017,
-      "genre": "전략",
-      "initialMinor": 5980000,
-      "finalMinor": 1495000,
-      "discountPercent": 75,
-      "currency": "KRW",
-      "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:29.296Z",
-      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=594570&cc=KR&l=koreana",
-      "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/594570/"
+      "storeUrl": "https://store.steampowered.com/app/990080/"
     },
     {
       "appid": 2399830,
@@ -60,7 +45,7 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:19.476Z",
+      "fetchedAt": "2026-08-28T12:42:16.812Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=2399830&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/2399830/"
@@ -75,25 +60,10 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:33.289Z",
+      "fetchedAt": "2026-08-28T12:42:27.985Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1174180&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1174180/"
-    },
-    {
-      "appid": 255710,
-      "name": "Cities: Skylines",
-      "year": 2015,
-      "genre": "시뮬레이션",
-      "initialMinor": 3300000,
-      "finalMinor": 990000,
-      "discountPercent": 70,
-      "currency": "KRW",
-      "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:39.596Z",
-      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=255710&cc=KR&l=koreana",
-      "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/255710/"
     },
     {
       "appid": 1049410,
@@ -105,7 +75,7 @@
       "discountPercent": 60,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:45.183Z",
+      "fetchedAt": "2026-08-28T12:42:37.210Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1049410&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1049410/"
@@ -120,7 +90,7 @@
       "discountPercent": 55,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:48.885Z",
+      "fetchedAt": "2026-08-28T12:42:40.332Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=204300&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/204300/"
@@ -135,7 +105,7 @@
       "discountPercent": 30,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-27T13:17:17.344Z",
+      "fetchedAt": "2026-08-28T12:42:15.027Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1623730&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1623730/"
