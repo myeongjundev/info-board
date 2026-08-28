@@ -270,13 +270,18 @@ body {
   padding-bottom: 1px;
 }
 .source-link:hover { border-bottom-color: var(--accent); }
+/* 주소는 고정폭, 설명은 산세리프.
+ *
+ * 이 클래스가 둘을 겸하고 있었다. 긴 한글 문단을 고정폭 계열로 조판하면
+ * 글자마다 폭이 같아 단어 덩어리가 안 생기고, 읽는 눈이 매 글자에 걸린다.
+ * 숫자와 주소는 자리가 맞아야 하니 mono 가 맞고, 문장은 아니다. */
 .source-url {
   margin: 9px 0 0;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--text-faint);
   word-break: break-all;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ── 경고 ── */
@@ -346,7 +351,7 @@ body {
   background: rgba(251, 191, 36, 0.1);
 }
 .fault-btn.is-reset { border-color: rgba(74, 222, 128, 0.4); color: var(--up); }
-.fixture-switch-title { margin: 18px 0 8px; color: var(--text); font: 700 11px/1 var(--mono); letter-spacing: .08em; }
+.fixture-switch-title { margin: 18px 0 8px; color: var(--text); font: 600 11px/1.5 var(--sans); letter-spacing: .02em; }
 
 .source-times { display: grid; gap: 7px; margin: 14px 0; }
 .source-times div { display: grid; grid-template-columns: 105px minmax(0, 1fr); gap: 10px; }
@@ -1004,7 +1009,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .genre-delta .is-down { color: var(--down); }
 .genre-delta .is-flat { color: var(--flat); }
 .genre-delta-note {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--text-faint);
   font-variant-numeric: tabular-nums;
@@ -1149,6 +1154,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   color: var(--text-faint);
 }
 .source-url.raw-url {
+  font-family: var(--mono);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1704,9 +1710,18 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 .quality-heading h2 { font-size: 19px; }
 .quality-heading > span { color: var(--text-faint); font-size: 11px; }
+/* 세 칸을 두 칸으로 바꿨다.
+ *
+ * 가운데 `검증 경로` 는 접이식 버튼과 한 문장뿐이라 내용이 83px 인데,
+ * 오른쪽 `장애 재현` 이 길어서 세 칸이 다 그 높이로 늘어났다. 재 보니
+ * 빈 공간이 186px · 287px 이었다 — 가운데는 내용의 세 배가 여백이었다.
+ *
+ * 얇은 칸을 억지로 한 열로 세우는 대신 위아래로 쌓는다. 출처와 검증 경로는
+ * 어차피 "이 값이 어디서 왔나" 하나의 이야기고, 장애 재현은 다른 이야기다.
+ * 나누는 선이 그 경계에 놓이는 편이 내용과도 맞는다. */
 .quality-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1fr 1.1fr;
+  grid-template-columns: 1fr 1.05fr;
 }
 .quality-item {
   min-width: 0;
@@ -1714,6 +1729,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   border-left: 1px solid var(--border);
 }
 .quality-item:first-child { border-left: 0; }
+.quality-item:nth-child(1) { grid-area: 1 / 1; }
+.quality-item:nth-child(2) { grid-area: 2 / 1; border-left: 0; border-top: 1px solid var(--border); }
+.quality-item:nth-child(3) { grid-area: 1 / 2 / span 2 / 3; }
 .quality-item > h3 {
   margin: 0 0 18px;
   color: var(--text-dim);
@@ -1725,7 +1743,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 .quality-item .source-summary { margin-top: 15px; }
 .quality-item .proof-toggle { border-radius: 6px; font-family: var(--sans); }
 .quality-item .fault-row { gap: 7px; }
-.quality-item .fault-btn { flex: 1 1 calc(50% - 7px); text-align: center; }
+/* 두 줄씩 세 묶음이라 이 칸만 길었고, 옆 두 칸이 그 높이에 맞춰 늘어나
+   빈 공간이 248px·350px 씩 생겼다. 한 줄에 셋씩 놓아 칸을 줄인다. */
+.quality-item .fault-btn { flex: 1 1 calc(33.333% - 7px); text-align: center; }
 
 @media (max-width: 980px) {
   .overview-axis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1735,6 +1755,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .kpi:nth-child(3) { border-left: 0; }
   .kpi:nth-child(n + 3) { border-top: 1px solid var(--border); }
   .quality-grid { grid-template-columns: 1fr; }
+  .quality-item:nth-child(1),
+  .quality-item:nth-child(2),
+  .quality-item:nth-child(3) { grid-area: auto; border-left: 0; border-top: 1px solid var(--border); }
+  .quality-item:first-child { border-top: 0; }
   .quality-item { border-left: 0; border-top: 1px solid var(--border); }
   .quality-item:first-child { border-top: 0; }
 }
