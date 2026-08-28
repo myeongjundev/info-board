@@ -34,7 +34,7 @@ export default function Comparison({ board, compact = false }) {
       <>
         <p className={`delta is-${x.direction}`}>
           <span>{x.arrow}</span>
-          <span>{sign}{formatNumber(x.delta)} {x.unit}</span>
+          <span className="delta-value">{sign}{formatNumber(x.delta)} {x.unit}</span>
           {x.percent !== null && <small>{sign}{x.percent.toFixed(2)}%</small>}
         </p>
         <p className="kpi-meta">기준 {x.previous.date}</p>
@@ -46,7 +46,7 @@ export default function Comparison({ board, compact = false }) {
     <>
       <p className={`delta is-${x.direction}`}>
         <span>{x.arrow}</span>
-        <span>{sign}{formatNumber(x.delta)} {x.unit}</span>
+        <span className="delta-value">{sign}{formatNumber(x.delta)} {x.unit}</span>
         {x.percent !== null && <small>{sign}{x.percent.toFixed(2)}%</small>}
       </p>
 

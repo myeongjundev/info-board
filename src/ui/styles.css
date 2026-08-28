@@ -186,12 +186,21 @@ body {
 .delta {
   display: flex;
   align-items: baseline;
+  /* 자리가 모자라면 퍼센트가 다음 줄로 내려간다. 값과 단위를 갈라 놓는 것보다
+     낫다 — 퍼센트는 부차 정보이고, 단위 없는 숫자는 값이 아니다. */
+  flex-wrap: wrap;
   gap: 9px;
   font-family: var(--mono);
   font-size: 21px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
+
+/* 숫자와 단위는 한 덩어리다. 이 둘이 줄로 갈라지면 "값 하나와 그 단위" 라는
+   화면의 주장이 눈에서 먼저 깨진다. 2026-08-28 공개 주소에서 실제로
+   "▼ -6,145 / 명" 으로 갈라져 있었고, innerText 로는 한 줄로 읽혀서
+   텍스트 계측만 하던 동안 세 번을 놓쳤다. */
+.delta-value { white-space: nowrap; }
 .delta.is-up   { color: var(--up); }
 .delta.is-down { color: var(--down); }
 .delta.is-flat { color: var(--flat); }
