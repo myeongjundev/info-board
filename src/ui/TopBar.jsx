@@ -1,6 +1,7 @@
 // 상단 띠. MSN 날씨의 top-container 배치를 따랐다 —
 // 왼쪽 로고 · 가운데 검색 · 오른쪽 설정 버튼.
 
+import { SUBPAGE_AXES } from '../view/overview.js';
 import GameSearch from './GameSearch.jsx';
 
 export default function TopBar({ games, selectedAppid, onPick, onOpenSettings, badge }) {
@@ -17,9 +18,9 @@ export default function TopBar({ games, selectedAppid, onPick, onOpenSettings, b
 
       <div className="topbar-right">
         <nav className="topbar-service-links" aria-label="서비스 페이지">
-          <a className="sales-nav-link" href="#/sales">할인 게임</a>
-          <a className="sales-chart-nav-link" href="#/charts">판매 차트</a>
-          <a className="stream-nav-link" href="#/streaming">스트리밍 순위</a>
+          {SUBPAGE_AXES.map((axis) => (
+            <a key={axis.id} className={axis.navClass} href={axis.href}>{axis.question}</a>
+          ))}
         </nav>
         {badge}
         <button

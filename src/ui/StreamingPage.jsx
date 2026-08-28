@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { SUBPAGE_AXES } from '../view/overview.js';
+
 import {
   crossPlatformGames,
   formatViewerCount,
@@ -70,11 +72,15 @@ export default function StreamingPage() {
   return (
     <div className="page streaming-page">
       <header className="sales-topbar">
-        <a className="sales-back" href="#sec-now">← 동시접속자 대시보드</a>
+        <a className="sales-back" href="#sec-now">← 전체 현황</a>
         <nav className="subpage-nav" aria-label="별도 페이지">
-          <a href="#/sales">할인 게임</a>
-          <a href="#/charts">판매 차트</a>
-          <a className="is-current" href="#/streaming">스트리밍 순위</a>
+          {SUBPAGE_AXES.map((axis) => (
+            <a
+              key={axis.id}
+              className={axis.href === '#/streaming' ? 'is-current' : undefined}
+              href={axis.href}
+            >{axis.question}</a>
+          ))}
         </nav>
       </header>
 
