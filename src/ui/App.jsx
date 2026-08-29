@@ -41,8 +41,9 @@ const PROBE_URL = `${import.meta.env.BASE_URL}data/timeprobe.json`;
 const NAV = [
   { id: 'sec-now', label: '현재', icon: 'now' },
   { id: 'sec-proof', label: '데이터 품질', icon: 'proof' },
-  { id: 'sec-when', label: '시각·장르', icon: 'time' },
+  // 나브 순서는 페이지 순서를 그대로 따른다. 어긋나면 누른 사람이 위로 올라간다.
   { id: 'sec-rank', label: '순위·변화', icon: 'trend' },
+  { id: 'sec-when', label: '시각·장르', icon: 'time' },
   { id: 'sec-old', label: '오래된 게임', icon: 'archive' },
 ];
 
@@ -287,48 +288,30 @@ function LiveApp() {
         <>
           <TierRule label="데이터 인사이트" note="추가 API 없이 동일한 측정 기록에서 계산한 분석이다." />
 
-          {/* 재현 모드에서는 안 보인다. 장애를 흉내내는 화면에 멀쩡히 받아온
-              보조 자료가 섞이면 무엇이 실패한 것인지 헷갈린다. */}
-          {!simulate && (
-            <section className="panel insight-panel" id="sec-when" aria-label="시각에 따른 차이">
-              <PanelHeading
-                eyebrow="TIME BIAS"
-                title="시간대에 따른 편향"
-                note="같은 날 다른 시각의 실제 측정값 비교"
-              />
-              <TimeBias data={timeBias(payload.data.records, probe, games, probeDate, {
-                anchorAppid: payload.data.source.heroAppid,
-              })} />
-            </section>
-          )}
+          {/* 질문 하나에 한 띠. **자료가 하는 말이 먼저고, 그 말의 한계가 바로 뒤다.**
 
-          <section className="panel insight-panel" id="sec-genre" aria-label="장르로 묶어 보기">
-            <PanelHeading
-              eyebrow="DISTRIBUTION"
-              title="장르별 구성"
-              note="측정 대상 안에서 장르별 규모를 비교"
-            />
-            <Genres
-              data={byGenre(payload.data.records, games, showing.reading.date, { anchorAppid })}
-              games={games}
-              onPickGame={pickGame}
-            />
-          </section>
+              ① 오늘 누가 위인가        측정 게임 순위
+              ② 어제와 견주면           이전 대비 변화 · 순위 이동
+              ③ 그런데 이 순위는        시간대에 따른 편향   ← ①②의 한계
+              ④ 우리가 재는 것은        장르별 구성
+              ⑤ 오래 살아남은 것은      장기 생존 게임
 
-          {/* 질문 하나에 한 띠.
-              ① 오늘 누가 위인가  ② 어제와 견주면 무엇이 달라졌나  ③ 오래 살아남은 것은
+              **묶음.** 전에는 `순위`와 `이전 대비 변화 + 장기 생존`을 두 기둥으로
+              세웠다. 왼쪽 831px, 오른쪽 1,650px 이라 왼쪽 아래가 819px 비었고,
+              무엇보다 `접속자가 얼마나 변했나`와 `순위가 얼마나 움직였나`는 같은
+              물음에 단위만 다른 답인데 사이에 성격이 다른 `장기 생존`이 끼어 있었다.
 
-              전에는 `순위`와 `이전 대비 변화 + 장기 생존`을 두 기둥으로 세웠다.
-              두 가지가 어긋나 있었다.
+              **순서.** 전에는 편향·장르가 맨 앞이었다. 첫 순위표까지 4,343px 을
+              내려야 했고, 그건 페이지의 56% 지점이다. 읽는 사람은 순위를 보기도
+              전에 그 순위의 한계부터 통과했다.
 
-              1. **빈칸.** 왼쪽 831px, 오른쪽 1,650px 이라 왼쪽 아래가 819px 비었다.
-              2. **같은 질문이 갈라져 있었다.** `접속자가 얼마나 변했나`와 `순위가
-                 얼마나 움직였나`는 같은 물음에 단위만 다른 답인데, 사이에 성격이
-                 다른 `장기 생존`이 끼어 있고 순위 이동은 아예 다른 띠에 있었다.
+              근거를 먼저 보이는 몫은 바로 위 `데이터 품질` 층(1,336px)이 이미 한다.
+              이 층은 `같은 기록에서 꺼낸 이야기들` 이므로 이야기가 먼저 온다.
+              편향은 감추는 것이 아니라 **그것이 가리키는 표 바로 뒤로** 옮긴 것이다.
 
-              높이로 짝을 맞추지 않은 이유. 오늘 장기 생존이 1,262px 인 것은 오래된
-              게임을 그만큼 재고 있어서고, 목록이 늘면 또 달라진다. **오늘 화면에
-              맞춰 기둥을 짜면 자료가 늘 때마다 같은 자리가 다시 어긋난다.** */}
+              **높이로 짝을 맞추지 않는다.** 오늘 장기 생존이 1,262px 인 것은 오래된
+              게임을 그만큼 재고 있어서고, 목록이 늘면 또 달라진다. 오늘 화면에 맞춰
+              기둥을 짜면 자료가 늘 때마다 같은 자리가 다시 어긋난다. */}
           <section className="panel insight-panel ranking-panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
             {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
                 '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
@@ -377,6 +360,34 @@ function LiveApp() {
               />
             </section>
           </div>
+
+          {/* 재현 모드에서는 안 보인다. 장애를 흉내내는 화면에 멀쩡히 받아온
+              보조 자료가 섞이면 무엇이 실패한 것인지 헷갈린다. */}
+          {!simulate && (
+            <section className="panel insight-panel" id="sec-when" aria-label="시각에 따른 차이">
+              <PanelHeading
+                eyebrow="TIME BIAS"
+                title="시간대에 따른 편향"
+                note="같은 날 다른 시각의 실제 측정값 비교"
+              />
+              <TimeBias data={timeBias(payload.data.records, probe, games, probeDate, {
+                anchorAppid: payload.data.source.heroAppid,
+              })} />
+            </section>
+          )}
+
+          <section className="panel insight-panel" id="sec-genre" aria-label="장르로 묶어 보기">
+            <PanelHeading
+              eyebrow="DISTRIBUTION"
+              title="장르별 구성"
+              note="측정 대상 안에서 장르별 규모를 비교"
+            />
+            <Genres
+              data={byGenre(payload.data.records, games, showing.reading.date, { anchorAppid })}
+              games={games}
+              onPickGame={pickGame}
+            />
+          </section>
 
           <section className="panel insight-panel" id="sec-old" aria-label="오래된 게임">
             <PanelHeading
