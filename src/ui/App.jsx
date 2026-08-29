@@ -29,6 +29,7 @@ import StorePriceModal from './StorePriceModal.jsx';
 import ReplayPage from './ReplayPage.jsx';
 import OverviewStrip from './OverviewStrip.jsx';
 import GameFocusPanel from './GameFocusPanel.jsx';
+import MeasurementStatus from './MeasurementStatus.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -255,6 +256,13 @@ function LiveApp() {
           </div>
           <span>출처부터 장애 상태까지 한곳에서 검증</span>
         </header>
+
+        <MeasurementStatus
+          coverage={coverage}
+          totalGames={GAMES.length}
+          loading={status === 'loading' && !showing}
+          fetchedAt={showing?.reading?.fetchedAt}
+        />
 
         <div className="quality-grid">
           <section className="quality-item" aria-label="출처">
