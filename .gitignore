@@ -5,3 +5,5 @@ dist/
 .env
 .env.*
 test.tap
+# CI 가 판정표를 여기에 받아 센다. test.tap 과 같은 이유로 커밋하지 않는다.
+audit.md

@@ -41,3 +41,38 @@ jobs:
             echo "::error::통과한 테스트가 0건이다. 테스트가 실행되지 않았다는 뜻이다."
             exit 1
           fi
+
+      # 제출 조건 판정표도 CI 가 돌린다.
+      #
+      # 결함 25번이 이걸 시켰다. `dates.length === 2` 라고 쓴 자가 8/28 에는 맞았고
+      # 8/29 에 기록이 하루 더 쌓이자 거짓이 됐다 — **요구를 넘어서면 통과를 멈추는
+      # 검사**였다. 아무도 안 돌리면 이런 것은 조용히 썩는다. 이 저장소는 매일 봇이
+      # 자료를 커밋하므로 자료는 계속 자라고, 자랄 때마다 이 표가 다시 위험해진다.
+      #
+      # 네트워크를 쓰는 `--online` 은 여기서 돌리지 않는다. Steam 과 공개 주소가
+      # 잠깐 흔들린 것을 우리 코드의 실패로 만들면 빨간불의 뜻이 흐려진다.
+      # 무인증 접근 확인은 제출 전에 손으로 한 번 돌린다.
+      #
+      # 위 테스트 단계와 같은 이유로 개수를 직접 센다. 판정 줄이 하나도 안 나와도
+      # FAIL 은 0 이라 그냥 통과하기 때문이다 — `아무것도 안 함` 과 `전부 통과` 를
+      # 같은 초록불로 만들지 않는다.
+      - name: 제출 조건 판정
+        run: |
+          set -euo pipefail
+          npm run audit:t04 | tee audit.md
+          summary=$(grep -E '^READY [0-9]+ · WAIT [0-9]+ · CHECK [0-9]+ · FAIL [0-9]+$' audit.md || true)
+          if [ -z "$summary" ]; then
+            echo "::error::판정 요약줄을 읽지 못했다. 판정표가 나오지 않았다는 뜻이다."
+            exit 1
+          fi
+          rows=$(grep -c '^| T04-C' audit.md || true)
+          echo "$summary · 판정 줄 ${rows}건"
+          if [ "${rows:-0}" -lt 1 ]; then
+            echo "::error::판정된 조건이 0건이다. 조건 목록을 못 읽었다는 뜻이다."
+            exit 1
+          fi
+          fail=$(sed -n 's/.*FAIL \([0-9]*\)$/\1/p' <<<"$summary")
+          if [ "${fail:-1}" -ne 0 ]; then
+            echo "::error::판정 실패 ${fail}건"
+            exit 1
+          fi
