@@ -38,11 +38,11 @@ const PROBE_URL = `${import.meta.env.BASE_URL}data/timeprobe.json`;
 // 브리프가 카드 1·5 의 통과 기준을 `한 화면에 보인다` 로 못박아서, 탭 뒤로 숨기면
 // 그 순간 조건이 깨진다. 여기 있는 id 는 전부 같은 페이지에 실제로 있어야 한다.
 const NAV = [
-  { id: 'sec-now', label: '개요' },
-  { id: 'sec-proof', label: '데이터 품질' },
-  { id: 'sec-when', label: '시각·장르' },
-  { id: 'sec-rank', label: '순위·변화' },
-  { id: 'sec-old', label: '오래된 게임' },
+  { id: 'sec-now', label: '현재', icon: 'now' },
+  { id: 'sec-proof', label: '데이터 품질', icon: 'proof' },
+  { id: 'sec-when', label: '시각·장르', icon: 'time' },
+  { id: 'sec-rank', label: '순위·변화', icon: 'trend' },
+  { id: 'sec-old', label: '오래된 게임', icon: 'archive' },
 ];
 
 export default function App() {
@@ -343,7 +343,7 @@ function LiveApp() {
                 <PanelHeading
                   eyebrow="LONGEVITY"
                   title="장기 생존 게임"
-                  note="출시 13년 이상 게임의 현재 접속자"
+                  note="우리가 오래됐다고 분류한 게임의 현재 접속자"
                 />
                 <Graveyard
                   rows={graveyard(payload.data.records, games, showing.reading.date, { anchorAppid })}

@@ -57,6 +57,9 @@ const ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurren
  *   · 594570 을 `Total War: THREE KINGDOMS` 로 알고 있었다 → 실제는 `WARHAMMER II`
  *   · 1049590 을 `Escape Simulator` 로 알고 있었다 → 실제는 `Eternal Return` (MOBA)
  *   · Path of Exile 둘은 상점이 Site Error 를 줘 **확인을 못 해 넣지 않았다**
+ *   · 3678970 을 `TBH: Taskbar Hero` 로 적었다 → 상점 표기는 `TBH: Task Bar Hero`
+ *     (2026-08-29 재확인에서 잡았다. 25개 중 이름이 어긋난 것은 이 하나였고
+ *      연도는 25개 모두 상점 출시일과 맞았다)
  * 확인 못 한 것을 넣지 않는 쪽을 골랐다. 숫자는 맞는데 이름이 딴 게임이면
  * 그것이 이 정보판이 잡아내려는 거짓말 그 자체다.
  */
@@ -108,7 +111,7 @@ export const GAMES = [
   { appid: 292030,  name: 'The Witcher 3: Wild Hunt',         year: 2015, tier: 'active', genre: 'RPG' },
   { appid: 377160,  name: 'Fallout 4',                        year: 2015, tier: 'active', genre: 'RPG' },
   { appid: 72850,   name: 'The Elder Scrolls V: Skyrim',      year: 2011, tier: 'legacy', genre: 'RPG' },
-  { appid: 3678970, name: 'TBH: Taskbar Hero',                year: 2026, tier: 'active', genre: 'RPG' },
+  { appid: 3678970, name: 'TBH: Task Bar Hero',                   year: 2026, tier: 'active', genre: 'RPG' },
   { appid: 250900,  name: 'The Binding of Isaac: Rebirth',    year: 2014, tier: 'active', genre: 'RPG' },
   { appid: 1973530, name: 'Limbus Company',                   year: 2023, tier: 'active', genre: 'RPG' },
 

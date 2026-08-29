@@ -194,6 +194,22 @@ export function aliveLabel(value) {
   return ALIVE_RULE.find((r) => value >= r.min).label;
 }
 
+/**
+ * 이 목록에 든 게임들이 몇 년째인가. 가장 어린 것과 가장 나이 든 것.
+ *
+ * 화면이 `출시 13년 이상 게임` 이라고 적고 있었는데, `legacy` 는 나이 규칙이 아니라
+ * **우리 판단**이다 — 개발이 멈춘 Battlerite(2017, 9년)는 legacy 이고 지금도 현역인
+ * CS2(2012, 14년)는 active 다. 없는 규칙을 화면이 말하면 그 자체가 거짓말이라,
+ * 규칙을 적는 대신 **실제 범위를 세서 적는다.**
+ *
+ * @returns {{min:number, max:number, count:number}|null}
+ */
+export function ageSpan(rows, date) {
+  const ages = (rows ?? []).map((r) => ageOf(r.year, date)).filter((a) => a !== null);
+  if (ages.length === 0) return null;
+  return { min: Math.min(...ages), max: Math.max(...ages), count: ages.length };
+}
+
 /** 그 게임이 몇 년 됐는가. 화면의 `26년째` 가 여기서 나온다. */
 export function ageOf(year, date) {
   const y = Number(String(date).slice(0, 4));

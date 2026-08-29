@@ -8,6 +8,20 @@
 
 import { useEffect, useState } from 'react';
 
+function NavGlyph({ name }) {
+  const common = {
+    className: 'secnav-icon', viewBox: '0 0 20 20', width: 18, height: 18,
+    fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round',
+    strokeLinejoin: 'round', 'aria-hidden': true,
+  };
+
+  if (name === 'now') return <svg {...common}><circle cx="10" cy="10" r="3" /><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.3 4.3l1.4 1.4M14.3 14.3l1.4 1.4M15.7 4.3l-1.4 1.4M5.7 14.3l-1.4 1.4" /></svg>;
+  if (name === 'proof') return <svg {...common}><ellipse cx="10" cy="5" rx="6" ry="2.5" /><path d="M4 5v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5M4 10v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5" /></svg>;
+  if (name === 'time') return <svg {...common}><circle cx="10" cy="10" r="7" /><path d="M10 6v4l3 2" /></svg>;
+  if (name === 'trend') return <svg {...common}><path d="M3 15V5M3 15h14M6 12l3-3 2 2 5-6" /></svg>;
+  return <svg {...common}><path d="M4 6h12v11H4zM3 6l2-3h10l2 3M8 10h4" /></svg>;
+}
+
 export default function SectionNav({ items }) {
   const [active, setActive] = useState(items[0]?.id);
   // 실제로 페이지에 있는 구획만 줄에 올린다.
@@ -56,6 +70,7 @@ export default function SectionNav({ items }) {
               className={i.id === active ? 'is-on' : undefined}
               aria-current={i.id === active ? 'true' : undefined}
             >
+              <NavGlyph name={i.icon} />
               {i.label}
             </a>
           </li>

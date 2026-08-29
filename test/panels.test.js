@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement, aliveLabel, ageOf, ALIVE_RULE, measurementSpread } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement, aliveLabel, ageOf, ageSpan, ALIVE_RULE, measurementSpread } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -647,4 +647,18 @@ test('장르 합계도 무엇을 더한 것인지 들고 나온다', () => {
   const g = byGenre(records, withGenre, '2026-08-27', { anchorAppid: 730 });
   assert.equal(g.spread.coherent, false);
   assert.equal(g.spread.offBatch, 1);
+});
+
+test('오래된 게임 목록의 실제 나이 범위를 센다 — 규칙을 적지 않는다', () => {
+  const rows = [{ year: 2017 }, { year: 2000 }, { year: 2013 }];
+  const span = ageSpan(rows, '2026-08-29');
+  assert.equal(span.min, 9);     // Battlerite 같은 줄. 13년 규칙이었으면 여기 없어야 한다
+  assert.equal(span.max, 26);
+  assert.equal(span.count, 3);
+});
+
+test('연도를 못 읽는 줄은 범위에 넣지 않는다', () => {
+  assert.equal(ageSpan([{ year: null }, { year: undefined }], '2026-08-29'), null);
+  assert.equal(ageSpan([], '2026-08-29'), null);
+  assert.equal(ageSpan([{ year: 2020 }, { year: null }], '2026-08-29').count, 1);
 });

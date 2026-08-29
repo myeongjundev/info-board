@@ -21,6 +21,15 @@ export default function SymbolRail({ onRefresh, busy }) {
     <div className="symbolrail">
       <button
         type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        disabled={!showTop}
+        title="맨 위로"
+        aria-label="맨 위로"
+      >
+        ↑
+      </button>
+      <button
+        type="button"
         onClick={onRefresh}
         disabled={busy}
         title="기록 파일을 다시 읽는다. Steam 을 다시 부르는 것이 아니라 대개 같은 값이 온다"
@@ -28,16 +37,6 @@ export default function SymbolRail({ onRefresh, busy }) {
       >
         {busy ? '···' : '↻'}
       </button>
-      {showTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          title="맨 위로"
-          aria-label="맨 위로"
-        >
-          ↑
-        </button>
-      )}
     </div>
   );
 }
