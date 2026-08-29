@@ -72,6 +72,30 @@ export default function SectionNav({ items }) {
   });   // 의존성을 두지 않는다 — 구획이 뒤늦게 생기는 것을 잡아야 한다
 
   const shown = items.filter((i) => present.includes(i.id));
+  // 커서가 패널 안에 있는가.
+  //
+  // 전에는 <nav> 의 onMouseEnter/onMouseLeave 로 열고 닫았다. 그런데 아래 칸의
+  // 동작 버튼(.symbolrail)은 이 <nav> 의 **자식이 아니라 형제**다 — 눈에는 같은
+  // 패널 한 칸이지만 DOM 으로는 남이다. 그래서 커서를 그 버튼으로 옮기는 순간
+  // "패널을 떠났다" 가 되어 패널이 접히고, 접히면 그 버튼이 display:none 이라
+  // 커서 밑에서 사라졌다. 누르려고 다가가면 도망가는 셈이다.
+  //
+  // 그래서 한 요소의 진입·이탈이 아니라 **커서가 둘 중 어디에 있는지**를 본다.
+  useEffect(() => {
+    const onPointerOver = (event) => {
+      const el = event.target instanceof Element ? event.target : null;
+      setHoverOpen(Boolean(el?.closest('.secnav, .symbolrail')));
+    };
+    document.addEventListener('pointerover', onPointerOver, { passive: true });
+    // 창 밖으로 나가면 pointerover 가 더 안 오므로 따로 닫는다.
+    const onLeave = () => setHoverOpen(false);
+    document.addEventListener('pointerleave', onLeave, { passive: true });
+    return () => {
+      document.removeEventListener('pointerover', onPointerOver);
+      document.removeEventListener('pointerleave', onLeave);
+    };
+  }, []);
+
   if (shown.length === 0) return null;
   const activeItem = shown.find((i) => i.id === active) ?? shown[0];
   const expanded = compactOpen || hoverOpen;
@@ -80,8 +104,6 @@ export default function SectionNav({ items }) {
     <nav
       className={`secnav${expanded ? ' is-compact-open' : ''}`}
       aria-label="구획 바로가기"
-      onMouseEnter={() => setHoverOpen(true)}
-      onMouseLeave={() => setHoverOpen(false)}
     >
       <button
         className="secnav-compact-toggle"
