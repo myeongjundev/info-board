@@ -13,6 +13,7 @@ import { displayArt, displayName } from '../view/gameDisplay.js';
 import { dealsOverview, discountSpread } from '../view/dealsOverview.js';
 import { isSnapshotStale } from '../view/board.js';
 import GameArt from './GameArt.jsx';
+import DiscountDeadline from './DiscountDeadline.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
 const EPIC_DATA_URL = `${import.meta.env.BASE_URL}data/epic-free.json`;
@@ -294,7 +295,7 @@ export default function SalesPage() {
                       <GameArt src={item.adult ? null : (item.imageUrl || headerUrl(item.appid))} width={460} height={215} />
                       <b>TOP {item.rank}</b><span>-{item.discountPercent}%</span>
                     </a>
-                    <div className="popular-deal-body"><h3>{displayName(item)}</h3><p><del>{formatWon(item.initialMinor)}</del><strong>{formatWon(item.finalMinor)}</strong></p><small>수집 시 동시접속자 {new Intl.NumberFormat('ko-KR').format(item.currentPlayers)}명</small></div>
+                    <div className="popular-deal-body"><h3>{displayName(item)}</h3><p><del>{formatWon(item.initialMinor)}</del><strong>{formatWon(item.finalMinor)}</strong></p><small>수집 시 동시접속자 {new Intl.NumberFormat('ko-KR').format(item.currentPlayers)}명</small><DiscountDeadline endsAt={item.discountEndsAt} kind={item.discountKind} /></div>
                   </article>
                 ))}
               </div>
@@ -354,6 +355,7 @@ export default function SalesPage() {
                         <strong>{formatWon(item.finalMinor)}</strong>
                       </div>
                       <p>{formatWon(item.initialMinor - item.finalMinor)} 절약</p>
+                      <DiscountDeadline endsAt={item.discountEndsAt} kind={item.discountKind} />
                     </div>
                     <footer className="deal-foot">
                       <a href={item.sourceUrl} target="_blank" rel="noreferrer">원자료 JSON ↗</a>

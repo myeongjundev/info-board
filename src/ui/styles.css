@@ -3342,3 +3342,31 @@ summary:focus-visible {
 
 /* 브랜드색으로 채운 단추 위의 글자는 두 테마 모두 어둡다. 채움이 늘 밝기 때문이다. */
 .stream-platform-switch button.is-active { color: var(--on-brand); }
+
+/* 이 할인이 언제까지인가.
+ *
+ * 급한 것만 색을 쓴다. 전부 노랗게 하면 노란색이 `급함` 을 뜻하지 않게 된다 —
+ * 사흘 안에 끝나는 것에만 붙이고 나머지는 다른 보조 글자와 같은 무게로 둔다. */
+.deal-deadline {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-size: var(--fs-meta);
+  color: var(--text-faint);
+  word-break: keep-all;
+}
+.deal-deadline b {
+  padding: 2px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.deal-deadline.is-urgent b {
+  border-color: color-mix(in srgb, var(--warn) 45%, transparent);
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+  color: var(--warn);
+}

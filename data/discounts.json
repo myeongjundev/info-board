@@ -9,15 +9,18 @@
     "language": "koreana",
     "warning": "문서화되지 않은 Steam Store 응답이며 예고 없이 바뀔 수 있다."
   },
-  "startedAt": "2026-08-29T07:49:39.182Z",
-  "completedAt": "2026-08-29T07:50:18.079Z",
+  "startedAt": "2026-08-29T12:13:02.997Z",
+  "completedAt": "2026-08-29T12:13:51.293Z",
   "counts": {
     "checked": 100,
     "discount": 9,
     "regular": 67,
     "free": 20,
     "unpriced": 4,
-    "failed": 0
+    "failed": 0,
+    "periodKnown": 9,
+    "periodEndsAtKnown": 9,
+    "periodDisagreed": 0
   },
   "discounts": [
     {
@@ -30,10 +33,15 @@
       "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:50:03.694Z",
+      "fetchedAt": "2026-08-29T12:13:32.605Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=990080&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/990080/"
+      "storeUrl": "https://store.steampowered.com/app/990080/",
+      "discountEndsAt": "2026-09-03T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 2399830,
@@ -45,10 +53,15 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:49:48.761Z",
+      "fetchedAt": "2026-08-29T12:13:14.060Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=2399830&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/2399830/"
+      "storeUrl": "https://store.steampowered.com/app/2399830/",
+      "discountEndsAt": "2026-09-07T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 1174180,
@@ -60,10 +73,15 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:50:02.618Z",
+      "fetchedAt": "2026-08-29T12:13:31.391Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1174180&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/1174180/"
+      "storeUrl": "https://store.steampowered.com/app/1174180/",
+      "discountEndsAt": "2026-09-08T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 381210,
@@ -75,10 +93,15 @@
       "discountPercent": 60,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:49:50.539Z",
+      "fetchedAt": "2026-08-29T12:13:16.191Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=381210&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/381210/"
+      "storeUrl": "https://store.steampowered.com/app/381210/",
+      "discountEndsAt": "2026-08-30T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 1049410,
@@ -90,10 +113,15 @@
       "discountPercent": 60,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:50:14.255Z",
+      "fetchedAt": "2026-08-29T12:13:46.260Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1049410&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/1049410/"
+      "storeUrl": "https://store.steampowered.com/app/1049410/",
+      "discountEndsAt": "2026-09-07T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 3240220,
@@ -105,10 +133,15 @@
       "discountPercent": 56,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:50:05.430Z",
+      "fetchedAt": "2026-08-29T12:13:34.720Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=3240220&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/3240220/"
+      "storeUrl": "https://store.steampowered.com/app/3240220/",
+      "discountEndsAt": "2026-09-07T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 204300,
@@ -120,10 +153,15 @@
       "discountPercent": 55,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:50:17.858Z",
+      "fetchedAt": "2026-08-29T12:13:50.816Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=204300&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/204300/"
+      "storeUrl": "https://store.steampowered.com/app/204300/",
+      "discountEndsAt": "2026-09-03T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 221100,
@@ -135,10 +173,15 @@
       "discountPercent": 50,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:49:51.234Z",
+      "fetchedAt": "2026-08-29T12:13:17.088Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=221100&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/221100/"
+      "storeUrl": "https://store.steampowered.com/app/221100/",
+      "discountEndsAt": "2026-09-07T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "appid": 1623730,
@@ -150,11 +193,25 @@
       "discountPercent": 30,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-29T07:49:46.971Z",
+      "fetchedAt": "2026-08-29T12:13:11.866Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1623730&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
-      "storeUrl": "https://store.steampowered.com/app/1623730/"
+      "storeUrl": "https://store.steampowered.com/app/1623730/",
+      "discountEndsAt": "2026-09-08T17:00:00.000Z",
+      "discountKind": "특별 할인",
+      "periodKnown": true,
+      "periodFetchedAt": "2026-08-29T12:13:51.293Z",
+      "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     }
   ],
-  "failures": []
+  "failures": [],
+  "periodSource": {
+    "id": "steam-storebrowse-undocumented",
+    "label": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답",
+    "host": "api.steampowered.com",
+    "country": "KR",
+    "language": "koreana",
+    "warning": "공식 Web API 호스트에 있으나 파트너 문서에 없는 응답이며 예고 없이 바뀔 수 있다."
+  },
+  "periodFailures": []
 }

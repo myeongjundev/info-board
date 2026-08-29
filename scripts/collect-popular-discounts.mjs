@@ -7,6 +7,8 @@ import {
   MOST_PLAYED_URL, parseMostPlayedHtml, parsePopularPriceResponse,
 } from '../src/source/steamPromotions.js';
 import { assertDescriptorsPresent } from '../src/source/contentDescriptors.js';
+import { PERIOD_SOURCE } from '../src/source/discountPeriod.js';
+import { withPeriods } from './lib/discountPeriods.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = resolve(ROOT, 'data/popular-discounts.json');
@@ -46,16 +48,26 @@ async function main() {
   }
   if (counts.checked < 80) throw new Error(`가격 성공 ${counts.checked}/100 — 기존 스냅샷을 덮지 않는다`);
   assertDescriptorsPresent(descriptorChecks, 'Steam 인기 Top 100 appdetails');
+  // 가격을 다 모은 뒤에 기간을 한 번에 붙인다. 여기서 실패해도 가격은 그대로 남는다.
+  const period = await withPeriods(discounts, { log: (line) => console.log(line) });
+  counts.periodKnown = period.counts.known;
+  counts.periodEndsAtKnown = period.counts.endsAtKnown;
+  counts.periodDisagreed = period.counts.disagreed;
+  discounts.length = 0;
+  discounts.push(...period.readings);
+
   discounts.sort((a, b) => a.rank - b.rank);
   const snapshot = {
     schemaVersion: 1,
     scope: '수집 당시 Steam 동시접속 상위 100개 가운데 한국에서 할인 중인 게임',
     source: { chartUrl: MOST_PLAYED_URL, priceSource: 'Steam Store 비공식 appdetails', country: 'KR' },
     startedAt, completedAt: new Date().toISOString(), counts, discounts, failures,
+    periodSource: PERIOD_SOURCE,
+    periodFailures: period.failures,
   };
   await mkdir(dirname(FILE), { recursive: true });
   await writeFile(FILE, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
-  console.log(`인기 Top 100 가격 ${counts.checked}개 확인 · 할인 ${discounts.length}개 · 실패 ${counts.failed}개`);
+  console.log(`인기 Top 100 가격 ${counts.checked}개 확인 · 할인 ${discounts.length}개 · 종료 시각 ${period.counts.endsAtKnown}개 · 실패 ${counts.failed}개`);
   return 0;
 }
 
