@@ -77,6 +77,21 @@ export function parseDiscountResponse(body, game, now = new Date()) {
   };
 }
 
+/**
+ * 그 스냅샷이 실제로 훑은 목록의 크기. **성공 + 실패다.**
+ *
+ * `counts.checked` 는 값을 받아 온 개수이고 실패는 `counts.failed` 로 따로 센다.
+ * 그래서 `checked` 하나를 목록 크기로 쓰면 실패한 날에 목록이 줄어든 것처럼 보인다.
+ *
+ * 화면이 이 수를 쓰는 이유는 재는 게임 수가 늘 수 있기 때문이다. 지금 `GAMES.length`
+ * 를 쓰면 어제 찍은 스냅샷 위에 오늘의 목록 크기를 얹게 된다 — 그 스냅샷은 그때의
+ * 목록만 훑었다. **화면에 뜬 자료가 실제로 덮은 범위**를 적는 것이 맞다.
+ */
+export function trackedCount(counts) {
+  if (!counts || !Number.isInteger(counts.checked) || !Number.isInteger(counts.failed)) return null;
+  return counts.checked + counts.failed;
+}
+
 export function validateDiscountSnapshot(data) {
   if (
     !data || data.schemaVersion !== 1 || !Array.isArray(data.discounts)
