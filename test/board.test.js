@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   STATE, buildBoard, formatNumber, formatInstant,
-  elapsedSince, crosscheckRows, rowsForDate,
+  elapsedSince, crosscheckRows, rowsForDate, timeOfDayDrift,
 } from '../src/view/board.js';
 
 const rec = (date, appid, value, hhmm = '01:10') => ({
@@ -229,4 +229,33 @@ test('고른 게임에 기록이 없으면 기본값으로 되돌아가지 않�
   // 값이 없어도 무엇을 고른 상태인지는 말할 수 있어야 한다.
   assert.equal(b.game.name, 'Dota 2');
   assert.equal(b.selectedAppid, 570);
+});
+
+// ── 날짜 사이의 시각 차이 ──────────────────────────────────────────────────
+
+test('두 기록을 하루 중 몇 분 다른 시각에 쟀는지 센다', () => {
+  const d = timeOfDayDrift('2026-08-28T01:39:03.000Z', '2026-08-29T03:00:01.000Z', 'Asia/Seoul');
+  assert.equal(d.previousClock, '10:39');
+  assert.equal(d.currentClock, '12:00');
+  assert.equal(d.minutes, 81);
+  assert.equal(d.aligned, false);
+});
+
+test('몇 분 차이는 같은 시각으로 본다 — 예약 실행은 늘 조금씩 흔들린다', () => {
+  const d = timeOfDayDrift('2026-08-28T01:10:12.000Z', '2026-08-29T01:13:40.000Z', 'Asia/Seoul');
+  assert.equal(d.minutes, 3);
+  assert.equal(d.aligned, true);
+});
+
+test('자정을 사이에 둔 두 시각은 둥글게 센다', () => {
+  // 23:50 과 00:10 은 20분 차이지 1,420분 차이가 아니다.
+  const d = timeOfDayDrift('2026-08-28T14:50:00.000Z', '2026-08-29T15:10:00.000Z', 'Asia/Seoul');
+  assert.equal(d.previousClock, '23:50');
+  assert.equal(d.currentClock, '00:10');
+  assert.equal(d.minutes, 20);
+});
+
+test('시각을 못 읽으면 만들어내지 않는다', () => {
+  assert.equal(timeOfDayDrift('언제', '2026-08-29T03:00:00.000Z', 'Asia/Seoul'), null);
+  assert.equal(timeOfDayDrift(null, null, 'Asia/Seoul'), null);
 });

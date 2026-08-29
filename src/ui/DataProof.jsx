@@ -11,7 +11,7 @@
 
 import { useState } from 'react';
 
-import { formatNumber, formatInstant, crosscheckRows } from '../view/board.js';
+import { formatNumber, formatInstant, crosscheckRows, timeOfDayDrift } from '../view/board.js';
 import { SOURCE } from '../source/definition.js';
 
 export default function DataProof({ board }) {
@@ -23,6 +23,11 @@ export default function DataProof({ board }) {
 
   const { reading, game, comparison } = board;
   const cross = crosscheckRows(comparison);
+  // 두 값을 하루 중 어느 시각에 쟀는가. 손계산이 맞아도 그 둘을 다른 시각에 쟀으면
+  // 차이의 일부는 하루의 변화가 아니다. 대조표가 그 사실까지 들고 있어야 한다.
+  const drift = cross
+    ? timeOfDayDrift(cross.previous.fetchedAt, cross.current.fetchedAt, SOURCE.timezone)
+    : null;
 
   return (
     <>
@@ -78,6 +83,15 @@ export default function DataProof({ board }) {
             {cross ? (
               <>
                 <ProofRow label="이전 저장값" value={`${cross.previous.value} ${cross.unit} (${cross.previous.date})`} mono />
+                {drift && (
+                  <ProofRow
+                    label="두 값을 잰 시각"
+                    value={drift.aligned
+                      ? `${drift.previousClock} → ${drift.currentClock} · 같은 시각`
+                      : `${drift.previousClock} → ${drift.currentClock} · ${drift.minutes}분 다름`}
+                    mono
+                  />
+                )}
                 <ProofRow label="손계산" value={cross.hand} mono strong />
                 <ProofRow
                   label="계산값"

@@ -44,6 +44,44 @@ export function formatSpan(ms) {
   return rest === 0 ? `${h}시간` : `${h}시간 ${rest}분`;
 }
 
+/**
+ * 두 기록을 **하루 중 어느 시각에** 쟀는가. 날짜 차이가 아니라 시각 차이다.
+ *
+ * CLAUDE.md 3-1 이 "매일 같은 시각에 잰다" 를 못박은 이유가 이것이다. 동시접속자는
+ * 부르는 순간의 값이라, 어제 10:39 값과 오늘 12:00 값을 견주면 그 차이에는 하루의
+ * 변화와 **81분이라는 시각 차이**가 함께 들어 있다. 실측으로 같은 날 01:00 → 07:30
+ * 사이에 PUBG 는 +214%, HELLDIVERS 2 는 -44% 였다.
+ *
+ * `measurementSpread` 가 하루 **안**의 차이를 재는 것과 짝이다. 이쪽은 날짜 **사이**다.
+ *
+ * 자정을 사이에 둔 두 시각(23:50 과 00:10)은 20분 차이지 1,420분 차이가 아니다.
+ * 시계는 둥글게 돈다.
+ *
+ * @returns {{previousClock:string, currentClock:string, minutes:number, aligned:boolean}|null}
+ */
+export const SAME_HOUR_TOLERANCE_MIN = 5;
+
+export function timeOfDayDrift(previousIso, currentIso, timeZone, {
+  toleranceMin = SAME_HOUR_TOLERANCE_MIN,
+} = {}) {
+  const clock = (iso) => {
+    const text = formatInstant(iso, timeZone);
+    return text === '—' ? null : text.slice(11);
+  };
+  const previousClock = clock(previousIso);
+  const currentClock = clock(currentIso);
+  if (!previousClock || !currentClock) return null;
+
+  const toMinutes = (hhmm) => {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  };
+  const raw = Math.abs(toMinutes(currentClock) - toMinutes(previousClock));
+  const minutes = Math.min(raw, 1440 - raw);
+
+  return { previousClock, currentClock, minutes, aligned: minutes <= toleranceMin };
+}
+
 /** 이만큼까지는 시계가 조금 어긋난 것으로 본다. */
 export const SKEW_TOLERANCE_MS = 60_000;
 

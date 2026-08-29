@@ -3140,3 +3140,7 @@ summary:focus-visible {
   font-style: normal;
   white-space: nowrap;
 }
+
+/* 날짜 사이의 시각 차이. 요약 카드는 자리가 좁아 한 줄로만 말하고,
+   자세한 것은 아래 비교 구역의 .spread-note 가 말한다. */
+.kpi-meta.is-warn { color: var(--warn); }
