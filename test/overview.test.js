@@ -139,3 +139,21 @@ test('요약 전체에 읽는 중을 넘긴다', () => {
   const playing = axes.find((a) => a.id === 'playing');
   assert.equal(playing.state, AXIS.LOADING);
 });
+
+test('요약 카드의 상세 보기는 제자리로 보내지 않는다', () => {
+  const axes = overview({ board: null });
+  const playing = axes.find((a) => a.id === 'playing');
+  // 나브가 쓰는 주소는 그대로다 — `동시접속은 이 페이지다` 를 표시해야 한다.
+  assert.equal(playing.href, '#sec-now');
+  // 카드가 쓰는 주소는 달라야 한다. 같으면 눌러도 방금 누른 카드로 돌아온다.
+  assert.notEqual(playing.detailHref, playing.href);
+  assert.equal(playing.detailHref, '#sec-focus');
+});
+
+test('다른 페이지로 가는 축은 두 주소가 같아도 된다', () => {
+  for (const axis of overview({ board: null })) {
+    if (axis.id === 'playing') continue;
+    assert.equal(axis.detailHref, axis.href, `${axis.id} 는 갈 곳이 하나다`);
+    assert.ok(axis.detailHref.startsWith('#/'), `${axis.id} 는 다른 페이지로 간다`);
+  }
+});

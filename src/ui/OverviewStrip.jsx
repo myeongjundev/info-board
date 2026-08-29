@@ -95,7 +95,7 @@ export default function OverviewStrip({ board, faulted = false, loading = false 
             <a
               key={axis.id}
               className={`overview-axis is-${axis.state}${axis.stale ? ' is-stale' : ''}`}
-              href={axis.href}
+              href={axis.detailHref}
             >
               <span className="overview-axis-number">0{index + 1}</span>
               <span className="overview-axis-label">{axis.label}</span>

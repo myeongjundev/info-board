@@ -166,8 +166,20 @@ export function watchingAxis(streaming) {
  * 필드 이름도 `question` 에서 `label` 로 바꿨다. 명사를 question 이라는
  * 이름에 담아 두면 다음 사람이 이 표를 잘못 읽는다.
  */
+// `href` 와 `detailHref` 를 가른 이유.
+//
+// `href` 는 상단 나브가 쓰는 **그 축이 사는 곳**이다. 동시접속은 이 페이지 자체이므로
+// `#sec-now` 가 맞고, 나브는 그 값으로 지금 보고 있는 곳을 표시한다.
+//
+// 그런데 첫 화면 요약 카드의 `상세 보기` 가 같은 주소를 쓰고 있었다. 그 카드는
+// `#sec-now`(=<main>) 바로 아래에 있어서, **누르면 56px 위로 올라가 방금 누른 카드를
+// 다시 보게 됐다.** 나머지 세 축은 실제로 다른 페이지로 가는데 하나만 제자리였다.
+// 띠 머리글이 `계산 근거와 상세 구역으로 이동합니다` 라고 약속한 자리다.
+//
+// 그래서 카드가 쓸 주소를 따로 둔다. 없으면 `href` 를 쓴다 — 다른 페이지로 가는
+// 세 축은 둘이 같아도 되기 때문이다.
 export const SERVICE_AXES = [
-  { id: 'playing', label: '동시접속', href: '#sec-now', navClass: 'play-nav-link' },
+  { id: 'playing', label: '동시접속', href: '#sec-now', detailHref: '#sec-focus', navClass: 'play-nav-link' },
   { id: 'selling', label: '매출 순위', href: '#/charts', navClass: 'sales-chart-nav-link' },
   { id: 'deals', label: '할인·무료', href: '#/sales', navClass: 'sales-nav-link' },
   { id: 'watching', label: '시청 순위', href: '#/streaming', navClass: 'stream-nav-link' },
@@ -181,5 +193,5 @@ export function overview(sources = {}) {
     deals: () => dealsAxis(sources),
     watching: () => watchingAxis(sources.streaming),
   };
-  return SERVICE_AXES.map((axis) => ({ ...axis, ...byId[axis.id]() }));
+  return SERVICE_AXES.map((axis) => ({ detailHref: axis.href, ...axis, ...byId[axis.id]() }));
 }

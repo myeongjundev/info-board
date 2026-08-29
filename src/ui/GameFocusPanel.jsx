@@ -10,7 +10,7 @@ export default function GameFocusPanel({
   const reading = board?.reading;
 
   return (
-    <section className="dashboard-summary game-focus-panel" aria-labelledby="dashboard-title">
+    <section id="sec-focus" className="dashboard-summary game-focus-panel" aria-labelledby="dashboard-title">
       <header className="dashboard-heading">
         <div>
           <p className="dashboard-eyebrow">SELECTED GAME · QUICK STATS</p>
