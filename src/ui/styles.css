@@ -226,6 +226,28 @@ a { text-decoration: none; }
   align-items: start;
 }
 .columns > * { min-width: 0; }
+
+/* 짝을 이루는 두 칸. **같은 높이로 늘린다.**
+ *
+ * `align-items: start` 로 두면 짧은 쪽이 끝난 자리가 그냥 빈다 — 전에 이 자리에서
+ * 819px 이 비어 있었다. 늘려 놓으면 남는 자리가 판 밖의 구멍이 아니라 **판 안의
+ * 여백**이 되고, 그건 화면에서 실수로 안 읽힌다.
+ *
+ * 두 칸의 내용은 날마다 길이가 달라진다. 그래서 어느 쪽이 길지 정해 두지 않고
+ * 폭도 반씩 나눈다 — 오늘 긴 쪽에 맞춰 폭을 주면 내일 반대가 된다. */
+.columns-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+.columns-even > .panel { display: flex; flex-direction: column; }
+/* `.panel + .panel` 의 세로 여백은 판을 위아래로 쌓을 때 쓰라고 만든 것이다.
+   나란히 선 두 판에 그게 걸리면 오른쪽만 20px 내려앉는다 — 실제로 그랬다. */
+.columns-even > .panel + .panel { margin-top: 0; }
+/* 짧은 쪽에 남는 자리는 목록 뒤가 아니라 **근거 문구 앞**에 둔다. 문구를 바닥에
+   붙이면 남은 자리가 판의 아래 여백이 되어 `끝났는데 뭔가 빠진` 것처럼 안 읽힌다.
+   요약 카드(.overview-axis small)가 쓰는 것과 같은 수법이다. */
+.columns-even > .panel > .source-url { margin-top: auto; padding-top: 16px; }
+
 @media (max-width: 880px) {
   .columns { grid-template-columns: 1fr; }
 }

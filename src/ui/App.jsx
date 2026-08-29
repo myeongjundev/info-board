@@ -315,62 +315,79 @@ function LiveApp() {
             />
           </section>
 
-          <div className="columns">
-            <section className="panel insight-panel ranking-panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
-              {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
-                  '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
-                  실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
+          {/* 질문 하나에 한 띠.
+              ① 오늘 누가 위인가  ② 어제와 견주면 무엇이 달라졌나  ③ 오래 살아남은 것은
+
+              전에는 `순위`와 `이전 대비 변화 + 장기 생존`을 두 기둥으로 세웠다.
+              두 가지가 어긋나 있었다.
+
+              1. **빈칸.** 왼쪽 831px, 오른쪽 1,650px 이라 왼쪽 아래가 819px 비었다.
+              2. **같은 질문이 갈라져 있었다.** `접속자가 얼마나 변했나`와 `순위가
+                 얼마나 움직였나`는 같은 물음에 단위만 다른 답인데, 사이에 성격이
+                 다른 `장기 생존`이 끼어 있고 순위 이동은 아예 다른 띠에 있었다.
+
+              높이로 짝을 맞추지 않은 이유. 오늘 장기 생존이 1,262px 인 것은 오래된
+              게임을 그만큼 재고 있어서고, 목록이 늘면 또 달라진다. **오늘 화면에
+              맞춰 기둥을 짜면 자료가 늘 때마다 같은 자리가 다시 어긋난다.** */}
+          <section className="panel insight-panel ranking-panel" id="sec-rank" aria-label="오늘 잰 게임 순위">
+            {/* 제목에 개수를 적지 않는다. games.length 는 '부른 개수' 이지
+                '잰 개수' 가 아니라, 일부가 실패하면 제목 16 · 목록 14 가 된다.
+                실제로 센 수는 Leaderboard 가 자기 자료에서 적는다. */}
+            <PanelHeading
+              eyebrow="RANKING"
+              title="측정 게임 순위"
+              note="측정 시각의 동시접속자 기준"
+            />
+            <Leaderboard
+              data={ranking}
+              heroAppid={selectedAppid}
+              onShowPrice={setPriceAppid}
+            />
+          </section>
+
+          {/* 어제와 견준 둘. 같은 질문에 단위만 다르다 — 한쪽은 사람 수, 한쪽은 자리. */}
+          <div className="columns columns-even">
+            <section className="panel insight-panel" id="sec-move" aria-label="오른 게임과 내린 게임">
               <PanelHeading
-                eyebrow="RANKING"
-                title="측정 게임 순위"
-                note="측정 시각의 동시접속자 기준"
+                eyebrow="MOVEMENT"
+                title="이전 측정 대비 변화"
+                note="양쪽 날짜에 모두 있는 게임만 비교"
               />
-              <Leaderboard
-                data={ranking}
-                heroAppid={selectedAppid}
-                onShowPrice={setPriceAppid}
+              {/* 위아래 6개씩 12줄. 옆 칸의 `순위 이동`이 처음에 12줄을 보이므로
+                  같은 질문에 답하는 두 칸이 같은 수를 본다. 픽셀을 채우려고 고른
+                  수가 아니다 — 그렇게 고르면 자료가 바뀔 때마다 다시 골라야 한다. */}
+              <Movers
+                data={movers(payload.data.records, games, showing.reading.date, {
+                  limit: 6,
+                  anchorAppid: payload.data.source.heroAppid,
+                })}
+                dates={showing.dates}
               />
             </section>
 
-            <div>
-              <section className="panel insight-panel" id="sec-move" aria-label="오른 게임과 내린 게임">
-                <PanelHeading
-                  eyebrow="MOVEMENT"
-                  title="이전 측정 대비 변화"
-                  note="양쪽 날짜에 모두 있는 게임만 비교"
-                />
-                <Movers
-                  data={movers(payload.data.records, games, showing.reading.date, {
-                    anchorAppid: payload.data.source.heroAppid,
-                  })}
-                  dates={showing.dates}
-                />
-              </section>
-
-              <section className="panel insight-panel" id="sec-old" aria-label="오래된 게임">
-                <PanelHeading
-                  eyebrow="LONGEVITY"
-                  title="장기 생존 게임"
-                  note="우리가 오래됐다고 분류한 게임의 현재 접속자"
-                />
-                <Graveyard
-                  rows={graveyard(payload.data.records, games, showing.reading.date, { anchorAppid })}
-                  date={showing.reading.date}
-                  spread={ranking?.spread ?? null}
-                />
-              </section>
-            </div>
+            <section className="panel insight-panel" id="sec-rankmove" aria-label="순위 이동">
+              <PanelHeading
+                eyebrow="RANK MOVEMENT"
+                title="순위 이동"
+                note="비교 가능한 공통 게임만 같은 분모로 계산"
+              />
+              <RankMovement
+                data={rankMovement(payload.data.records, games, showing.reading.date, { anchorAppid })}
+                onPickGame={pickGame}
+              />
+            </section>
           </div>
 
-          <section className="panel insight-panel" id="sec-rankmove" aria-label="순위 이동">
+          <section className="panel insight-panel" id="sec-old" aria-label="오래된 게임">
             <PanelHeading
-              eyebrow="RANK MOVEMENT"
-              title="순위 이동"
-              note="비교 가능한 공통 게임만 같은 분모로 계산"
+              eyebrow="LONGEVITY"
+              title="장기 생존 게임"
+              note="우리가 오래됐다고 분류한 게임의 현재 접속자"
             />
-            <RankMovement
-              data={rankMovement(payload.data.records, games, showing.reading.date, { anchorAppid })}
-              onPickGame={pickGame}
+            <Graveyard
+              rows={graveyard(payload.data.records, games, showing.reading.date, { anchorAppid })}
+              date={showing.reading.date}
+              spread={ranking?.spread ?? null}
             />
           </section>
         </>
