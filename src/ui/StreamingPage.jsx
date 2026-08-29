@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
+import PageHero from './PageHero.jsx';
 
 import {
   crossPlatformGames,
@@ -74,18 +75,17 @@ export default function StreamingPage() {
       <SubpageTopBar current="#/streaming" caption="치지직·Twitch 시청자 순위" />
 
       <main>
-        <section className="streaming-hero">
-          <div>
-            <p className="sales-eyebrow">STREAMING GAME INDEX</p>
-            <h1>지금, 어디서<br />어떤 게임을 볼까</h1>
-            <p>치지직 · 트위치의 상위 게임 방송을 같은 기준으로 읽는다.</p>
-          </div>
-          <div className="streaming-readiness" aria-label="데이터 연결 현황">
+        <PageHero
+          tone="watching"
+          eyebrow="STREAMING GAME INDEX"
+          title={<>지금, 어디서<br />{' '}어떤 게임을 볼까</>}
+          description="치지직 · 트위치의 상위 게임 방송을 같은 기준으로 읽는다."
+          aside={<div className="streaming-readiness" aria-label="데이터 연결 현황">
             <span>DATA READINESS</span>
             <strong>{connected}<i>/2</i></strong>
             <small>공식 데이터 연결</small>
-          </div>
-        </section>
+          </div>}
+        />
 
         {state.status === 'loading' && <p className="sales-state">스트리밍 스냅샷을 읽는 중…</p>}
         {state.status === 'error' && (

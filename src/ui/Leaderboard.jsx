@@ -8,6 +8,7 @@ import { formatNumber } from '../view/board.js';
 import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
 import { steamStoreUrl } from '../source/steamLinks.js';
 import GameArt from './GameArt.jsx';
+import ListDisclosure from './ListDisclosure.jsx';
 
 export default function Leaderboard({ data, heroAppid, onShowPrice }) {
   const [expanded, setExpanded] = useState(false);
@@ -17,7 +18,6 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
   }
 
   const visibleRows = expanded ? data.rows : data.rows.slice(0, 12);
-  const hiddenCount = data.rows.length - visibleRows.length;
 
   return (
     <>
@@ -75,16 +75,13 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
       </ol>
 
       {data.rows.length > 12 && (
-        <div className="list-disclosure">
-          <p>
-            상위 <b>{visibleRows.length}개</b> 표시
-            {!expanded && <span> · 나머지 {hiddenCount}개는 필요할 때 펼쳐본다</span>}
-          </p>
-          <button type="button" onClick={() => setExpanded((value) => !value)} aria-expanded={expanded}>
-            {expanded ? '목록 접기' : `전체 ${data.rows.length}개 보기`}
-            <span aria-hidden="true">{expanded ? '↑' : '↓'}</span>
-          </button>
-        </div>
+        <ListDisclosure
+          expanded={expanded}
+          onToggle={() => setExpanded((value) => !value)}
+          visible={visibleRows.length}
+          total={data.rows.length}
+          collapsedNote={`나머지 ${data.rows.length - visibleRows.length}개는 필요할 때 펼쳐본다`}
+        />
       )}
 
       <details className="method-note">

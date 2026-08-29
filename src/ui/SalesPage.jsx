@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
+import PageHero from './PageHero.jsx';
 
 import { headerUrl } from '../source/artwork.js';
 import { krwFromMinor, validateDiscountSnapshot } from '../source/discounts.js';
@@ -134,19 +135,18 @@ export default function SalesPage() {
       <SubpageTopBar current="#/sales" caption="한국 상점 할인과 무료 배포" />
 
       <main>
-        <section className="sales-hero">
-          <div>
-            <p className="sales-eyebrow">KOREA DISCOUNT RADAR</p>
-            <h1>한국 할인 게임</h1>
-            <p>추적 중인 75개 게임에서 현재 한국 Steam 할인이 확인된 게임만 모았다.</p>
-          </div>
-          {state.data && (
+        <PageHero
+          tone="deals"
+          eyebrow="KOREA DISCOUNT RADAR"
+          title="한국 할인 게임"
+          description="추적 중인 75개 게임에서 현재 한국 Steam 할인이 확인된 게임만 모았다."
+          aside={state.data && (
             <p className={`sales-updated${snapshotStale ? ' is-stale' : ''}`}>
               <span>{snapshotStale ? '오래된 가격 자료' : '마지막 확인'}</span>
               {formatKst(state.data.completedAt)} KST
             </p>
           )}
-        </section>
+        />
 
         <section className="epic-giveaway-section" aria-labelledby="epic-free-title">
           <header className="epic-giveaway-heading">

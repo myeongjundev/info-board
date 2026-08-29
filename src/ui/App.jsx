@@ -11,10 +11,7 @@ import {
   movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement,
 } from '../view/panels.js';
 
-import HeroValue from './HeroValue.jsx';
-import Comparison from './Comparison.jsx';
 import RecordList from './RecordList.jsx';
-import FaultPanel from './FaultPanel.jsx';
 import FaultSwitch from './FaultSwitch.jsx';
 import Movers from './Movers.jsx';
 import Graveyard from './Graveyard.jsx';
@@ -31,6 +28,7 @@ import DataProof from './DataProof.jsx';
 import StorePriceModal from './StorePriceModal.jsx';
 import ReplayPage from './ReplayPage.jsx';
 import OverviewStrip from './OverviewStrip.jsx';
+import GameFocusPanel from './GameFocusPanel.jsx';
 
 const RECORDS_URL = `${import.meta.env.BASE_URL}data/records.json`;
 // 하루 중 다른 시각 표본. 날짜별 기록과 별개 파일이고, 못 읽어도 화면은 멀쩡하다.
@@ -211,75 +209,16 @@ function LiveApp() {
       <main id="sec-now">
         <OverviewStrip board={showing} faulted={status === 'fault'} />
 
-        <section className="dashboard-summary" aria-labelledby="dashboard-title">
-          <header className="dashboard-heading">
-            <div>
-              <p className="dashboard-eyebrow">DAILY STEAM CONCURRENCY MONITOR</p>
-              <h2 id="dashboard-title">Steam 동시접속자 일일 현황</h2>
-              <p>날짜별 실제 조회 시각을 함께 보존한 기록으로 현재 규모와 변화를 확인한다.</p>
-            </div>
-            {showing?.reading && (
-              <p className="dashboard-date">
-                <span>{showing.reading.date}</span>
-                {showing.reading.timezone}
-              </p>
-            )}
-          </header>
-
-          <div className="kpi-grid">
-            <section className="kpi kpi-primary" aria-label="현재 접속자">
-              <h3>현재 접속자</h3>
-            {status === 'loading' && !showing ? (
-              <div className="skeleton" />
-            ) : status === 'fault' && !showing ? (
-              <FaultPanel fault={fault} onRetry={load} busy={status === 'loading'} />
-            ) : (
-              <HeroValue
-                board={showing}
-                status={status}
-                fault={fault}
-                onRetry={load}
-                showTiming={false}
-                showArtwork
-                onShowPrice={() => setPriceAppid(showing.reading.appid)}
-              />
-            )}
-            </section>
-
-            <section className="kpi" aria-label="이전 측정 대비">
-              <h3>이전 측정 대비</h3>
-              <Comparison board={showing} compact />
-            </section>
-
-            <section className="kpi" aria-label="측정 시각">
-              <h3>측정 시각</h3>
-              {showing?.reading ? (
-                <>
-                  <p className="kpi-time">
-                    {formatInstant(showing.reading.fetchedAt, SOURCE.timezone)}
-                  </p>
-                  <p className="kpi-meta">
-                    {showing.elapsed?.text ?? '경과 시간 확인 불가'} · {showing.reading.timezone}
-                  </p>
-                </>
-              ) : (
-                <p className="kpi-empty">정상 측정값 없음</p>
-              )}
-            </section>
-
-            <section className="kpi" aria-label="데이터 상태">
-              <h3>데이터 상태</h3>
-              <div className="kpi-status"><StateBadge status={status} board={board} /></div>
-              <p className="kpi-coverage">
-                <b>{coverage?.measured ?? 0}</b>
-                <span>/ {GAMES.length} games measured</span>
-              </p>
-              {coverage?.missing > 0 && (
-                <p className="kpi-meta">나머지 {coverage.missing}개는 다음 정규 측정 대상</p>
-              )}
-            </section>
-          </div>
-        </section>
+        <GameFocusPanel
+          board={showing}
+          status={status}
+          fault={fault}
+          onRetry={load}
+          coverage={coverage}
+          totalGames={GAMES.length}
+          statusBadge={<StateBadge status={status} board={board} />}
+          onShowPrice={() => showing && setPriceAppid(showing.reading.appid)}
+        />
 
         <section className="history-block" aria-labelledby="history-title">
           <header className="section-heading">

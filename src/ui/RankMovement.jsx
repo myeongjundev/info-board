@@ -10,6 +10,7 @@
 
 import { useState } from 'react';
 import { formatNumber } from '../view/board.js';
+import ListDisclosure from './ListDisclosure.jsx';
 
 export default function RankMovement({ data, onPickGame }) {
   const [expanded, setExpanded] = useState(false);
@@ -26,7 +27,6 @@ export default function RankMovement({ data, onPickGame }) {
   // 자리가 바뀐 것만 위에 따로 보인다. 안 바뀐 줄이 대부분이면 볼 것이 없다.
   const moved = data.rows.filter((r) => r.movement !== 0);
   const visibleRows = expanded ? data.rows : data.rows.slice(0, 12);
-  const hiddenCount = data.rows.length - visibleRows.length;
 
   return (
     <>
@@ -58,16 +58,13 @@ export default function RankMovement({ data, onPickGame }) {
       )}
 
       {moved.length > 0 && data.rows.length > 12 && (
-        <div className="list-disclosure">
-          <p>
-            상위 <b>{visibleRows.length}개</b> 표시
-            {!expanded && <span> · 나머지 {hiddenCount}개 순위 이동은 펼쳐서 확인</span>}
-          </p>
-          <button type="button" onClick={() => setExpanded((value) => !value)} aria-expanded={expanded}>
-            {expanded ? '목록 접기' : `전체 ${data.rows.length}개 보기`}
-            <span aria-hidden="true">{expanded ? '↑' : '↓'}</span>
-          </button>
-        </div>
+        <ListDisclosure
+          expanded={expanded}
+          onToggle={() => setExpanded((value) => !value)}
+          visible={visibleRows.length}
+          total={data.rows.length}
+          collapsedNote={`나머지 ${data.rows.length - visibleRows.length}개 순위 이동은 펼쳐서 확인`}
+        />
       )}
 
       <p className="source-url">
