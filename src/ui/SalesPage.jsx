@@ -15,6 +15,8 @@ import { isSnapshotStale } from '../view/board.js';
 import GameArt from './GameArt.jsx';
 import DiscountDeadline from './DiscountDeadline.jsx';
 import EndingSoon from './EndingSoon.jsx';
+import SectionNav from './SectionNav.jsx';
+import SymbolRail from './SymbolRail.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
 const EPIC_DATA_URL = `${import.meta.env.BASE_URL}data/epic-free.json`;
@@ -35,6 +37,17 @@ function formatKst(iso) {
     hour: '2-digit', minute: '2-digit', hour12: false,
   }).format(new Date(iso));
 }
+
+// 이 페이지의 구획 나브. 첫 화면과 같은 부품이고 목록만 다르다.
+// SectionNav 가 문서에 없는 id 는 스스로 걸러 낸다 — 자료를 못 읽어 구획이
+// 안 그려진 날 눌러도 아무 일 없는 줄이 남지 않게 하려는 것이다.
+const NAV = [
+  { id: 'sec-summary', label: '요약', icon: 'now' },
+  { id: 'sec-ending', label: '곧 끝남', icon: 'time' },
+  { id: 'sec-epic', label: '무료 배포', icon: 'archive' },
+  { id: 'sec-popular', label: '인기 100', icon: 'trend' },
+  { id: 'sec-tracked', label: '추적 할인', icon: 'proof' },
+];
 
 export default function SalesPage() {
   const [state, setState] = useState({ status: 'loading', data: null });
@@ -153,6 +166,9 @@ export default function SalesPage() {
     <div className="page sales-page">
       <SubpageTopBar current="#/sales" caption="한국 상점 할인과 무료 배포" />
 
+      <SectionNav items={NAV} />
+      <SymbolRail />
+
       <main>
         <PageHero
           tone="deals"
@@ -167,7 +183,7 @@ export default function SalesPage() {
           )}
         />
 
-        <section className="deals-overview" aria-label="할인과 무료 행사 요약">
+        <section id="sec-summary" className="deals-overview" aria-label="할인과 무료 행사 요약">
           <MetricCard tone="deals" label="Epic 무료" value={overview.epicFree} meta="현재 진행 중" />
           <MetricCard tone="deals" label="Steam 무료 소장" value={overview.steamKeep} meta="행사 후에도 보유" />
           <MetricCard tone="deals" label="Steam 무료 주말" value={overview.steamWeekend} meta="기간 한정 플레이" />
@@ -181,7 +197,7 @@ export default function SalesPage() {
         />
 
 
-        <section className="epic-giveaway-section" aria-labelledby="epic-free-title">
+        <section id="sec-epic" className="epic-giveaway-section" aria-labelledby="epic-free-title">
           <header className="epic-giveaway-heading">
             <div>
               <p>EPIC GAMES · LIMITED GIVEAWAY</p>
@@ -228,7 +244,7 @@ export default function SalesPage() {
           )}
         </section>
 
-        <section className="steam-free-section" aria-labelledby="steam-free-title">
+        <section id="sec-steamfree" className="steam-free-section" aria-labelledby="steam-free-title">
           <header>
             <div><p>STEAM · LIMITED FREE EVENTS</p><h2 id="steam-free-title">Steam 무료 이벤트</h2></div>
             <a href="https://store.steampowered.com/search/?category1=998&hidef2p=1&maxprice=free&specials=1" target="_blank" rel="noreferrer">Steam에서 확인 ↗</a>
@@ -287,7 +303,7 @@ export default function SalesPage() {
           {steamFreeState.data && <footer>마지막 확인 {formatKst(steamFreeState.data.completedAt)} KST · 무료 소장과 임시 플레이를 구분 · 검색 결과가 비면 0건으로 표시</footer>}
         </section>
 
-        <section className="popular-deals-section" aria-labelledby="popular-deals-title">
+        <section id="sec-popular" className="popular-deals-section" aria-labelledby="popular-deals-title">
           <header>
             <div><p>STEAM MOST PLAYED · TOP 100</p><h2 id="popular-deals-title">인기 100 게임 할인</h2><span>수집 당시 동시접속자 순위 기준</span></div>
             {popularState.data && <strong>{popularState.data.discounts.length}<i>/100</i><small>할인 중</small></strong>}
@@ -322,7 +338,7 @@ export default function SalesPage() {
 
         {state.data && (
           <>
-            <header className="tracked-deals-heading"><div><p>TRACKED LIBRARY</p><h2>추적 게임 할인</h2></div><span>고정 목록 {tracked}개 기준</span></header>
+            <header id="sec-tracked" className="tracked-deals-heading"><div><p>TRACKED LIBRARY</p><h2>추적 게임 할인</h2></div><span>고정 목록 {tracked}개 기준</span></header>
             <section className="sales-kpis" aria-label="할인 요약">
               <article><span>할인 중</span><strong>{discounts.length}</strong><small>/ {tracked}개 추적</small></article>
               <article><span>최대 할인</span><strong>{maxDiscount === null ? '—' : `${maxDiscount}%`}</strong></article>

@@ -8,7 +8,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { scrollToTop } from './scrollToTop.js';
+import { scrollToElement, scrollToTop } from './scroll.js';
 
 function NavGlyph({ name }) {
   const common = {
@@ -29,17 +29,32 @@ export default function SectionNav({ items }) {
   const [compactOpen, setCompactOpen] = useState(false);
   const [hoverOpen, setHoverOpen] = useState(false);
 
+  // **주소의 해시를 건드리지 않고 우리가 옮긴다.**
+  //
+  // 전에는 `sec-now` 만 가로채고 나머지는 앵커에 맡겼다. 첫 화면에서는 그래도
+  // 됐다 — `#sec-rank` 는 어느 페이지도 아니라 그대로 첫 화면에 머문다.
+  //
+  // 그런데 이 앱은 **해시로 페이지를 고른다**(`#/sales`, `#/charts`, `#/streaming`).
+  // 하위 페이지에서 앵커가 해시를 `#sec-live` 로 바꾸면 그 주소는 더 이상
+  // `#/charts` 로 시작하지 않고, **구획으로 가려던 사람이 첫 화면으로 튕긴다.**
+  //
+  // 그래서 전부 가로챈다. 첫 화면과 하위 페이지가 같은 길로 움직인다 —
+  // 한쪽만 다르게 두면 다음에 페이지를 하나 더 만들 때 같은 함정을 다시 밟는다.
   function moveToSection(event, id) {
     setCompactOpen(false);
-    if (id !== 'sec-now') return;
-
-    // 첫 구획의 실제 시작점보다 페이지 머리가 더 좋은 개요다. 상단의 서비스명,
-    // 갱신 시각, 네 축 요약까지 한 번에 다시 보이도록 `현재`만 맨 위로 보낸다.
     event.preventDefault();
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#/`);
-    scrollToTop();
     setActive(id);
+
+    if (id === 'sec-now') {
+      // 첫 구획의 실제 시작점보다 페이지 머리가 더 좋은 개요다. 상단의 서비스명,
+      // 갱신 시각, 네 축 요약까지 한 번에 다시 보이도록 `현재`만 맨 위로 보낸다.
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#/`);
+      scrollToTop();
+      return;
+    }
+    scrollToElement(document.getElementById(id));
   }
+
   // 실제로 페이지에 있는 구획만 줄에 올린다.
   //
   // 값이 하나도 없는 상태(EMPTY)에서는 순위·움직임 같은 구획이 아예 안 그려진다.

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
+import SectionNav from './SectionNav.jsx';
+import SymbolRail from './SymbolRail.jsx';
 import PageHero from './PageHero.jsx';
 import SegmentControl from './SegmentControl.jsx';
 
@@ -49,6 +51,16 @@ function monthKeyLabel(key) {
   return `${year}년 ${month}월`;
 }
 
+// 이 페이지의 구획 나브. 첫 화면과 같은 부품을 쓰고 목록만 다르다.
+// 여기 있는 id 는 아래에서 실제로 붙인 것이어야 한다 — SectionNav 가 문서에
+// 없는 id 는 스스로 걸러 내지만, 걸러진 줄은 조용히 사라져서 안 보인다.
+const NAV = [
+  { id: 'sec-live', label: '현재 매출', icon: 'now' },
+  { id: 'sec-weekly', label: '주간 순위', icon: 'trend' },
+  { id: 'sec-calendar', label: '출시 예정', icon: 'time' },
+  { id: 'sec-monthly', label: '이번 달 신작', icon: 'archive' },
+];
+
 export default function SalesChartsPage() {
   const [state, setState] = useState({ status: 'loading', data: null });
   const [region, setRegion] = useState('korea');
@@ -86,6 +98,9 @@ export default function SalesChartsPage() {
     <div className="page charts-page">
       <SubpageTopBar current="#/charts" caption="Steam 한국·글로벌 매출 순위" />
 
+      <SectionNav items={NAV} />
+      <SymbolRail />
+
       <main>
         <PageHero
           tone="selling"
@@ -99,7 +114,7 @@ export default function SalesChartsPage() {
         {state.status === 'error' && <p className="sales-state is-error"><b>판매 차트를 읽지 못했다.</b><span>{state.message}</span></p>}
 
         {state.data && <>
-          <section className="live-sales-section" aria-labelledby="live-sales-title">
+          <section id="sec-live" className="live-sales-section" aria-labelledby="live-sales-title">
             <header className="charts-section-heading">
               <div><p>TOP SELLING RIGHT NOW · BY REVENUE</p><h2 id="live-sales-title">지금 많이 팔리는 게임</h2></div>
               <SegmentControl
@@ -125,7 +140,7 @@ export default function SalesChartsPage() {
             </ol>
           </section>
 
-          <section className="weekly-sales-section" aria-labelledby="weekly-sales-title">
+          <section id="sec-weekly" className="weekly-sales-section" aria-labelledby="weekly-sales-title">
             <header className="charts-section-heading">
               <div><p>OFFICIAL WEEKLY TOP 20</p><h2 id="weekly-sales-title">이번 주 매출 순위</h2><span>{formatDateKst(state.data.weekly.weekStart)} 시작 · 한국</span></div>
               <a href={state.data.source.overview} target="_blank" rel="noreferrer">공식 차트 ↗</a>
@@ -147,7 +162,7 @@ export default function SalesChartsPage() {
             </ol>
           </section>
 
-          <section className="release-calendar-section" aria-labelledby="release-calendar-title">
+          <section id="sec-calendar" className="release-calendar-section" aria-labelledby="release-calendar-title">
             <header className="charts-section-heading">
               <div><p>STEAM RELEASE CALENDAR · POPULAR SAMPLE</p><h2 id="release-calendar-title">신작 출시 캘린더</h2><span>한국 상점의 인기 신작·주요 출시 예정작 각 최대 20개</span></div>
               <a href={state.data.source.releaseCalendar[releaseTab === 'current' ? 'recent' : 'upcoming']} target="_blank" rel="noreferrer">검색 원자료 ↗</a>
@@ -184,7 +199,7 @@ export default function SalesChartsPage() {
             <footer className="release-calendar-foot">Steam 인기 검색 표본 · 전체 출시작 목록이 아님 · 공개된 날짜 표현만 사용</footer>
           </section>
 
-          <section className="monthly-releases-section" aria-labelledby="monthly-releases-title">
+          <section id="sec-monthly" className="monthly-releases-section" aria-labelledby="monthly-releases-title">
             <header className="charts-section-heading">
               <div><p>MONTHLY TOP RELEASES</p><h2 id="monthly-releases-title">{monthLabel(state.data.monthly.monthAt)} 인기 신작</h2><span>Steam 공개 목록 · 개별 매출 순위는 제공되지 않음</span></div>
               <a href={`https://store.steampowered.com/charts/topnewreleases/${state.data.monthly.saleName}`} target="_blank" rel="noreferrer">월간 원자료 ↗</a>

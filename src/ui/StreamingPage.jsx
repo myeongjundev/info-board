@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 import SubpageTopBar from './SubpageTopBar.jsx';
 import PageHero from './PageHero.jsx';
 import SegmentControl from './SegmentControl.jsx';
+import SectionNav from './SectionNav.jsx';
+import SymbolRail from './SymbolRail.jsx';
 
 import {
   crossPlatformGames,
@@ -38,6 +40,15 @@ function signedViewerDelta(value) {
   if (value === 0) return '시청자 변화 없음';
   return `시청자 ${value > 0 ? '+' : '−'}${formatViewerCount(Math.abs(value))}명`;
 }
+
+// 이 페이지의 구획 나브. 첫 화면과 같은 부품이고 목록만 다르다.
+// 자료를 못 읽으면 구획이 안 그려지고, 그러면 SectionNav 가 그 줄을 뺀다.
+const NAV = [
+  { id: 'sec-platform', label: '연결 상태', icon: 'proof' },
+  { id: 'sec-streamrank', label: 'Top 10', icon: 'trend' },
+  { id: 'sec-cross', label: '공통 게임', icon: 'now' },
+  { id: 'sec-method', label: '읽는 기준', icon: 'archive' },
+];
 
 export default function StreamingPage() {
   const [state, setState] = useState({ status: 'loading', data: null });
@@ -81,6 +92,9 @@ export default function StreamingPage() {
     <div className="page streaming-page">
       <SubpageTopBar current="#/streaming" caption="치지직·Twitch 시청자 순위" />
 
+      <SectionNav items={NAV} />
+      <SymbolRail />
+
       <main>
         <PageHero
           tone="watching"
@@ -103,7 +117,7 @@ export default function StreamingPage() {
 
         {state.data && (
           <>
-            <section className="platform-status-grid" aria-label="플랫폼 수집 상태">
+            <section id="sec-platform" className="platform-status-grid" aria-label="플랫폼 수집 상태">
               {state.data.platforms.map((item) => {
                 const meta = STREAMING_PLATFORMS[item.id];
                 const status = STATUS_COPY[item.status];
@@ -122,7 +136,7 @@ export default function StreamingPage() {
               })}
             </section>
 
-            <section className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[resolvedActiveId].color, '--platform-ink': STREAMING_PLATFORMS[resolvedActiveId].inkColor }}>
+            <section id="sec-streamrank" className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[resolvedActiveId].color, '--platform-ink': STREAMING_PLATFORMS[resolvedActiveId].inkColor }}>
               <header>
                 <div>
                   <p>{STREAMING_PLATFORMS[resolvedActiveId].label} · GAME TOP 10</p>
@@ -181,7 +195,7 @@ export default function StreamingPage() {
               )}
             </section>
 
-            <section className="stream-cross-section" aria-labelledby="stream-cross-title">
+            <section id="sec-cross" className="stream-cross-section" aria-labelledby="stream-cross-title">
               <header>
                 <div><p>CROSS PLATFORM</p><h2 id="stream-cross-title">두 차트에 함께 오른 게임</h2></div>
                 <span>시청자 수는 플랫폼별로 따로 읽는다</span>
@@ -194,7 +208,7 @@ export default function StreamingPage() {
               </div> : <p className="stream-cross-empty">현재 두 Top 10에 동시에 포함된 것으로 확인된 게임이 없다.</p>}
             </section>
 
-            <section className="stream-method">
+            <section id="sec-method" className="stream-method">
               <div><p>METHODOLOGY</p><h2>숫자를 비교하는 기준</h2></div>
               <div className="stream-method-grid">
                 <article><b>01</b><h3>동일 시각</h3><p>플랫폼별 수집 시각을 기록하고 오래된 값은 최신 값처럼 섞지 않는다.</p></article>

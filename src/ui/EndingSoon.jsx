@@ -29,7 +29,7 @@ export default function EndingSoon({ tracked, popular }) {
   if (knownCount === 0 || rows.length === 0) return null;
 
   return (
-    <section className="ending-soon" aria-labelledby="ending-soon-title">
+    <section id="sec-ending" className="ending-soon" aria-labelledby="ending-soon-title">
       <header>
         <div>
           <p>ENDING SOON</p>
