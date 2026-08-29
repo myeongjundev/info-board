@@ -8,6 +8,13 @@ import { AXIS, overview } from '../view/overview.js';
 
 const PLATFORM = { chzzk: '치지직', twitch: 'Twitch' };
 
+// 숫자와 단위 사이는 **줄이 갈라지지 않는 공백**이다.
+//
+// 결함 15번이 이 자리에서 한 번 났다 — 대표 변화값이 `▼ -6,145` 와 `명` 두 줄로
+// 갈라져 공개 주소에 떴다. 좁은 화면에서는 요약 카드도 같은 자리에 있다.
+// 실제로 375px 에서 `이전 기록 대비 +41,881` / `명` 으로 갈라져 있었다.
+const NB = ' ';
+
 function number(value) {
   return new Intl.NumberFormat('ko-KR').format(value);
 }
@@ -31,8 +38,8 @@ function axisCopy(axis) {
         ? '오래된 값 · 제품 장애 시 마지막 정상 Reading'
         : axis.delta === null
         ? '이전 날짜 비교 전'
-        : `이전 기록 대비 ${axis.delta > 0 ? '+' : ''}${number(axis.delta)} ${axis.unit}`;
-      return { metric: `${number(axis.value)} ${axis.unit}`, subject: axis.subject, detail: delta };
+        : `이전 기록 대비 ${axis.delta > 0 ? '+' : ''}${number(axis.delta)}${NB}${axis.unit}`;
+      return { metric: `${number(axis.value)}${NB}${axis.unit}`, subject: axis.subject, detail: delta };
     }
     case 'selling':
       return {
@@ -42,13 +49,13 @@ function axisCopy(axis) {
       };
     case 'deals':
       return {
-        metric: `무료 ${number(axis.freeNow)} · 할인 ${number(axis.onSale)}`,
+        metric: `무료${NB}${number(axis.freeNow)} · 할인${NB}${number(axis.onSale)}`,
         subject: '한국 상점 행사',
         detail: axis.partial ? '일부 자료 기준' : 'Epic·Steam 정적 수집본 기준',
       };
     case 'watching':
       return {
-        metric: `${number(axis.viewerCount)}명 시청`,
+        metric: `${number(axis.viewerCount)}명${NB}시청`,
         subject: axis.subject,
         detail: `${PLATFORM[axis.platformId] ?? axis.platformId} 표본 1위 · 플랫폼끼리 합산하지 않음`,
       };
