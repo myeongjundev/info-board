@@ -3,33 +3,23 @@ import react from '@vitejs/plugin-react';
 import { readFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+import { DATA_FILES as FILES, matchDataFile } from './src/source/dataFiles.js';
+
 // data/records.json 은 Actions 가 저장소 루트에 커밋한다. 화면은 그 파일을 진짜로
 // fetch 해서 읽는다 — import 로 번들에 넣으면 카드 3 의 '다시 시도' 가 아무것도
 // 다시 하지 않게 되고, 네트워크 요청 주소도 남지 않는다.
 //
 // 개발 중에는 미들웨어로 바로 내주고, 빌드할 때는 dist 로 복사한다.
 // 이것 하나 하자고 의존성을 늘리지 않는다.
-// timeprobe.json 은 하루 중 다른 시각 표본이다. **없어도 된다** — 화면의 값·단위·
-// 날짜·비교는 records.json 에서만 오고, 표본이 없으면 그 패널만 안 나온다.
-// 그래서 빌드에서 이 파일이 없다고 실패시키지 않는다.
-const FILES = [
-  { path: 'data/records.json', required: true },
-  { path: 'data/timeprobe.json', required: false },
-  { path: 'data/discounts.json', required: true },
-  { path: 'data/streaming.json', required: true },
-  { path: 'data/streaming-history.json', required: true },
-  { path: 'data/epic-free.json', required: true },
-  { path: 'data/popular-discounts.json', required: true },
-  { path: 'data/steam-free.json', required: true },
-  { path: 'data/sales-charts.json', required: true },
-];
+// 목록과 "어떤 요청에 내주는가" 는 src/source/dataFiles.js 에 있다. 여기 두면
+// 브라우저를 띄워야만 확인할 수 있고, 그래서 결함 17번이 하루 반 동안 안 보였다.
 
 function serveData() {
   return {
     name: 'serve-data',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        const hit = FILES.find((f) => req.url?.startsWith(`/${f.path}`));
+        const hit = matchDataFile(req.url ?? '');
         if (!hit) return next();
         try {
           const body = await readFile(resolve(process.cwd(), hit.path), 'utf8');
