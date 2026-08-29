@@ -14,6 +14,7 @@ import {
   validateStreamingSnapshot,
 } from '../source/streaming.js';
 import GameArt from './GameArt.jsx';
+import { sampleViewerTotal } from '../view/streamingTotals.js';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/streaming.json`;
 const HISTORY_URL = `${import.meta.env.BASE_URL}data/streaming-history.json`;
@@ -68,9 +69,9 @@ export default function StreamingPage() {
     ?? state.data?.platforms.find((item) => item.id === activeId)
     ?? state.data?.platforms[0];
   const resolvedActiveId = active?.id ?? activeId;
-  const totalViewers = useMemo(() => (
-    active?.rankings.reduce((sum, item) => sum + item.viewerCount, 0) ?? 0
-  ), [active]);
+  // 플랫폼 하나의 표본 합계다. 두 플랫폼을 더하지 않는 것이 규칙 5-5 이고,
+  // sampleViewerTotal 은 플랫폼 하나만 받아 그 규칙을 서명에 담는다.
+  const totalViewers = useMemo(() => sampleViewerTotal(active) ?? 0, [active]);
   const previous = useMemo(() => (
     active?.fetchedAt ? previousStreamingReading(state.history, active.id, active.fetchedAt) : null
   ), [active, state.history]);

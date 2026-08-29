@@ -82,6 +82,22 @@ export function timeOfDayDrift(previousIso, currentIso, timeZone, {
   return { previousClock, currentClock, minutes, aligned: minutes <= toleranceMin };
 }
 
+/**
+ * 이 스냅샷이 오래됐는가. 매시간 갱신되는 파일이 하루 반이 지나도 그대로면
+ * 수집이 멈춘 것이다.
+ *
+ * `ui` 안에서 `Date.now() - Date.parse(...) > 36 * 60 * 60 * 1000` 을 하고 있었다.
+ * 시각 판단이 컴포넌트에 있으면 경계를 검증할 수 없고, 이 저장소에서 시각은 다섯
+ * 번이나 뚫린 자리다.
+ *
+ * 시각을 못 읽으면 **오래됐다고 하지 않는다.** 모르는 것을 단정하지 않는다.
+ */
+export function isSnapshotStale(iso, { now = new Date(), hours = 36 } = {}) {
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return false;
+  return now.getTime() - t > hours * 3600_000;
+}
+
 /** 이만큼까지는 시계가 조금 어긋난 것으로 본다. */
 export const SKEW_TOLERANCE_MS = 60_000;
 

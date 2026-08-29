@@ -10,7 +10,8 @@ import { krwFromMinor, trackedCount, validateDiscountSnapshot } from '../source/
 import { remainingLabel, validateEpicFreeSnapshot } from '../source/epicFree.js';
 import { validateFreeToKeepSnapshot, validatePopularDiscountSnapshot } from '../source/steamPromotions.js';
 import { displayArt, displayName } from '../view/gameDisplay.js';
-import { dealsOverview } from '../view/dealsOverview.js';
+import { dealsOverview, discountSpread } from '../view/dealsOverview.js';
+import { isSnapshotStale } from '../view/board.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
@@ -122,13 +123,12 @@ export default function SalesPage() {
   }, [state.data, query, genre]);
 
   const discounts = state.data?.discounts ?? [];
-  const maxDiscount = discounts.length ? Math.max(...discounts.map((item) => item.discountPercent)) : null;
-  const averageDiscount = discounts.length
-    ? Math.round(discounts.reduce((sum, item) => sum + item.discountPercent, 0) / discounts.length)
-    : null;
-  const snapshotStale = state.data
-    ? Date.now() - Date.parse(state.data.completedAt) > 36 * 60 * 60 * 1000
-    : false;
+  // 최대·평균 할인율과 스냅샷이 오래됐는지는 view 에서 낸다. 컴포넌트 안에서
+  // 나누거나 시각을 재면 손계산으로 대조할 자리가 없다.
+  const spread = discountSpread(discounts);
+  const maxDiscount = spread.max;
+  const averageDiscount = spread.average;
+  const snapshotStale = state.data ? isSnapshotStale(state.data.completedAt) : false;
   // 이 스냅샷이 실제로 돈 게임 수. 성공(checked)과 실패(failed)를 더한 것이 그날의
   // 목록 크기다. 셈은 source 에 있다 — ui 에서 더하면 손계산 대조를 못 한다.
   //

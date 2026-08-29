@@ -6,6 +6,7 @@ import SegmentControl from './SegmentControl.jsx';
 
 import { rankMovement, validateSalesChartSnapshot } from '../source/salesCharts.js';
 import { countAdult, displayArt, displayName, priceMarksOnScreen } from '../view/gameDisplay.js';
+import { releaseTiming } from '../view/releaseTiming.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/sales-charts.json`;
@@ -46,16 +47,6 @@ function monthLabel(iso) {
 function monthKeyLabel(key) {
   const [year, month] = key.split('-').map(Number);
   return `${year}년 ${month}월`;
-}
-
-function releaseTiming(item, upcoming) {
-  if (!item.releaseDate) return upcoming ? '날짜 미정' : '이번 달 출시';
-  if (!upcoming) return 'NEW RELEASE';
-  const today = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit',
-  }).format(new Date());
-  const days = Math.round((Date.parse(`${item.releaseDate}T00:00:00+09:00`) - Date.parse(`${today}T00:00:00+09:00`)) / 86_400_000);
-  return days > 0 ? `D-${days}` : days === 0 ? '오늘 출시' : '일정 확인';
 }
 
 export default function SalesChartsPage() {
