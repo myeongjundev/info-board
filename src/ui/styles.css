@@ -2865,9 +2865,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 }
 
 body {
+  /* 오른쪽 위의 보라(--axis-selling 8%)를 걷었다. 요약 칸의 55% 를 지운 것과
+     같은 이유다 — 축 넷 중 하나의 색이 바탕에 깔리면 그 축이 이 화면의 주제처럼
+     읽힌다. 왼쪽 위 --accent 는 축 색이 아니라 서비스 색이라 남긴다. */
   background:
     radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 28rem),
-    radial-gradient(circle at 88% 4%, color-mix(in srgb, var(--axis-selling) 8%, transparent), transparent 26rem),
     var(--bg);
 }
 
