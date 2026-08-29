@@ -2,12 +2,15 @@ import { useEffect, useMemo, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
 import PageHero from './PageHero.jsx';
+import SegmentControl from './SegmentControl.jsx';
+import MetricCard from './MetricCard.jsx';
 
 import { headerUrl } from '../source/artwork.js';
 import { krwFromMinor, validateDiscountSnapshot } from '../source/discounts.js';
 import { remainingLabel, validateEpicFreeSnapshot } from '../source/epicFree.js';
 import { validateFreeToKeepSnapshot, validatePopularDiscountSnapshot } from '../source/steamPromotions.js';
-import { countAdult, displayArt, displayName } from '../view/gameDisplay.js';
+import { displayArt, displayName } from '../view/gameDisplay.js';
+import { dealsOverview } from '../view/dealsOverview.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
@@ -129,6 +132,13 @@ export default function SalesPage() {
   const activeEpicGiveaways = epicState.data?.giveaways.filter((item) => (
     Date.parse(item.startAt) <= nowMs && nowMs < Date.parse(item.endAt)
   )) ?? [];
+  const overview = dealsOverview({
+    tracked: state.status === 'ok' ? discounts : null,
+    popular: popularState.status === 'ok' ? popularState.data.discounts : null,
+    epic: epicState.status === 'ok' ? activeEpicGiveaways : null,
+    steamKeep: steamFreeState.status === 'ok' ? steamFreeState.data.giveaways : null,
+    steamWeekend: steamFreeState.status === 'ok' ? steamFreeState.data.freeWeekends : null,
+  });
 
   return (
     <div className="page sales-page">
@@ -147,6 +157,13 @@ export default function SalesPage() {
             </p>
           )}
         />
+
+        <section className="deals-overview" aria-label="할인과 무료 행사 요약">
+          <MetricCard tone="deals" label="Epic 무료" value={overview.epicFree} meta="현재 진행 중" />
+          <MetricCard tone="deals" label="Steam 무료 소장" value={overview.steamKeep} meta="행사 후에도 보유" />
+          <MetricCard tone="deals" label="Steam 무료 주말" value={overview.steamWeekend} meta="기간 한정 플레이" />
+          <MetricCard tone="deals" label="할인 게임" value={overview.onSale} meta="두 할인 목록 중복 제거" />
+        </section>
 
         <section className="epic-giveaway-section" aria-labelledby="epic-free-title">
           <header className="epic-giveaway-heading">
@@ -200,14 +217,17 @@ export default function SalesPage() {
             <div><p>STEAM · LIMITED FREE EVENTS</p><h2 id="steam-free-title">Steam 무료 이벤트</h2></div>
             <a href="https://store.steampowered.com/search/?category1=998&hidef2p=1&maxprice=free&specials=1" target="_blank" rel="noreferrer">Steam에서 확인 ↗</a>
           </header>
-          <div className="steam-free-tabs" role="tablist" aria-label="Steam 무료 이벤트 유형">
-            <button type="button" role="tab" aria-selected={steamFreeTab === 'keep'} className={steamFreeTab === 'keep' ? 'is-active' : ''} onClick={() => setSteamFreeTab('keep')}>
-              무료 소장 <span>{steamFreeState.data?.giveaways.length ?? '—'}</span>
-            </button>
-            <button type="button" role="tab" aria-selected={steamFreeTab === 'weekend'} className={steamFreeTab === 'weekend' ? 'is-active' : ''} onClick={() => setSteamFreeTab('weekend')}>
-              무료 플레이 주말 <span>{steamFreeState.data?.freeWeekends?.length ?? '—'}</span>
-            </button>
-          </div>
+          <SegmentControl
+            className="steam-free-tabs"
+            role="tablist"
+            label="Steam 무료 이벤트 유형"
+            value={steamFreeTab}
+            onChange={setSteamFreeTab}
+            options={[
+              { value: 'keep', label: '무료 소장', meta: steamFreeState.data?.giveaways.length ?? '—' },
+              { value: 'weekend', label: '무료 플레이 주말', meta: steamFreeState.data?.freeWeekends?.length ?? '—' },
+            ]}
+          />
           {steamFreeState.status === 'loading' && <p className="steam-free-empty">무료 이벤트를 확인하는 중…</p>}
           {steamFreeState.status === 'error' && <p className="steam-free-empty is-error">Steam 무료 이벤트 자료를 읽지 못했다. <span>{steamFreeState.message}</span></p>}
           {steamFreeState.status === 'ok' && steamFreeTab === 'keep' && steamFreeState.data.giveaways.length === 0 && (
