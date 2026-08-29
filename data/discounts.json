@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "추적 게임 75개 가운데 한국 상점에서 현재 할인 중인 게임",
+  "scope": "추적 게임 100개 가운데 한국 상점에서 현재 할인 중인 게임",
   "source": {
     "id": "steam-store-appdetails-unofficial",
     "label": "Steam Store · 비공식 appdetails",
@@ -9,14 +9,14 @@
     "language": "koreana",
     "warning": "문서화되지 않은 Steam Store 응답이며 예고 없이 바뀔 수 있다."
   },
-  "startedAt": "2026-08-28T12:42:10.451Z",
-  "completedAt": "2026-08-28T12:42:40.553Z",
+  "startedAt": "2026-08-29T03:00:44.088Z",
+  "completedAt": "2026-08-29T03:01:33.833Z",
   "counts": {
-    "checked": 75,
-    "discount": 6,
-    "regular": 56,
-    "free": 11,
-    "unpriced": 2,
+    "checked": 100,
+    "discount": 9,
+    "regular": 67,
+    "free": 20,
+    "unpriced": 4,
     "failed": 0
   },
   "discounts": [
@@ -30,7 +30,7 @@
       "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:29.018Z",
+      "fetchedAt": "2026-08-29T03:01:15.324Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=990080&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/990080/"
@@ -45,7 +45,7 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:16.812Z",
+      "fetchedAt": "2026-08-29T03:00:55.078Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=2399830&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/2399830/"
@@ -60,10 +60,25 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:27.985Z",
+      "fetchedAt": "2026-08-29T03:01:13.982Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1174180&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1174180/"
+    },
+    {
+      "appid": 381210,
+      "name": "Dead by Daylight",
+      "year": 2016,
+      "genre": "생존·제작",
+      "initialMinor": 2150000,
+      "finalMinor": 860000,
+      "discountPercent": 60,
+      "currency": "KRW",
+      "country": "KR",
+      "fetchedAt": "2026-08-29T03:00:57.324Z",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=381210&cc=KR&l=koreana",
+      "sourceLabel": "Steam Store · 비공식 appdetails",
+      "storeUrl": "https://store.steampowered.com/app/381210/"
     },
     {
       "appid": 1049410,
@@ -75,10 +90,25 @@
       "discountPercent": 60,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:37.210Z",
+      "fetchedAt": "2026-08-29T03:01:29.220Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1049410&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1049410/"
+    },
+    {
+      "appid": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "year": 2025,
+      "genre": "오픈월드",
+      "initialMinor": 5500000,
+      "finalMinor": 2420000,
+      "discountPercent": 56,
+      "currency": "KRW",
+      "country": "KR",
+      "fetchedAt": "2026-08-29T03:01:17.535Z",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=3240220&cc=KR&l=koreana",
+      "sourceLabel": "Steam Store · 비공식 appdetails",
+      "storeUrl": "https://store.steampowered.com/app/3240220/"
     },
     {
       "appid": 204300,
@@ -90,10 +120,25 @@
       "discountPercent": 55,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:40.332Z",
+      "fetchedAt": "2026-08-29T03:01:33.606Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=204300&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/204300/"
+    },
+    {
+      "appid": 221100,
+      "name": "DayZ",
+      "year": 2018,
+      "genre": "생존·제작",
+      "initialMinor": 5900000,
+      "finalMinor": 2950000,
+      "discountPercent": 50,
+      "currency": "KRW",
+      "country": "KR",
+      "fetchedAt": "2026-08-29T03:00:58.227Z",
+      "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=221100&cc=KR&l=koreana",
+      "sourceLabel": "Steam Store · 비공식 appdetails",
+      "storeUrl": "https://store.steampowered.com/app/221100/"
     },
     {
       "appid": 1623730,
@@ -105,7 +150,7 @@
       "discountPercent": 30,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-08-28T12:42:15.027Z",
+      "fetchedAt": "2026-08-29T03:00:52.725Z",
       "sourceUrl": "https://store.steampowered.com/api/appdetails?appids=1623730&cc=KR&l=koreana",
       "sourceLabel": "Steam Store · 비공식 appdetails",
       "storeUrl": "https://store.steampowered.com/app/1623730/"

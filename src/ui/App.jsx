@@ -153,7 +153,7 @@ function LiveApp() {
     ? leaderboard(payload.data.records, games, showing.reading.date)
     : null;
   // 운영 상태의 분모는 기록 파일에 이미 들어온 게임이 아니라 코드에 확정한 수집 대상이다.
-  // 첫날 파일은 16개뿐이지만 다음 정규 측정 대상은 75개이므로 16/16 이라고 쓰면
+  // 첫날 파일은 16개뿐이지만 다음 정규 측정 대상은 100개이므로 16/16 이라고 쓰면
   // 준비가 끝난 것처럼 보인다.
   const coverage = showing
     ? leaderboard(payload.data.records, GAMES, showing.reading.date)
