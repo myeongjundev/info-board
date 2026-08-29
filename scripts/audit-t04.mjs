@@ -158,9 +158,18 @@ set('T04-C09', latest?.timezone === 'Asia/Seoul' ? 'READY' : 'FAIL', 'Reading.ti
 set('T04-C10', appSource.includes('<DataProof') && has('value') && has('sourceUrl') ? 'READY' : 'FAIL', '같은 Reading을 대조 패널과 화면이 공유');
 
 const dates = [...new Set(records.map((row) => row.date))].sort();
-const twoLiveDates = dates.length === 2;
+// **`>=` 다. `===` 가 아니다.**
+//
+// 조건이 요구하는 것은 `서로 다른 실제 날짜 2일치 이상` 인데 전에는 `=== 2` 였다.
+// 그래서 8/28 에 2일치일 때는 참이었다가 8/29 에 3일치가 되자 거짓으로 뒤집혀,
+// 화면이 매일 하고 있는 계산을 두고 `변화 재계산 불가` 라고 적기 시작했다.
+//
+// **요구를 넘어서면 통과를 멈추는 검사**였다. 기록이 쌓일수록 틀려지는 자다.
+// 아래 fixture 검사들의 `=== N` 은 그대로 둔다 — 그쪽은 개수가 고정된 시험 자료라
+// 정확히 그 수여야 하는 것이 맞다.
+const twoLiveDates = dates.length >= 2;
 set('T04-C22', 'WAIT', `실제 저장 날짜 ${dates.length}개(${dates.join(', ') || '없음'}); 봉인 영수증은 제출 단계에서 확인`);
-set('T04-C23', 'WAIT', `${twoLiveDates ? '저장 후보 2일치 있음' : '저장 후보가 아직 2일치가 아님'}; 봉인 영수증 대조 필요`);
+set('T04-C23', 'WAIT', `${twoLiveDates ? `저장 후보 ${dates.length}일치 있음` : '저장 후보가 아직 2일치가 아님'}; 봉인 영수증 대조 필요`);
 set('T04-C24', 'WAIT', `${twoLiveDates ? '변화 재계산 후보 있음' : '실제 두 날짜 변화 재계산 불가'}; 봉인 영수증 순서 대조 필요`);
 set(['T04-C27', 'T04-C28'], 'WAIT', '제출문 작성 단계에서만 확정');
 set(['T04-C34', 'T04-C35'], 'WAIT', '제출 필드 작성 단계에서 결과물 URL·full commit URL 확정');
