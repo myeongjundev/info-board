@@ -119,6 +119,9 @@ export default function SalesChartsPage() {
                 options={[{ value: 'korea', label: '한국' }, { value: 'global', label: '글로벌' }]}
               />
             </header>
+            <div className="rank-table-head is-live" aria-hidden="true">
+              <span>순위</span><span>게임</span><span>표시 가격</span><span>상점</span>
+            </div>
             <ol className="sales-rank-list">
               {liveItems.map((item) => <li key={`${region}-${item.appid}`}>
                 <b className="sales-rank-no">{String(item.rank).padStart(2, '0')}</b>
@@ -136,6 +139,9 @@ export default function SalesChartsPage() {
               <div><p>OFFICIAL WEEKLY TOP 20</p><h2 id="weekly-sales-title">이번 주 매출 순위</h2><span>{formatDateKst(state.data.weekly.weekStart)} 시작 · 한국</span></div>
               <a href={state.data.source.overview} target="_blank" rel="noreferrer">공식 차트 ↗</a>
             </header>
+            <div className="rank-table-head is-weekly" aria-hidden="true">
+              <span>순위</span><span>게임</span><span>변화</span><span>연속</span><span>표시 가격</span>
+            </div>
             <ol className="weekly-rank-list">
               {state.data.weekly.items.map((item) => {
                 const movement = rankMovement(item);

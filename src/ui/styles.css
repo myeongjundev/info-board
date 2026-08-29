@@ -2984,6 +2984,30 @@ summary:focus-visible {
 
 .segment-control button:focus-visible { position: relative; z-index: 1; }
 
+/* SteamDB처럼 숫자 열을 먼저 훑을 수 있도록 현재·주간 표가 같은 머리글을 쓴다. */
+.rank-table-head {
+  display: grid;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, .018);
+  color: var(--text-faint);
+  font: 700 10px/1 var(--sans);
+  letter-spacing: .08em;
+}
+.rank-table-head.is-live { grid-template-columns: 46px minmax(0, 1fr) minmax(220px, auto) 70px; }
+.rank-table-head.is-weekly { grid-template-columns: 44px minmax(0, 1fr) 65px 60px minmax(190px, auto); }
+.rank-table-head span:nth-last-child(-n + 2) { text-align: center; }
+.rank-table-head.is-live span:nth-child(3),
+.rank-table-head.is-weekly span:last-child { text-align: right; }
+.sales-rank-list li { min-height: 66px; }
+.weekly-rank-list li { min-height: 64px; }
+.sales-rank-game img,
+.sales-rank-game .art-hold { width: 82px; height: 38px; }
+.weekly-rank-list li > a img,
+.weekly-rank-list li > a .art-hold { width: 76px; height: 35px; }
+
 .game-focus-panel { position: relative; }
 .game-focus-panel::before {
   content: '';
@@ -3001,4 +3025,11 @@ summary:focus-visible {
   .page-hero h1 { font-size: clamp(38px, 12vw, 56px); }
   .page-hero-aside { padding: 18px 0 0; border-top: 1px solid var(--border); border-left: 0; }
   .page-hero-aside .streaming-readiness { display: grid; grid-template-columns: 1fr auto; align-items: end; }
+  .rank-table-head { padding: 0 15px; }
+  .rank-table-head.is-live,
+  .sales-rank-list li { grid-template-columns: 34px minmax(0, 1fr) 76px; }
+  .rank-table-head.is-live span:last-child { display: none; }
+  .rank-table-head.is-weekly { grid-template-columns: 34px minmax(0, 1fr) 54px; }
+  .rank-table-head.is-weekly span:nth-child(4),
+  .rank-table-head.is-weekly span:nth-child(5) { display: none; }
 }
