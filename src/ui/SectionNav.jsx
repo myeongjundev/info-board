@@ -8,6 +8,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { scrollToTop } from './scrollToTop.js';
+
 function NavGlyph({ name }) {
   const common = {
     className: 'secnav-icon', viewBox: '0 0 20 20', width: 18, height: 18,
@@ -35,7 +37,7 @@ export default function SectionNav({ items }) {
     // 갱신 시각, 네 축 요약까지 한 번에 다시 보이도록 `현재`만 맨 위로 보낸다.
     event.preventDefault();
     window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#/`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
     setActive(id);
   }
   // 실제로 페이지에 있는 구획만 줄에 올린다.

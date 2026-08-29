@@ -7,6 +7,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { scrollToTop } from './scrollToTop.js';
+
 export default function SymbolRail({ onRefresh, busy }) {
   const [showTop, setShowTop] = useState(false);
 
@@ -21,7 +23,7 @@ export default function SymbolRail({ onRefresh, busy }) {
     <div className="symbolrail">
       <button
         type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => scrollToTop()}
         disabled={!showTop}
         title="맨 위로"
         aria-label="맨 위로"
