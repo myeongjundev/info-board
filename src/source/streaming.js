@@ -3,12 +3,15 @@ export const STREAMING_PLATFORMS = Object.freeze({
     label: 'CHZZK',
     koreanLabel: '치지직',
     color: '#00e778',
+    // 밝은 바탕에 글자로 얹을 때만 쓰는 짙은 변형. 채움·표시등은 위 브랜드색 그대로다.
+    inkColor: '#00703c',
     serviceUrl: 'https://chzzk.naver.com/',
   },
   twitch: {
     label: 'TWITCH',
     koreanLabel: '트위치',
     color: '#a970ff',
+    inkColor: '#6b21a8',
     serviceUrl: 'https://www.twitch.tv/directory',
   },
 });

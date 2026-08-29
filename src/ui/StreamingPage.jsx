@@ -111,7 +111,7 @@ export default function StreamingPage() {
                   <article
                     key={item.id}
                     className={`platform-status-card is-${item.status}${resolvedActiveId === item.id ? ' is-active' : ''}`}
-                    style={{ '--platform': meta.color }}
+                    style={{ '--platform': meta.color, '--platform-ink': meta.inkColor }}
                   >
                     <span className="platform-wordmark">{meta.label}</span>
                     <span className="platform-status-dot" aria-hidden="true" />
@@ -122,7 +122,7 @@ export default function StreamingPage() {
               })}
             </section>
 
-            <section className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[resolvedActiveId].color }}>
+            <section className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[resolvedActiveId].color, '--platform-ink': STREAMING_PLATFORMS[resolvedActiveId].inkColor }}>
               <header>
                 <div>
                   <p>{STREAMING_PLATFORMS[resolvedActiveId].label} · GAME TOP 10</p>

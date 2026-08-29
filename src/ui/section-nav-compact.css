@@ -17,8 +17,8 @@
     box-sizing: border-box;
     border: 1px solid var(--border-2);
     border-radius: 17px;
-    background: rgba(13, 18, 27, .94);
-    box-shadow: 0 16px 42px rgba(0, 0, 0, .28);
+    background: var(--float);
+    box-shadow: 0 16px 42px color-mix(in srgb, var(--shadow-ink) 28%, transparent);
     backdrop-filter: blur(14px);
     transition: width .18s ease, height .18s ease, border-radius .18s ease;
   }
@@ -39,7 +39,7 @@
     color: var(--text-dim);
     cursor: pointer;
   }
-  .secnav-compact-toggle:hover { color: var(--text); background: rgba(255, 255, 255, .045); }
+  .secnav-compact-toggle:hover { color: var(--text); background: color-mix(in srgb, var(--text) 4.5%, transparent); }
   .secnav-compact-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .secnav-compact-current {
@@ -50,7 +50,7 @@
     place-items: center;
     border-radius: 50%;
     background: var(--accent);
-    color: #061018;
+    color: var(--on-accent);
   }
   .secnav-compact-current .secnav-icon { width: 15px; height: 15px; }
   .secnav-compact-dots {
@@ -106,11 +106,11 @@
     font-size: 11px;
     line-height: 1.2;
   }
-  .secnav.is-compact-open a:hover { background: rgba(255, 255, 255, .045); color: var(--text); }
+  .secnav.is-compact-open a:hover { background: color-mix(in srgb, var(--text) 4.5%, transparent); color: var(--text); }
   .secnav.is-compact-open a.is-on {
     background: var(--accent);
-    color: #061018;
-    box-shadow: 0 8px 20px rgba(76, 201, 240, .18);
+    color: var(--on-accent);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 18%, transparent);
   }
 
   /* 접혔을 때는 참고 화면처럼 동작 버튼도 숨긴다. 펼치면 같은 패널의 아래 칸이 된다. */
@@ -136,7 +136,7 @@
     background: transparent;
     font-size: 18px;
   }
-  .secnav.is-compact-open + .symbolrail button:hover { background: rgba(255, 255, 255, .055); }
+  .secnav.is-compact-open + .symbolrail button:hover { background: color-mix(in srgb, var(--text) 5.5%, transparent); }
 }
 
 @media (max-width: 420px) {

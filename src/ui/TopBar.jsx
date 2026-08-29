@@ -3,6 +3,7 @@
 
 import { SERVICE_AXES } from '../view/overview.js';
 import GameSearch from './GameSearch.jsx';
+import ThemeToggle from './ThemeToggle.jsx';
 
 function measuredTime(reading) {
   if (!reading?.fetchedAt) return null;
@@ -44,6 +45,9 @@ export default function TopBar({
           ))}
         </nav>
         {badge}
+        {/* 설정 안에 숨기지 않고 톱니 옆에 둔다 — 누르면 바로 바뀌는 것이라
+            한 번 더 열게 할 이유가 없다. */}
+        <ThemeToggle />
         <button
           type="button"
           className="gear"

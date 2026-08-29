@@ -8,6 +8,7 @@
 // `몇 명이 하나` 라는 같은 이름의 한 칸이 된다. 길이 네 개면 어디서나 네 개다.
 
 import { SERVICE_AXES } from '../view/overview.js';
+import ThemeToggle from './ThemeToggle.jsx';
 
 export default function SubpageTopBar({ current, caption }) {
   return (
@@ -27,6 +28,7 @@ export default function SubpageTopBar({ current, caption }) {
             >{axis.label}</a>
           ))}
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   );
