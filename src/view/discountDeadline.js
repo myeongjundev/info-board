@@ -65,3 +65,41 @@ export function endingSoon(readings, { now = new Date(), timeZone = 'Asia/Seoul'
     .sort((a, b) => a.deadline.days - b.deadline.days
       || (b.reading.discountPercent ?? 0) - (a.reading.discountPercent ?? 0));
 }
+
+/**
+ * 두 할인 목록을 합쳐 **곧 끝나는 순서**로 낸다.
+ *
+ * 두 목록(추적 100개 · 인기 Top 100)은 겹친다. 같은 게임이 두 줄로 나오면 목록이
+ * 길어 보이는 만큼 거짓말이 되므로 appid 로 하나만 남긴다. **먼저 온 쪽을 남기지
+ * 않고 종료 시각을 아는 쪽을 남긴다** — 이 구역이 하는 말이 종료 시각이라서다.
+ *
+ * `withinDays` 를 넓히는 것은 화면이 아니라 여기서 정한다. 오늘 끝나는 것이 하나도
+ * 없는 날이 있고, 그때 빈 칸을 띄우는 것보다 **"오늘은 없고 가장 가까운 것은 이것"**
+ * 이 사람에게 쓸모 있다. 다만 넓힌 사실 자체를 `widened` 로 같이 돌려준다 —
+ * 화면이 그걸 모르면 3일 뒤 끝나는 것을 오늘 끝난다고 말하게 된다.
+ */
+export function endingSoonAcross(lists, { now = new Date(), timeZone = 'Asia/Seoul', withinDays = 1, fallbackDays = 7, limit = 6 } = {}) {
+  const merged = new Map();
+  for (const list of Array.isArray(lists) ? lists : []) {
+    for (const reading of Array.isArray(list) ? list : []) {
+      if (!Number.isInteger(reading?.appid)) continue;
+      const kept = merged.get(reading.appid);
+      if (!kept || (!kept.discountEndsAt && reading.discountEndsAt)) merged.set(reading.appid, reading);
+    }
+  }
+  const all = [...merged.values()];
+
+  const today = endingSoon(all, { now, timeZone, withinDays });
+  const widened = today.length === 0;
+  const rows = widened ? endingSoon(all, { now, timeZone, withinDays: fallbackDays }) : today;
+
+  return {
+    rows: rows.slice(0, limit),
+    widened,
+    withinDays: widened ? fallbackDays : withinDays,
+    // 합친 목록에서 종료 시각을 아는 것이 몇 개인가. 화면이 "몇 개 중에서 고른 것"
+    // 인지 밝히지 못하면 이 구역은 근거 없는 추천이 된다.
+    knownCount: all.filter((r) => typeof r.discountEndsAt === 'string' && r.discountEndsAt !== '').length,
+    totalCount: all.length,
+  };
+}

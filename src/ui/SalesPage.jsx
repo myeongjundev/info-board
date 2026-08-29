@@ -14,6 +14,7 @@ import { dealsOverview, discountSpread } from '../view/dealsOverview.js';
 import { isSnapshotStale } from '../view/board.js';
 import GameArt from './GameArt.jsx';
 import DiscountDeadline from './DiscountDeadline.jsx';
+import EndingSoon from './EndingSoon.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
 const EPIC_DATA_URL = `${import.meta.env.BASE_URL}data/epic-free.json`;
@@ -172,6 +173,13 @@ export default function SalesPage() {
           <MetricCard tone="deals" label="Steam 무료 주말" value={overview.steamWeekend} meta="기간 한정 플레이" />
           <MetricCard tone="deals" label="할인 게임" value={overview.onSale} meta="두 할인 목록 중복 제거" />
         </section>
+
+        {/* 요약 카드 바로 다음이다. 급한 것은 스크롤 아래에 두면 급하지 않은 것이 된다. */}
+        <EndingSoon
+          tracked={state.status === 'ok' ? state.data.discounts : null}
+          popular={popularState.status === 'ok' ? popularState.data.discounts : null}
+        />
+
 
         <section className="epic-giveaway-section" aria-labelledby="epic-free-title">
           <header className="epic-giveaway-heading">
