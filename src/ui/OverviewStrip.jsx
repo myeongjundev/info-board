@@ -13,6 +13,11 @@ function number(value) {
 }
 
 function axisCopy(axis) {
+  // 아직 안 읽은 것을 못 읽었다고 말하지 않는다. 잠깐 스쳐 가는 상태라도
+  // 그 순간 화면에 뜨는 것은 뜨는 것이다.
+  if (axis.state === AXIS.LOADING) {
+    return { metric: '읽는 중', subject: axis.reason, detail: '아직 못 읽은 것이 아니다' };
+  }
   if (axis.state === AXIS.UNAVAILABLE) {
     return { metric: '확인 불가', subject: axis.reason, detail: '자료 상태를 확인하세요' };
   }
@@ -52,8 +57,9 @@ function axisCopy(axis) {
   }
 }
 
-export default function OverviewStrip({ board, faulted = false }) {
+export default function OverviewStrip({ board, faulted = false, loading = false }) {
   const axes = overview({
+    loading,
     board: faulted && board ? { ...board, state: 'STALE' } : board,
     salesCharts,
     epicFree,

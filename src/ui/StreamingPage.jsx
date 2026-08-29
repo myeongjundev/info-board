@@ -88,8 +88,10 @@ export default function StreamingPage() {
           description="치지직 · 트위치의 상위 게임 방송을 같은 기준으로 읽는다."
           aside={<div className="streaming-readiness" aria-label="데이터 연결 현황">
             <span>DATA READINESS</span>
-            <strong>{connected}<i>/2</i></strong>
-            <small>공식 데이터 연결</small>
+            {/* 읽는 중에 0/2 라고 쓰면 두 플랫폼 다 연결이 끊긴 것처럼 보인다.
+                아직 안 읽은 것과 못 읽은 것은 다르다. */}
+            <strong>{state.status === 'loading' ? '—' : connected}<i>/2</i></strong>
+            <small>{state.status === 'loading' ? '읽는 중' : '공식 데이터 연결'}</small>
           </div>}
         />
 

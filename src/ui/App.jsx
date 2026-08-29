@@ -210,7 +210,7 @@ function LiveApp() {
       )}
 
       <main id="sec-now">
-        <OverviewStrip board={showing} faulted={status === 'fault'} />
+        <OverviewStrip board={showing} faulted={status === 'fault'} loading={status === 'loading' && !showing} />
 
         <GameFocusPanel
           board={showing}

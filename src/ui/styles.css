@@ -3220,3 +3220,7 @@ summary:focus-visible {
 /* 날짜 사이의 시각 차이. 요약 카드는 자리가 좁아 한 줄로만 말하고,
    자세한 것은 아래 비교 구역의 .spread-note 가 말한다. */
 .kpi-meta.is-warn { color: var(--warn); }
+
+/* 읽는 중은 장애가 아니다. 못 읽은 것(.is-unavailable)은 붉게 쓰지만
+   아직 안 읽은 것은 흐리게만 둔다 — 잠깐 뜨는 글자가 사고처럼 보이면 안 된다. */
+.overview-axis.is-loading strong { color: var(--text-faint); }

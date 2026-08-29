@@ -27,12 +27,29 @@ import { displayName } from './gameDisplay.js';
  * `EMPTY` 와 `UNAVAILABLE` 을 같은 `—` 로 뭉개면, 이 판이 잡으려는 거짓말을
  * 요약 칸에서 우리가 저지르게 된다. "없다" 와 "모른다" 는 다른 말이다.
  */
-export const AXIS = { OK: 'ok', EMPTY: 'empty', UNAVAILABLE: 'unavailable' };
+export const AXIS = {
+  OK: 'ok',
+  EMPTY: 'empty',
+  UNAVAILABLE: 'unavailable',
+  // 아직 안 읽었다. **못 읽은 것과 다르다.**
+  //
+  // 이 자리에서 실제로 겪었다 — 배포 주소를 처음 열면 요약 카드가 잠깐
+  // `확인 불가 · 정상값이 아직 없다` 라고 말했다. 파일은 멀쩡했고 그저 아직
+  // 안 온 것이었다. `없다`와 `모른다`를 가르려고 만든 파일이 정작
+  // `아직 모른다`를 `못 읽었다`로 뭉갠 셈이다.
+  LOADING: 'loading',
+};
 
 /** 얼마나 하나 — 대표 게임의 동시접속자. 이미 계산된 board 에서 집어 온다. */
-export function playingAxis(board) {
+export function playingAxis(board, { loading = false } = {}) {
   const reading = board?.reading;
-  if (!reading) return { state: AXIS.UNAVAILABLE, reason: '정상값이 아직 없다' };
+  if (!reading) {
+    // 네 축 중 이 축만 런타임에 fetch 해서 온다. 나머지 셋은 빌드 때 들어온
+    // 스냅샷이라 읽는 중이라는 상태가 아예 없다.
+    return loading
+      ? { state: AXIS.LOADING, reason: '기록 파일을 읽는 중' }
+      : { state: AXIS.UNAVAILABLE, reason: '정상값이 아직 없다' };
+  }
   return {
     state: AXIS.OK,
     value: reading.value,
@@ -159,7 +176,7 @@ export const SERVICE_AXES = [
 /** 첫 화면 요약 네 칸. 순서는 하는 것 → 사는 것 → 공짜 → 보는 것. */
 export function overview(sources = {}) {
   const byId = {
-    playing: () => playingAxis(sources.board),
+    playing: () => playingAxis(sources.board, { loading: sources.loading === true }),
     selling: () => sellingAxis(sources.salesCharts),
     deals: () => dealsAxis(sources),
     watching: () => watchingAxis(sources.streaming),

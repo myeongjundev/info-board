@@ -113,3 +113,29 @@ test('요약은 네 칸이고 순서가 고정이다', () => {
   assert.equal(rows[0].state, AXIS.OK);
   assert.equal(rows[1].state, AXIS.UNAVAILABLE);
 });
+
+// ── 아직 안 읽은 것과 못 읽은 것 ────────────────────────────────────────────
+
+test('읽는 중이면 못 읽었다고 하지 않는다', () => {
+  const axis = playingAxis(null, { loading: true });
+  assert.equal(axis.state, AXIS.LOADING);
+  assert.equal(axis.reason, '기록 파일을 읽는 중');
+});
+
+test('다 읽었는데 값이 없으면 그때는 못 읽은 것이다', () => {
+  assert.equal(playingAxis(null).state, AXIS.UNAVAILABLE);
+  assert.equal(playingAxis(null, { loading: false }).state, AXIS.UNAVAILABLE);
+});
+
+test('값이 있으면 읽는 중이라도 값을 보여준다 — 새로고침 중에 숫자가 사라지지 않는다', () => {
+  const board = { reading: { value: 105, unit: '명' }, game: { name: 'CS2' }, state: 'FRESH' };
+  const axis = playingAxis(board, { loading: true });
+  assert.equal(axis.state, AXIS.OK);
+  assert.equal(axis.value, 105);
+});
+
+test('요약 전체에 읽는 중을 넘긴다', () => {
+  const axes = overview({ loading: true });
+  const playing = axes.find((a) => a.id === 'playing');
+  assert.equal(playing.state, AXIS.LOADING);
+});
