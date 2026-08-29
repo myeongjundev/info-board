@@ -10,97 +10,97 @@
     {
       "id": "chzzk",
       "status": "ok",
-      "fetchedAt": "2026-08-29T13:20:32.278Z",
+      "fetchedAt": "2026-08-29T17:21:32.325Z",
       "rankings": [
         {
           "rank": 1,
-          "gameId": "Valorant",
-          "gameName": "발로란트",
-          "viewerCount": 24131,
-          "broadcastCount": 5,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/Valorant",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNTAzMDZfMjQ5/MDAxNzQxMjI5NTc0OTc4.8c-bF6t1xETSF-s2y3x2D18vrcD5HSinHbtRlX777vkg.3OvywCoNs_Y_2bq4jyu2mBbBDrNd-9IgwZhVHoEPwfMg.PNG/Valorant_S25A2_Box_Art_600x800.png"
+          "gameId": "League_of_Legends",
+          "gameName": "리그 오브 레전드",
+          "viewerCount": 16642,
+          "broadcastCount": 7,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/League_of_Legends",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA0MzBfMjc0/MDAxNzc3NTE3NDAxNjY3.OdL1QTZFW8nnHYrO5Qm9xWsyQkYbmsI3zt-aJUN7bs8g.3359Ufp9OSo-U5koD9WHINFCwYjQjJLRlAVj649ncbUg.PNG/%EB%A6%AC%EA%B7%B8%EC%98%A4%EB%B8%8C%EB%A0%88%EC%A0%84%EB%93%9C_%ED%8F%AC%EC%8A%A4%ED%84%B0.png"
         },
         {
           "rank": 2,
-          "gameId": "StarCraft_Remastered",
-          "gameName": "스타크래프트 : 리마스터",
-          "viewerCount": 19205,
-          "broadcastCount": 10,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/StarCraft_Remastered",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNTA3MTZfMjM5/MDAxNzUyNjcyOTEwMjE3.lBJqqCpPdC7vvf25HaIudZjRJrAz44yxg7xqG8d63EUg.wqRtXFzS6NFkINcybMqLPTsf28JwqA-2kaW9YrC61Osg.PNG/SCR_CHZZK_Category_v2.png"
+          "gameId": "Bills_Must_Be_Paid",
+          "gameName": "빌스 머스트 비 페이드",
+          "viewerCount": 11997,
+          "broadcastCount": 1,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Bills_Must_Be_Paid",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA3MDlfMTkg/MDAxNzgzNTY4MjQzNzY0.IgvnxeSh071CcuEyrABlvvZPmDe1TZFjIf4T9GyR9Tkg.c7SvHAakIdyRzuyqyPrmjfIS2FHgJdJ2e0SL-O4xW98g.JPEG/%EB%B9%8C%EC%8A%A4_%EB%A8%B8%EC%8A%A4%ED%8A%B8_%EB%B9%84_%ED%8E%98%EC%9D%B4%EB%93%9C_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg"
         },
         {
           "rank": 3,
           "gameId": "Minecraft",
           "gameName": "마인크래프트",
-          "viewerCount": 15177,
+          "viewerCount": 11701,
           "broadcastCount": 4,
           "categoryUrl": "https://chzzk.naver.com/category/GAME/Minecraft",
           "imageUrl": "https://nng-phinf.pstatic.net/MjAyMzEyMTFfMTM3/MDAxNzAyMjgyNjI1MDgw.Ozu1fi3gdfyooyBjO_SGXJBDqRWgDFLlmWAFZg6qYIUg.rlnppQX9tMgn2nvgjhXwqsJhfktN23Gdjj09CgJ--BYg.JPEG/104.%EB%A7%88%EC%9D%B8%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8_%EC%99%84%EC%84%B1%EB%B3%B8_%EC%9D%B4%EB%8B%AC%EB%8B%98.jpg"
         },
         {
           "rank": 4,
-          "gameId": "Bills_Must_Be_Paid",
-          "gameName": "빌스 머스트 비 페이드",
-          "viewerCount": 13784,
-          "broadcastCount": 1,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/Bills_Must_Be_Paid",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA3MDlfMTkg/MDAxNzgzNTY4MjQzNzY0.IgvnxeSh071CcuEyrABlvvZPmDe1TZFjIf4T9GyR9Tkg.c7SvHAakIdyRzuyqyPrmjfIS2FHgJdJ2e0SL-O4xW98g.JPEG/%EB%B9%8C%EC%8A%A4_%EB%A8%B8%EC%8A%A4%ED%8A%B8_%EB%B9%84_%ED%8E%98%EC%9D%B4%EB%93%9C_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg"
-        },
-        {
-          "rank": 5,
-          "gameId": "League_of_Legends",
-          "gameName": "리그 오브 레전드",
-          "viewerCount": 11719,
-          "broadcastCount": 5,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/League_of_Legends",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA0MzBfMjc0/MDAxNzc3NTE3NDAxNjY3.OdL1QTZFW8nnHYrO5Qm9xWsyQkYbmsI3zt-aJUN7bs8g.3359Ufp9OSo-U5koD9WHINFCwYjQjJLRlAVj649ncbUg.PNG/%EB%A6%AC%EA%B7%B8%EC%98%A4%EB%B8%8C%EB%A0%88%EC%A0%84%EB%93%9C_%ED%8F%AC%EC%8A%A4%ED%84%B0.png"
-        },
-        {
-          "rank": 6,
-          "gameId": "Black_Survival_Eternal_Return",
-          "gameName": "이터널 리턴",
-          "viewerCount": 9932,
-          "broadcastCount": 9,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/Black_Survival_Eternal_Return",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA4MDZfMjk2/MDAxNzg1OTkwNTU5NjM1.as8SPNMnlW8_XKBoarcNx4AMJOEglOJXbVK5xOHxsdMg.3VQZOz5E1DCCpRlBoxJr_qFIuBb1_-KeAEO-MNjwq2Yg.PNG/22.%EB%84%A4%EC%9D%B4%EB%B2%84_%EC%B9%98%EC%A7%80%EC%A7%81__%ED%8F%AC%EC%8A%A4%ED%84%B0%ED%98%95_%ED%83%80%EC%9D%B4%ED%8B%80_%EC%9D%B4%EB%AF%B8%EC%A7%80_300_x_400.png"
-        },
-        {
-          "rank": 7,
           "gameId": "Rimworld",
           "gameName": "림월드",
-          "viewerCount": 8124,
+          "viewerCount": 9394,
           "broadcastCount": 1,
           "categoryUrl": "https://chzzk.naver.com/category/GAME/Rimworld",
           "imageUrl": "https://nng-phinf.pstatic.net/MjAyNDAyMDdfMzYg/MDAxNzA3MjkyNTMzMDY1.4emBRZReUm3Pe1ZuFTWkjFpi8aeSQ9PSCjJo6ScNElgg.fqdoIwQeScsPEAE68ANVcfyw5mKuJmxFYFDArX9VhDYg.PNG/46.png"
         },
         {
-          "rank": 8,
+          "rank": 5,
+          "gameId": "StarCraft_Remastered",
+          "gameName": "스타크래프트 : 리마스터",
+          "viewerCount": 8984,
+          "broadcastCount": 5,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/StarCraft_Remastered",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNTA3MTZfMjM5/MDAxNzUyNjcyOTEwMjE3.lBJqqCpPdC7vvf25HaIudZjRJrAz44yxg7xqG8d63EUg.wqRtXFzS6NFkINcybMqLPTsf28JwqA-2kaW9YrC61Osg.PNG/SCR_CHZZK_Category_v2.png"
+        },
+        {
+          "rank": 6,
+          "gameId": "DEAD_BY_DAYLIGHT",
+          "gameName": "데드 바이 데이라이트",
+          "viewerCount": 6191,
+          "broadcastCount": 3,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/DEAD_BY_DAYLIGHT",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyMzEyMTNfNjQg/MDAxNzAyNDMxMTEyNDEz.2lPNjTnR3k_6Y9R9pLpEdIDRK_N07MRHXAXumlUu0esg.JuvDTkCSnR8-AtRg8oWpoRdyr77kAZnUOVXY_B264x0g.JPEG/393.%EB%8D%B0%EB%93%9C_%EB%B0%94%EC%9D%B4_%EB%8D%B0%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8_%EC%99%84%EC%84%B1%EB%B3%B8_%EC%84%9D%EC%A7%80%EC%97%B0.jpg"
+        },
+        {
+          "rank": 7,
           "gameId": "heXtreming_deep",
           "gameName": "고독방송:심",
-          "viewerCount": 6413,
+          "viewerCount": 6017,
           "broadcastCount": 2,
           "categoryUrl": "https://chzzk.naver.com/category/GAME/heXtreming_deep",
           "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA4MTBfMjc2/MDAxNzg2MzU1NjIyODYw.TOUG6UxLz81tu6jxxPUIRxOX-726nQQ8HiO2py--XhUg.nAJkznK_aJN0CgkizPVZxwbjVIvsswOdkbAp69pdeg4g.PNG/%EA%B3%A0%EB%8F%85%EB%B0%A9%EC%86%A1_%EC%8B%AC.png"
         },
         {
+          "rank": 8,
+          "gameId": "Endacopia",
+          "gameName": "엔다코피아",
+          "viewerCount": 3976,
+          "broadcastCount": 1,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Endacopia",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA3MjlfMTIw/MDAxNzg1Mjk0MTYxMDgw.gQMlh9GK4D8_cknrG9XhMAu1AUrDUEQSQBrDP7GdKvMg.AhLQO7EsLPhvpcXujDiHZ64eDrpnN601Pti14HIMCrog.JPEG/Endacopia-300-400.jpg"
+        },
+        {
           "rank": 9,
-          "gameId": "OVERWATCH",
-          "gameName": "오버워치",
-          "viewerCount": 4943,
+          "gameId": "various_games",
+          "gameName": "종합 게임",
+          "viewerCount": 2653,
           "broadcastCount": 2,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/OVERWATCH",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA4MTJfMjQy/MDAxNzg2NDg5NjQ0ODA4.xNniVBE4mSPirGDfM5kZTHR3m5lXv3-cHCKGOnctwxsg.OREumO2B9eenI_zgfmAw68D7ZU0krTPKB3kAKl5AuZ4g.PNG/2026_07_JekyllWorks_Bliz_OW_S4_Launch_Social_Headers_Twitch_Cover_600x800_JW01.png"
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/various_games",
+          "imageUrl": "https://ssl.pstatic.net/static/nng/glive/icon/category_poster_various_games.png"
         },
         {
           "rank": 10,
-          "gameId": "various_games",
-          "gameName": "종합 게임",
-          "viewerCount": 4322,
+          "gameId": "Black_Desert",
+          "gameName": "검은사막",
+          "viewerCount": 2413,
           "broadcastCount": 3,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/various_games",
-          "imageUrl": "https://ssl.pstatic.net/static/nng/glive/icon/category_poster_various_games.png"
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Black_Desert",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA3MzBfNjMg/MDAxNzg1Mzc5MzE5NzEx.R69f_o1qvyxUoWcfKiX4Rhag4XF7AukSdyK9g8aVN2Ig.YS3HR78bT2A20mTyZvpyNAzEmtdhqK5jzzuO8Y8ttLwg.JPEG/KR_260729_%ED%8F%AD%EB%B0%9C%ED%82%A4%EC%95%84%ED%8A%B8_%EC%B9%98%EC%A7%80%EC%A7%81__300x400_KR.jpg"
         }
       ],
       "message": "상위 라이브 100개 표본을 게임별로 합산한 Top 10이다.",
@@ -109,97 +109,97 @@
     {
       "id": "twitch",
       "status": "ok",
-      "fetchedAt": "2026-08-29T13:20:32.943Z",
+      "fetchedAt": "2026-08-29T17:21:33.054Z",
       "rankings": [
         {
           "rank": 1,
           "gameId": "21779",
           "gameName": "League of Legends",
-          "viewerCount": 74861,
-          "broadcastCount": 6,
+          "viewerCount": 105419,
+          "broadcastCount": 7,
           "categoryUrl": "https://www.twitch.tv/directory/game/League%20of%20Legends",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/21779-144x192.jpg"
         },
         {
           "rank": 2,
-          "gameId": "263490",
-          "gameName": "Rust",
-          "viewerCount": 55820,
-          "broadcastCount": 6,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Rust",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/263490_IGDB-144x192.jpg"
+          "gameId": "14842174",
+          "gameName": "Chained Together",
+          "viewerCount": 90880,
+          "broadcastCount": 2,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Chained%20Together",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/14842174_IGDB-144x192.jpg"
         },
         {
           "rank": 3,
-          "gameId": "32982",
-          "gameName": "Grand Theft Auto V",
-          "viewerCount": 42604,
+          "gameId": "490655",
+          "gameName": "Pokémon GO",
+          "viewerCount": 87755,
           "broadcastCount": 2,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-144x192.jpg"
+          "categoryUrl": "https://www.twitch.tv/directory/game/Pok%C3%A9mon%20GO",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/490655_IGDB-144x192.jpg"
         },
         {
           "rank": 4,
-          "gameId": "516575",
-          "gameName": "VALORANT",
-          "viewerCount": 42217,
-          "broadcastCount": 8,
-          "categoryUrl": "https://www.twitch.tv/directory/game/VALORANT",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/516575-144x192.jpg"
+          "gameId": "1931693784",
+          "gameName": "Pokémon Champions",
+          "viewerCount": 65553,
+          "broadcastCount": 5,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Pok%C3%A9mon%20Champions",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/1931693784_IGDB-144x192.jpg"
         },
         {
           "rank": 5,
           "gameId": "18122",
           "gameName": "World of Warcraft",
-          "viewerCount": 39409,
-          "broadcastCount": 3,
+          "viewerCount": 60921,
+          "broadcastCount": 5,
           "categoryUrl": "https://www.twitch.tv/directory/game/World%20of%20Warcraft",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/18122-144x192.jpg"
         },
         {
           "rank": 6,
-          "gameId": "2058220722",
-          "gameName": "Poppy Playtime",
-          "viewerCount": 25135,
-          "broadcastCount": 1,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Poppy%20Playtime",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/2058220722_IGDB-144x192.jpg"
+          "gameId": "32982",
+          "gameName": "Grand Theft Auto V",
+          "viewerCount": 53526,
+          "broadcastCount": 4,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-144x192.jpg"
         },
         {
           "rank": 7,
-          "gameId": "490655",
-          "gameName": "Pokémon GO",
-          "viewerCount": 19913,
-          "broadcastCount": 1,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Pok%C3%A9mon%20GO",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/490655_IGDB-144x192.jpg"
+          "gameId": "263490",
+          "gameName": "Rust",
+          "viewerCount": 42191,
+          "broadcastCount": 4,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Rust",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/263490_IGDB-144x192.jpg"
         },
         {
           "rank": 8,
-          "gameId": "511195",
-          "gameName": "DRAGON BALL Z: KAKAROT",
-          "viewerCount": 19785,
-          "broadcastCount": 1,
-          "categoryUrl": "https://www.twitch.tv/directory/game/DRAGON%20BALL%20Z%3A%20KAKAROT",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/511195_IGDB-144x192.jpg"
+          "gameId": "516575",
+          "gameName": "VALORANT",
+          "viewerCount": 36414,
+          "broadcastCount": 6,
+          "categoryUrl": "https://www.twitch.tv/directory/game/VALORANT",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/516575-144x192.jpg"
         },
         {
           "rank": 9,
-          "gameId": "491931",
-          "gameName": "Escape from Tarkov",
-          "viewerCount": 15721,
+          "gameId": "1478650472",
+          "gameName": "Call of Duty: Modern Warfare 4",
+          "viewerCount": 29269,
           "broadcastCount": 4,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Escape%20from%20Tarkov",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/491931_IGDB-144x192.jpg"
+          "categoryUrl": "https://www.twitch.tv/directory/game/Call%20of%20Duty%3A%20Modern%20Warfare%204",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/1478650472_IGDB-144x192.jpg"
         },
         {
           "rank": 10,
-          "gameId": "2090279789",
-          "gameName": "FINAL FANTASY XVI",
-          "viewerCount": 12288,
+          "gameId": "9618",
+          "gameName": "Pokémon Trading Card Game",
+          "viewerCount": 18861,
           "broadcastCount": 1,
-          "categoryUrl": "https://www.twitch.tv/directory/game/FINAL%20FANTASY%20XVI",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/2090279789_IGDB-144x192.jpg"
+          "categoryUrl": "https://www.twitch.tv/directory/game/Pok%C3%A9mon%20Trading%20Card%20Game",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/9618_IGDB-144x192.jpg"
         }
       ],
       "message": "상위 라이브 100개 표본을 게임별로 합산한 Top 10이다.",
