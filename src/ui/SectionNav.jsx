@@ -25,6 +25,7 @@ function NavGlyph({ name }) {
 export default function SectionNav({ items }) {
   const [active, setActive] = useState(items[0]?.id);
   const [compactOpen, setCompactOpen] = useState(false);
+  const [hoverOpen, setHoverOpen] = useState(false);
 
   function moveToSection(event, id) {
     setCompactOpen(false);
@@ -73,14 +74,20 @@ export default function SectionNav({ items }) {
   const shown = items.filter((i) => present.includes(i.id));
   if (shown.length === 0) return null;
   const activeItem = shown.find((i) => i.id === active) ?? shown[0];
+  const expanded = compactOpen || hoverOpen;
 
   return (
-    <nav className={`secnav${compactOpen ? ' is-compact-open' : ''}`} aria-label="구획 바로가기">
+    <nav
+      className={`secnav${expanded ? ' is-compact-open' : ''}`}
+      aria-label="구획 바로가기"
+      onMouseEnter={() => setHoverOpen(true)}
+      onMouseLeave={() => setHoverOpen(false)}
+    >
       <button
         className="secnav-compact-toggle"
         type="button"
-        aria-expanded={compactOpen}
-        aria-label={compactOpen ? '구획 메뉴 접기' : `구획 메뉴 열기, 현재 ${activeItem.label}`}
+        aria-expanded={expanded}
+        aria-label={expanded ? '구획 메뉴 접기' : `구획 메뉴 열기, 현재 ${activeItem.label}`}
         onClick={() => setCompactOpen((open) => !open)}
       >
         <span className="secnav-compact-current" aria-hidden="true">
