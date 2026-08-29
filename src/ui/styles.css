@@ -1646,8 +1646,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   top: 22px;
   right: 22px;
   display: block;
-  width: 104px;
-  height: 49px;
+  width: 156px;
+  height: 73px;
   overflow: hidden;
   border: 1px solid var(--border-2);
   border-radius: 6px;
@@ -1666,7 +1666,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   opacity: .9;
 }
 .kpi-primary .hero-game {
-  max-width: calc(100% - 116px);
+  max-width: calc(100% - 168px);
   margin-bottom: 9px;
   padding: 0;
   font-size: 13px;
@@ -2018,10 +2018,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   .kpi-primary .hero-art-link {
     top: 17px;
     right: 16px;
-    width: 88px;
-    height: 41px;
+    width: 116px;
+    height: 54px;
   }
-  .kpi-primary .hero-game { max-width: calc(100% - 98px); }
+  .kpi-primary .hero-game { max-width: calc(100% - 126px); }
   .ranking-panel .rank-art-slot { display: none; }
   .ranking-panel .rank-list li { grid-template-columns: 24px minmax(0, 1fr) auto auto; gap: 7px; }
   .ranking-panel .rank-bar { left: 34px; }

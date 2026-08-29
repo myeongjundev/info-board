@@ -24,6 +24,17 @@ function NavGlyph({ name }) {
 
 export default function SectionNav({ items }) {
   const [active, setActive] = useState(items[0]?.id);
+
+  function moveToSection(event, id) {
+    if (id !== 'sec-now') return;
+
+    // 첫 구획의 실제 시작점보다 페이지 머리가 더 좋은 개요다. 상단의 서비스명,
+    // 갱신 시각, 네 축 요약까지 한 번에 다시 보이도록 `현재`만 맨 위로 보낸다.
+    event.preventDefault();
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#/`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setActive(id);
+  }
   // 실제로 페이지에 있는 구획만 줄에 올린다.
   //
   // 값이 하나도 없는 상태(EMPTY)에서는 순위·움직임 같은 구획이 아예 안 그려진다.
@@ -67,6 +78,7 @@ export default function SectionNav({ items }) {
           <li key={i.id}>
             <a
               href={`#${i.id}`}
+              onClick={(event) => moveToSection(event, i.id)}
               className={i.id === active ? 'is-on' : undefined}
               aria-current={i.id === active ? 'true' : undefined}
             >
