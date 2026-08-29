@@ -1,0 +1,145 @@
+/* 좁은 화면의 구획 나브.
+   전체 레일을 둘 자리가 없을 때는 현재 구획 아이콘과 나머지 구획의 점만 남긴다. */
+.secnav-compact-toggle { display: none; }
+
+@media (max-width: 1599px) {
+  .secnav {
+    position: fixed;
+    top: 50%;
+    left: 8px;
+    z-index: 40;
+    width: 34px;
+    height: 128px;
+    min-height: 0;
+    margin: 0;
+    padding: 5px 4px;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+    border: 1px solid var(--border-2);
+    border-radius: 17px;
+    background: rgba(13, 18, 27, .94);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(14px);
+    transition: width .18s ease, height .18s ease, border-radius .18s ease;
+  }
+
+  .secnav > ul { display: none; }
+  .secnav-icon { display: block; }
+
+  .secnav-compact-toggle {
+    display: flex;
+    width: 24px;
+    height: 116px;
+    padding: 4px 0;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+  }
+  .secnav-compact-toggle:hover { color: var(--text); background: rgba(255, 255, 255, .045); }
+  .secnav-compact-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .secnav-compact-current {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    flex: none;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #061018;
+  }
+  .secnav-compact-current .secnav-icon { width: 15px; height: 15px; }
+  .secnav-compact-dots {
+    display: grid;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .secnav-compact-dots i {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    opacity: .62;
+  }
+  .secnav-compact-close { display: none; }
+
+  .secnav.is-compact-open {
+    width: 122px;
+    height: auto;
+    min-height: 330px;
+    padding: 38px 8px 64px;
+    border-radius: 16px;
+  }
+  .secnav.is-compact-open .secnav-compact-toggle {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 8px;
+  }
+  .secnav.is-compact-open .secnav-compact-current,
+  .secnav.is-compact-open .secnav-compact-dots { display: none; }
+  .secnav.is-compact-open .secnav-compact-close { display: block; font-size: 20px; line-height: 1; }
+  .secnav.is-compact-open > ul {
+    display: grid;
+    gap: 4px;
+    overflow: visible;
+  }
+  .secnav.is-compact-open a {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 9px;
+    border: 0;
+    border-radius: 9px;
+    color: var(--text-dim);
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  .secnav.is-compact-open a:hover { background: rgba(255, 255, 255, .045); color: var(--text); }
+  .secnav.is-compact-open a.is-on {
+    background: var(--accent);
+    color: #061018;
+    box-shadow: 0 8px 20px rgba(76, 201, 240, .18);
+  }
+
+  /* 접혔을 때는 참고 화면처럼 동작 버튼도 숨긴다. 펼치면 같은 패널의 아래 칸이 된다. */
+  .secnav + .symbolrail { display: none; }
+  .secnav.is-compact-open + .symbolrail {
+    top: calc(50% + 100px);
+    right: auto;
+    bottom: auto;
+    left: 22px;
+    z-index: 41;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    width: 94px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .secnav.is-compact-open + .symbolrail button {
+    width: 45px;
+    height: 38px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    font-size: 18px;
+  }
+  .secnav.is-compact-open + .symbolrail button:hover { background: rgba(255, 255, 255, .055); }
+}
+
+@media (max-width: 420px) {
+  .secnav { left: 3px; }
+  .secnav.is-compact-open + .symbolrail { left: 17px; }
+}

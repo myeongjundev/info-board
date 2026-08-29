@@ -24,8 +24,10 @@ function NavGlyph({ name }) {
 
 export default function SectionNav({ items }) {
   const [active, setActive] = useState(items[0]?.id);
+  const [compactOpen, setCompactOpen] = useState(false);
 
   function moveToSection(event, id) {
+    setCompactOpen(false);
     if (id !== 'sec-now') return;
 
     // 첫 구획의 실제 시작점보다 페이지 머리가 더 좋은 개요다. 상단의 서비스명,
@@ -70,9 +72,25 @@ export default function SectionNav({ items }) {
 
   const shown = items.filter((i) => present.includes(i.id));
   if (shown.length === 0) return null;
+  const activeItem = shown.find((i) => i.id === active) ?? shown[0];
 
   return (
-    <nav className="secnav" aria-label="구획 바로가기">
+    <nav className={`secnav${compactOpen ? ' is-compact-open' : ''}`} aria-label="구획 바로가기">
+      <button
+        className="secnav-compact-toggle"
+        type="button"
+        aria-expanded={compactOpen}
+        aria-label={compactOpen ? '구획 메뉴 접기' : `구획 메뉴 열기, 현재 ${activeItem.label}`}
+        onClick={() => setCompactOpen((open) => !open)}
+      >
+        <span className="secnav-compact-current" aria-hidden="true">
+          <NavGlyph name={activeItem.icon} />
+        </span>
+        <span className="secnav-compact-dots" aria-hidden="true">
+          {shown.filter((i) => i.id !== activeItem.id).map((i) => <i key={i.id} />)}
+        </span>
+        <span className="secnav-compact-close" aria-hidden="true">×</span>
+      </button>
       <ul>
         {shown.map((i) => (
           <li key={i.id}>

@@ -5,6 +5,7 @@ import SalesPage from './ui/SalesPage.jsx';
 import StreamingPage from './ui/StreamingPage.jsx';
 import SalesChartsPage from './ui/SalesChartsPage.jsx';
 import './ui/styles.css';
+import './ui/section-nav-compact.css';
 
 function Root() {
   const [route, setRoute] = useState(() => window.location.hash);
