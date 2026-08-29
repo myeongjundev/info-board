@@ -149,14 +149,17 @@ function LiveApp() {
   const games = withGenres(payload?.data?.games, GAMES);
   // 화면이 크게 띄운 게임과 목록에서 강조되는 게임은 같아야 한다.
   const selectedAppid = board?.selectedAppid ?? payload?.data?.source?.heroAppid;
+  // 배치 기준은 대표 게임을 잰 시각이다. movers 와 같은 기준을 써야 한 화면 안에서
+  // "대표 배치" 가 패널마다 다른 것을 가리키지 않는다.
+  const anchorAppid = payload?.data?.source?.heroAppid;
   const ranking = showing
-    ? leaderboard(payload.data.records, games, showing.reading.date)
+    ? leaderboard(payload.data.records, games, showing.reading.date, { anchorAppid })
     : null;
   // 운영 상태의 분모는 기록 파일에 이미 들어온 게임이 아니라 코드에 확정한 수집 대상이다.
   // 첫날 파일은 16개뿐이지만 다음 정규 측정 대상은 100개이므로 16/16 이라고 쓰면
   // 준비가 끝난 것처럼 보인다.
   const coverage = showing
-    ? leaderboard(payload.data.records, GAMES, showing.reading.date)
+    ? leaderboard(payload.data.records, GAMES, showing.reading.date, { anchorAppid })
     : null;
   // 시각 편향 표본은 최신 일일 Reading이 아니라 표본 자신과 같은 KST 날짜의
   // 대표 배치와 견준다. 날짜가 지난 뒤에도 역사적 실측 근거가 거짓 비교로 바뀌지 않는다.
@@ -298,7 +301,7 @@ function LiveApp() {
               note="측정 대상 안에서 장르별 규모를 비교"
             />
             <Genres
-              data={byGenre(payload.data.records, games, showing.reading.date)}
+              data={byGenre(payload.data.records, games, showing.reading.date, { anchorAppid })}
               games={games}
               onPickGame={pickGame}
             />
@@ -343,8 +346,9 @@ function LiveApp() {
                   note="출시 13년 이상 게임의 현재 접속자"
                 />
                 <Graveyard
-                  rows={graveyard(payload.data.records, games, showing.reading.date)}
+                  rows={graveyard(payload.data.records, games, showing.reading.date, { anchorAppid })}
                   date={showing.reading.date}
+                  spread={ranking?.spread ?? null}
                 />
               </section>
             </div>
@@ -357,7 +361,7 @@ function LiveApp() {
               note="비교 가능한 공통 게임만 같은 분모로 계산"
             />
             <RankMovement
-              data={rankMovement(payload.data.records, games, showing.reading.date)}
+              data={rankMovement(payload.data.records, games, showing.reading.date, { anchorAppid })}
               onPickGame={pickGame}
             />
           </section>

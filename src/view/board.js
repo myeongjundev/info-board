@@ -27,6 +27,23 @@ export function formatInstant(iso, timeZone) {
   return `${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`;
 }
 
+/**
+ * 두 시각 사이의 길이. `10시간 10분` · `20초`.
+ *
+ * `elapsedSince` 와 다르다. 저건 지금까지 얼마나 지났는가이고 이건 두 측정
+ * 사이가 얼마나 벌어졌는가다. 방문자 시계가 끼어들지 않는다.
+ */
+export function formatSpan(ms) {
+  if (typeof ms !== 'number' || !Number.isFinite(ms) || ms < 0) return null;
+  const sec = Math.round(ms / 1000);
+  if (sec < 60) return `${sec}초`;
+  const min = Math.round(sec / 60);
+  if (min < 60) return `${min}분`;
+  const h = Math.floor(min / 60);
+  const rest = min % 60;
+  return rest === 0 ? `${h}시간` : `${h}시간 ${rest}분`;
+}
+
 /** 이만큼까지는 시계가 조금 어긋난 것으로 본다. */
 export const SKEW_TOLERANCE_MS = 60_000;
 

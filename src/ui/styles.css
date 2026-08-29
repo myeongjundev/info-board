@@ -3115,3 +3115,28 @@ summary:focus-visible {
   .stream-rank-head { padding: 0 20px; }
   .stream-rank-head span:nth-child(5) { display: none; }
 }
+
+/* ── 한 날짜 안의 시각 차이 ──
+   값은 빼지 않고 표시만 한다. 경고(.caveat)와 같은 색을 쓰되 테두리는 안 두른다 —
+   이건 무엇이 잘못됐다는 말이 아니라 이 값들을 언제 잰 것인지에 대한 사실이다. */
+.spread-note {
+  margin: 0 0 12px;
+  padding: 11px 13px;
+  border-left: 2px solid var(--warn);
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.spread-note b { color: var(--warn); font-weight: 600; }
+
+/* 대표 배치에서 벗어난 줄에만 붙는 시각. 전부 붙이면 잡음이 된다. */
+.rank-when {
+  display: block;
+  margin-top: 2px;
+  color: var(--warn);
+  font-size: 11px;
+  font-weight: 400;
+  font-style: normal;
+  white-space: nowrap;
+}

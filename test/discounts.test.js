@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  buildDiscountUrl, krwFromMinor, parseDiscountResponse, DiscountSchemaError, validateDiscountSnapshot,
+  buildDiscountUrl, krwFromMinor, parseDiscountResponse, DiscountSchemaError, trackedCount,
+  validateDiscountSnapshot,
 } from '../src/source/discounts.js';
 
 const game = { appid: 620, name: 'Portal 2', year: 2011, genre: '퍼즐' };
@@ -71,4 +72,15 @@ test('할인 스냅샷의 필수 필드를 검사한다', () => {
   };
   assert.equal(validateDiscountSnapshot(snapshot), true);
   assert.equal(validateDiscountSnapshot({ ...snapshot, discounts: [{ ...reading, finalMinor: null }] }), false);
+});
+
+// 추적 목록 크기는 성공 + 실패다. checked 하나만 쓰면 실패한 날 목록이 줄어든
+// 것처럼 보이고, GAMES.length 를 쓰면 어제 스냅샷에 오늘 목록 크기를 얹게 된다.
+test('추적 목록 크기는 성공과 실패를 함께 센다', () => {
+  assert.equal(trackedCount({ checked: 75, failed: 0 }), 75);
+  assert.equal(trackedCount({ checked: 73, failed: 2 }), 75);
+  assert.equal(trackedCount({ checked: 0, failed: 0 }), 0);
+  assert.equal(trackedCount(undefined), null);
+  assert.equal(trackedCount({ checked: 75 }), null);
+  assert.equal(trackedCount({ checked: '75', failed: 0 }), null);
 });

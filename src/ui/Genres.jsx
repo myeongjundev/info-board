@@ -17,6 +17,7 @@
 import { useState } from 'react';
 
 import { formatNumber } from '../view/board.js';
+import SpreadNote from './SpreadNote.jsx';
 import { capsuleUrl } from '../source/artwork.js';
 import GameArt from './GameArt.jsx';
 
@@ -29,6 +30,8 @@ export default function Genres({ data, games, onPickGame }) {
 
   return (
     <>
+      <SpreadNote spread={data.spread} subject="장르 합계에 든 값은" />
+
       <ol className="genre-list">
         {data.genres.map((g) => {
           const isOpen = open === g.genre;

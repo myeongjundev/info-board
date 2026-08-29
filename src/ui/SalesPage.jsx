@@ -6,12 +6,11 @@ import SegmentControl from './SegmentControl.jsx';
 import MetricCard from './MetricCard.jsx';
 
 import { headerUrl } from '../source/artwork.js';
-import { krwFromMinor, validateDiscountSnapshot } from '../source/discounts.js';
+import { krwFromMinor, trackedCount, validateDiscountSnapshot } from '../source/discounts.js';
 import { remainingLabel, validateEpicFreeSnapshot } from '../source/epicFree.js';
 import { validateFreeToKeepSnapshot, validatePopularDiscountSnapshot } from '../source/steamPromotions.js';
 import { displayArt, displayName } from '../view/gameDisplay.js';
 import { dealsOverview } from '../view/dealsOverview.js';
-import { GAMES } from '../source/definition.js';
 import GameArt from './GameArt.jsx';
 
 const DATA_URL = `${import.meta.env.BASE_URL}data/discounts.json`;
@@ -130,6 +129,13 @@ export default function SalesPage() {
   const snapshotStale = state.data
     ? Date.now() - Date.parse(state.data.completedAt) > 36 * 60 * 60 * 1000
     : false;
+  // 이 스냅샷이 실제로 돈 게임 수. 성공(checked)과 실패(failed)를 더한 것이 그날의
+  // 목록 크기다. 셈은 source 에 있다 — ui 에서 더하면 손계산 대조를 못 한다.
+  //
+  // 지금의 GAMES.length 를 쓰지 않는다. 목록이 늘어난 뒤 옛 스냅샷을 열면 새 목록
+  // 크기가 옛 수집에 붙어, "75개를 확인했다" 가 "100개를 확인했다" 로 바뀐다.
+  // 화면에 박아 둔 75 가 낡는 것과 같은 결함을 자리만 옮겨 되풀이하는 일이다.
+  const tracked = trackedCount(state.data?.counts);
   const activeEpicGiveaways = epicState.data?.giveaways.filter((item) => (
     Date.parse(item.startAt) <= nowMs && nowMs < Date.parse(item.endAt)
   )) ?? [];
@@ -150,7 +156,7 @@ export default function SalesPage() {
           tone="deals"
           eyebrow="KOREA DISCOUNT RADAR"
           title="한국 할인 게임"
-          description={`추적 중인 ${GAMES.length}개 게임에서 현재 한국 Steam 할인이 확인된 게임만 모았다.`}
+          description={`추적 중인${tracked === null ? '' : ` ${tracked}개`} 게임에서 현재 한국 Steam 할인이 확인된 게임만 모았다.`}
           aside={state.data && (
             <p className={`sales-updated${snapshotStale ? ' is-stale' : ''}`}>
               <span>{snapshotStale ? '오래된 가격 자료' : '마지막 확인'}</span>
@@ -307,14 +313,14 @@ export default function SalesPage() {
 
         {state.data && (
           <>
-            <header className="tracked-deals-heading"><div><p>TRACKED LIBRARY</p><h2>추적 게임 할인</h2></div><span>고정 목록 {GAMES.length}개 기준</span></header>
+            <header className="tracked-deals-heading"><div><p>TRACKED LIBRARY</p><h2>추적 게임 할인</h2></div><span>고정 목록 {tracked}개 기준</span></header>
             <section className="sales-kpis" aria-label="할인 요약">
-              <article><span>할인 중</span><strong>{discounts.length}</strong><small>/ {GAMES.length}개 추적</small></article>
+              <article><span>할인 중</span><strong>{discounts.length}</strong><small>/ {tracked}개 추적</small></article>
               <article><span>최대 할인</span><strong>{maxDiscount === null ? '—' : `${maxDiscount}%`}</strong></article>
               <article><span>평균 할인</span><strong>{averageDiscount === null ? '—' : `${averageDiscount}%`}</strong></article>
               <article>
                 <span>수집 상태</span><strong>{state.data.counts.checked}</strong>
-                <small>/ {GAMES.length}개 중 확인 · 실패 {state.data.counts.failed}</small>
+                <small>/ {tracked}개 시도 · 실패 {state.data.counts.failed}</small>
               </article>
             </section>
 
@@ -366,7 +372,7 @@ export default function SalesPage() {
                 <h2>비공식 Steam Store 응답</h2>
               </div>
               <p>
-                이 페이지는 Steam 전체가 아니라 추적 게임 {GAMES.length}개만 확인한다. 문서화되지 않은
+                이 페이지는 Steam 전체가 아니라 추적 게임 {tracked}개만 확인한다. 문서화되지 않은
                 <code> appdetails</code> 응답이라 예고 없이 바뀔 수 있고, 실패한 게임은 0%로
                 만들지 않고 수집 상태에서 따로 센다. 제출 전 유지 여부를 다시 검토한다.
               </p>
