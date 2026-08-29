@@ -3055,6 +3055,43 @@ summary:focus-visible {
 .metric-card > strong { display: block; margin-top: 11px; font: 700 30px/1 var(--mono); }
 .metric-card > small { display: block; margin-top: 9px; color: var(--text-faint); font-size: 11px; }
 
+.platform-status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.platform-status-card { cursor: default; }
+.platform-status-card:hover { transform: none; }
+.stream-rank-actions { display: flex; align-items: flex-end; gap: 18px; }
+.stream-platform-switch {
+  display: flex;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.stream-platform-switch button {
+  min-width: 72px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-faint);
+  font: 700 11px/1 var(--sans);
+  cursor: pointer;
+}
+.stream-platform-switch button.is-active { background: var(--platform); color: var(--bg); }
+.stream-rank-head {
+  display: grid;
+  grid-template-columns: 54px 68px minmax(0, 1fr) 120px 100px;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, .018);
+  color: var(--text-faint);
+  font: 700 10px/1 var(--sans);
+  letter-spacing: .08em;
+}
+.stream-rank-head span:nth-child(4),
+.stream-rank-head span:nth-child(5) { text-align: right; }
+
 @media (max-width: 720px) {
   .page-hero { grid-template-columns: 1fr; gap: 24px; padding: 40px 0 28px; }
   .page-hero h1 { font-size: clamp(38px, 12vw, 56px); }
@@ -3070,4 +3107,11 @@ summary:focus-visible {
   .deals-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
   .metric-card:nth-child(3) { border-top: 1px solid var(--border); border-left: 0; }
   .metric-card:nth-child(4) { border-top: 1px solid var(--border); }
+  .platform-status-grid { grid-template-columns: 1fr; }
+  .stream-rank-panel > header { align-items: flex-start; flex-direction: column; }
+  .stream-rank-actions { width: 100%; align-items: center; justify-content: space-between; }
+  .stream-rank-head,
+  .stream-rank-list li { grid-template-columns: 34px 44px minmax(0, 1fr) 68px; }
+  .stream-rank-head { padding: 0 20px; }
+  .stream-rank-head span:nth-child(5) { display: none; }
 }

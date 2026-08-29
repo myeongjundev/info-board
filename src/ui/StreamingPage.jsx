@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
 import PageHero from './PageHero.jsx';
+import SegmentControl from './SegmentControl.jsx';
 
 import {
   crossPlatformGames,
@@ -61,7 +62,12 @@ export default function StreamingPage() {
   }, []);
 
   const connected = state.data?.platforms.filter((item) => item.status === 'ok').length ?? 0;
-  const active = state.data?.platforms.find((item) => item.id === activeId);
+  const selectablePlatforms = state.data?.platforms.filter((item) => item.status === 'ok') ?? [];
+  const active = selectablePlatforms.find((item) => item.id === activeId)
+    ?? selectablePlatforms[0]
+    ?? state.data?.platforms.find((item) => item.id === activeId)
+    ?? state.data?.platforms[0];
+  const resolvedActiveId = active?.id ?? activeId;
   const totalViewers = useMemo(() => (
     active?.rankings.reduce((sum, item) => sum + item.viewerCount, 0) ?? 0
   ), [active]);
@@ -99,58 +105,74 @@ export default function StreamingPage() {
                 const meta = STREAMING_PLATFORMS[item.id];
                 const status = STATUS_COPY[item.status];
                 return (
-                  <button
-                    type="button"
+                  <article
                     key={item.id}
-                    className={`platform-status-card is-${item.status}${activeId === item.id ? ' is-active' : ''}`}
+                    className={`platform-status-card is-${item.status}${resolvedActiveId === item.id ? ' is-active' : ''}`}
                     style={{ '--platform': meta.color }}
-                    onClick={() => setActiveId(item.id)}
                   >
                     <span className="platform-wordmark">{meta.label}</span>
                     <span className="platform-status-dot" aria-hidden="true" />
                     <strong>{status[0]}</strong>
                     <small>{item.status === 'ok' ? formatKst(item.fetchedAt) : status[1]}</small>
-                  </button>
+                  </article>
                 );
               })}
             </section>
 
-            <section className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[activeId].color }}>
+            <section className="stream-rank-panel" style={{ '--platform': STREAMING_PLATFORMS[resolvedActiveId].color }}>
               <header>
                 <div>
-                  <p>{STREAMING_PLATFORMS[activeId].label} · GAME TOP 10</p>
-                  <h2>{STREAMING_PLATFORMS[activeId].koreanLabel} 인기 게임 Top 10</h2>
+                  <p>{STREAMING_PLATFORMS[resolvedActiveId].label} · GAME TOP 10</p>
+                  <h2>{STREAMING_PLATFORMS[resolvedActiveId].koreanLabel} 인기 게임 Top 10</h2>
                   <span className="stream-compare-time">{previous ? `${formatKst(previous.fetchedAt)} 대비` : '비교할 이전 정상 표본을 기다리는 중'}</span>
                 </div>
-                <div className="stream-rank-summary">
-                  <span>표본 시청자</span>
-                  <strong>{active?.status === 'ok' ? formatViewerCount(totalViewers) : '—'}</strong>
+                <div className="stream-rank-actions">
+                  {selectablePlatforms.length > 1 && (
+                    <SegmentControl
+                      className="stream-platform-switch"
+                      label="스트리밍 플랫폼"
+                      value={resolvedActiveId}
+                      onChange={setActiveId}
+                      options={selectablePlatforms.map((item) => ({
+                        value: item.id, label: STREAMING_PLATFORMS[item.id].label,
+                      }))}
+                    />
+                  )}
+                  <div className="stream-rank-summary">
+                    <span>표본 시청자</span>
+                    <strong>{active?.status === 'ok' ? formatViewerCount(totalViewers) : '—'}</strong>
+                  </div>
                 </div>
               </header>
 
               {active?.status === 'ok' && active.rankings.length ? (
-                <ol className="stream-rank-list">
-                  {active.rankings.slice(0, 10).map((item) => {
-                    const trend = streamingRankTrend(item, previous);
-                    return <li key={`${active.id}-${item.rank}-${item.gameName}`}>
-                      <b>{String(item.rank).padStart(2, '0')}</b>
-                      <span className="stream-art-slot"><GameArt className="stream-game-art" src={item.imageUrl} width={54} height={72} /></span>
-                      <div className="stream-game-copy">
-                        <strong>{item.gameName}</strong><span>방송 {formatViewerCount(item.broadcastCount)}개</span>
-                        <small className={`stream-trend is-${trend.kind}`}><b>{trend.label}</b>{signedViewerDelta(trend.viewerDelta)}</small>
-                      </div>
-                      <p><strong>{formatViewerCount(item.viewerCount)}</strong><span>명</span></p>
-                      {item.categoryUrl && <a href={item.categoryUrl} target="_blank" rel="noreferrer">보러가기 ↗</a>}
-                    </li>;
-                  })}
-                </ol>
+                <>
+                  <div className="stream-rank-head" aria-hidden="true">
+                    <span>순위</span><span>표지</span><span>게임 · 직전 표본 변화</span><span>시청자</span><span>이동</span>
+                  </div>
+                  <ol className="stream-rank-list">
+                    {active.rankings.slice(0, 10).map((item) => {
+                      const trend = streamingRankTrend(item, previous);
+                      return <li key={`${active.id}-${item.rank}-${item.gameName}`}>
+                        <b>{String(item.rank).padStart(2, '0')}</b>
+                        <span className="stream-art-slot"><GameArt className="stream-game-art" src={item.imageUrl} width={54} height={72} /></span>
+                        <div className="stream-game-copy">
+                          <strong>{item.gameName}</strong><span>방송 {formatViewerCount(item.broadcastCount)}개</span>
+                          <small className={`stream-trend is-${trend.kind}`}><b>{trend.label}</b>{signedViewerDelta(trend.viewerDelta)}</small>
+                        </div>
+                        <p><strong>{formatViewerCount(item.viewerCount)}</strong><span>명</span></p>
+                        {item.categoryUrl && <a href={item.categoryUrl} target="_blank" rel="noreferrer">보러가기 ↗</a>}
+                      </li>;
+                    })}
+                  </ol>
+                </>
               ) : (
                 <div className="stream-empty">
-                  <span aria-hidden="true">{String(activeId === 'twitch' ? '02' : '01')}</span>
+                  <span aria-hidden="true">{String(resolvedActiveId === 'twitch' ? '02' : '01')}</span>
                   <div>
                     <h3>{STATUS_COPY[active?.status]?.[0] ?? '데이터 없음'}</h3>
                     <p>{active?.message ?? STATUS_COPY[active?.status]?.[1]}</p>
-                    <a href={active?.docsUrl ?? STREAMING_PLATFORMS[activeId].serviceUrl} target="_blank" rel="noreferrer">공식 안내 확인 ↗</a>
+                    <a href={active?.docsUrl ?? STREAMING_PLATFORMS[resolvedActiveId].serviceUrl} target="_blank" rel="noreferrer">공식 안내 확인 ↗</a>
                   </div>
                 </div>
               )}
