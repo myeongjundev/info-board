@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import SubpageTopBar from './SubpageTopBar.jsx';
+import PageHero from './PageHero.jsx';
+import SegmentControl from './SegmentControl.jsx';
 
 import { rankMovement, validateSalesChartSnapshot } from '../source/salesCharts.js';
 import { countAdult, displayArt, displayName, priceMarksOnScreen } from '../view/gameDisplay.js';
@@ -94,10 +96,13 @@ export default function SalesChartsPage() {
       <SubpageTopBar current="#/charts" caption="Steam 한국·글로벌 매출 순위" />
 
       <main>
-        <section className="charts-hero">
-          <div><p>STEAM REVENUE RANKING</p><h1>무엇이 지금<br />팔리고 있을까</h1><span>판매량 추정 없이 Steam이 공개한 매출 순위만 읽는다.</span></div>
-          {state.data && <div className="charts-updated"><span>LAST CHECKED</span><strong>{formatKst(state.data.completedAt)}</strong><small>KST · 매시간 갱신</small></div>}
-        </section>
+        <PageHero
+          tone="selling"
+          eyebrow="STEAM REVENUE RANKING"
+          title={<>무엇이 지금<br />{' '}팔리고 있을까</>}
+          description="판매량 추정 없이 Steam이 공개한 매출 순위만 읽는다."
+          aside={state.data && <div className="charts-updated"><span>LAST CHECKED</span><strong>{formatKst(state.data.completedAt)}</strong><small>KST · 매시간 갱신</small></div>}
+        />
 
         {state.status === 'loading' && <p className="sales-state">Steam 판매 차트를 읽는 중…</p>}
         {state.status === 'error' && <p className="sales-state is-error"><b>판매 차트를 읽지 못했다.</b><span>{state.message}</span></p>}
@@ -106,11 +111,17 @@ export default function SalesChartsPage() {
           <section className="live-sales-section" aria-labelledby="live-sales-title">
             <header className="charts-section-heading">
               <div><p>TOP SELLING RIGHT NOW · BY REVENUE</p><h2 id="live-sales-title">지금 많이 팔리는 게임</h2></div>
-              <div className="region-switch" role="group" aria-label="판매 지역">
-                <button className={region === 'korea' ? 'is-active' : ''} type="button" onClick={() => setRegion('korea')}>한국</button>
-                <button className={region === 'global' ? 'is-active' : ''} type="button" onClick={() => setRegion('global')}>글로벌</button>
-              </div>
+              <SegmentControl
+                className="region-switch"
+                label="판매 지역"
+                value={region}
+                onChange={setRegion}
+                options={[{ value: 'korea', label: '한국' }, { value: 'global', label: '글로벌' }]}
+              />
             </header>
+            <div className="rank-table-head is-live" aria-hidden="true">
+              <span>순위</span><span>게임</span><span>표시 가격</span><span>상점</span>
+            </div>
             <ol className="sales-rank-list">
               {liveItems.map((item) => <li key={`${region}-${item.appid}`}>
                 <b className="sales-rank-no">{String(item.rank).padStart(2, '0')}</b>
@@ -128,6 +139,9 @@ export default function SalesChartsPage() {
               <div><p>OFFICIAL WEEKLY TOP 20</p><h2 id="weekly-sales-title">이번 주 매출 순위</h2><span>{formatDateKst(state.data.weekly.weekStart)} 시작 · 한국</span></div>
               <a href={state.data.source.overview} target="_blank" rel="noreferrer">공식 차트 ↗</a>
             </header>
+            <div className="rank-table-head is-weekly" aria-hidden="true">
+              <span>순위</span><span>게임</span><span>변화</span><span>연속</span><span>표시 가격</span>
+            </div>
             <ol className="weekly-rank-list">
               {state.data.weekly.items.map((item) => {
                 const movement = rankMovement(item);
@@ -147,14 +161,17 @@ export default function SalesChartsPage() {
               <div><p>STEAM RELEASE CALENDAR · POPULAR SAMPLE</p><h2 id="release-calendar-title">신작 출시 캘린더</h2><span>한국 상점의 인기 신작·주요 출시 예정작 각 최대 20개</span></div>
               <a href={state.data.source.releaseCalendar[releaseTab === 'current' ? 'recent' : 'upcoming']} target="_blank" rel="noreferrer">검색 원자료 ↗</a>
             </header>
-            <div className="release-calendar-tabs" role="tablist" aria-label="출시 월 선택">
-              <button type="button" role="tab" aria-selected={releaseTab === 'current'} className={releaseTab === 'current' ? 'is-active' : ''} onClick={() => setReleaseTab('current')}>
-                {monthKeyLabel(state.data.releaseCalendar.currentMonth)} 신작 <span>{state.data.releaseCalendar.current.length}</span>
-              </button>
-              <button type="button" role="tab" aria-selected={releaseTab === 'upcoming'} className={releaseTab === 'upcoming' ? 'is-active' : ''} onClick={() => setReleaseTab('upcoming')}>
-                {monthKeyLabel(state.data.releaseCalendar.nextMonth)} 출시 예정 <span>{state.data.releaseCalendar.upcoming.length}</span>
-              </button>
-            </div>
+            <SegmentControl
+              className="release-calendar-tabs"
+              role="tablist"
+              label="출시 월 선택"
+              value={releaseTab}
+              onChange={setReleaseTab}
+              options={[
+                { value: 'current', label: `${monthKeyLabel(state.data.releaseCalendar.currentMonth)} 신작`, meta: state.data.releaseCalendar.current.length },
+                { value: 'upcoming', label: `${monthKeyLabel(state.data.releaseCalendar.nextMonth)} 출시 예정`, meta: state.data.releaseCalendar.upcoming.length },
+              ]}
+            />
             {releaseItems.length === 0 ? (
               <p className="release-calendar-empty">{monthKeyLabel(releaseMonth)}에 공개 날짜가 확인된 인기 게임이 없다.</p>
             ) : (

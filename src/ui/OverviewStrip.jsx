@@ -67,10 +67,13 @@ export default function OverviewStrip({ board, faulted = false }) {
     <section className="overview-strip" aria-labelledby="overview-title">
       <header className="overview-strip-heading">
         <div>
-          <p>GAME MARKET AT A GLANCE</p>
-          <h2 id="overview-title">지금 게임 시장, 네 가지를 잰다</h2>
+          <p>GAME MARKET INTELLIGENCE</p>
+          <h2 id="overview-title">게임 시장, 한눈에 읽다</h2>
         </div>
-        <span>대표값을 선택하면 근거가 있는 상세 구역으로 이동합니다.</span>
+        <div className="overview-strip-meta">
+          <b>{board?.reading?.date ?? '최신 수집본'} · 4 AXES</b>
+          <span>각 지표를 선택하면 계산 근거와 상세 구역으로 이동합니다.</span>
+        </div>
       </header>
       <div className="overview-axis-grid">
         {axes.map((axis, index) => {
@@ -86,6 +89,7 @@ export default function OverviewStrip({ board, faulted = false }) {
               <strong>{copy.metric}</strong>
               <b>{copy.subject}</b>
               <small>{copy.detail}</small>
+              <span className="overview-axis-action">상세 보기 <i aria-hidden="true">→</i></span>
             </a>
           );
         })}

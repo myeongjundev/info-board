@@ -23,8 +23,8 @@ export default function TopBar({
       <div className="topbar-left">
         <h1 className="wordmark">GAME PULSE</h1>
         <p>
-          <span>Steam 동시접속자 · 매일 {scheduledAt} KST 예정</span>
-          {actualTime && <span>최근 {actualTime} 측정</span>}
+          <span>게임 시장 데이터 인텔리전스</span>
+          <span>Steam 기준 매일 {scheduledAt} 예정{actualTime && ` · 최근 ${actualTime} 측정`}</span>
         </p>
       </div>
 

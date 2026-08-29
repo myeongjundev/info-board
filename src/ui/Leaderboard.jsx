@@ -3,24 +3,30 @@
 // 이 패널만 이전 기록 없이 성립한다. 기록이 하루뿐인 첫날에 움직임 패널이
 // 꺼져 있어도 여기는 채워진다 — 재놓고 안 보여주던 15개를 꺼내는 자리다.
 
+import { useState } from 'react';
 import { formatNumber, formatInstant } from '../view/board.js';
 import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
 import { steamStoreUrl } from '../source/steamLinks.js';
 import { SOURCE } from '../source/definition.js';
 import GameArt from './GameArt.jsx';
+import ListDisclosure from './ListDisclosure.jsx';
 import SpreadNote from './SpreadNote.jsx';
 
 export default function Leaderboard({ data, heroAppid, onShowPrice }) {
+  const [expanded, setExpanded] = useState(false);
+
   if (!data) {
     return <p className="empty-note">오늘 잰 기록이 없다.</p>;
   }
+
+  const visibleRows = expanded ? data.rows : data.rows.slice(0, 12);
 
   return (
     <>
       <SpreadNote spread={data.spread} subject="이 순위는" />
 
       <ol className="rank-list">
-        {data.rows.map((r) => (
+        {visibleRows.map((r) => (
           <li key={r.appid} className={r.appid === heroAppid ? 'is-hero' : undefined}>
             <span className="rank-no">{r.rank}</span>
             {/* 자리는 남기고 그림만 사라진다.
@@ -78,6 +84,16 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
           </li>
         ))}
       </ol>
+
+      {data.rows.length > 12 && (
+        <ListDisclosure
+          expanded={expanded}
+          onToggle={() => setExpanded((value) => !value)}
+          visible={visibleRows.length}
+          total={data.rows.length}
+          collapsedNote={`나머지 ${data.rows.length - visibleRows.length}개는 필요할 때 펼쳐본다`}
+        />
+      )}
 
       <details className="method-note">
         <summary>%는 측정한 {data.measured}개 안에서 계산</summary>

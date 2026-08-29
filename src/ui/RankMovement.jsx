@@ -8,6 +8,8 @@
 // 보인다. 값은 멀쩡한데 화면이 거짓말을 하는 종류라 계산에서 막았고, 화면에는
 // 기준이 된 개수를 적는다.
 
+import { useState } from 'react';
+import ListDisclosure from './ListDisclosure.jsx';
 import { formatNumber, formatInstant, formatSpan } from '../view/board.js';
 import { SOURCE } from '../source/definition.js';
 
@@ -20,6 +22,8 @@ function whenText(spread) {
 }
 
 export default function RankMovement({ data, onPickGame }) {
+  const [expanded, setExpanded] = useState(false);
+
   if (!data) {
     return (
       <p className="delta-none">
@@ -31,6 +35,7 @@ export default function RankMovement({ data, onPickGame }) {
 
   // 자리가 바뀐 것만 위에 따로 보인다. 안 바뀐 줄이 대부분이면 볼 것이 없다.
   const moved = data.rows.filter((r) => r.movement !== 0);
+  const visibleRows = expanded ? data.rows : data.rows.slice(0, 12);
 
   return (
     <>
@@ -57,7 +62,7 @@ export default function RankMovement({ data, onPickGame }) {
         <p className="empty-note">자리가 바뀐 게임이 없다.</p>
       ) : (
         <ol className="rankmove">
-          {data.rows.map((r) => (
+          {visibleRows.map((r) => (
             <li key={r.appid} className={r.movement === 0 ? 'is-flat' : undefined}>
               <button type="button" onClick={() => onPickGame?.(r.appid)} title={`${r.name} 을 대표값으로 보기`}>
                 <span className="rm-rank">{r.currentRank}</span>
@@ -79,6 +84,16 @@ export default function RankMovement({ data, onPickGame }) {
             </li>
           ))}
         </ol>
+      )}
+
+      {moved.length > 0 && data.rows.length > 12 && (
+        <ListDisclosure
+          expanded={expanded}
+          onToggle={() => setExpanded((value) => !value)}
+          visible={visibleRows.length}
+          total={data.rows.length}
+          collapsedNote={`나머지 ${data.rows.length - visibleRows.length}개 순위 이동은 펼쳐서 확인`}
+        />
       )}
 
       <p className="source-url">

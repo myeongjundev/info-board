@@ -11,6 +11,10 @@ const KST_MORNING = new Date('2026-08-27T01:00:00Z');
 // 2026-08-26 16:00 UTC = 2026-08-27 01:00 KST — UTC 로는 어제, KST 로는 오늘
 const KST_JUST_PAST_MIDNIGHT = new Date('2026-08-26T16:00:00Z');
 
+test('고정 측정 목록은 100개다', () => {
+  assert.equal(GAMES.length, 100);
+});
+
 test('게임 표에 appid 중복이 없다', () => {
   const ids = GAMES.map((g) => g.appid);
   assert.equal(new Set(ids).size, ids.length);
