@@ -3,10 +3,12 @@
 // 이 패널만 이전 기록 없이 성립한다. 기록이 하루뿐인 첫날에 움직임 패널이
 // 꺼져 있어도 여기는 채워진다 — 재놓고 안 보여주던 15개를 꺼내는 자리다.
 
-import { formatNumber } from '../view/board.js';
+import { formatNumber, formatInstant } from '../view/board.js';
 import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
 import { steamStoreUrl } from '../source/steamLinks.js';
+import { SOURCE } from '../source/definition.js';
 import GameArt from './GameArt.jsx';
+import SpreadNote from './SpreadNote.jsx';
 
 export default function Leaderboard({ data, heroAppid, onShowPrice }) {
   if (!data) {
@@ -15,6 +17,8 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
 
   return (
     <>
+      <SpreadNote spread={data.spread} subject="이 순위는" />
+
       <ol className="rank-list">
         {data.rows.map((r) => (
           <li key={r.appid} className={r.appid === heroAppid ? 'is-hero' : undefined}>
@@ -47,6 +51,13 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
               <span className="rank-share">
                 {r.shareOfMeasured === null ? '—' : `${r.shareOfMeasured.toFixed(1)}%`}
               </span>
+              {/* 대표값과 다른 시각에 잰 줄만 시각을 단다. 전부 달면 같은 배치인
+                  날에도 잡음이 되고, 안 달면 다른 시각인 것이 안 보인다. */}
+              {r.offBatch && (
+                <span className="rank-when" title="대표값과 다른 시각에 잰 값이다">
+                  {formatInstant(r.fetchedAt, SOURCE.timezone).slice(11)} 측정
+                </span>
+              )}
             </span>
             <button
               type="button"

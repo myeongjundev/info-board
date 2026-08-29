@@ -20,6 +20,58 @@ function sameCollectionBatch(reading, anchor, windowMs = COLLECTION_BATCH_MS) {
   return Math.abs(new Date(reading.fetchedAt) - new Date(anchor.fetchedAt)) <= windowMs;
 }
 
+/**
+ * 그 날짜의 기록을 **언제 잰 것들인가.**
+ *
+ * 하루가 한 번에 잰 것이라는 보장이 없다. `pendingGamesForDate` 는 그날 빠진
+ * 게임만 채우므로, 목록이 늘어난 날이나 일부가 실패한 날은 한 날짜 안에 배치가
+ * 둘 이상 생긴다. 실제로 2026-08-27 이 그랬다 — 16개는 09:59 KST, 59개는
+ * 20:09 KST 로 **10시간 10분** 차다.
+ *
+ * ## 여기서 값을 빼지 않는다
+ *
+ * `movers` 는 다른 배치를 비교에서 뺀다. 그쪽은 **차이를 만드는** 계산이라
+ * 시각이 다르면 없는 변화를 만들어 내기 때문이다. 줄세우기·장르 합계·순위 이동은
+ * 다르다. 거기 있는 것은 전부 **실제로 잰 값**이고, 빼면 그날 잰 것을 우리가
+ * 화면에서 지우는 쪽이 된다.
+ *
+ * 그래서 값은 그대로 두고 **언제 잰 것인지를 화면이 말하게 한다.** 이 저장소가
+ * 여태 고른 쪽과 같다 — 오래된 값을 지우지 않고 오래됐다고 적는 것, 접은 항목의
+ * 순위를 지우지 않고 접었다고 적는 것과 같은 자리다.
+ *
+ * @returns {{measured:number, from:string, to:string, spanMs:number,
+ *            anchorAt:string|null, offBatch:number, coherent:boolean}|null}
+ */
+export function measurementSpread(records, games, date, {
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
+  const rows = [];
+  for (const g of games) {
+    const r = seriesOf(records, g.appid).find((x) => x.date === date);
+    if (r && typeof r.fetchedAt === 'string' && Number.isFinite(Date.parse(r.fetchedAt))) rows.push(r);
+  }
+  if (rows.length === 0) return null;
+
+  const times = rows.map((r) => Date.parse(r.fetchedAt)).sort((a, b) => a - b);
+  // 기준은 대표 게임을 잰 시각이다. 대표 게임이 그날 없으면 가장 이른 것을 쓴다.
+  const anchor = seriesOf(records, anchorAppid).find((x) => x.date === date)
+    ?? rows.find((r) => Date.parse(r.fetchedAt) === times[0]);
+  const spanMs = times.at(-1) - times[0];
+
+  return {
+    measured: rows.length,
+    from: new Date(times[0]).toISOString(),
+    to: new Date(times.at(-1)).toISOString(),
+    spanMs,
+    anchorAt: anchor?.fetchedAt ?? null,
+    // 대표 배치에서 벗어난 행 수. 값을 빼지 않으므로 이건 제외 건수가 아니라
+    // "다른 시각에 잰 것이 몇 개인가" 다.
+    offBatch: rows.filter((r) => !sameCollectionBatch(r, anchor, batchWindowMs)).length,
+    coherent: spanMs <= batchWindowMs,
+  };
+}
+
 function dateInTimezone(instant, timeZone = 'Asia/Seoul') {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
@@ -98,12 +150,21 @@ export function movers(records, games, date, {
  *
  * 이전 기록이 필요 없다. 그날 값 하나로 성립하므로 **첫날부터 보인다.**
  */
-export function graveyard(records, games, date, { limit = Infinity } = {}) {
+export function graveyard(records, games, date, {
+  limit = Infinity,
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
+  const anchor = seriesOf(records, anchorAppid).find((x) => x.date === date);
   const rows = games
     .filter((g) => g.tier === 'legacy')
     .map((g) => {
       const r = seriesOf(records, g.appid).find((x) => x.date === date);
-      return r ? { appid: g.appid, name: g.name, year: g.year, value: r.value, unit: r.unit } : null;
+      return r ? {
+        appid: g.appid, name: g.name, year: g.year, value: r.value, unit: r.unit,
+        fetchedAt: r.fetchedAt,
+        offBatch: anchor ? !sameCollectionBatch(r, anchor, batchWindowMs) : false,
+      } : null;
     })
     .filter(Boolean)
     .sort((a, b) => a.year - b.year);   // 오래된 것부터
@@ -156,9 +217,14 @@ export function ageOf(year, date) {
  *
  * @returns {{rows:Array, total:number, measured:number, missing:number, unit:string}|null}
  */
-export function leaderboard(records, games, date) {
+export function leaderboard(records, games, date, {
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
   const rows = [];
   let missing = 0;
+
+  const anchor = seriesOf(records, anchorAppid).find((x) => x.date === date);
 
   for (const g of games) {
     const r = seriesOf(records, g.appid).find((x) => x.date === date);
@@ -170,6 +236,10 @@ export function leaderboard(records, games, date) {
       tier: g.tier,
       value: r.value,
       unit: r.unit,
+      // 이 줄을 잰 시각. 순위는 값으로 매기지만 값의 뜻은 시각에 달렸다.
+      fetchedAt: r.fetchedAt,
+      // 대표 배치와 다른 시각에 잰 줄인가. 빼지 않고 표시만 한다.
+      offBatch: anchor ? !sameCollectionBatch(r, anchor, batchWindowMs) : false,
     });
   }
 
@@ -186,7 +256,15 @@ export function leaderboard(records, games, date) {
     r.relative = rows[0].value > 0 ? (r.value / rows[0].value) * 100 : null;
   }
 
-  return { rows, total, measured: rows.length, missing, unit: rows[0].unit };
+  return {
+    rows,
+    total,
+    measured: rows.length,
+    missing,
+    unit: rows[0].unit,
+    // 이 순위가 한 번에 잰 것인지. 아니면 화면이 그 사실을 적는다.
+    spread: measurementSpread(records, games, date, { anchorAppid, batchWindowMs }),
+  };
 }
 
 /**
@@ -247,7 +325,11 @@ function daysApart(from, to) {
  *
  * @returns {{genres:Array, total:number, previousDate:string|null, unit:string}|null}
  */
-export function byGenre(records, games, date, { previousDate = null } = {}) {
+export function byGenre(records, games, date, {
+  previousDate = null,
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
   const prevDate = previousDate ?? previousDateOf(records, date);
   const buckets = new Map();
 
@@ -321,7 +403,15 @@ export function byGenre(records, games, date, { previousDate = null } = {}) {
     g.relative = genres[0].total > 0 ? (g.total / genres[0].total) * 100 : null;
   }
 
-  return { genres, total, previousDate: prevDate, unit: genres[0].rows[0].unit };
+  return {
+    genres,
+    total,
+    previousDate: prevDate,
+    unit: genres[0].rows[0].unit,
+    // 장르 합계는 서로 다른 시각의 값을 더한 것일 수 있다. 더하기를 멈추지 않고
+    // 무엇을 더한 것인지 적는다.
+    spread: measurementSpread(records, games, date, { anchorAppid, batchWindowMs }),
+  };
 }
 
 /** 그 날짜 바로 앞에 기록이 있는 날. 없으면 null. */
@@ -441,7 +531,11 @@ export function timeBias(records, probe, games, date, {
  *
  * @returns {{rows:Array, basis:number, previousDate:string, excludedToday:number, excludedBefore:number}|null}
  */
-export function rankMovement(records, games, date, { previousDate = null } = {}) {
+export function rankMovement(records, games, date, {
+  previousDate = null,
+  anchorAppid = games[0]?.appid,
+  batchWindowMs = COLLECTION_BATCH_MS,
+} = {}) {
   const prevDate = previousDate ?? previousDateOf(records, date);
   if (!prevDate) return null;
 
@@ -474,6 +568,9 @@ export function rankMovement(records, games, date, { previousDate = null } = {})
   const nowRank = rankOf('now');
   const beforeRank = rankOf('before');
 
+  const currentAnchor = seriesOf(records, anchorAppid).find((x) => x.date === date);
+  const previousAnchor = seriesOf(records, anchorAppid).find((x) => x.date === prevDate);
+
   const rows = both.map((r) => {
     const currentRank = nowRank.get(r.appid);
     const previousRank = beforeRank.get(r.appid);
@@ -484,6 +581,12 @@ export function rankMovement(records, games, date, { previousDate = null } = {})
       unit: r.unit,
       currentRank,
       previousRank,
+      // 이 줄의 두 값을 각각 언제 쟀는가. 한쪽이라도 그날 대표 배치에서 벗어나
+      // 있으면 이 줄의 이동에는 하루의 변화가 아닌 시각 차이가 섞여 있다.
+      currentAt: r.now.fetchedAt,
+      previousAt: r.before.fetchedAt,
+      crossBatch: !sameCollectionBatch(r.now, currentAnchor, batchWindowMs)
+        || !sameCollectionBatch(r.before, previousAnchor, batchWindowMs),
       // 양수가 올라간 것이다. 순위는 숫자가 작아지는 쪽이 상승이다.
       movement: previousRank - currentRank,
       currentValue: r.now.value,
@@ -494,5 +597,15 @@ export function rankMovement(records, games, date, { previousDate = null } = {})
 
   rows.sort((a, b) => a.currentRank - b.currentRank);
 
-  return { rows, basis: both.length, previousDate: prevDate, excludedToday, excludedBefore };
+  return {
+    rows,
+    basis: both.length,
+    previousDate: prevDate,
+    excludedToday,
+    excludedBefore,
+    // 두 날짜를 각각 언제 잰 것인가. 순위 이동은 두 날의 값으로 내므로 양쪽이
+    // 다 필요하다 — 어제가 저녁, 오늘이 아침이면 이동의 일부는 시각 차이다.
+    spread: measurementSpread(records, games, date, { anchorAppid, batchWindowMs }),
+    previousSpread: measurementSpread(records, games, prevDate, { anchorAppid, batchWindowMs }),
+  };
 }

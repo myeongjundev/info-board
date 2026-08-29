@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement, aliveLabel, ageOf, ALIVE_RULE } from '../src/view/panels.js';
+import { movers, graveyard, leaderboard, dayStrip, byGenre, withGenres, timeBias, rankMovement, aliveLabel, ageOf, ALIVE_RULE, measurementSpread } from '../src/view/panels.js';
 
 const rec = (date, appid, value) => ({
   value, unit: '명', appid, date,
@@ -574,4 +574,77 @@ test('바로 앞에 기록이 있는 날을 이전 날로 삼는다', () => {
   const records = [rec('2026-08-24', 730, 100), rec('2026-08-28', 730, 200)];
   const m = rankMovement(records, GAMES, '2026-08-28');
   assert.equal(m.previousDate, '2026-08-24');
+});
+
+// ── 한 날짜 안의 시각 차이 — 값은 빼지 않고 화면이 밝힌다 ──────────────────────
+
+const at = (date, appid, value, time) => ({ ...rec(date, appid, value), fetchedAt: `${date}T${time}.000Z` });
+
+test('한 배치로 잰 날은 적을 것이 없다', () => {
+  const records = GAMES.map((g) => at('2026-08-28', g.appid, 1000, '01:39:05'));
+  const s = measurementSpread(records, GAMES, '2026-08-28', { anchorAppid: 730 });
+  assert.equal(s.coherent, true);
+  assert.equal(s.offBatch, 0);
+  assert.equal(s.measured, GAMES.length);
+});
+
+test('한 날짜가 두 배치면 구간과 벗어난 개수를 준다', () => {
+  const records = [
+    at('2026-08-27', 730, 500000, '00:59:17'),
+    at('2026-08-27', 570, 400000, '00:59:19'),
+    at('2026-08-27', 550, 20000, '11:09:20'),   // 10시간 뒤
+    at('2026-08-27', 10, 9000, '11:09:21'),
+  ];
+  const s = measurementSpread(records, GAMES, '2026-08-27', { anchorAppid: 730 });
+  assert.equal(s.coherent, false);
+  assert.equal(s.offBatch, 2);
+  assert.equal(s.measured, 4);
+  assert.equal(s.spanMs, (10 * 60 + 10) * 60 * 1000 + 4000);
+  assert.equal(s.anchorAt, '2026-08-27T00:59:17.000Z');
+});
+
+test('줄세우기는 다른 시각에 잰 값도 빼지 않는다 — 표시만 한다', () => {
+  const records = [
+    at('2026-08-27', 730, 500000, '00:59:17'),
+    at('2026-08-27', 550, 900000, '11:09:20'),   // 저녁에 재서 1위가 됐다
+  ];
+  const board = leaderboard(records, GAMES, '2026-08-27', { anchorAppid: 730 });
+
+  // 값도 순위도 그대로다. movers 처럼 빼지 않는다.
+  assert.equal(board.measured, 2);
+  assert.deepEqual(board.rows.map((r) => r.name), ['Left 4 Dead 2', 'Counter-Strike 2']);
+  assert.equal(board.rows[0].offBatch, true);
+  assert.equal(board.rows[1].offBatch, false);
+  assert.equal(board.spread.coherent, false);
+});
+
+test('순위 이동은 두 날의 잰 시각을 각각 들고 나온다', () => {
+  const records = [
+    at('2026-08-27', 730, 500000, '00:59:17'),
+    at('2026-08-27', 570, 400000, '11:09:20'),   // 어제만 저녁에 쟀다
+    at('2026-08-28', 730, 520000, '01:39:05'),
+    at('2026-08-28', 570, 300000, '01:39:07'),
+  ];
+  const rm = rankMovement(records, GAMES, '2026-08-28', { anchorAppid: 730 });
+  assert.equal(rm.spread.coherent, true);
+  assert.equal(rm.previousSpread.coherent, false);
+
+  const dota = rm.rows.find((r) => r.appid === 570);
+  assert.equal(dota.crossBatch, true);      // 어제 값이 대표 배치 밖이다
+  assert.equal(dota.previousAt, '2026-08-27T11:09:20.000Z');
+  assert.equal(dota.currentAt, '2026-08-28T01:39:07.000Z');
+
+  const cs = rm.rows.find((r) => r.appid === 730);
+  assert.equal(cs.crossBatch, false);
+});
+
+test('장르 합계도 무엇을 더한 것인지 들고 나온다', () => {
+  const records = [
+    { ...at('2026-08-27', 730, 500000, '00:59:17'), genre: undefined },
+    at('2026-08-27', 550, 20000, '11:09:20'),
+  ];
+  const withGenre = GAMES.map((g) => ({ ...g, genre: g.appid === 730 ? '슈터' : '좀비' }));
+  const g = byGenre(records, withGenre, '2026-08-27', { anchorAppid: 730 });
+  assert.equal(g.spread.coherent, false);
+  assert.equal(g.spread.offBatch, 1);
 });
