@@ -5,14 +5,26 @@
 //
 // 다만 이 패널은 **Steam 의 장르 판도가 아니다.** 장르는 원자료가 주지 않아
 // 우리가 GAMES 표에 적은 것이고, 묶이는 게임도 우리가 고른 것이다. 그래서
-//   · 장르마다 그 안에 든 게임을 다 펼쳐 보이고
+//   · 장르마다 그 안에 든 게임을 한 번에 다 볼 수 있게 하고
 //   · `우리가 N개로 분류` 를 숫자로 적고
 //   · 한 개짜리 장르에는 왕관을 씌우지 않는다
 // 는 셋을 지킨다. 이걸 안 지키면 `MOBA 1위 Dota 2` 가 순위처럼 보이는데,
 // 실제로는 우리가 MOBA 에 몇 개 못 넣었을 뿐이다.
 //
-// 줄을 누르면 그 장르의 게임이 막대로 펼쳐진다. 접혀 있을 때도 이름과 값은
-// 글자로 다 보인다 — **펼치지 않으면 안 보이는 정보를 만들지 않는다.**
+// ## 접힌 상태에서 이름을 다 적지 않기로 했다 — 2026-08-29
+//
+// 전에는 여기에 `펼치지 않으면 안 보이는 정보를 만들지 않는다` 고 적고 접힌
+// 줄에도 게임 이름과 값을 **전부** 늘어놓았다. 슈터 18개, 시뮬레이션 16개가
+// 11px 글자로 두 줄씩 이어져 여덟 장르에 274px 이 들어갔다.
+//
+// 그 원칙이 지키려던 것은 글자 수가 아니라 **우리 분류를 반박할 수 있게 하는
+// 것**이었다. 그런데 이름·숫자·가운뎃점이 뒤엉킨 두 줄은 읽히지 않는다 —
+// 반박하려면 읽혀야 하고, 안 읽히는 목록은 있어도 그 일을 못 한다.
+//
+// 그래서 접힌 줄에는 앞의 셋과 `외 N개` 만 두고, 나머지는 줄을 눌러 펼치게
+// 했다. 펼친 쪽이 오히려 낫다 — 거기서는 표지·이름·값·막대가 한 줄에 하나씩
+// 선다. **정보를 숨긴 것이 아니라 읽을 수 있는 자리로 옮긴 것이고**, 몇 개가
+// 더 있는지는 접힌 상태에서도 숫자로 적혀 있다.
 
 import { useState } from 'react';
 
@@ -20,6 +32,9 @@ import { formatNumber } from '../view/board.js';
 import SpreadNote from './SpreadNote.jsx';
 import { capsuleUrl } from '../source/artwork.js';
 import GameArt from './GameArt.jsx';
+
+/** 접힌 줄에 이름을 몇 개까지 적는가. 한 줄에 들어가는 만큼이다. */
+const FOLDED = 3;
 
 export default function Genres({ data, games, onPickGame }) {
   const [open, setOpen] = useState(null);
@@ -61,19 +76,21 @@ export default function Genres({ data, games, onPickGame }) {
                 aria-hidden="true"
               />
 
-              {/* 어느 게임이 이 장르에 들었는지 숨기지 않는다. 분류가 우리 것이라
-                  보는 사람이 동의하지 않을 수 있고, 그러려면 목록이 보여야 한다.
-                  펼치든 안 펼치든 이름과 값은 보인다. */}
+              {/* 접힌 줄에는 앞의 셋과 남은 수만. 나머지는 줄을 누르면 표지·이름·값·
+                  막대가 한 줄에 하나씩 선다. 몇 개가 더 있는지는 여기 숫자로 있다. */}
               {isOpen ? (
                 <GenreChart rows={g.rows} genre={g.genre} onPickGame={onPickGame} />
               ) : (
                 <p className="genre-members">
-                  {g.rows.map((r, i) => (
+                  {g.rows.slice(0, FOLDED).map((r, i) => (
                     <span key={r.appid}>
                       {i > 0 && ' · '}
                       {r.name} <b>{formatNumber(r.value)}</b>
                     </span>
                   ))}
+                  {g.rows.length > FOLDED && (
+                    <span className="genre-more"> 외 {g.rows.length - FOLDED}개</span>
+                  )}
                 </p>
               )}
 

@@ -1131,6 +1131,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
   color: var(--text-dim);
   line-height: 1.7;
 }
+/* `외 12개` — 이름이 아니라 안내다. 이름과 같은 무게로 쓰면 게임 이름처럼 읽힌다. */
+.genre-members .genre-more { color: var(--text-faint); }
 .genre-members b {
   font-family: var(--mono);
   color: var(--text);
