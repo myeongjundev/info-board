@@ -3,20 +3,26 @@
 // 이 패널만 이전 기록 없이 성립한다. 기록이 하루뿐인 첫날에 움직임 패널이
 // 꺼져 있어도 여기는 채워진다 — 재놓고 안 보여주던 15개를 꺼내는 자리다.
 
+import { useState } from 'react';
 import { formatNumber } from '../view/board.js';
 import { capsuleUrl, ARTWORK_NOTE } from '../source/artwork.js';
 import { steamStoreUrl } from '../source/steamLinks.js';
 import GameArt from './GameArt.jsx';
 
 export default function Leaderboard({ data, heroAppid, onShowPrice }) {
+  const [expanded, setExpanded] = useState(false);
+
   if (!data) {
     return <p className="empty-note">오늘 잰 기록이 없다.</p>;
   }
 
+  const visibleRows = expanded ? data.rows : data.rows.slice(0, 12);
+  const hiddenCount = data.rows.length - visibleRows.length;
+
   return (
     <>
       <ol className="rank-list">
-        {data.rows.map((r) => (
+        {visibleRows.map((r) => (
           <li key={r.appid} className={r.appid === heroAppid ? 'is-hero' : undefined}>
             <span className="rank-no">{r.rank}</span>
             {/* 자리는 남기고 그림만 사라진다.
@@ -67,6 +73,19 @@ export default function Leaderboard({ data, heroAppid, onShowPrice }) {
           </li>
         ))}
       </ol>
+
+      {data.rows.length > 12 && (
+        <div className="list-disclosure">
+          <p>
+            상위 <b>{visibleRows.length}개</b> 표시
+            {!expanded && <span> · 나머지 {hiddenCount}개는 필요할 때 펼쳐본다</span>}
+          </p>
+          <button type="button" onClick={() => setExpanded((value) => !value)} aria-expanded={expanded}>
+            {expanded ? '목록 접기' : `전체 ${data.rows.length}개 보기`}
+            <span aria-hidden="true">{expanded ? '↑' : '↓'}</span>
+          </button>
+        </div>
+      )}
 
       <details className="method-note">
         <summary>%는 측정한 {data.measured}개 안에서 계산</summary>
