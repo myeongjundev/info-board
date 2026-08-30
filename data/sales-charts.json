@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-08-30T21:15:43.955Z",
+  "completedAt": "2026-08-30T23:37:16.091Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -251,25 +251,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 985810,
-        "rank": 14,
-        "name": "GrandChase",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/985810/c6dff0803e0d9a9b2a415cd40c4cfa3bd846d091/header.jpg?t=1786514946",
-        "storeUrl": "https://store.steampowered.com/app/985810/GrandChase?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 1174180,
-        "rank": 15,
+        "rank": 14,
         "name": "Red Dead Redemption 2",
         "adult": false,
         "descriptorIds": [
@@ -287,28 +270,25 @@
         "discountPercent": 75
       },
       {
-        "appid": 2074920,
-        "rank": 16,
-        "name": "퍼스트 디센던트",
+        "appid": 2483190,
+        "rank": 15,
+        "name": "Forza Horizon 6",
         "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2074920/dc8ac02c8328d66f2f78ea8b83472bdd7e281a62/header.jpg?t=1787211276",
-        "storeUrl": "https://store.steampowered.com/app/2074920/?cc=KR&l=koreana",
-        "isFree": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2483190/aec13616ef2adf9908ab2bf185f6e0557d6603ef/header_alt_assets_3.jpg?t=1787843145",
+        "storeUrl": "https://store.steampowered.com/app/2483190/Forza_Horizon_6?cc=KR&l=koreana",
+        "isFree": false,
         "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
+        "priceText": "$59.49",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 5949,
+        "discountPercent": 15
       },
       {
         "appid": 730,
-        "rank": 17,
+        "rank": 16,
         "name": "Counter-Strike 2",
         "adult": false,
         "descriptorIds": [
@@ -327,25 +307,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 2483190,
-        "rank": 18,
-        "name": "Forza Horizon 6",
+        "appid": 985810,
+        "rank": 17,
+        "name": "GrandChase",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2483190/aec13616ef2adf9908ab2bf185f6e0557d6603ef/header_alt_assets_3.jpg?t=1787843145",
-        "storeUrl": "https://store.steampowered.com/app/2483190/Forza_Horizon_6?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/985810/c6dff0803e0d9a9b2a415cd40c4cfa3bd846d091/header.jpg?t=1786514946",
+        "storeUrl": "https://store.steampowered.com/app/985810/GrandChase?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$59.49",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 5949,
-        "discountPercent": 15
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       },
       {
         "appid": 3240220,
-        "rank": 19,
+        "rank": 18,
         "name": "Grand Theft Auto V 인핸스드",
         "adult": false,
         "descriptorIds": [
@@ -365,20 +345,40 @@
         "discountPercent": 56
       },
       {
-        "appid": 2075800,
+        "appid": 2074920,
+        "rank": 19,
+        "name": "퍼스트 디센던트",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2074920/dc8ac02c8328d66f2f78ea8b83472bdd7e281a62/header.jpg?t=1787211276",
+        "storeUrl": "https://store.steampowered.com/app/2074920/?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3564740,
         "rank": 20,
-        "name": "스타워즈 제로 컴퍼니™",
+        "name": "연운",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2075800/2c7d5dad080c4888faaa03c4a955136c50f5bfae/header.jpg?t=1787848803",
-        "storeUrl": "https://store.steampowered.com/app/2075800/?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/bc34b2945973a86bddedd899b96c89cbc1732ef3/header_koreana.jpg?t=1787327185",
+        "storeUrl": "https://store.steampowered.com/app/3564740/?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$49.99",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 4999,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
         "discountPercent": 0
       }
     ],
@@ -493,8 +493,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 2406770,
+        "appid": 4356430,
         "rank": 7,
+        "name": "NBA 2K27",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4356430/9152438fde7de9f4c20b4fd9072ba69f844dacab/header.jpg?t=1787958027",
+        "storeUrl": "https://store.steampowered.com/app/4356430/NBA_2K27?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 2406770,
+        "rank": 8,
         "name": "Bodycam",
         "adult": false,
         "descriptorIds": [
@@ -510,23 +527,6 @@
         "priceTextInitial": "$33.32",
         "initialMinor": 3332,
         "finalMinor": 3332,
-        "discountPercent": 0
-      },
-      {
-        "appid": 4356430,
-        "rank": 8,
-        "name": "NBA 2K27",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4356430/9152438fde7de9f4c20b4fd9072ba69f844dacab/header.jpg?t=1787958027",
-        "storeUrl": "https://store.steampowered.com/app/4356430/NBA_2K27?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
         "discountPercent": 0
       },
       {
@@ -605,28 +605,8 @@
         "discountPercent": 15
       },
       {
-        "appid": 1245620,
-        "rank": 13,
-        "name": "ELDEN RING",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1787868578",
-        "storeUrl": "https://store.steampowered.com/app/1245620/ELDEN_RING?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$59.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 5999,
-        "discountPercent": 0
-      },
-      {
         "appid": 553850,
-        "rank": 14,
+        "rank": 13,
         "name": "HELLDIVERS™ 2",
         "adult": false,
         "descriptorIds": [
@@ -642,6 +622,26 @@
         "priceTextInitial": "$39.99",
         "initialMinor": 3999,
         "finalMinor": 3999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 1245620,
+        "rank": 14,
+        "name": "ELDEN RING",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1787868578",
+        "storeUrl": "https://store.steampowered.com/app/1245620/ELDEN_RING?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$59.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 5999,
         "discountPercent": 0
       },
       {
@@ -682,29 +682,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 3240220,
-        "rank": 17,
-        "name": "Grand Theft Auto V 인핸스드",
-        "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header_koreana.jpg?t=1781187782",
-        "storeUrl": "https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$19.79",
-        "priceTextInitial": "$44.99",
-        "initialMinor": 4499,
-        "finalMinor": 1979,
-        "discountPercent": 56
-      },
-      {
         "appid": 1478500,
-        "rank": 18,
+        "rank": 17,
         "name": "Big Walk",
         "adult": false,
         "descriptorIds": [],
@@ -717,6 +696,27 @@
         "priceTextInitial": "$19.99",
         "initialMinor": 1999,
         "finalMinor": 1999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3751260,
+        "rank": 18,
+        "name": "The Blood of Dawnwalker 더 블러드 오브 던워커",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3751260/a036c8739673ee053c0560aa452b0f4840e62b7f/header_koreana.jpg?t=1787847868",
+        "storeUrl": "https://store.steampowered.com/app/3751260/The_Blood_of_Dawnwalker?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
         "discountPercent": 0
       },
       {
@@ -740,9 +740,9 @@
         "discountPercent": 0
       },
       {
-        "appid": 3751260,
+        "appid": 3240220,
         "rank": 20,
-        "name": "The Blood of Dawnwalker 더 블러드 오브 던워커",
+        "name": "Grand Theft Auto V 인핸스드",
         "adult": false,
         "descriptorIds": [
           1,
@@ -750,15 +750,15 @@
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3751260/a036c8739673ee053c0560aa452b0f4840e62b7f/header_koreana.jpg?t=1787847868",
-        "storeUrl": "https://store.steampowered.com/app/3751260/The_Blood_of_Dawnwalker?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header_koreana.jpg?t=1781187782",
+        "storeUrl": "https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
-        "discountPercent": 0
+        "priceText": "$19.79",
+        "priceTextInitial": "$44.99",
+        "initialMinor": 4499,
+        "finalMinor": 1979,
+        "discountPercent": 56
       }
     ]
   },
@@ -1582,7 +1582,7 @@
       {
         "appid": 4073860,
         "name": "쭉쭉주식회사",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4073860/5b535bc9f56b2b6e0092a4988c7d6d7e6b2c768b/capsule_231x87_koreana.jpg?t=1787953893",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4073860/5b535bc9f56b2b6e0092a4988c7d6d7e6b2c768b/capsule_231x87_koreana.jpg?t=1788128442",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1768,24 +1768,24 @@
         "discountPercent": 0
       },
       {
-        "appid": 4625810,
-        "name": "Internet Survivor Survivors",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4625810/32985081ed99e143a208ff5b3f3079bd48012f44/capsule_231x87.jpg?t=1787564992",
+        "appid": 4796830,
+        "name": "WE ARE SO DEAD",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4796830/15ae44bc1ee99426941b730a03771857df696d50/capsule_231x87.jpg?t=1787326438",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/4625810/Internet_Survivor_Survivors/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 8월 16일",
+        "storeUrl": "https://store.steampowered.com/app/4796830/WE_ARE_SO_DEAD/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 8월 17일",
         "releaseMonth": "2026-08",
-        "releaseDate": "2026-08-16",
+        "releaseDate": "2026-08-17",
         "precision": "day",
         "isFree": false,
         "currency": "KRW",
-        "priceText": "₩ 16,000",
-        "priceTextInitial": "₩ 16,000",
-        "initialMinor": 1600000,
-        "finalMinor": 1600000,
-        "discountPercent": 0
+        "priceText": "₩ 5,390",
+        "priceTextInitial": "₩ 8,700",
+        "initialMinor": 870000,
+        "finalMinor": 539000,
+        "discountPercent": 38
       }
     ],
     "upcoming": [
@@ -2146,13 +2146,13 @@
         "discountPercent": 0
       },
       {
-        "appid": 3690850,
-        "name": "아스테리카: 팬텀 로즈 리프레인",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3690850/3a99f87270a606d65180a30b486d68264d86ae79/capsule_231x87.jpg?t=1786481027",
+        "appid": 5027520,
+        "name": "Megastore: Tidy Up Together",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5027520/ff888190498a6463aae34c01821d053fb6c026fe/capsule_231x87.jpg?t=1788024453",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/3690850/_/?cc=KR&l=koreana",
+        "storeUrl": "https://store.steampowered.com/app/5027520/Megastore_Tidy_Up_Together/?cc=KR&l=koreana",
         "releaseLabel": "2026년 9월 2일",
         "releaseMonth": "2026-09",
         "releaseDate": "2026-09-02",
@@ -2166,13 +2166,13 @@
         "discountPercent": 0
       },
       {
-        "appid": 5027520,
-        "name": "Megastore: Tidy Up Together",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5027520/ff888190498a6463aae34c01821d053fb6c026fe/capsule_231x87.jpg?t=1788024453",
+        "appid": 3690850,
+        "name": "아스테리카: 팬텀 로즈 리프레인",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3690850/3a99f87270a606d65180a30b486d68264d86ae79/capsule_231x87.jpg?t=1786481027",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/5027520/Megastore_Tidy_Up_Together/?cc=KR&l=koreana",
+        "storeUrl": "https://store.steampowered.com/app/3690850/_/?cc=KR&l=koreana",
         "releaseLabel": "2026년 9월 2일",
         "releaseMonth": "2026-09",
         "releaseDate": "2026-09-02",
