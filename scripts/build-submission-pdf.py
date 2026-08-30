@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import subprocess
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -21,7 +20,7 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "output" / "pdf" / "t04-game-pulse-submission-draft.pdf"
+OUTPUT = ROOT / "output" / "pdf" / "t04-game-pulse-submission.pdf"
 
 NAVY = colors.HexColor("#09111F")
 INK = colors.HexColor("#162033")
@@ -53,12 +52,6 @@ def register_fonts() -> tuple[str, str]:
 
 
 REGULAR, BOLD = register_fonts()
-
-
-def current_sha() -> str:
-    return subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-    ).strip()
 
 
 def p(text: str, style: ParagraphStyle) -> Paragraph:
@@ -173,9 +166,8 @@ def numbered_label(number: str, title: str, color: colors.Color) -> Table:
 
 def build() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    sha = current_sha()
     result_url = "https://myeongjundev.github.io/info-board/"
-    source_url = f"https://github.com/myeongjundev/info-board/tree/{sha}"
+    source_url = "https://github.com/myeongjundev/info-board"
 
     doc = SimpleDocTemplate(
         str(OUTPUT),
@@ -184,7 +176,7 @@ def build() -> None:
         rightMargin=14 * mm,
         topMargin=12 * mm,
         bottomMargin=10 * mm,
-        title="SKT ALEPH T04 - GAME PULSE 제출용 임시본",
+        title="SKT ALEPH T04 - GAME PULSE 제출용 검증 요약",
         author="myeongjundev",
         subject="T04 검증 안내서와 AI 3줄",
     )
@@ -199,7 +191,7 @@ def build() -> None:
             styles["KSubtitle"],
         ),
     ]
-    draft = Table([[p("임시 제출본", styles["KLabel"])]], colWidths=[25 * mm], rowHeights=[8 * mm])
+    draft = Table([[p("제출용 요약", styles["KLabel"])]], colWidths=[25 * mm], rowHeights=[8 * mm])
     draft.setStyle(
         TableStyle(
             [
@@ -226,7 +218,7 @@ def build() -> None:
     url_table = Table(
         [
             [p("결과물", styles["KBodyBold"]), p(f'<link href="{result_url}">{result_url}</link>', styles["KUrl"])],
-            [p("소스 스냅샷", styles["KBodyBold"]), p(f'<link href="{source_url}">{source_url}</link>', styles["KUrl"])],
+            [p("소스 저장소", styles["KBodyBold"]), p(f'<link href="{source_url}">{source_url}</link>', styles["KUrl"])],
         ],
         colWidths=[25 * mm, 153 * mm],
     )
@@ -248,7 +240,7 @@ def build() -> None:
     story.append(numbered_label("01", "검증 안내서 - 어디로 가나요 / 무엇을 하나요", CYAN))
     steps = [
         [p("1", styles["KBodyBold"]), p("공개 화면을 열고 동시접속자 값·단위·잰 날·측정 시각·Asia/Seoul·데이터 상태를 확인합니다.", styles["KBody"])],
-        [p("2", styles["KBodyBold"]), p("왼쪽 <b>데이터 품질</b>을 누르고 내려가 <b>펼쳐서 손으로 대조하기</b>를 엽니다.", styles["KBody"])],
+        [p("2", styles["KBodyBold"]), p("아래로 내려 <b>데이터 품질</b> 영역에서 <b>펼쳐서 손으로 대조하기</b>를 엽니다.", styles["KBody"])],
         [p("3", styles["KBodyBold"]), p("주소 끝에 <b>?replay=timeout</b>을 붙여 연 뒤 <b>다시 시도 · T04-RECOVER-D2</b>를 누릅니다.", styles["KBody"])],
     ]
     step_table = Table(steps, colWidths=[9 * mm, 169 * mm])
@@ -336,7 +328,7 @@ def build() -> None:
     story.extend([KeepTogether(ai_table), Spacer(1, 3 * mm)])
 
     footer = Table(
-        [[p("GAME PULSE · SKT ALEPH T04", styles["KSmall"]), p(f"임시본 · 소스 {sha[:8]}", styles["KSmall"])]],
+        [[p("GAME PULSE · SKT ALEPH T04", styles["KSmall"]), p("제출용 검증 요약", styles["KSmall"])]],
         colWidths=[110 * mm, 68 * mm],
     )
     footer.setStyle(
