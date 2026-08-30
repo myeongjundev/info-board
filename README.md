@@ -192,6 +192,7 @@ assets/       T04 조건 정본과 공개 fixture
 | 문서 | 용도 |
 |---|---|
 | [검증 안내서](docs/VERIFY.md) | 공개 주소에서 30초·3단계로 통과 여부 확인 |
+| [임시 제출 PDF](output/pdf/t04-game-pulse-submission-draft.pdf) | 검증 안내서·AI 3줄·제출 URL을 모은 A4 1페이지 임시본 |
 | [대조표](docs/CROSSCHECK.md) | 원자료·저장값·계산값·화면값과 비밀값 검사 |
 | [결정 기록](docs/DECISIONS.md) | 선택한 방식, 근거, 탈락시킨 후보와 현재 상태 |
 | [결함 기록](docs/DEFECTS.md) | 발견한 결함과 반복 방지 방식 |
