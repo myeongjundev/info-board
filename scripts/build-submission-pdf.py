@@ -307,9 +307,9 @@ def build() -> None:
 
     story.append(numbered_label("04", "AI 활용 3줄", PURPLE))
     ai_rows = [
-        [p("AI에게 맡긴 일", styles["KBodyBold"]), p("Codex와 Claude에게 데이터 수집기, 화면 구현, 오류 상태 재현, 회귀 테스트와 문서 정리를 맡겼습니다.", styles["KBody"])],
-        [p("내가 판단한 일", styles["KBodyBold"]), p("지역마다 게임 이용 시간이 다르다는 점을 짚고, 같은 날 다른 시각의 접속자 수를 비교하는 기능을 넣기로 결정했습니다.", styles["KBody"])],
-        [p("AI 말을 안 들은 일", styles["KBodyBold"]), p("AI는 게임 수가 적어 장르 분석을 확대하지 말자고 했지만, 표본 범위와 분모를 화면에 밝히는 조건으로 장르 분석을 추가했습니다.", styles["KBody"])],
+        [p("AI에게 맡긴 일", styles["KBodyBold"]), p("Codex와 Claude에게 공개 데이터 후보 조사, 수집·정규화 구조, 네 축 화면 구현, 장애 5종과 복구 재현, 317개 회귀 테스트, 출처 대조와 문서화를 맡겼습니다.", styles["KBody"])],
+        [p("내가 판단한 일", styles["KBodyBold"]), p("Stack Overflow보다 Steam이 대중적이라고 판단해 주제를 바꾸고, 동시접속·매출·할인·방송의 네 축을 정했습니다. 지역별 이용 시간 차이를 짚어 ‘같은 날, 다른 시각’ 비교도 넣었습니다.", styles["KBody"])],
+        [p("AI 말을 안 들은 일", styles["KBodyBold"]), p("AI는 Stack Overflow 유지와 장르 분석 축소를 권했지만 따르지 않았습니다. 대신 Steam으로 전환하고, 표본 범위·포함 게임 수·분모의 한계를 화면에 밝히는 조건으로 장르 분석을 확장했습니다.", styles["KBody"])],
     ]
     ai_table = Table(ai_rows, colWidths=[35 * mm, 143 * mm])
     ai_table.setStyle(
