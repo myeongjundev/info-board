@@ -15,11 +15,15 @@ Steam 동시접속자 · 한국 매출 · 할인/무료 배포 · 게임 방송�
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-22-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)
+![Regression](https://img.shields.io/badge/regression-317%2F317_passed-16a34a?style=flat-square)
+![T04 Audit](https://img.shields.io/badge/T04_audit-35_conditions-0891b2?style=flat-square)
+![Records](https://img.shields.io/badge/real_records-daily_history-f59e0b?style=flat-square)
 
 <br>
 
 [**▶ 설치 없이 바로 보기**](https://myeongjundev.github.io/info-board/) ·
 [**✓ 30초 검증 안내서**](docs/VERIFY.md) ·
+[**▣ 제출 PDF**](output/pdf/t04-game-pulse-submission.pdf) ·
 [**↗ 실제 기록 데이터**](data/records.json)
 
 </div>
@@ -28,15 +32,25 @@ Steam 동시접속자 · 한국 매출 · 할인/무료 배포 · 게임 방송�
 
 ---
 
+## 한눈에 보는 완성 결과
+
+| 실제 데이터 | 검증 | 실패 대응 | 공개 범위 |
+|---|---|---|---|
+| 동시접속·매출·할인·방송 **4개 축** | 회귀 테스트 **317/317 통과** | timeout 등 **5개 장애 + 복구** 재현 | 결과물·소스·기록을 로그인 없이 공개 |
+| 서로 다른 실제 날짜 기록을 **매일 누적** | T04 조건 **35개 감사 경로** | 마지막 정상값과 원래 시각 보존 | 공개 Git 이력이 감사 로그 역할 |
+
+핵심은 숫자를 많이 모은 것이 아니라, **원자료 → 저장값 → 계산값 → 화면값**을
+한 자리에서 대조하고 실패했을 때도 모르는 값을 만들어내지 않은 것입니다.
+
 ## 30초 안에 확인하기
 
 설치도 로그인도 필요 없습니다.
 
 | 순서 | 무엇을 하나요 | 무엇이 보이면 통과인가요 |
 |---:|---|---|
-| 1 | [공개 화면](https://myeongjundev.github.io/info-board/)을 연다 | 네 가지 시장 신호와 측정 시각이 보인다 |
-| 2 | `Steam · 동시접속자 ↗`를 누른다 | 인증 없이 Steam 원자료 JSON이 열린다 |
-| 3 | 화면 아래 `장애 재현`에서 `offline`을 누른다 | 마지막 정상값은 남고, `오래된 자료`와 실패 이유가 표시된다 |
+| 1 | [공개 화면](https://myeongjundev.github.io/info-board/)을 연다 | 값·단위·잰 날·측정 시각·`Asia/Seoul`·데이터 상태가 보인다 |
+| 2 | `데이터 품질`에서 `펼쳐서 손으로 대조하기`를 연다 | 원자료·저장값·이전값·손계산·계산값·화면값이 연결된다 |
+| 3 | 주소 끝에 `?replay=timeout`을 붙이고 `다시 시도 · T04-RECOVER-D2`를 누른다 | `stale / timeout · 105 · 1건`이 `fresh / none · 120 · 2건 · +15`로 바뀐다 |
 
 자세한 통과 기준과 문제 해결 방법은 [검증 안내서](docs/VERIFY.md)에 정리했습니다.
 
@@ -145,6 +159,17 @@ GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?a
 
 **공개 저장소·배포 파일·Git 이력에 비밀 원문은 0건입니다.** 검사 범위와 결과는
 [대조표 5절](docs/CROSSCHECK.md#5-비밀값-0건)에서 확인할 수 있습니다.
+
+## AI에게 맡기고, 내가 결정한 경계
+
+AI를 단순 코드 생성기로 쓰지 않고 조사·구현·반증 파트너로 사용했습니다. 다만 어떤
+숫자를 믿을지, 무엇을 화면에 밝힐지는 직접 판단했습니다.
+
+| 구분 | 실제 작업 |
+|---|---|
+| **AI에게 맡긴 일** | Codex와 Claude가 수집·정규화 구조, 네 축 화면, 장애 5종과 복구, 317개 회귀 테스트, 결함 26개 재현과 문서화를 맡았습니다. |
+| **내가 판단한 일** | Stack Overflow 대신 Steam을 선택하고 동시접속·매출·할인·방송 네 축을 정했습니다. 지역별 이용 시간 차이를 짚어 `같은 날, 다른 시각` 비교도 추가했습니다. |
+| **AI 말을 안 들은 일** | AI는 작은 표본의 장르 확장을 반대했지만, 표본 범위·포함 게임 수·분모를 화면에 함께 밝히는 조건으로 확장했습니다. 반대 논거를 버리지 않고 안전장치로 바꿨습니다. |
 
 ## 로컬에서 실행하기
 
