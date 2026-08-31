@@ -277,7 +277,7 @@ def build() -> None:
 
     story.append(numbered_label("02", "무엇이 보이면 통과인가요", GREEN))
     pass_cells = [
-        p("<b>실제 데이터</b><br/>값과 단위 `명`, 잰 날, 조회 시각, Asia/Seoul, 데이터 상태가 서로 구분됩니다.", styles["KBody"]),
+        p("<b>실제 데이터</b><br/>값과 단위 <b>명</b>, 잰 날, 조회 시각, Asia/Seoul, 데이터 상태가 서로 구분됩니다.", styles["KBody"]),
         p("<b>출처와 계산</b><br/>Steam 원자료·저장값·이전값·손계산·계산값·화면값이 한 자리에서 연결됩니다.", styles["KBody"]),
         p("<b>실패 후 복구</b><br/>stale / timeout · 105 pt · 1건 → fresh / none · 120 pt · 2건 · +15 pt로 바뀝니다.", styles["KBody"]),
     ]
@@ -300,7 +300,7 @@ def build() -> None:
     story.append(numbered_label("03", "안 될 때", ORANGE))
     failure = p(
         "자료를 못 읽으면 마지막 정상값과 원래 조회 시각을 유지하고 <b>오래된 자료</b>와 실패 이유를 표시합니다. "
-        "정상값도 없으면 `—`를 표시합니다. <b>?fault=timeout|auth|rate-limit|offline|schema</b>로 다섯 장애의 서로 다른 안내를 확인할 수 있습니다. "
+        "정상값도 없으면 <b>—</b>를 표시합니다. <b>?fault=timeout|auth|rate-limit|offline|schema</b>로 다섯 장애의 서로 다른 안내를 확인할 수 있습니다. "
         "원자료의 현재 숫자와 화면의 저장 숫자가 달라도 정상입니다. 동시접속자는 호출 순간마다 달라집니다.",
         styles["KBody"],
     )
