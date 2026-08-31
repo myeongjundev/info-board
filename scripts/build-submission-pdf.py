@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+import subprocess
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -164,10 +166,22 @@ def numbered_label(number: str, title: str, color: colors.Color) -> Table:
     return row
 
 
+def head_commit() -> str:
+    """이 요약을 만든 시점의 40자리 커밋. 없으면 빈 문자열이 아니라 실패한다 —
+    소스 URL 에 커밋이 빠진 채 나가는 것이 이 함수가 막으려는 일이다."""
+    sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT, capture_output=True, text=True, check=True,
+    ).stdout.strip()
+    if len(sha) != 40 or not re.fullmatch(r"[0-9a-f]{40}", sha):
+        raise SystemExit(f"40자리 소문자 16진수 커밋이 아니다: {sha!r}")
+    return sha
+
+
 def build() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     result_url = "https://myeongjundev.github.io/info-board/"
-    source_url = "https://github.com/myeongjundev/info-board"
+    source_url = f"https://github.com/myeongjundev/info-board/commit/{head_commit()}"
 
     doc = SimpleDocTemplate(
         str(OUTPUT),
@@ -218,7 +232,7 @@ def build() -> None:
     url_table = Table(
         [
             [p("결과물", styles["KBodyBold"]), p(f'<link href="{result_url}">{result_url}</link>', styles["KUrl"])],
-            [p("소스 저장소", styles["KBodyBold"]), p(f'<link href="{source_url}">{source_url}</link>', styles["KUrl"])],
+            [p("소스 커밋", styles["KBodyBold"]), p(f'<link href="{source_url}">{source_url}</link>', styles["KUrl"])],
         ],
         colWidths=[25 * mm, 153 * mm],
     )
@@ -307,9 +321,38 @@ def build() -> None:
 
     story.append(numbered_label("04", "AI 활용 3줄", PURPLE))
     ai_rows = [
-        [p("AI에게 맡긴 일", styles["KBodyBold"]), p("Codex와 Claude에게 공개 데이터 후보 조사, 수집·정규화 구조, 네 축 화면 구현, 장애 5종과 복구 재현, 317개 회귀 테스트, 출처 대조와 문서화를 맡겼습니다.", styles["KBody"])],
-        [p("내가 판단한 일", styles["KBodyBold"]), p("Stack Overflow보다 Steam이 대중적이라고 판단해 주제를 바꾸고, 동시접속·매출·할인·방송의 네 축을 정했습니다. 지역별 이용 시간 차이를 짚어 ‘같은 날, 다른 시각’ 비교도 넣었습니다.", styles["KBody"])],
-        [p("AI 말을 안 들은 일", styles["KBodyBold"]), p("AI는 Stack Overflow 유지와 장르 분석 축소를 권했지만 따르지 않았습니다. 대신 Steam으로 전환하고, 표본 범위·포함 게임 수·분모의 한계를 화면에 밝히는 조건으로 장르 분석을 확장했습니다.", styles["KBody"])],
+        [
+            p("AI에게 맡긴 일", styles["KBodyBold"]),
+            p(
+                "Codex와 Claude에게 수집·정규화 구조, 네 축 화면 구현, 장애 5종과 복구 재현, "
+                "317개 회귀 테스트, 결함 찾기 26개, 공개 자산 17개 SHA-256 대조와 문서화를 맡겼습니다. "
+                "다만 <b>찾는 것과 판정하는 것은 나눴습니다</b> — 무엇을 고치고 무엇을 남길지는 제가 정했고, "
+                "그래서 결함 문서에 ‘안 고치고 남긴 것’ 절이 따로 있습니다.",
+                styles["KBody"],
+            ),
+        ],
+        [
+            p("내가 판단한 일", styles["KBodyBold"]),
+            p(
+                "‘아시아와 미국은 플레이 시간이 다르지 않나’를 짚어 같은 날 01:00과 07:30 UTC에 재 봤습니다. "
+                "PUBG는 +214%, HELLDIVERS 2는 −44%로 <b>방향이 게임마다 반대</b>였습니다. 그래서 이 값을 ‘인기’가 "
+                "아니라 ‘그 순간 접속해 있던 사람’으로 규정하고 ‘같은 날, 다른 시각’ 패널을 넣었습니다. "
+                "‘화면부터 확인하자’고 순서를 정해 차트 가격이 ₩70(실제 ₩79,800)으로 나가 있던 것도 잡았습니다 — "
+                "값이 스키마를 통과해 테스트도 리뷰도 못 잡은 결함이었습니다.",
+                styles["KBody"],
+            ),
+        ],
+        [
+            p("AI 말을 안 들은 일", styles["KBodyBold"]),
+            p(
+                "AI는 장르 확장을 ‘16개로는 통계가 아니라 취향 목록’이라며 반대했고 논거는 맞았지만 뒤집었습니다. "
+                "대표값 하나만 크게 띄우면 그 장르를 안 하는 사람에게 첫 화면이 남의 이야기가 되기 때문입니다. "
+                "대신 <b>반대 이유를 버리지 않고 가드로 바꿔 넣게 했습니다</b> — 장르마다 든 게임을 값과 함께 펼치고, "
+                "게임 수를 줄마다 적고, 분모를 화면에 숫자로 적습니다. 소재도 Stack Overflow 유지 권고를 따르지 않고 "
+                "Steam으로 옮기며, 그때 잃은 원자료 재현성을 숨기지 않고 화면에 밝혔습니다.",
+                styles["KBody"],
+            ),
+        ],
     ]
     ai_table = Table(ai_rows, colWidths=[35 * mm, 143 * mm])
     ai_table.setStyle(
