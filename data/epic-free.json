@@ -10,19 +10,7 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-02T05:53:50.312Z",
-  "completedAt": "2026-09-02T05:53:50.768Z",
-  "giveaways": [
-    {
-      "id": "8401414902e84f2cb9afa9142f051d32",
-      "title": "Breathedge",
-      "originalPrice": 27000,
-      "currency": "KRW",
-      "startAt": "2026-08-27T15:00:00.000Z",
-      "endAt": "2026-09-03T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/08ae29e4f70a4b62aa055e383381aa82/offer/egs-breathedge-redruinssoftworks-s1-2560x1440-76fd08cd9c2d-2560x1440-783424f6d4a7f32a0e75fc074f2f928e.jpg",
-      "storeUrl": "https://store.epicgames.com/ko/p/breathedge",
-      "fetchedAt": "2026-09-02T05:53:50.768Z"
-    }
-  ]
+  "startedAt": "2026-09-02T11:27:19.232Z",
+  "completedAt": "2026-09-02T11:27:19.453Z",
+  "giveaways": []
 }
