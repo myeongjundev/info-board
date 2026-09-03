@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-09-03T00:22:36.461Z",
+  "completedAt": "2026-09-03T04:45:04.491Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -36,8 +36,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 3751260,
+        "appid": 2139460,
         "rank": 2,
+        "name": "Once Human",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
+        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3751260,
+        "rank": 3,
         "name": "The Blood of Dawnwalker 더 블러드 오브 던워커",
         "adult": false,
         "descriptorIds": [
@@ -54,23 +71,6 @@
         "priceTextInitial": "$69.99",
         "initialMinor": 6999,
         "finalMinor": 6999,
-        "discountPercent": 0
-      },
-      {
-        "appid": 1049590,
-        "rank": 3,
-        "name": "이터널 리턴",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1049590/72918ebacd0d4f8537969dc8b976ceb98f681cab/header.jpg?t=1786327135",
-        "storeUrl": "https://store.steampowered.com/app/1049590/이터널_리턴?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
         "discountPercent": 0
       },
       {
@@ -114,14 +114,14 @@
         "discountPercent": 20
       },
       {
-        "appid": 3564740,
+        "appid": 1049590,
         "rank": 6,
-        "name": "연운",
+        "name": "이터널 리턴",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/bc34b2945973a86bddedd899b96c89cbc1732ef3/header_koreana.jpg?t=1787327185",
-        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1049590/72918ebacd0d4f8537969dc8b976ceb98f681cab/header.jpg?t=1786327135",
+        "storeUrl": "https://store.steampowered.com/app/1049590/이터널_리턴?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -131,14 +131,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 1172470,
+        "appid": 3564740,
         "rank": 7,
-        "name": "Apex 레전드™",
+        "name": "연운",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/6cf04767652d703b6050da84b82cfb1194258d7d/header.jpg?t=1786031871",
-        "storeUrl": "https://store.steampowered.com/app/1172470/Apex_레전드?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/bc34b2945973a86bddedd899b96c89cbc1732ef3/header_koreana.jpg?t=1787327185",
+        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -165,14 +165,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 1818450,
+        "appid": 1172470,
         "rank": 9,
-        "name": "STALZONE | 스탈존",
+        "name": "Apex 레전드™",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1818450/03ac3c6b881ac2c344fb465bfec8a707d24f33a9/header.jpg?t=1785758933",
-        "storeUrl": "https://store.steampowered.com/app/1818450/STALZONE_스탈존?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/6cf04767652d703b6050da84b82cfb1194258d7d/header.jpg?t=1786031871",
+        "storeUrl": "https://store.steampowered.com/app/1172470/Apex_레전드?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -202,8 +202,45 @@
         "discountPercent": 0
       },
       {
-        "appid": 1623730,
+        "appid": 1973530,
         "rank": 11,
+        "name": "Limbus Company",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1973530/header.jpg?t=1788168326",
+        "storeUrl": "https://store.steampowered.com/app/1973530/Limbus_Company?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 1818450,
+        "rank": 12,
+        "name": "STALZONE | 스탈존",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1818450/03ac3c6b881ac2c344fb465bfec8a707d24f33a9/header.jpg?t=1785758933",
+        "storeUrl": "https://store.steampowered.com/app/1818450/STALZONE_스탈존?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 1623730,
+        "rank": 13,
         "name": "Palworld / 팰월드",
         "adult": false,
         "descriptorIds": [],
@@ -217,42 +254,6 @@
         "initialMinor": 2999,
         "finalMinor": 2099,
         "discountPercent": 30
-      },
-      {
-        "appid": 4001890,
-        "rank": 12,
-        "name": "낚시 방법",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4001890/45c4ddff4901e32c4b8b643e1b97d0d01898d299/header.jpg?t=1788160834",
-        "storeUrl": "https://store.steampowered.com/app/4001890/낚시_방법?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$7.99",
-        "priceTextInitial": "$7.99",
-        "initialMinor": 799,
-        "finalMinor": 799,
-        "discountPercent": 0
-      },
-      {
-        "appid": 2139460,
-        "rank": 13,
-        "name": "Once Human",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
-        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
       },
       {
         "appid": 1867240,
@@ -274,23 +275,23 @@
         "discountPercent": 0
       },
       {
-        "appid": 3768760,
+        "appid": 4001890,
         "rank": 15,
-        "name": "007 퍼스트 라이트",
+        "name": "낚시 방법",
         "adult": false,
         "descriptorIds": [
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3768760/6646220d04fce26fc441f589e8f98d66c9e33b9c/header_alt_assets_2.jpg?t=1786116490",
-        "storeUrl": "https://store.steampowered.com/app/3768760/007_퍼스트_라이트?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4001890/45c4ddff4901e32c4b8b643e1b97d0d01898d299/header.jpg?t=1788160834",
+        "storeUrl": "https://store.steampowered.com/app/4001890/낚시_방법?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$55.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 5599,
-        "discountPercent": 20
+        "priceText": "$7.99",
+        "priceTextInitial": "$7.99",
+        "initialMinor": 799,
+        "finalMinor": 799,
+        "discountPercent": 0
       },
       {
         "appid": 294100,
@@ -327,24 +328,23 @@
         "discountPercent": 0
       },
       {
-        "appid": 730,
+        "appid": 4656000,
         "rank": 18,
-        "name": "Counter-Strike 2",
+        "name": "BOMBANANA!",
         "adult": false,
         "descriptorIds": [
-          2,
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/162664aa5da85f418105350c5d67ca565f6c3713/header.jpg?t=1784564069",
-        "storeUrl": "https://store.steampowered.com/app/730/CounterStrike_2?cc=KR&l=koreana",
-        "isFree": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4656000/99c086faba625a8d3bc459bab444087d257ccbe1/header.jpg?t=1788351950",
+        "storeUrl": "https://store.steampowered.com/app/4656000/BOMBANANA?cc=KR&l=koreana",
+        "isFree": false,
         "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
+        "priceText": "$4.95",
+        "priceTextInitial": "$7.99",
+        "initialMinor": 799,
+        "finalMinor": 495,
+        "discountPercent": 38
       },
       {
         "appid": 108600,
@@ -367,23 +367,24 @@
         "discountPercent": 33
       },
       {
-        "appid": 4656000,
+        "appid": 730,
         "rank": 20,
-        "name": "BOMBANANA!",
+        "name": "Counter-Strike 2",
         "adult": false,
         "descriptorIds": [
+          2,
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4656000/99c086faba625a8d3bc459bab444087d257ccbe1/header.jpg?t=1788351950",
-        "storeUrl": "https://store.steampowered.com/app/4656000/BOMBANANA?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/162664aa5da85f418105350c5d67ca565f6c3713/header.jpg?t=1784564069",
+        "storeUrl": "https://store.steampowered.com/app/730/CounterStrike_2?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$4.95",
-        "priceTextInitial": "$7.99",
-        "initialMinor": 799,
-        "finalMinor": 495,
-        "discountPercent": 38
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       }
     ],
     "global": [
@@ -465,28 +466,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 2406770,
-        "rank": 5,
-        "name": "Bodycam",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2406770/2e29515d3bdfad9f1074ca155365eb8a56158051/header_alt_assets_0.jpg?t=1788372299",
-        "storeUrl": "https://store.steampowered.com/app/2406770/Bodycam?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$33.32",
-        "priceTextInitial": "$33.32",
-        "initialMinor": 3332,
-        "finalMinor": 3332,
-        "discountPercent": 0
-      },
-      {
         "appid": 2638890,
-        "rank": 6,
+        "rank": 5,
         "name": "귀무자 Way of the Sword",
         "adult": false,
         "descriptorIds": [
@@ -502,6 +483,26 @@
         "priceTextInitial": "$69.99",
         "initialMinor": 6999,
         "finalMinor": 6999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 2406770,
+        "rank": 6,
+        "name": "Bodycam",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2406770/2e29515d3bdfad9f1074ca155365eb8a56158051/header_alt_assets_0.jpg?t=1788372299",
+        "storeUrl": "https://store.steampowered.com/app/2406770/Bodycam?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$33.32",
+        "priceTextInitial": "$33.32",
+        "initialMinor": 3332,
+        "finalMinor": 3332,
         "discountPercent": 0
       },
       {
@@ -598,33 +599,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 3564740,
+        "appid": 2139460,
         "rank": 12,
-        "name": "연운",
+        "name": "Once Human",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/bc34b2945973a86bddedd899b96c89cbc1732ef3/header_koreana.jpg?t=1787327185",
-        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 359550,
-        "rank": 13,
-        "name": "톰 클랜시의 레인보우식스 시즈",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/359550/2c5d32a3077a8dfd1929eba95e6a29a06637e61d/header_alt_assets_24.jpg?t=1788282023",
-        "storeUrl": "https://store.steampowered.com/app/359550/톰_클랜시의_레인보우식스_시즈?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
+        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -635,7 +617,7 @@
       },
       {
         "appid": 4656000,
-        "rank": 14,
+        "rank": 13,
         "name": "BOMBANANA!",
         "adult": false,
         "descriptorIds": [
@@ -653,66 +635,44 @@
         "discountPercent": 38
       },
       {
-        "appid": 1174180,
+        "appid": 359550,
+        "rank": 14,
+        "name": "톰 클랜시의 레인보우식스 시즈",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/359550/2c5d32a3077a8dfd1929eba95e6a29a06637e61d/header_alt_assets_24.jpg?t=1788282023",
+        "storeUrl": "https://store.steampowered.com/app/359550/톰_클랜시의_레인보우식스_시즈?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3564740,
         "rank": 15,
-        "name": "Red Dead Redemption 2",
+        "name": "연운",
         "adult": false,
-        "descriptorIds": [
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
-        "storeUrl": "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/bc34b2945973a86bddedd899b96c89cbc1732ef3/header_koreana.jpg?t=1787327185",
+        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$14.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 1499,
-        "discountPercent": 75
-      },
-      {
-        "appid": 3768760,
-        "rank": 16,
-        "name": "007 퍼스트 라이트",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3768760/6646220d04fce26fc441f589e8f98d66c9e33b9c/header_alt_assets_2.jpg?t=1786116490",
-        "storeUrl": "https://store.steampowered.com/app/3768760/007_퍼스트_라이트?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$55.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 5599,
-        "discountPercent": 20
-      },
-      {
-        "appid": 108600,
-        "rank": 17,
-        "name": "Project Zomboid",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg?t=1787740093",
-        "storeUrl": "https://store.steampowered.com/app/108600/Project_Zomboid?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$16.74",
-        "priceTextInitial": "$24.99",
-        "initialMinor": 2499,
-        "finalMinor": 1674,
-        "discountPercent": 33
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       },
       {
         "appid": 578080,
-        "rank": 18,
+        "rank": 16,
         "name": "PUBG: BATTLEGROUNDS",
         "adult": false,
         "descriptorIds": [
@@ -731,8 +691,27 @@
         "discountPercent": 0
       },
       {
+        "appid": 1174180,
+        "rank": 17,
+        "name": "Red Dead Redemption 2",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
+        "storeUrl": "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$14.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 1499,
+        "discountPercent": 75
+      },
+      {
         "appid": 2483190,
-        "rank": 19,
+        "rank": 18,
         "name": "Forza Horizon 6",
         "adult": false,
         "descriptorIds": [],
@@ -748,21 +727,45 @@
         "discountPercent": 15
       },
       {
-        "appid": 1623730,
-        "rank": 20,
-        "name": "Palworld / 팰월드",
+        "appid": 3240220,
+        "rank": 19,
+        "name": "Grand Theft Auto V 인핸스드",
         "adult": false,
-        "descriptorIds": [],
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1623730/6912f19c43a95ff5fe514eedd35e68bf12335459/header.jpg?t=1784714419",
-        "storeUrl": "https://store.steampowered.com/app/1623730/Palworld_팰월드?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header_koreana.jpg?t=1781187782",
+        "storeUrl": "https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_인핸스드?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$20.99",
-        "priceTextInitial": "$29.99",
-        "initialMinor": 2999,
-        "finalMinor": 2099,
-        "discountPercent": 30
+        "priceText": "$19.79",
+        "priceTextInitial": "$44.99",
+        "initialMinor": 4499,
+        "finalMinor": 1979,
+        "discountPercent": 56
+      },
+      {
+        "appid": 108600,
+        "rank": 20,
+        "name": "Project Zomboid",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg?t=1787740093",
+        "storeUrl": "https://store.steampowered.com/app/108600/Project_Zomboid?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$16.74",
+        "priceTextInitial": "$24.99",
+        "initialMinor": 2499,
+        "finalMinor": 1674,
+        "discountPercent": 33
       }
     ]
   },
@@ -1373,6 +1376,26 @@
     "nextMonth": "2026-10",
     "current": [
       {
+        "appid": 3690850,
+        "name": "아스테리카: 팬텀 로즈 리프레인",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3690850/3a99f87270a606d65180a30b486d68264d86ae79/capsule_231x87.jpg?t=1788393899",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/3690850/_/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 2일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-02",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 12,800",
+        "priceTextInitial": "₩ 16,000",
+        "initialMinor": 1600000,
+        "finalMinor": 1280000,
+        "discountPercent": 20
+      },
+      {
         "appid": 3751260,
         "name": "The Blood of Dawnwalker 더 블러드 오브 던워커",
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3751260/5c44c2cccc6e7462f380d4d96004e77792c97b2f/capsule_231x87_koreana.jpg?t=1788387095",
@@ -1395,6 +1418,26 @@
         "initialMinor": 7980000,
         "finalMinor": 7980000,
         "discountPercent": 0
+      },
+      {
+        "appid": 5027520,
+        "name": "Megastore: Tidy Up Together",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5027520/ff888190498a6463aae34c01821d053fb6c026fe/capsule_231x87.jpg?t=1788371936",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/5027520/Megastore_Tidy_Up_Together/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 2일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-02",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 5,570",
+        "priceTextInitial": "₩ 6,550",
+        "initialMinor": 655000,
+        "finalMinor": 557000,
+        "discountPercent": 15
       },
       {
         "appid": 2350790,
