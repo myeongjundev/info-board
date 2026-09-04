@@ -10,7 +10,19 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-03T22:38:21.214Z",
-  "completedAt": "2026-09-03T22:38:21.942Z",
-  "giveaways": []
+  "startedAt": "2026-09-04T01:02:42.116Z",
+  "completedAt": "2026-09-04T01:02:42.671Z",
+  "giveaways": [
+    {
+      "id": "b8cc76ce7d6645f0a282b843a072cc78",
+      "title": "Alone With You",
+      "originalPrice": 10200,
+      "currency": "KRW",
+      "startAt": "2026-09-03T15:00:00.000Z",
+      "endAt": "2026-09-10T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/04b7a1d78c904065b5c24f9e7816c99a/alone-with-you-cllc3.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/alone-with-you-028a15",
+      "fetchedAt": "2026-09-04T01:02:42.671Z"
+    }
+  ]
 }
