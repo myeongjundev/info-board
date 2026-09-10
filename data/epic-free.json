@@ -10,19 +10,30 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-10T11:29:03.396Z",
-  "completedAt": "2026-09-10T11:29:03.715Z",
+  "startedAt": "2026-09-10T16:30:18.930Z",
+  "completedAt": "2026-09-10T16:30:19.448Z",
   "giveaways": [
     {
-      "id": "b8cc76ce7d6645f0a282b843a072cc78",
-      "title": "Alone With You",
+      "id": "e9bb092228f544c582e2c9395fae96f3",
+      "title": "Astral Ascent",
+      "originalPrice": 26000,
+      "currency": "KRW",
+      "startAt": "2026-09-10T15:00:00.000Z",
+      "endAt": "2026-09-17T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/974c8a587d714d8d9e0c3b0fefe61a35/astral-ascent-b0gcm.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/astral-ascent-b33bc2",
+      "fetchedAt": "2026-09-10T16:30:19.448Z"
+    },
+    {
+      "id": "c76046dddcdb43619c33ce0395941033",
+      "title": "Luftrausers",
       "originalPrice": 10200,
       "currency": "KRW",
-      "startAt": "2026-09-03T15:00:00.000Z",
-      "endAt": "2026-09-10T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/04b7a1d78c904065b5c24f9e7816c99a/alone-with-you-cllc3.png",
-      "storeUrl": "https://store.epicgames.com/ko/p/alone-with-you-028a15",
-      "fetchedAt": "2026-09-10T11:29:03.715Z"
+      "startAt": "2026-09-10T15:00:00.000Z",
+      "endAt": "2026-09-17T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/85ddeeec9d4243b3a2d78aab87bfae7f/luftrausers-1mxb1.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/luftrausers-51e5e9",
+      "fetchedAt": "2026-09-10T16:30:19.448Z"
     }
   ]
 }
