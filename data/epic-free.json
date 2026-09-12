@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-12T10:54:53.466Z",
-  "completedAt": "2026-09-12T10:54:53.776Z",
+  "startedAt": "2026-09-12T14:12:28.845Z",
+  "completedAt": "2026-09-12T14:12:29.276Z",
   "giveaways": [
     {
       "id": "e9bb092228f544c582e2c9395fae96f3",
@@ -22,7 +22,7 @@
       "endAt": "2026-09-17T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/974c8a587d714d8d9e0c3b0fefe61a35/astral-ascent-b0gcm.png",
       "storeUrl": "https://store.epicgames.com/ko/p/astral-ascent-b33bc2",
-      "fetchedAt": "2026-09-12T10:54:53.776Z"
+      "fetchedAt": "2026-09-12T14:12:29.276Z"
     },
     {
       "id": "c76046dddcdb43619c33ce0395941033",
@@ -33,7 +33,7 @@
       "endAt": "2026-09-17T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/85ddeeec9d4243b3a2d78aab87bfae7f/luftrausers-1mxb1.png",
       "storeUrl": "https://store.epicgames.com/ko/p/luftrausers-51e5e9",
-      "fetchedAt": "2026-09-12T10:54:53.776Z"
+      "fetchedAt": "2026-09-12T14:12:29.276Z"
     }
   ]
 }
