@@ -6,7 +6,7 @@
     "url": "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana",
     "warning": "문서화된 공개 API가 아닌 상점 검색 응답이다."
   },
-  "completedAt": "2026-09-14T19:26:54.690Z",
+  "completedAt": "2026-09-14T23:11:44.427Z",
   "giveaways": [
     {
       "appid": 447700,
@@ -14,7 +14,7 @@
       "currency": "KRW",
       "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/447700/capsule_231x87.jpg?t=1789325105",
       "storeUrl": "https://store.steampowered.com/app/447700/Crystal_Crisis/?snr=1_7_7_2300_150_1",
-      "fetchedAt": "2026-09-14T19:26:54.690Z",
+      "fetchedAt": "2026-09-14T23:11:44.427Z",
       "endAt": null,
       "originalWon": 20500
     }
