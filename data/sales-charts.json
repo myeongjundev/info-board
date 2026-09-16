@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-09-16T20:15:55.388Z",
+  "completedAt": "2026-09-16T23:03:00.460Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -238,8 +238,28 @@
         "discountPercent": 75
       },
       {
-        "appid": 3557620,
+        "appid": 2638890,
         "rank": 13,
+        "name": "귀무자 Way of the Sword",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2638890/ce31174fea86d0bafa21b26e853dcd0b7326e36f/header.jpg?t=1789430751",
+        "storeUrl": "https://store.steampowered.com/app/2638890/귀무자_Way_of_the_Sword?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3557620,
+        "rank": 14,
         "name": "블루 아카이브",
         "adult": false,
         "descriptorIds": [
@@ -259,7 +279,7 @@
       },
       {
         "appid": 1172470,
-        "rank": 14,
+        "rank": 15,
         "name": "Apex 레전드™",
         "adult": false,
         "descriptorIds": [],
@@ -275,61 +295,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 2139460,
-        "rank": 15,
-        "name": "Once Human",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
-        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 985810,
-        "rank": 16,
-        "name": "GrandChase",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/985810/c6dff0803e0d9a9b2a415cd40c4cfa3bd846d091/header.jpg?t=1786514946",
-        "storeUrl": "https://store.steampowered.com/app/985810/GrandChase?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 2073620,
-        "rank": 17,
-        "name": "Arena Breakout: Infinite",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2073620/eccc13f9398a6af599a78ec7a437d6540f43a3c5/header.jpg?t=1789546912",
-        "storeUrl": "https://store.steampowered.com/app/2073620/Arena_Breakout_Infinite?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 3321460,
-        "rank": 18,
+        "rank": 16,
         "name": "붉은사막 Enhanced",
         "adult": false,
         "descriptorIds": [
@@ -348,8 +315,25 @@
         "discountPercent": 0
       },
       {
+        "appid": 2139460,
+        "rank": 17,
+        "name": "Once Human",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
+        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
         "appid": 2246340,
-        "rank": 19,
+        "rank": 18,
         "name": "Monster Hunter Wilds",
         "adult": false,
         "descriptorIds": [],
@@ -365,17 +349,33 @@
         "discountPercent": 25
       },
       {
-        "appid": 730,
-        "rank": 20,
-        "name": "Counter-Strike 2",
+        "appid": 2073620,
+        "rank": 19,
+        "name": "Arena Breakout: Infinite",
         "adult": false,
         "descriptorIds": [
-          2,
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/162664aa5da85f418105350c5d67ca565f6c3713/header.jpg?t=1789251637",
-        "storeUrl": "https://store.steampowered.com/app/730/CounterStrike_2?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2073620/eccc13f9398a6af599a78ec7a437d6540f43a3c5/header.jpg?t=1789546912",
+        "storeUrl": "https://store.steampowered.com/app/2073620/Arena_Breakout_Infinite?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 985810,
+        "rank": 20,
+        "name": "GrandChase",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/985810/c6dff0803e0d9a9b2a415cd40c4cfa3bd846d091/header.jpg?t=1786514946",
+        "storeUrl": "https://store.steampowered.com/app/985810/GrandChase?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -460,17 +460,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 578080,
+        "appid": 4126040,
         "rank": 5,
-        "name": "PUBG: BATTLEGROUNDS",
+        "name": "애니모",
         "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/841ea38bc58cabb70aef65365cf50bc2d79329d9/header.jpg?t=1786493086",
-        "storeUrl": "https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1789562655",
+        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -480,14 +477,17 @@
         "discountPercent": 0
       },
       {
-        "appid": 4126040,
+        "appid": 578080,
         "rank": 6,
-        "name": "애니모",
+        "name": "PUBG: BATTLEGROUNDS",
         "adult": false,
-        "descriptorIds": [],
+        "descriptorIds": [
+          2,
+          5
+        ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1789562655",
-        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/841ea38bc58cabb70aef65365cf50bc2d79329d9/header.jpg?t=1786493086",
+        "storeUrl": "https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -516,21 +516,21 @@
         "discountPercent": 0
       },
       {
-        "appid": 2402680,
+        "appid": 1374490,
         "rank": 8,
-        "name": "딤레이스",
+        "name": "RuneScape: Dragonwilds 룬스케이프: 드래곤와일즈",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2402680/8fe3923c10dfda28e5a41c5a501aedc4909966a7/header.jpg?t=1789584092",
-        "storeUrl": "https://store.steampowered.com/app/2402680/딤레이스?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1374490/920958f537ae74b51eb607e4e728e4d74666bdaf/header_alt_assets_4_koreana.jpg?t=1789474199",
+        "storeUrl": "https://store.steampowered.com/app/1374490/RuneScape_Dragonwilds_룬스케이프_드래곤와일즈?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$19.79",
-        "priceTextInitial": "$21.99",
-        "initialMinor": 2199,
-        "finalMinor": 1979,
-        "discountPercent": 10
+        "priceText": "$29.99",
+        "priceTextInitial": "$29.99",
+        "initialMinor": 2999,
+        "finalMinor": 2999,
+        "discountPercent": 0
       },
       {
         "appid": 2344520,
@@ -553,45 +553,25 @@
         "discountPercent": 75
       },
       {
-        "appid": 1374490,
+        "appid": 2402680,
         "rank": 10,
-        "name": "RuneScape: Dragonwilds 룬스케이프: 드래곤와일즈",
+        "name": "딤레이스",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1374490/920958f537ae74b51eb607e4e728e4d74666bdaf/header_alt_assets_4_koreana.jpg?t=1789474199",
-        "storeUrl": "https://store.steampowered.com/app/1374490/RuneScape_Dragonwilds_룬스케이프_드래곤와일즈?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2402680/8fe3923c10dfda28e5a41c5a501aedc4909966a7/header.jpg?t=1789584092",
+        "storeUrl": "https://store.steampowered.com/app/2402680/딤레이스?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$29.99",
-        "priceTextInitial": "$29.99",
-        "initialMinor": 2999,
-        "finalMinor": 2999,
-        "discountPercent": 0
-      },
-      {
-        "appid": 3639070,
-        "rank": 11,
-        "name": "BLACKWOOD",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3639070/86eb06cf8dad642dacb7b5c4944515ff48c4cd3a/header.jpg?t=1789583129",
-        "storeUrl": "https://store.steampowered.com/app/3639070/BLACKWOOD?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$22.49",
-        "priceTextInitial": "$24.99",
-        "initialMinor": 2499,
-        "finalMinor": 2249,
+        "priceText": "$19.79",
+        "priceTextInitial": "$21.99",
+        "initialMinor": 2199,
+        "finalMinor": 1979,
         "discountPercent": 10
       },
       {
         "appid": 1086940,
-        "rank": 12,
+        "rank": 11,
         "name": "Baldur's Gate 3",
         "adult": false,
         "descriptorIds": [
@@ -611,25 +591,8 @@
         "discountPercent": 30
       },
       {
-        "appid": 3564740,
-        "rank": 13,
-        "name": "연운",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/1646a998bc0359a3607a96edfae7038767ede17a/header_alt_assets_9_koreana.jpg?t=1789558853",
-        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 2073620,
-        "rank": 14,
+        "rank": 12,
         "name": "Arena Breakout: Infinite",
         "adult": false,
         "descriptorIds": [
@@ -647,25 +610,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 949230,
-        "rank": 15,
-        "name": "Cities: Skylines II",
+        "appid": 3564740,
+        "rank": 13,
+        "name": "연운",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/949230/1a2deefa88f24344c9ad133ac232feb9073a72d6/header_alt_assets_7_koreana.jpg?t=1789487974",
-        "storeUrl": "https://store.steampowered.com/app/949230/Cities_Skylines_II?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3564740/1646a998bc0359a3607a96edfae7038767ede17a/header_alt_assets_9_koreana.jpg?t=1789558853",
+        "storeUrl": "https://store.steampowered.com/app/3564740/연운?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$34.99",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 3499,
-        "discountPercent": 30
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       },
       {
         "appid": 2767030,
-        "rank": 16,
+        "rank": 14,
         "name": "마블 라이벌즈",
         "adult": false,
         "descriptorIds": [],
@@ -682,7 +645,7 @@
       },
       {
         "appid": 1599340,
-        "rank": 17,
+        "rank": 15,
         "name": "Lost Ark",
         "adult": false,
         "descriptorIds": [
@@ -703,7 +666,7 @@
       },
       {
         "appid": 2357570,
-        "rank": 18,
+        "rank": 16,
         "name": "오버워치™",
         "adult": false,
         "descriptorIds": [],
@@ -719,8 +682,25 @@
         "discountPercent": 0
       },
       {
+        "appid": 949230,
+        "rank": 17,
+        "name": "Cities: Skylines II",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/949230/1a2deefa88f24344c9ad133ac232feb9073a72d6/header_alt_assets_7_koreana.jpg?t=1789487974",
+        "storeUrl": "https://store.steampowered.com/app/949230/Cities_Skylines_II?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$34.99",
+        "priceTextInitial": "$49.99",
+        "initialMinor": 4999,
+        "finalMinor": 3499,
+        "discountPercent": 30
+      },
+      {
         "appid": 4001890,
-        "rank": 19,
+        "rank": 18,
         "name": "낚시 방법",
         "adult": false,
         "descriptorIds": [
@@ -739,7 +719,7 @@
       },
       {
         "appid": 381210,
-        "rank": 20,
+        "rank": 19,
         "name": "Dead by Daylight",
         "adult": false,
         "descriptorIds": [
@@ -756,6 +736,27 @@
         "initialMinor": 1999,
         "finalMinor": 1999,
         "discountPercent": 0
+      },
+      {
+        "appid": 1285190,
+        "rank": 20,
+        "name": "보더랜드® 4",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1285190/edc5c69b131148491b79b7f90eda102f525779f3/header_alt_assets_4_koreana.jpg?t=1789422727",
+        "storeUrl": "https://store.steampowered.com/app/1285190/보더랜드_4?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$34.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 3499,
+        "discountPercent": 50
       }
     ]
   },
@@ -1360,7 +1361,7 @@
       {
         "appid": 4163960,
         "name": "Another Eden Begins",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4163960/fa1ca147e40f7c484d738eecfa6db8967b39da05/capsule_231x87.jpg?t=1789572133",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4163960/fa1ca147e40f7c484d738eecfa6db8967b39da05/capsule_231x87.jpg?t=1789572133",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1380,7 +1381,7 @@
       {
         "appid": 2572040,
         "name": "Woodo",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2572040/3708b51d6a4b8b643e2cf8296602f27dff303f60/capsule_231x87.jpg?t=1789581740",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2572040/3708b51d6a4b8b643e2cf8296602f27dff303f60/capsule_231x87.jpg?t=1789581740",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1400,7 +1401,7 @@
       {
         "appid": 4126040,
         "name": "애니모",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4126040/8c3210b0a21458c0f55a66be4a166910c6e863a9/capsule_231x87_koreana.jpg?t=1789562655",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/8c3210b0a21458c0f55a66be4a166910c6e863a9/capsule_231x87_koreana.jpg?t=1789562655",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1418,9 +1419,31 @@
         "discountPercent": 0
       },
       {
+        "appid": 3985950,
+        "name": "윤회 보험사 R.I.P.",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3985950/96153ff75aed4abbee04ecd7d0350423bd9bf050/capsule_231x87_alt_assets_5_koreana.jpg?t=1789518622",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "storeUrl": "https://store.steampowered.com/app/3985950/__RIP/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 15일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-15",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 13,020",
+        "priceTextInitial": "₩ 18,600",
+        "initialMinor": 1860000,
+        "finalMinor": 1302000,
+        "discountPercent": 30
+      },
+      {
         "appid": 2402680,
         "name": "딤레이스",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2402680/c89849716df0c45bfe23a28ab36fd8c988c39e14/capsule_231x87.jpg?t=1789584092",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2402680/c89849716df0c45bfe23a28ab36fd8c988c39e14/capsule_231x87.jpg?t=1789584092",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1438,29 +1461,9 @@
         "discountPercent": 10
       },
       {
-        "appid": 3829310,
-        "name": "Sublight",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3829310/37a52d1e089ac9a69614d4587972330f8e88935f/capsule_231x87.jpg?t=1789480816",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/3829310/Sublight/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 9월 15일",
-        "releaseMonth": "2026-09",
-        "releaseDate": "2026-09-15",
-        "precision": "day",
-        "isFree": false,
-        "currency": "KRW",
-        "priceText": "₩ 13,500",
-        "priceTextInitial": "₩ 13,500",
-        "initialMinor": 1350000,
-        "finalMinor": 1350000,
-        "discountPercent": 0
-      },
-      {
         "appid": 4557380,
         "name": "Batomon Showdown",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557380/b40dccb71e0f4917c751b4ee7c44eecfde1316be/capsule_231x87.jpg?t=1789470804",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4557380/b40dccb71e0f4917c751b4ee7c44eecfde1316be/capsule_231x87.jpg?t=1789470804",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1480,7 +1483,7 @@
       {
         "appid": 3891400,
         "name": "바텐더 시뮬레이터",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3891400/30b85275c47181eac510980503334cf1b5be6474/capsule_231x87_koreana.jpg?t=1789467841",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3891400/30b85275c47181eac510980503334cf1b5be6474/capsule_231x87_koreana.jpg?t=1789467841",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1500,7 +1503,7 @@
       {
         "appid": 1374490,
         "name": "RuneScape: Dragonwilds 룬스케이프: 드래곤와일즈",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1374490/851add1a67f5d68d91ee9e4c78fb8433f48bb3a9/capsule_231x87_alt_assets_4_koreana.jpg?t=1789474199",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1374490/851add1a67f5d68d91ee9e4c78fb8433f48bb3a9/capsule_231x87_alt_assets_4_koreana.jpg?t=1789474199",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1520,7 +1523,7 @@
       {
         "appid": 3070070,
         "name": "TCG Card Shop Simulator",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3070070/5c2ce0a6c3455d49ce536cf054a85266363b0dc2/capsule_231x87_alt_assets_0.jpg?t=1789528213",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3070070/5c2ce0a6c3455d49ce536cf054a85266363b0dc2/capsule_231x87_alt_assets_0.jpg?t=1789528213",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1540,7 +1543,7 @@
       {
         "appid": 4221990,
         "name": "Fish Lab",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4221990/2c7bafdc90acf46b2d17cc6c1135546063e527d3/capsule_231x87.jpg?t=1789401717",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4221990/2c7bafdc90acf46b2d17cc6c1135546063e527d3/capsule_231x87.jpg?t=1789401717",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1560,7 +1563,7 @@
       {
         "appid": 4573090,
         "name": "피블토피아",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4573090/2d27bc1d9070a968cc6d08f1c9577dbf86178e36/capsule_231x87_koreana.jpg?t=1789477558",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4573090/2d27bc1d9070a968cc6d08f1c9577dbf86178e36/capsule_231x87_koreana.jpg?t=1789477558",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1580,7 +1583,7 @@
       {
         "appid": 4300090,
         "name": "마음까지 정리해요",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4300090/b7c73f74cd58a84e004df6669967142e8b3ff066/capsule_231x87_koreana.jpg?t=1789481635",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4300090/b7c73f74cd58a84e004df6669967142e8b3ff066/capsule_231x87_koreana.jpg?t=1789481635",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1600,7 +1603,7 @@
       {
         "appid": 1867240,
         "name": "WARDOGS",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1867240/11d3bb7607c5568c61108fe70e7c670b4940269e/capsule_231x87.jpg?t=1789503126",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/11d3bb7607c5568c61108fe70e7c670b4940269e/capsule_231x87.jpg?t=1789503126",
         "adult": false,
         "descriptorIds": [
           5
@@ -1620,9 +1623,29 @@
         "discountPercent": 0
       },
       {
+        "appid": 3560360,
+        "name": "Forsworn",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3560360/5b5324cb29c8ccdb2f2f7c80d90d6bbdc8d2896e/capsule_231x87_alt_assets_0.jpg?t=1789055128",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/3560360/Forsworn/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 10일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-10",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 13,600",
+        "priceTextInitial": "₩ 17,000",
+        "initialMinor": 1700000,
+        "finalMinor": 1360000,
+        "discountPercent": 20
+      },
+      {
         "appid": 4412320,
         "name": "Dumb Ways to Build",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4412320/d0ca58fce7e7bc5a0a87784f18e537adba07d99a/capsule_231x87.jpg?t=1789053992",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4412320/d0ca58fce7e7bc5a0a87784f18e537adba07d99a/capsule_231x87.jpg?t=1789053992",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1640,9 +1663,29 @@
         "discountPercent": 0
       },
       {
+        "appid": 4030150,
+        "name": "환세록 리메이크",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4030150/60083c0d62503d9ba3428fe7f7df86b4018b39cc/capsule_231x87.jpg?t=1789392318",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/4030150/_/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 9일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-09",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 19,710",
+        "priceTextInitial": "₩ 21,900",
+        "initialMinor": 2190000,
+        "finalMinor": 1971000,
+        "discountPercent": 10
+      },
+      {
         "appid": 4659620,
         "name": "동방홍마향: New Classic ～ the Embodiment of Scarlet Devil",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4659620/9425acb126d0e3076efa6f8154118711fccb1587/capsule_231x87_koreana.jpg?t=1788964897",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4659620/9425acb126d0e3076efa6f8154118711fccb1587/capsule_231x87_koreana.jpg?t=1788964897",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1662,7 +1705,7 @@
       {
         "appid": 892970,
         "name": "Valheim",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/892970/4e8fffa2161ff5bf23058cc72c43ef1032059b5b/capsule_231x87_alt_assets_6.jpg?t=1789470462",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/892970/4e8fffa2161ff5bf23058cc72c43ef1032059b5b/capsule_231x87_alt_assets_6.jpg?t=1789470462",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1682,7 +1725,7 @@
       {
         "appid": 3874450,
         "name": "Sunset Summit - 선셋 서밋",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3874450/f7e8f0ce33b368c38049d1b392592f73988e9134/capsule_231x87.jpg?t=1788955252",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3874450/f7e8f0ce33b368c38049d1b392592f73988e9134/capsule_231x87.jpg?t=1788955252",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1702,7 +1745,7 @@
       {
         "appid": 3624140,
         "name": "Wanderburg 완더버그",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3624140/cf09ebaa75753e62dab552e1d98f0e45425cb808/capsule_231x87_koreana.jpg?t=1789141114",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3624140/cf09ebaa75753e62dab552e1d98f0e45425cb808/capsule_231x87_koreana.jpg?t=1789141114",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1718,59 +1761,13 @@
         "initialMinor": 1500000,
         "finalMinor": 975000,
         "discountPercent": 35
-      },
-      {
-        "appid": 2798330,
-        "name": "던전 세틀러즈 Dungeon Settlers",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2798330/f80f8fde50ba7c711cb376b03d68aa8633b51f76/capsule_231x87_koreana.jpg?t=1789111099",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "storeUrl": "https://store.steampowered.com/app/2798330/__Dungeon_Settlers/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 9월 4일",
-        "releaseMonth": "2026-09",
-        "releaseDate": "2026-09-04",
-        "precision": "day",
-        "isFree": false,
-        "currency": "KRW",
-        "priceText": "₩ 21,160",
-        "priceTextInitial": "₩ 24,900",
-        "initialMinor": 2490000,
-        "finalMinor": 2116000,
-        "discountPercent": 15
-      },
-      {
-        "appid": 2638890,
-        "name": "귀무자 Way of the Sword",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2638890/4aa8bcfcb20173a0250f03ee15473abece15f6b0/capsule_231x87.jpg?t=1789430751",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "storeUrl": "https://store.steampowered.com/app/2638890/_Way_of_the_Sword/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 9월 3일",
-        "releaseMonth": "2026-09",
-        "releaseDate": "2026-09-03",
-        "precision": "day",
-        "isFree": false,
-        "currency": "KRW",
-        "priceText": "₩ 79,800",
-        "priceTextInitial": "₩ 79,800",
-        "initialMinor": 7980000,
-        "finalMinor": 7980000,
-        "discountPercent": 0
       }
     ],
     "upcoming": [
       {
         "appid": 2288340,
         "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2288340/f72b0d0ef7d7beed96998f1ac0bdfb788a01845f/capsule_231x87.jpg?t=1789362045",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/f72b0d0ef7d7beed96998f1ac0bdfb788a01845f/capsule_231x87.jpg?t=1789362045",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1790,7 +1787,7 @@
       {
         "appid": 3846830,
         "name": "토탈워: 쇼군 2 - 컴플리트 에디션",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3846830/3aac12897252e0b0726d8a882a90ed3c83a0ccfa/capsule_231x87.jpg?t=1789489801",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3846830/3aac12897252e0b0726d8a882a90ed3c83a0ccfa/capsule_231x87.jpg?t=1789489801",
         "adult": false,
         "descriptorIds": [
           2,
@@ -1813,7 +1810,7 @@
       {
         "appid": 3219030,
         "name": "플래닛 주 2",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3219030/916cd0994ac22580e1a53ec8bc0142541ebd4aed/capsule_231x87_koreana.jpg?t=1788453298",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3219030/916cd0994ac22580e1a53ec8bc0142541ebd4aed/capsule_231x87_koreana.jpg?t=1788453298",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1833,7 +1830,7 @@
       {
         "appid": 4231820,
         "name": "Castlevania: Belmont's Curse",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4231820/2ce9921d044de1c749da39763f8c03edd5c91d78/capsule_231x87.jpg?t=1788478863",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4231820/2ce9921d044de1c749da39763f8c03edd5c91d78/capsule_231x87.jpg?t=1788478863",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1853,7 +1850,7 @@
       {
         "appid": 3486530,
         "name": "Stupid Never Dies",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3486530/6ecaf52004ceb92cc994f3c0d452688056f7a231/capsule_231x87.jpg?t=1789130489",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3486530/6ecaf52004ceb92cc994f3c0d452688056f7a231/capsule_231x87.jpg?t=1789130489",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1873,7 +1870,7 @@
       {
         "appid": 3259780,
         "name": "FINAL FANTASY RESONANCE",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3259780/6861c59eb09396b7370536d494c1c1f33f684f14/capsule_231x87.jpg?t=1788534743",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3259780/6861c59eb09396b7370536d494c1c1f33f684f14/capsule_231x87.jpg?t=1788534743",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1893,7 +1890,7 @@
       {
         "appid": 4890760,
         "name": "THE DEAD WE KNEW: Open World Survival",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4890760/fb907128802e801189829972334439cbcf3dcaf3/capsule_231x87.jpg?t=1789402327",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4890760/fb907128802e801189829972334439cbcf3dcaf3/capsule_231x87.jpg?t=1789402327",
         "adult": false,
         "descriptorIds": [
           2,
@@ -1916,7 +1913,7 @@
       {
         "appid": 4435490,
         "name": "콜 오브 듀티®: 모던 워페어 4",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4435490/b9fb9a94af9ab627be81bde20a8aa40e3e180175/capsule_231x87_koreana.jpg?t=1789146183",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4435490/b9fb9a94af9ab627be81bde20a8aa40e3e180175/capsule_231x87_koreana.jpg?t=1789146183",
         "adult": false,
         "descriptorIds": [
           2,
@@ -1939,7 +1936,7 @@
       {
         "appid": 2295170,
         "name": "Emberville",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2295170/ad089cece8b69edd93d675684bf48b244c06e461/capsule_231x87.jpg?t=1789543246",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2295170/ad089cece8b69edd93d675684bf48b244c06e461/capsule_231x87.jpg?t=1789543246",
         "adult": false,
         "descriptorIds": [
           2,
@@ -1962,7 +1959,7 @@
       {
         "appid": 4115450,
         "name": "Phantom Blade Zero",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4115450/aef06490c9a4ad912142fe3b766ee08a2b38ef80/capsule_231x87.jpg?t=1787142639",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4115450/aef06490c9a4ad912142fe3b766ee08a2b38ef80/capsule_231x87.jpg?t=1787142639",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": false,
@@ -1982,7 +1979,7 @@
       {
         "appid": 4348910,
         "name": "Probably Stolen - Cyberpunk Shopkeeper Sim",
-        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4348910/b34bac92cd37260ecead20b181eda3d0f928a373/capsule_231x87.jpg?t=1789460435",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4348910/b34bac92cd37260ecead20b181eda3d0f928a373/capsule_231x87.jpg?t=1789460435",
         "adult": false,
         "descriptorIds": [
           5
