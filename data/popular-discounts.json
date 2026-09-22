@@ -6,8 +6,8 @@
     "priceSource": "Steam Store 비공식 appdetails",
     "country": "KR"
   },
-  "startedAt": "2026-09-22T06:36:06.002Z",
-  "completedAt": "2026-09-22T06:36:42.814Z",
+  "startedAt": "2026-09-22T06:45:45.161Z",
+  "completedAt": "2026-09-22T06:46:19.099Z",
   "counts": {
     "ranked": 100,
     "checked": 95,
@@ -24,7 +24,7 @@
     {
       "rank": 16,
       "appid": 252490,
-      "currentPlayers": 45861,
+      "currentPlayers": 46411,
       "peakToday": 113924,
       "name": "Rust",
       "adult": false,
@@ -40,18 +40,18 @@
       "discountPercent": 50,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-22T06:36:11.402Z",
+      "fetchedAt": "2026-09-22T06:45:50.451Z",
       "storeUrl": "https://store.steampowered.com/app/252490/?cc=KR&l=koreana",
       "discountEndsAt": "2026-09-26T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-22T06:36:42.814Z",
+      "periodFetchedAt": "2026-09-22T06:46:19.099Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 36,
       "appid": 2344520,
-      "currentPlayers": 26393,
+      "currentPlayers": 26478,
       "peakToday": 49572,
       "name": "디아블로® IV",
       "adult": false,
@@ -66,18 +66,18 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-22T06:36:18.285Z",
+      "fetchedAt": "2026-09-22T06:45:57.276Z",
       "storeUrl": "https://store.steampowered.com/app/2344520/?cc=KR&l=koreana",
       "discountEndsAt": "2026-09-24T17:00:00.000Z",
       "discountKind": "주말 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-22T06:36:42.814Z",
+      "periodFetchedAt": "2026-09-22T06:46:19.099Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
-      "rank": 94,
+      "rank": 95,
       "appid": 3527290,
-      "currentPlayers": 9387,
+      "currentPlayers": 9259,
       "peakToday": 28975,
       "name": "PEAK",
       "adult": false,
@@ -89,12 +89,12 @@
       "discountPercent": 38,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-22T06:36:40.350Z",
+      "fetchedAt": "2026-09-22T06:46:17.143Z",
       "storeUrl": "https://store.steampowered.com/app/3527290/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-22T06:36:42.814Z",
+      "periodFetchedAt": "2026-09-22T06:46:19.099Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     }
   ],
@@ -110,17 +110,17 @@
       "reason": "appid 2694490 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 53,
+      "rank": 52,
       "appid": 582660,
       "reason": "appid 582660 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 72,
+      "rank": 73,
       "appid": 39210,
       "reason": "appid 39210 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 79,
+      "rank": 78,
       "appid": 1623660,
       "reason": "appid 1623660 가격 응답을 읽을 수 없다"
     }
