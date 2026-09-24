@@ -6,8 +6,8 @@
     "priceSource": "Steam Store 비공식 appdetails",
     "country": "KR"
   },
-  "startedAt": "2026-09-24T06:31:12.088Z",
-  "completedAt": "2026-09-24T06:31:42.397Z",
+  "startedAt": "2026-09-24T06:43:04.349Z",
+  "completedAt": "2026-09-24T06:43:38.734Z",
   "counts": {
     "ranked": 100,
     "checked": 95,
@@ -22,9 +22,9 @@
   },
   "discounts": [
     {
-      "rank": 18,
+      "rank": 17,
       "appid": 252490,
-      "currentPlayers": 43094,
+      "currentPlayers": 43552,
       "peakToday": 98597,
       "name": "Rust",
       "adult": false,
@@ -40,12 +40,12 @@
       "discountPercent": 50,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-24T06:31:17.514Z",
+      "fetchedAt": "2026-09-24T06:43:10.061Z",
       "storeUrl": "https://store.steampowered.com/app/252490/?cc=KR&l=koreana",
       "discountEndsAt": "2026-09-26T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-24T06:31:42.396Z",
+      "periodFetchedAt": "2026-09-24T06:43:38.733Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
@@ -66,12 +66,12 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-24T06:31:22.930Z",
+      "fetchedAt": "2026-09-24T06:43:16.358Z",
       "storeUrl": "https://store.steampowered.com/app/2344520/?cc=KR&l=koreana",
       "discountEndsAt": "2026-09-24T17:00:00.000Z",
       "discountKind": "주말 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-24T06:31:42.396Z",
+      "periodFetchedAt": "2026-09-24T06:43:38.733Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     }
   ],
@@ -92,7 +92,7 @@
       "reason": "appid 582660 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 75,
+      "rank": 76,
       "appid": 39210,
       "reason": "appid 39210 가격 응답을 읽을 수 없다"
     },
