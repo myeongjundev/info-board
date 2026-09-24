@@ -10,30 +10,19 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-24T10:08:36.284Z",
-  "completedAt": "2026-09-24T10:08:36.893Z",
+  "startedAt": "2026-09-24T15:13:14.782Z",
+  "completedAt": "2026-09-24T15:13:15.177Z",
   "giveaways": [
     {
-      "id": "8a20c6c8d5b5417e800c687e9d72013e",
-      "title": "마인드캅",
-      "originalPrice": 19000,
+      "id": "7c14bf0cffdd43be968fdcf28e5af653",
+      "title": "Astrea Six Sided Oracles",
+      "originalPrice": 25600,
       "currency": "KRW",
-      "startAt": "2026-09-17T15:00:00.000Z",
-      "endAt": "2026-09-24T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/984cdc148ea6423e866ca6e04a1b429f/mindcop-kplp1.jpg",
-      "storeUrl": "https://store.epicgames.com/ko/p/mindcop-78e6c1",
-      "fetchedAt": "2026-09-24T10:08:36.893Z"
-    },
-    {
-      "id": "b9ff3f98367a45cdac289dff6683a2bc",
-      "title": "Shogun Showdown",
-      "originalPrice": 15300,
-      "currency": "KRW",
-      "startAt": "2026-09-17T15:00:00.000Z",
-      "endAt": "2026-09-24T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/450bcfdb9c00453394d7ccc2948ba5db/shogun-showdown-hz1yh.jpg",
-      "storeUrl": "https://store.epicgames.com/ko/p/shogun-showdown-61832d",
-      "fetchedAt": "2026-09-24T10:08:36.893Z"
+      "startAt": "2026-09-24T15:00:00.000Z",
+      "endAt": "2026-10-01T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/4515173972ae4444a2582bc690c150bd/astrea-six-sided-oracles-offer-bvy0n.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/astrea-six-sided-oracles-33c949",
+      "fetchedAt": "2026-09-24T15:13:15.177Z"
     }
   ]
 }
