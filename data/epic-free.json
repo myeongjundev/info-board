@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-09-24T15:13:14.782Z",
-  "completedAt": "2026-09-24T15:13:15.177Z",
+  "startedAt": "2026-09-24T19:16:36.449Z",
+  "completedAt": "2026-09-24T19:16:36.856Z",
   "giveaways": [
     {
       "id": "7c14bf0cffdd43be968fdcf28e5af653",
@@ -22,7 +22,7 @@
       "endAt": "2026-10-01T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/4515173972ae4444a2582bc690c150bd/astrea-six-sided-oracles-offer-bvy0n.png",
       "storeUrl": "https://store.epicgames.com/ko/p/astrea-six-sided-oracles-33c949",
-      "fetchedAt": "2026-09-24T15:13:15.177Z"
+      "fetchedAt": "2026-09-24T19:16:36.856Z"
     }
   ]
 }
