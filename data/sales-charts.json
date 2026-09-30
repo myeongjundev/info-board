@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-09-29T20:54:57.568Z",
+  "completedAt": "2026-09-30T00:35:19.069Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -104,25 +104,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 4126040,
-        "rank": 6,
-        "name": "애니모",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790595631",
-        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 1973530,
-        "rank": 7,
+        "rank": 6,
         "name": "Limbus Company",
         "adult": false,
         "descriptorIds": [
@@ -142,7 +125,7 @@
       },
       {
         "appid": 3557620,
-        "rank": 8,
+        "rank": 7,
         "name": "블루 아카이브",
         "adult": false,
         "descriptorIds": [
@@ -152,6 +135,23 @@
         "descriptorAvailable": true,
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3557620/a43191451225d3122c224a7349f2fc232f46b3d0/header_koreana.jpg?t=1779773548",
         "storeUrl": "https://store.steampowered.com/app/3557620/블루_아카이브?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 4126040,
+        "rank": 8,
+        "name": "애니모",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790595631",
+        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -200,28 +200,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 2638890,
-        "rank": 11,
-        "name": "귀무자 Way of the Sword",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2638890/ce31174fea86d0bafa21b26e853dcd0b7326e36f/header.jpg?t=1790383151",
-        "storeUrl": "https://store.steampowered.com/app/2638890/귀무자_Way_of_the_Sword?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
-        "discountPercent": 0
-      },
-      {
         "appid": 4282500,
-        "rank": 12,
+        "rank": 11,
         "name": "hololive Dreams",
         "adult": false,
         "descriptorIds": [],
@@ -238,7 +218,7 @@
       },
       {
         "appid": 230410,
-        "rank": 13,
+        "rank": 12,
         "name": "Warframe",
         "adult": false,
         "descriptorIds": [
@@ -257,25 +237,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 4019220,
-        "rank": 14,
-        "name": "Dressmaker",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4019220/f1cd08127872e60e4c47a4bc3e40d682d94741bf/header.jpg?t=1790605593",
-        "storeUrl": "https://store.steampowered.com/app/4019220/Dressmaker?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$14.99",
-        "priceTextInitial": "$14.99",
-        "initialMinor": 1499,
-        "finalMinor": 1499,
-        "discountPercent": 0
-      },
-      {
         "appid": 1172470,
-        "rank": 15,
+        "rank": 13,
         "name": "Apex 레전드™",
         "adult": false,
         "descriptorIds": [],
@@ -288,6 +251,40 @@
         "priceTextInitial": null,
         "initialMinor": null,
         "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3493540,
+        "rank": 14,
+        "name": "Transport Fever 3",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3493540/e36f9ea700608a342c9e90046e946146c20f88c6/header_alt_assets_0_koreana.jpg?t=1790697610",
+        "storeUrl": "https://store.steampowered.com/app/3493540/Transport_Fever_3?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$49.99",
+        "priceTextInitial": "$49.99",
+        "initialMinor": 4999,
+        "finalMinor": 4999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 4019220,
+        "rank": 15,
+        "name": "Dressmaker",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4019220/f1cd08127872e60e4c47a4bc3e40d682d94741bf/header.jpg?t=1790605593",
+        "storeUrl": "https://store.steampowered.com/app/4019220/Dressmaker?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$14.99",
+        "priceTextInitial": "$14.99",
+        "initialMinor": 1499,
+        "finalMinor": 1499,
         "discountPercent": 0
       },
       {
@@ -308,14 +305,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 985810,
+        "appid": 4025700,
         "rank": 17,
-        "name": "GrandChase",
+        "name": "두근두근타운",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/985810/c6dff0803e0d9a9b2a415cd40c4cfa3bd846d091/header.jpg?t=1786514946",
-        "storeUrl": "https://store.steampowered.com/app/985810/GrandChase?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4025700/2228fe487077813485fe804a4f8311c289d69901/header_alt_assets_1.jpg?t=1789974308",
+        "storeUrl": "https://store.steampowered.com/app/4025700/두근두근타운?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -325,25 +322,42 @@
         "discountPercent": 0
       },
       {
-        "appid": 3493540,
+        "appid": 270880,
         "rank": 18,
-        "name": "Transport Fever 3",
+        "name": "American Truck Simulator",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3493540/e36f9ea700608a342c9e90046e946146c20f88c6/header_alt_assets_0_koreana.jpg?t=1790697610",
-        "storeUrl": "https://store.steampowered.com/app/3493540/Transport_Fever_3?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/270880/2cfd6711c21677e7611985d2bacc3a3bcfac2660/header_alt_assets_8.jpg?t=1790697134",
+        "storeUrl": "https://store.steampowered.com/app/270880/American_Truck_Simulator?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$49.99",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 4999,
-        "discountPercent": 0
+        "priceText": "$4.99",
+        "priceTextInitial": "$19.99",
+        "initialMinor": 1999,
+        "finalMinor": 499,
+        "discountPercent": 75
+      },
+      {
+        "appid": 3020510,
+        "rank": 19,
+        "name": "Heroes' Vow: Three Kingdoms",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3020510/cd981f2281e9203a3c94f730c9b21dbfd0ecacbd/header_koreana.jpg?t=1790499638",
+        "storeUrl": "https://store.steampowered.com/app/3020510/Heroes_Vow_Three_Kingdoms?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$17.99",
+        "priceTextInitial": "$19.99",
+        "initialMinor": 1999,
+        "finalMinor": 1799,
+        "discountPercent": 10
       },
       {
         "appid": 2161700,
-        "rank": 19,
+        "rank": 20,
         "name": "페르소나3 리로드",
         "adult": false,
         "descriptorIds": [
@@ -360,46 +374,12 @@
         "initialMinor": 5999,
         "finalMinor": 1799,
         "discountPercent": 70
-      },
-      {
-        "appid": 3020510,
-        "rank": 20,
-        "name": "Heroes' Vow: Three Kingdoms",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3020510/cd981f2281e9203a3c94f730c9b21dbfd0ecacbd/header_koreana.jpg?t=1790499638",
-        "storeUrl": "https://store.steampowered.com/app/3020510/Heroes_Vow_Three_Kingdoms?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$17.99",
-        "priceTextInitial": "$19.99",
-        "initialMinor": 1999,
-        "finalMinor": 1799,
-        "discountPercent": 10
       }
     ],
     "global": [
       {
-        "appid": 3493540,
-        "rank": 1,
-        "name": "Transport Fever 3",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3493540/e36f9ea700608a342c9e90046e946146c20f88c6/header_alt_assets_0_koreana.jpg?t=1790697610",
-        "storeUrl": "https://store.steampowered.com/app/3493540/Transport_Fever_3?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$49.99",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 4999,
-        "discountPercent": 0
-      },
-      {
         "appid": 1912410,
-        "rank": 2,
+        "rank": 1,
         "name": "Minecraft Dungeons II",
         "adult": false,
         "descriptorIds": [],
@@ -415,8 +395,62 @@
         "discountPercent": 0
       },
       {
-        "appid": 730,
+        "appid": 3493540,
+        "rank": 2,
+        "name": "Transport Fever 3",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3493540/e36f9ea700608a342c9e90046e946146c20f88c6/header_alt_assets_0_koreana.jpg?t=1790697610",
+        "storeUrl": "https://store.steampowered.com/app/3493540/Transport_Fever_3?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$49.99",
+        "priceTextInitial": "$49.99",
+        "initialMinor": 4999,
+        "finalMinor": 4999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3393110,
         "rank": 3,
+        "name": "AION 2",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3393110/7411048cb8c2ed367d5b4254e54434f76d63c22f/header.jpg?t=1790717919",
+        "storeUrl": "https://store.steampowered.com/app/3393110/AION_2?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 2288340,
+        "rank": 4,
+        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790651602",
+        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 730,
+        "rank": 5,
         "name": "Counter-Strike 2",
         "adult": false,
         "descriptorIds": [
@@ -432,43 +466,6 @@
         "priceTextInitial": null,
         "initialMinor": null,
         "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 3393110,
-        "rank": 4,
-        "name": "AION 2",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3393110/10aa4b096ebe6af0d1dd7882e5ba004271aef6f7/header.jpg?t=1790715170",
-        "storeUrl": "https://store.steampowered.com/app/3393110/AION_2?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 2288340,
-        "rank": 5,
-        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790651602",
-        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
         "discountPercent": 0
       },
       {
@@ -508,25 +505,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 270880,
-        "rank": 8,
-        "name": "American Truck Simulator",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/270880/2cfd6711c21677e7611985d2bacc3a3bcfac2660/header_alt_assets_8.jpg?t=1790697134",
-        "storeUrl": "https://store.steampowered.com/app/270880/American_Truck_Simulator?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$4.99",
-        "priceTextInitial": "$19.99",
-        "initialMinor": 1999,
-        "finalMinor": 499,
-        "discountPercent": 75
-      },
-      {
         "appid": 1488490,
-        "rank": 9,
+        "rank": 8,
         "name": "니발리스 나이트 Nivalis Nights",
         "adult": false,
         "descriptorIds": [
@@ -542,6 +522,23 @@
         "initialMinor": 2499,
         "finalMinor": 2249,
         "discountPercent": 10
+      },
+      {
+        "appid": 270880,
+        "rank": 9,
+        "name": "American Truck Simulator",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/270880/2cfd6711c21677e7611985d2bacc3a3bcfac2660/header_alt_assets_8.jpg?t=1790697134",
+        "storeUrl": "https://store.steampowered.com/app/270880/American_Truck_Simulator?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$4.99",
+        "priceTextInitial": "$19.99",
+        "initialMinor": 1999,
+        "finalMinor": 499,
+        "discountPercent": 75
       },
       {
         "appid": 292030,
@@ -581,16 +578,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 570,
+        "appid": 2139460,
         "rank": 12,
-        "name": "Dota 2",
+        "name": "Once Human",
         "adult": false,
-        "descriptorIds": [
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-        "storeUrl": "https://store.steampowered.com/app/570/Dota_2?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
+        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -617,8 +612,27 @@
         "discountPercent": 0
       },
       {
-        "appid": 4019220,
+        "appid": 570,
         "rank": 14,
+        "name": "Dota 2",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
+        "storeUrl": "https://store.steampowered.com/app/570/Dota_2?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 4019220,
+        "rank": 15,
         "name": "Dressmaker",
         "adult": false,
         "descriptorIds": [],
@@ -631,23 +645,6 @@
         "priceTextInitial": "$14.99",
         "initialMinor": 1499,
         "finalMinor": 1499,
-        "discountPercent": 0
-      },
-      {
-        "appid": 2139460,
-        "rank": 15,
-        "name": "Once Human",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
-        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
         "discountPercent": 0
       },
       {
@@ -728,23 +725,23 @@
         "discountPercent": 0
       },
       {
-        "appid": 1142710,
+        "appid": 3010850,
         "rank": 20,
-        "name": "토탈워: 워해머 3",
+        "name": "Gears of War: E-Day",
         "adult": false,
         "descriptorIds": [
           2,
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1142710/header.jpg?t=1790321531",
-        "storeUrl": "https://store.steampowered.com/app/1142710/토탈워_워해머_3?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1789676311",
+        "storeUrl": "https://store.steampowered.com/app/3010850/Gears_of_War_EDay?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$59.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 5999,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
         "discountPercent": 0
       }
     ]
@@ -1372,6 +1369,48 @@
         "discountPercent": 0
       },
       {
+        "appid": 3917700,
+        "name": "Dicevaders",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3917700/71c07b7dea8407a7757c3e3d782386d35e7f375e/capsule_231x87_alt_assets_2.jpg?t=1790706148",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/3917700/Dicevaders/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 29일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-29",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 14,400",
+        "priceTextInitial": "₩ 16,000",
+        "initialMinor": 1600000,
+        "finalMinor": 1440000,
+        "discountPercent": 10
+      },
+      {
+        "appid": 1488490,
+        "name": "니발리스 나이트 Nivalis Nights",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1488490/7e483ece1117906b11bd6959a16e1f77f5a6e4d5/capsule_231x87.jpg?t=1790694813",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "storeUrl": "https://store.steampowered.com/app/1488490/__Nivalis_Nights/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 9월 29일",
+        "releaseMonth": "2026-09",
+        "releaseDate": "2026-09-29",
+        "precision": "day",
+        "isFree": false,
+        "currency": "KRW",
+        "priceText": "₩ 23,850",
+        "priceTextInitial": "₩ 26,500",
+        "initialMinor": 2650000,
+        "finalMinor": 2385000,
+        "discountPercent": 10
+      },
+      {
         "appid": 4601120,
         "name": "Endless Rails",
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4601120/a4e721a3b11740bb060c8e6c0d54a989a9973cbc/capsule_231x87.jpg?t=1790689860",
@@ -1595,26 +1634,6 @@
         "discountPercent": 10
       },
       {
-        "appid": 3936270,
-        "name": "일단 만들어서 출시하자 / It's Fine",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3936270/469226b6b110174ab34adee91c1413fdd4de7c82/capsule_231x87.jpg?t=1790225431",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/3936270/____Its_Fine/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 9월 23일",
-        "releaseMonth": "2026-09",
-        "releaseDate": "2026-09-23",
-        "precision": "day",
-        "isFree": false,
-        "currency": "KRW",
-        "priceText": "₩ 8,010",
-        "priceTextInitial": "₩ 8,900",
-        "initialMinor": 890000,
-        "finalMinor": 801000,
-        "discountPercent": 10
-      },
-      {
         "appid": 3020510,
         "name": "Heroes' Vow: Three Kingdoms",
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3020510/6c3226be44884032cb5d537142c4c4b05b618a74/capsule_231x87_koreana.jpg?t=1790499638",
@@ -1733,26 +1752,6 @@
         "initialMinor": 225000,
         "finalMinor": 180000,
         "discountPercent": 20
-      },
-      {
-        "appid": 3058360,
-        "name": "프랑스 브라세리 시뮬레이터",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3058360/e16497ed1083b3a1d8a80b57f7ded70af3fe4f7e/capsule_231x87_koreana.jpg?t=1789878950",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/3058360/_/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 9월 18일",
-        "releaseMonth": "2026-09",
-        "releaseDate": "2026-09-18",
-        "precision": "day",
-        "isFree": false,
-        "currency": "KRW",
-        "priceText": "₩ 12,600",
-        "priceTextInitial": "₩ 21,000",
-        "initialMinor": 2100000,
-        "finalMinor": 1260000,
-        "discountPercent": 40
       }
     ],
     "upcoming": [
@@ -2010,6 +2009,26 @@
         "discountPercent": 0
       },
       {
+        "appid": 4962560,
+        "name": "Eclesiar",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4962560/33e0b3b70b64f3a2423eed079692561f33e9c788/capsule_231x87.jpg?t=1788035410",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": false,
+        "storeUrl": "https://store.steampowered.com/app/4962560/Eclesiar/?cc=KR&l=koreana",
+        "releaseLabel": "2026년 10월 1일",
+        "releaseMonth": "2026-10",
+        "releaseDate": "2026-10-01",
+        "precision": "day",
+        "isFree": true,
+        "currency": null,
+        "priceText": "무료",
+        "priceTextInitial": "무료",
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
         "appid": 4660280,
         "name": "DUAL PROTOCOL: The Case of Eva & Miles",
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4660280/2e1995c8aa48a1a4ee318b73ebfa4b8a265bc3b5/capsule_231x87.jpg?t=1790695347",
@@ -2115,29 +2134,6 @@
         "discountPercent": 0
       },
       {
-        "appid": 3737680,
-        "name": "Bloodspill",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3737680/d6eaeff74fbbd0642ab1d9aa7ce4a21048d0a00c/capsule_231x87.jpg?t=1790494587",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "storeUrl": "https://store.steampowered.com/app/3737680/Bloodspill/?cc=KR&l=koreana",
-        "releaseLabel": "2026년 10월 2일",
-        "releaseMonth": "2026-10",
-        "releaseDate": "2026-10-02",
-        "precision": "day",
-        "isFree": false,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 5221510,
         "name": "Tidy Up the Flower Shop",
         "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5221510/5e98d964a508926b7cd5ab518694a151200185bc/capsule_231x87.jpg?t=1789590990",
@@ -2158,13 +2154,16 @@
         "discountPercent": 0
       },
       {
-        "appid": 5023770,
-        "name": "Let's Tidy Up! : Treasure",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5023770/ecf82a9bc1b51e90dc2632d5b8c6bee7bd071da5/capsule_231x87.jpg?t=1788684898",
+        "appid": 3737680,
+        "name": "Bloodspill",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3737680/d6eaeff74fbbd0642ab1d9aa7ce4a21048d0a00c/capsule_231x87.jpg?t=1790494587",
         "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": false,
-        "storeUrl": "https://store.steampowered.com/app/5023770/Lets_Tidy_Up__Treasure/?cc=KR&l=koreana",
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "storeUrl": "https://store.steampowered.com/app/3737680/Bloodspill/?cc=KR&l=koreana",
         "releaseLabel": "2026년 10월 2일",
         "releaseMonth": "2026-10",
         "releaseDate": "2026-10-02",
