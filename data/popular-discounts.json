@@ -6,8 +6,8 @@
     "priceSource": "Steam Store 비공식 appdetails",
     "country": "KR"
   },
-  "startedAt": "2026-09-30T06:50:17.389Z",
-  "completedAt": "2026-09-30T06:50:51.584Z",
+  "startedAt": "2026-09-30T07:08:28.035Z",
+  "completedAt": "2026-09-30T07:09:01.812Z",
   "counts": {
     "ranked": 100,
     "checked": 95,
@@ -24,7 +24,7 @@
     {
       "rank": 14,
       "appid": 292030,
-      "currentPlayers": 51318,
+      "currentPlayers": 52114,
       "peakToday": 120975,
       "name": "The Witcher 3: Wild Hunt — Remastered",
       "adult": false,
@@ -39,19 +39,19 @@
       "discountPercent": 50,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-30T06:50:22.159Z",
+      "fetchedAt": "2026-09-30T07:08:32.689Z",
       "storeUrl": "https://store.steampowered.com/app/292030/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-30T06:50:51.584Z",
+      "periodFetchedAt": "2026-09-30T07:09:01.811Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 33,
       "appid": 4623570,
-      "currentPlayers": 28621,
-      "peakToday": 28621,
+      "currentPlayers": 28716,
+      "peakToday": 28716,
       "name": "데스크롤러：방치형 ARPG",
       "adult": false,
       "descriptorIds": [],
@@ -62,18 +62,18 @@
       "discountPercent": 30,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-30T06:50:28.622Z",
+      "fetchedAt": "2026-09-30T07:08:39.313Z",
       "storeUrl": "https://store.steampowered.com/app/4623570/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-12T17:00:11.000Z",
       "discountKind": "출시 기념 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-30T06:50:51.584Z",
+      "periodFetchedAt": "2026-09-30T07:09:01.811Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
-      "rank": 79,
+      "rank": 78,
       "appid": 227300,
-      "currentPlayers": 12935,
+      "currentPlayers": 13401,
       "peakToday": 45506,
       "name": "Euro Truck Simulator 2",
       "adult": false,
@@ -85,18 +85,18 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-30T06:50:44.304Z",
+      "fetchedAt": "2026-09-30T07:08:54.235Z",
       "storeUrl": "https://store.steampowered.com/app/227300/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T16:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-30T06:50:51.584Z",
+      "periodFetchedAt": "2026-09-30T07:09:01.811Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 97,
       "appid": 1057090,
-      "currentPlayers": 9915,
+      "currentPlayers": 10129,
       "peakToday": 17437,
       "name": "Ori and the Will of the Wisps",
       "adult": false,
@@ -108,18 +108,18 @@
       "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-09-30T06:50:50.234Z",
+      "fetchedAt": "2026-09-30T07:09:00.440Z",
       "storeUrl": "https://store.steampowered.com/app/1057090/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-09-30T06:50:51.584Z",
+      "periodFetchedAt": "2026-09-30T07:09:01.811Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     }
   ],
   "failures": [
     {
-      "rank": 22,
+      "rank": 25,
       "appid": 2357570,
       "reason": "appid 2357570 가격 응답을 읽을 수 없다"
     },
@@ -129,19 +129,19 @@
       "reason": "appid 2694490 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 56,
+      "rank": 57,
       "appid": 582660,
       "reason": "appid 582660 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 88,
-      "appid": 39210,
-      "reason": "appid 39210 가격 응답을 읽을 수 없다"
-    },
-    {
-      "rank": 91,
+      "rank": 90,
       "appid": 1623660,
       "reason": "appid 1623660 가격 응답을 읽을 수 없다"
+    },
+    {
+      "rank": 92,
+      "appid": 39210,
+      "reason": "appid 39210 가격 응답을 읽을 수 없다"
     }
   ],
   "periodSource": {
