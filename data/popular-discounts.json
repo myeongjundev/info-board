@@ -6,8 +6,8 @@
     "priceSource": "Steam Store 비공식 appdetails",
     "country": "KR"
   },
-  "startedAt": "2026-10-01T07:10:07.515Z",
-  "completedAt": "2026-10-01T07:10:38.943Z",
+  "startedAt": "2026-10-01T07:14:43.631Z",
+  "completedAt": "2026-10-01T07:15:18.045Z",
   "counts": {
     "ranked": 100,
     "checked": 96,
@@ -22,9 +22,9 @@
   },
   "discounts": [
     {
-      "rank": 16,
+      "rank": 15,
       "appid": 292030,
-      "currentPlayers": 54322,
+      "currentPlayers": 54610,
       "peakToday": 108993,
       "name": "The Witcher 3: Wild Hunt — Remastered",
       "adult": false,
@@ -39,19 +39,19 @@
       "discountPercent": 50,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:12.463Z",
+      "fetchedAt": "2026-10-01T07:14:48.732Z",
       "storeUrl": "https://store.steampowered.com/app/292030/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 29,
       "appid": 4623570,
-      "currentPlayers": 34459,
-      "peakToday": 34459,
+      "currentPlayers": 34487,
+      "peakToday": 34487,
       "name": "데스크롤러：방치형 ARPG",
       "adult": false,
       "descriptorIds": [],
@@ -62,18 +62,18 @@
       "discountPercent": 30,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:16.497Z",
+      "fetchedAt": "2026-10-01T07:14:53.378Z",
       "storeUrl": "https://store.steampowered.com/app/4623570/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-12T17:00:11.000Z",
       "discountKind": "출시 기념 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
-      "rank": 75,
+      "rank": 74,
       "appid": 227300,
-      "currentPlayers": 15155,
+      "currentPlayers": 15315,
       "peakToday": 45469,
       "name": "Euro Truck Simulator 2",
       "adult": false,
@@ -85,18 +85,18 @@
       "discountPercent": 75,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:30.850Z",
+      "fetchedAt": "2026-10-01T07:15:08.839Z",
       "storeUrl": "https://store.steampowered.com/app/227300/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T16:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 84,
       "appid": 1057090,
-      "currentPlayers": 13769,
+      "currentPlayers": 13782,
       "peakToday": 16915,
       "name": "Ori and the Will of the Wisps",
       "adult": false,
@@ -108,18 +108,18 @@
       "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:33.655Z",
+      "fetchedAt": "2026-10-01T07:15:12.140Z",
       "storeUrl": "https://store.steampowered.com/app/1057090/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
       "rank": 92,
       "appid": 3527290,
-      "currentPlayers": 12557,
+      "currentPlayers": 12581,
       "peakToday": 24267,
       "name": "PEAK",
       "adult": false,
@@ -131,12 +131,12 @@
       "discountPercent": 38,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:36.085Z",
+      "fetchedAt": "2026-10-01T07:15:14.899Z",
       "storeUrl": "https://store.steampowered.com/app/3527290/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-01T17:00:00.000Z",
       "discountKind": "특별 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     },
     {
@@ -154,12 +154,12 @@
       "discountPercent": 90,
       "currency": "KRW",
       "country": "KR",
-      "fetchedAt": "2026-10-01T07:10:38.551Z",
+      "fetchedAt": "2026-10-01T07:15:17.550Z",
       "storeUrl": "https://store.steampowered.com/app/246420/?cc=KR&l=koreana",
       "discountEndsAt": "2026-10-08T17:00:00.000Z",
       "discountKind": "일일 할인",
       "periodKnown": true,
-      "periodFetchedAt": "2026-10-01T07:10:38.943Z",
+      "periodFetchedAt": "2026-10-01T07:15:18.044Z",
       "periodSourceLabel": "Steam Web API 호스트 · 문서화되지 않은 StoreBrowse 응답"
     }
   ],
@@ -175,12 +175,12 @@
       "reason": "appid 2694490 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 88,
+      "rank": 89,
       "appid": 582660,
       "reason": "appid 582660 가격 응답을 읽을 수 없다"
     },
     {
-      "rank": 96,
+      "rank": 95,
       "appid": 1623660,
       "reason": "appid 1623660 가격 응답을 읽을 수 없다"
     }
