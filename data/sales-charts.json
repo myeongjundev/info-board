@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-10-02T12:53:13.140Z",
+  "completedAt": "2026-10-02T18:32:39.850Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -36,25 +36,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 2288340,
-        "rank": 2,
-        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790908088",
-        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
-        "discountPercent": 0
-      },
-      {
         "appid": 1973530,
-        "rank": 3,
+        "rank": 2,
         "name": "Limbus Company",
         "adult": false,
         "descriptorIds": [
@@ -71,6 +54,27 @@
         "initialMinor": null,
         "finalMinor": null,
         "discountPercent": 0
+      },
+      {
+        "appid": 1091500,
+        "rank": 3,
+        "name": "Cyberpunk 2077",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/26b96fa9c8af43189cbecbbc329ade29d9c9cf3e/header_koreana.jpg?t=1784714077",
+        "storeUrl": "https://store.steampowered.com/app/1091500/Cyberpunk_2077?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$17.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 1799,
+        "discountPercent": 70
       },
       {
         "appid": 1049590,
@@ -90,25 +94,21 @@
         "discountPercent": 0
       },
       {
-        "appid": 1091500,
+        "appid": 2288340,
         "rank": 5,
-        "name": "Cyberpunk 2077",
+        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
         "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/26b96fa9c8af43189cbecbbc329ade29d9c9cf3e/header_koreana.jpg?t=1784714077",
-        "storeUrl": "https://store.steampowered.com/app/1091500/Cyberpunk_2077?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790908088",
+        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$17.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 1799,
-        "discountPercent": 70
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
+        "discountPercent": 0
       },
       {
         "appid": 960170,
@@ -131,28 +131,8 @@
         "discountPercent": 80
       },
       {
-        "appid": 899770,
-        "rank": 7,
-        "name": "라스트 에포크",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/899770/4fb3ded2be17991473ada5a8d74f3980b1d76bd9/header_alt_assets_2_koreana.jpg?t=1790870417",
-        "storeUrl": "https://store.steampowered.com/app/899770/라스트_에포크?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$24.49",
-        "priceTextInitial": "$34.99",
-        "initialMinor": 3499,
-        "finalMinor": 2449,
-        "discountPercent": 30
-      },
-      {
         "appid": 2651280,
-        "rank": 8,
+        "rank": 7,
         "name": "마블 스파이더맨 2",
         "adult": false,
         "descriptorIds": [],
@@ -168,27 +148,8 @@
         "discountPercent": 33
       },
       {
-        "appid": 1867240,
-        "rank": 9,
-        "name": "WARDOGS",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
-        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$39.99",
-        "priceTextInitial": "$39.99",
-        "initialMinor": 3999,
-        "finalMinor": 3999,
-        "discountPercent": 0
-      },
-      {
         "appid": 2139460,
-        "rank": 10,
+        "rank": 8,
         "name": "Once Human",
         "adult": false,
         "descriptorIds": [],
@@ -205,7 +166,7 @@
       },
       {
         "appid": 3932890,
-        "rank": 11,
+        "rank": 9,
         "name": "Escape from Tarkov",
         "adult": false,
         "descriptorIds": [
@@ -224,25 +185,27 @@
         "discountPercent": 25
       },
       {
-        "appid": 4126040,
-        "rank": 12,
-        "name": "애니모",
+        "appid": 1867240,
+        "rank": 10,
+        "name": "WARDOGS",
         "adult": false,
-        "descriptorIds": [],
+        "descriptorIds": [
+          5
+        ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
-        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
-        "isFree": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
+        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
+        "isFree": false,
         "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
+        "priceText": "$39.99",
+        "priceTextInitial": "$39.99",
+        "initialMinor": 3999,
+        "finalMinor": 3999,
         "discountPercent": 0
       },
       {
         "appid": 381210,
-        "rank": 13,
+        "rank": 11,
         "name": "Dead by Daylight",
         "adult": false,
         "descriptorIds": [
@@ -261,87 +224,8 @@
         "discountPercent": 60
       },
       {
-        "appid": 2138330,
-        "rank": 14,
-        "name": "사이버펑크 2077: 팬텀 리버티",
-        "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138330/1c4bb324f2f9fb9719da6fa3c393cc413e8db95f/header_koreana.jpg?t=1784713876",
-        "storeUrl": "https://store.steampowered.com/app/2138330/사이버펑크_2077_팬텀_리버티?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$17.99",
-        "priceTextInitial": "$29.99",
-        "initialMinor": 2999,
-        "finalMinor": 1799,
-        "discountPercent": 40
-      },
-      {
-        "appid": 3489700,
-        "rank": 15,
-        "name": "스텔라 블레이드™",
-        "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3489700/header_koreana.jpg?t=1776466244",
-        "storeUrl": "https://store.steampowered.com/app/3489700/스텔라_블레이드?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$40.19",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 4019,
-        "discountPercent": 33
-      },
-      {
-        "appid": 3438810,
-        "rank": 16,
-        "name": "프린세스 메이커 : 예언의 아이들",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3438810/4f76129c1633a2e352ca33892c0742d455dc9e22/header_koreana.jpg?t=1790761177",
-        "storeUrl": "https://store.steampowered.com/app/3438810/프린세스_메이커_예언의_아이들?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$27.99",
-        "priceTextInitial": "$34.99",
-        "initialMinor": 3499,
-        "finalMinor": 2799,
-        "discountPercent": 20
-      },
-      {
-        "appid": 2183900,
-        "rank": 17,
-        "name": "Warhammer 40,000: Space Marine 2",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2183900/0725a80b89ba198f406081ad66a7c42e3db46cb4/header_alt_assets_14_koreana.jpg?t=1790874369",
-        "storeUrl": "https://store.steampowered.com/app/2183900/Warhammer_40000_Space_Marine_2?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$14.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 1499,
-        "discountPercent": 75
-      },
-      {
         "appid": 1086940,
-        "rank": 18,
+        "rank": 12,
         "name": "Baldur's Gate 3",
         "adult": false,
         "descriptorIds": [
@@ -361,8 +245,87 @@
         "discountPercent": 30
       },
       {
+        "appid": 4126040,
+        "rank": 13,
+        "name": "애니모",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
+        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3489700,
+        "rank": 14,
+        "name": "스텔라 블레이드™",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3489700/header_koreana.jpg?t=1776466244",
+        "storeUrl": "https://store.steampowered.com/app/3489700/스텔라_블레이드?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$40.19",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 4019,
+        "discountPercent": 33
+      },
+      {
+        "appid": 2138330,
+        "rank": 15,
+        "name": "사이버펑크 2077: 팬텀 리버티",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138330/1c4bb324f2f9fb9719da6fa3c393cc413e8db95f/header_koreana.jpg?t=1784713876",
+        "storeUrl": "https://store.steampowered.com/app/2138330/사이버펑크_2077_팬텀_리버티?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$17.99",
+        "priceTextInitial": "$29.99",
+        "initialMinor": 2999,
+        "finalMinor": 1799,
+        "discountPercent": 40
+      },
+      {
+        "appid": 899770,
+        "rank": 16,
+        "name": "라스트 에포크",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/899770/4fb3ded2be17991473ada5a8d74f3980b1d76bd9/header_alt_assets_2_koreana.jpg?t=1790870417",
+        "storeUrl": "https://store.steampowered.com/app/899770/라스트_에포크?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$24.49",
+        "priceTextInitial": "$34.99",
+        "initialMinor": 3499,
+        "finalMinor": 2449,
+        "discountPercent": 30
+      },
+      {
         "appid": 3513350,
-        "rank": 19,
+        "rank": 17,
         "name": "Wuthering Waves",
         "adult": false,
         "descriptorIds": [],
@@ -378,14 +341,51 @@
         "discountPercent": 0
       },
       {
-        "appid": 294100,
-        "rank": 20,
-        "name": "RimWorld",
+        "appid": 1817070,
+        "rank": 18,
+        "name": "Marvel’s Spider-Man Remastered",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/294100/76e0613b8197327299d5dbabb0a7fd7828a689a2/header.jpg?t=1782756789",
-        "storeUrl": "https://store.steampowered.com/app/294100/RimWorld?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg?t=1787838689",
+        "storeUrl": "https://store.steampowered.com/app/1817070/Marvels_SpiderMan_Remastered?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$23.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 2399,
+        "discountPercent": 60
+      },
+      {
+        "appid": 2183900,
+        "rank": 19,
+        "name": "Warhammer 40,000: Space Marine 2",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2183900/0725a80b89ba198f406081ad66a7c42e3db46cb4/header_alt_assets_14_koreana.jpg?t=1790874369",
+        "storeUrl": "https://store.steampowered.com/app/2183900/Warhammer_40000_Space_Marine_2?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$14.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 1499,
+        "discountPercent": 75
+      },
+      {
+        "appid": 3438810,
+        "rank": 20,
+        "name": "프린세스 메이커 : 예언의 아이들",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3438810/4f76129c1633a2e352ca33892c0742d455dc9e22/header_koreana.jpg?t=1790761177",
+        "storeUrl": "https://store.steampowered.com/app/3438810/프린세스_메이커_예언의_아이들?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
         "priceText": "$27.99",
@@ -397,25 +397,8 @@
     ],
     "global": [
       {
-        "appid": 2288340,
-        "rank": 1,
-        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790908088",
-        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
-        "discountPercent": 0
-      },
-      {
         "appid": 3393110,
-        "rank": 2,
+        "rank": 1,
         "name": "AION 2",
         "adult": false,
         "descriptorIds": [
@@ -435,7 +418,7 @@
       },
       {
         "appid": 730,
-        "rank": 3,
+        "rank": 2,
         "name": "Counter-Strike 2",
         "adult": false,
         "descriptorIds": [
@@ -454,17 +437,31 @@
         "discountPercent": 0
       },
       {
-        "appid": 3010850,
-        "rank": 4,
-        "name": "Gears of War: E-Day",
+        "appid": 2288340,
+        "rank": 3,
+        "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
         "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1790871278",
-        "storeUrl": "https://store.steampowered.com/app/3010850/Gears_of_War_EDay?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/13dea8084135fd130605b78189c82e39bf944c35/header.jpg?t=1790908088",
+        "storeUrl": "https://store.steampowered.com/app/2288340/에이스_컴뱃_8_시브의_날개_ACE_COMBAT_8_WINGS_OF_THEVE?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$69.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 6999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 4080220,
+        "rank": 4,
+        "name": "EA SPORTS FC™ 27",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4080220/ff6a3779f1ca83aae8ad3878454f6c11008ea24d/header.jpg?t=1790875777",
+        "storeUrl": "https://store.steampowered.com/app/4080220/EA_SPORTS_FC_27?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
         "priceText": "$69.99",
@@ -495,14 +492,17 @@
         "discountPercent": 70
       },
       {
-        "appid": 4080220,
+        "appid": 3010850,
         "rank": 6,
-        "name": "EA SPORTS FC™ 27",
+        "name": "Gears of War: E-Day",
         "adult": false,
-        "descriptorIds": [],
+        "descriptorIds": [
+          2,
+          5
+        ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4080220/ff6a3779f1ca83aae8ad3878454f6c11008ea24d/header.jpg?t=1790875777",
-        "storeUrl": "https://store.steampowered.com/app/4080220/EA_SPORTS_FC_27?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1790871278",
+        "storeUrl": "https://store.steampowered.com/app/3010850/Gears_of_War_EDay?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
         "priceText": "$69.99",
@@ -533,8 +533,27 @@
         "discountPercent": 90
       },
       {
-        "appid": 2183900,
+        "appid": 1867240,
         "rank": 8,
+        "name": "WARDOGS",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
+        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$39.99",
+        "priceTextInitial": "$39.99",
+        "initialMinor": 3999,
+        "finalMinor": 3999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 2183900,
+        "rank": 9,
         "name": "Warhammer 40,000: Space Marine 2",
         "adult": false,
         "descriptorIds": [
@@ -553,27 +572,27 @@
         "discountPercent": 75
       },
       {
-        "appid": 1867240,
-        "rank": 9,
-        "name": "WARDOGS",
+        "appid": 1174180,
+        "rank": 10,
+        "name": "Red Dead Redemption 2",
         "adult": false,
         "descriptorIds": [
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
-        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
+        "storeUrl": "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$39.99",
-        "priceTextInitial": "$39.99",
-        "initialMinor": 3999,
-        "finalMinor": 3999,
-        "discountPercent": 0
+        "priceText": "$14.99",
+        "priceTextInitial": "$59.99",
+        "initialMinor": 5999,
+        "finalMinor": 1499,
+        "discountPercent": 75
       },
       {
         "appid": 578080,
-        "rank": 10,
+        "rank": 11,
         "name": "PUBG: BATTLEGROUNDS",
         "adult": false,
         "descriptorIds": [
@@ -592,61 +611,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 4126040,
-        "rank": 11,
-        "name": "애니모",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
-        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 1174180,
-        "rank": 12,
-        "name": "Red Dead Redemption 2",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
-        "storeUrl": "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$14.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 1499,
-        "discountPercent": 75
-      },
-      {
-        "appid": 3513350,
-        "rank": 13,
-        "name": "Wuthering Waves",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3513350/bc5f8263acb7a97f033ea92cad07c0fedd992b6f/header_koreana.jpg?t=1790713386",
-        "storeUrl": "https://store.steampowered.com/app/3513350/Wuthering_Waves?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
         "appid": 4001890,
-        "rank": 14,
+        "rank": 12,
         "name": "낚시 방법",
         "adult": false,
         "descriptorIds": [
@@ -665,7 +631,7 @@
       },
       {
         "appid": 570,
-        "rank": 15,
+        "rank": 13,
         "name": "Dota 2",
         "adult": false,
         "descriptorIds": [
@@ -683,14 +649,14 @@
         "discountPercent": 0
       },
       {
-        "appid": 1172470,
-        "rank": 16,
-        "name": "Apex 레전드™",
+        "appid": 4126040,
+        "rank": 14,
+        "name": "애니모",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/60fcaedb88ccf94df30281533d828b86c6ffb9b6/header_alt_assets_5.jpg?t=1790164440",
-        "storeUrl": "https://store.steampowered.com/app/1172470/Apex_레전드?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
+        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -701,7 +667,7 @@
       },
       {
         "appid": 3493540,
-        "rank": 17,
+        "rank": 15,
         "name": "Transport Fever 3",
         "adult": false,
         "descriptorIds": [],
@@ -717,46 +683,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 2483190,
-        "rank": 18,
-        "name": "Forza Horizon 6",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2483190/a3f1465050b6103274991a29b7462d3f28918b5d/header_alt_assets_4.jpg?t=1790866995",
-        "storeUrl": "https://store.steampowered.com/app/2483190/Forza_Horizon_6?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$55.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 5599,
-        "discountPercent": 20
-      },
-      {
-        "appid": 3240220,
-        "rank": 19,
-        "name": "Grand Theft Auto V 인핸스드",
-        "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header_koreana.jpg?t=1781187782",
-        "storeUrl": "https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_인핸스드?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$14.99",
-        "priceTextInitial": "$29.99",
-        "initialMinor": 2999,
-        "finalMinor": 1499,
-        "discountPercent": 50
-      },
-      {
         "appid": 1086940,
-        "rank": 20,
+        "rank": 16,
         "name": "Baldur's Gate 3",
         "adult": false,
         "descriptorIds": [
@@ -774,6 +702,77 @@
         "initialMinor": 5999,
         "finalMinor": 4199,
         "discountPercent": 30
+      },
+      {
+        "appid": 3513350,
+        "rank": 17,
+        "name": "Wuthering Waves",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3513350/bc5f8263acb7a97f033ea92cad07c0fedd992b6f/header_koreana.jpg?t=1790713386",
+        "storeUrl": "https://store.steampowered.com/app/3513350/Wuthering_Waves?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 489830,
+        "rank": 18,
+        "name": "The Elder Scrolls V: Skyrim Special Edition",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/489830/header.jpg?t=1786648247",
+        "storeUrl": "https://store.steampowered.com/app/489830/The_Elder_Scrolls_V_Skyrim_Special_Edition?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$3.99",
+        "priceTextInitial": "$39.99",
+        "initialMinor": 3999,
+        "finalMinor": 399,
+        "discountPercent": 90
+      },
+      {
+        "appid": 2483190,
+        "rank": 19,
+        "name": "Forza Horizon 6",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2483190/a3f1465050b6103274991a29b7462d3f28918b5d/header_alt_assets_4.jpg?t=1790866995",
+        "storeUrl": "https://store.steampowered.com/app/2483190/Forza_Horizon_6?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$55.99",
+        "priceTextInitial": "$69.99",
+        "initialMinor": 6999,
+        "finalMinor": 5599,
+        "discountPercent": 20
+      },
+      {
+        "appid": 2767030,
+        "rank": 20,
+        "name": "마블 라이벌즈",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2767030/088fc787d8513a6f9782d03968e5ac1a01840087/header.jpg?t=1789119923",
+        "storeUrl": "https://store.steampowered.com/app/2767030/마블_라이벌즈?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       }
     ]
   },
@@ -1173,11 +1172,11 @@
         "storeUrl": "https://store.steampowered.com/app/4358690/Graveyard_Keeper_2?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$24.99",
-        "priceTextInitial": "$24.99",
-        "initialMinor": 2499,
-        "finalMinor": 2499,
-        "discountPercent": 0,
+        "priceText": "$23.98",
+        "priceTextInitial": "$35.98",
+        "initialMinor": 3598,
+        "finalMinor": 2398,
+        "discountPercent": 33,
         "previousRank": 95,
         "consecutiveWeeks": 2,
         "firstTop100": false
