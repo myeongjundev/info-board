@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "completedAt": "2026-10-06T17:18:11.268Z",
+  "completedAt": "2026-10-06T21:44:41.026Z",
   "source": {
     "korea": "https://store.steampowered.com/charts/topselling/KR?cc=KR&l=koreana",
     "global": "https://store.steampowered.com/charts/topselling/global?cc=KR&l=koreana",
@@ -56,8 +56,25 @@
         "discountPercent": 60
       },
       {
-        "appid": 1091500,
+        "appid": 1049590,
         "rank": 3,
+        "name": "이터널 리턴",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1049590/72918ebacd0d4f8537969dc8b976ceb98f681cab/header.jpg?t=1789544685",
+        "storeUrl": "https://store.steampowered.com/app/1049590/이터널_리턴?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 1091500,
+        "rank": 4,
         "name": "Cyberpunk 2077",
         "adult": false,
         "descriptorIds": [
@@ -75,23 +92,6 @@
         "initialMinor": 5999,
         "finalMinor": 1799,
         "discountPercent": 70
-      },
-      {
-        "appid": 1049590,
-        "rank": 4,
-        "name": "이터널 리턴",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1049590/72918ebacd0d4f8537969dc8b976ceb98f681cab/header.jpg?t=1789544685",
-        "storeUrl": "https://store.steampowered.com/app/1049590/이터널_리턴?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
       },
       {
         "appid": 1973530,
@@ -150,48 +150,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 960170,
+        "appid": 4126040,
         "rank": 8,
-        "name": "DJMAX RESPECT V",
+        "name": "애니모",
         "adult": false,
-        "descriptorIds": [
-          1,
-          5
-        ],
+        "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/960170/header.jpg?t=1772009068",
-        "storeUrl": "https://store.steampowered.com/app/960170/DJMAX_RESPECT_V?cc=KR&l=koreana",
-        "isFree": false,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
+        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
+        "isFree": true,
         "currency": null,
-        "priceText": "$9.99",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 999,
-        "discountPercent": 80
-      },
-      {
-        "appid": 108600,
-        "rank": 9,
-        "name": "Project Zomboid",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg?t=1787740093",
-        "storeUrl": "https://store.steampowered.com/app/108600/Project_Zomboid?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$16.74",
-        "priceTextInitial": "$24.99",
-        "initialMinor": 2499,
-        "finalMinor": 1674,
-        "discountPercent": 33
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
       },
       {
         "appid": 3489700,
-        "rank": 10,
+        "rank": 9,
         "name": "스텔라 블레이드™",
         "adult": false,
         "descriptorIds": [
@@ -211,14 +188,54 @@
         "discountPercent": 33
       },
       {
-        "appid": 4126040,
+        "appid": 960170,
+        "rank": 10,
+        "name": "DJMAX RESPECT V",
+        "adult": false,
+        "descriptorIds": [
+          1,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/960170/header.jpg?t=1772009068",
+        "storeUrl": "https://store.steampowered.com/app/960170/DJMAX_RESPECT_V?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$9.99",
+        "priceTextInitial": "$49.99",
+        "initialMinor": 4999,
+        "finalMinor": 999,
+        "discountPercent": 80
+      },
+      {
+        "appid": 108600,
         "rank": 11,
-        "name": "애니모",
+        "name": "Project Zomboid",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg?t=1787740093",
+        "storeUrl": "https://store.steampowered.com/app/108600/Project_Zomboid?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$16.74",
+        "priceTextInitial": "$24.99",
+        "initialMinor": 2499,
+        "finalMinor": 1674,
+        "discountPercent": 33
+      },
+      {
+        "appid": 2139460,
+        "rank": 12,
+        "name": "Once Human",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4126040/43b430b83e739f056c7878bf11a6d8a3c1b8bb59/header_koreana.jpg?t=1790849962",
-        "storeUrl": "https://store.steampowered.com/app/4126040/애니모?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
+        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
         "isFree": true,
         "currency": null,
         "priceText": null,
@@ -226,26 +243,6 @@
         "initialMinor": null,
         "finalMinor": null,
         "discountPercent": 0
-      },
-      {
-        "appid": 3932890,
-        "rank": 12,
-        "name": "Escape from Tarkov",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3932890/4dd12ea3b00a4f8b67bfd629f3b9abbf8d5cab05/header_alt_assets_2.jpg?t=1785782094",
-        "storeUrl": "https://store.steampowered.com/app/3932890/Escape_from_Tarkov?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$37.49",
-        "priceTextInitial": "$49.99",
-        "initialMinor": 4999,
-        "finalMinor": 3749,
-        "discountPercent": 25
       },
       {
         "appid": 1086940,
@@ -286,62 +283,25 @@
         "discountPercent": 0
       },
       {
-        "appid": 2651280,
+        "appid": 294100,
         "rank": 15,
-        "name": "마블 스파이더맨 2",
+        "name": "RimWorld",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg?t=1763569811",
-        "storeUrl": "https://store.steampowered.com/app/2651280/마블_스파이더맨_2?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/294100/76e0613b8197327299d5dbabb0a7fd7828a689a2/header.jpg?t=1782756789",
+        "storeUrl": "https://store.steampowered.com/app/294100/RimWorld?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$40.19",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 4019,
-        "discountPercent": 33
-      },
-      {
-        "appid": 2139460,
-        "rank": 16,
-        "name": "Once Human",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2139460/c18b08a2f93dec32fcc5fa71bc2da44ee42de1f0/header.jpg?t=1786675226",
-        "storeUrl": "https://store.steampowered.com/app/2139460/Once_Human?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 3010850,
-        "rank": 17,
-        "name": "Gears of War: E-Day",
-        "adult": false,
-        "descriptorIds": [
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1791301675",
-        "storeUrl": "https://store.steampowered.com/app/3010850/Gears_of_War_EDay?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$69.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 6999,
-        "discountPercent": 0
+        "priceText": "$27.99",
+        "priceTextInitial": "$34.99",
+        "initialMinor": 3499,
+        "finalMinor": 2799,
+        "discountPercent": 20
       },
       {
         "appid": 2288340,
-        "rank": 18,
+        "rank": 16,
         "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
         "adult": false,
         "descriptorIds": [],
@@ -357,8 +317,28 @@
         "discountPercent": 0
       },
       {
+        "appid": 3932890,
+        "rank": 17,
+        "name": "Escape from Tarkov",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3932890/4dd12ea3b00a4f8b67bfd629f3b9abbf8d5cab05/header_alt_assets_2.jpg?t=1785782094",
+        "storeUrl": "https://store.steampowered.com/app/3932890/Escape_from_Tarkov?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$37.49",
+        "priceTextInitial": "$49.99",
+        "initialMinor": 4999,
+        "finalMinor": 3749,
+        "discountPercent": 25
+      },
+      {
         "appid": 2138330,
-        "rank": 19,
+        "rank": 18,
         "name": "사이버펑크 2077: 팬텀 리버티",
         "adult": false,
         "descriptorIds": [
@@ -379,7 +359,7 @@
       },
       {
         "appid": 2246340,
-        "rank": 20,
+        "rank": 19,
         "name": "Monster Hunter Wilds",
         "adult": false,
         "descriptorIds": [],
@@ -393,12 +373,46 @@
         "initialMinor": 3999,
         "finalMinor": 2999,
         "discountPercent": 25
+      },
+      {
+        "appid": 1623730,
+        "rank": 20,
+        "name": "Palworld / 팰월드",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1623730/6912f19c43a95ff5fe514eedd35e68bf12335459/header.jpg?t=1790336367",
+        "storeUrl": "https://store.steampowered.com/app/1623730/Palworld_팰월드?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$20.99",
+        "priceTextInitial": "$29.99",
+        "initialMinor": 2999,
+        "finalMinor": 2099,
+        "discountPercent": 30
       }
     ],
     "global": [
       {
-        "appid": 3393110,
+        "appid": 2357570,
         "rank": 1,
+        "name": "오버워치™",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2357570/68046d790bc0b76d9a3d7c2cf4eef27c5ff437fc/header_alt_assets_23_koreana.jpg?t=1791311522",
+        "storeUrl": "https://store.steampowered.com/app/2357570/오버워치?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 3393110,
+        "rank": 2,
         "name": "AION 2",
         "adult": false,
         "descriptorIds": [
@@ -418,7 +432,7 @@
       },
       {
         "appid": 3010850,
-        "rank": 2,
+        "rank": 3,
         "name": "Gears of War: E-Day",
         "adult": false,
         "descriptorIds": [
@@ -426,7 +440,7 @@
           5
         ],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1791301675",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/1abb0c5ef76c14f463dd6e3964adb64f984237d2/header.jpg?t=1791309192",
         "storeUrl": "https://store.steampowered.com/app/3010850/Gears_of_War_EDay?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
@@ -438,7 +452,7 @@
       },
       {
         "appid": 4078430,
-        "rank": 3,
+        "rank": 4,
         "name": "스타워즈: 은하계 레이서™",
         "adult": false,
         "descriptorIds": [],
@@ -455,7 +469,7 @@
       },
       {
         "appid": 730,
-        "rank": 4,
+        "rank": 5,
         "name": "Counter-Strike 2",
         "adult": false,
         "descriptorIds": [
@@ -475,7 +489,7 @@
       },
       {
         "appid": 381210,
-        "rank": 5,
+        "rank": 6,
         "name": "Dead by Daylight",
         "adult": false,
         "descriptorIds": [
@@ -495,7 +509,7 @@
       },
       {
         "appid": 4080220,
-        "rank": 6,
+        "rank": 7,
         "name": "EA SPORTS FC™ 27",
         "adult": false,
         "descriptorIds": [],
@@ -512,7 +526,7 @@
       },
       {
         "appid": 1091500,
-        "rank": 7,
+        "rank": 8,
         "name": "Cyberpunk 2077",
         "adult": false,
         "descriptorIds": [
@@ -533,7 +547,7 @@
       },
       {
         "appid": 1304930,
-        "rank": 8,
+        "rank": 9,
         "name": "The Outlast Trials",
         "adult": false,
         "descriptorIds": [
@@ -553,8 +567,46 @@
         "discountPercent": 90
       },
       {
+        "appid": 1867240,
+        "rank": 10,
+        "name": "WARDOGS",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
+        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$39.99",
+        "priceTextInitial": "$39.99",
+        "initialMinor": 3999,
+        "finalMinor": 3999,
+        "discountPercent": 0
+      },
+      {
+        "appid": 570,
+        "rank": 11,
+        "name": "Dota 2",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
+        "storeUrl": "https://store.steampowered.com/app/570/Dota_2?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
         "appid": 578080,
-        "rank": 9,
+        "rank": 12,
         "name": "PUBG: BATTLEGROUNDS",
         "adult": false,
         "descriptorIds": [
@@ -573,46 +625,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 570,
-        "rank": 10,
-        "name": "Dota 2",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-        "storeUrl": "https://store.steampowered.com/app/570/Dota_2?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 1867240,
-        "rank": 11,
-        "name": "WARDOGS",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1867240/59d4daf753bd5d982e6675f7eee363bc817c574e/header.jpg?t=1790774170",
-        "storeUrl": "https://store.steampowered.com/app/1867240/WARDOGS?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$39.99",
-        "priceTextInitial": "$39.99",
-        "initialMinor": 3999,
-        "finalMinor": 3999,
-        "discountPercent": 0
-      },
-      {
         "appid": 4019220,
-        "rank": 12,
+        "rank": 13,
         "name": "Dressmaker",
         "adult": false,
         "descriptorIds": [],
@@ -628,61 +642,8 @@
         "discountPercent": 0
       },
       {
-        "appid": 1449850,
-        "rank": 13,
-        "name": "Yu-Gi-Oh! Master Duel",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1449850/3dabbf618664c7a561202771e3754b6690949159/header.jpg?t=1788064919",
-        "storeUrl": "https://store.steampowered.com/app/1449850/YuGiOh_Master_Duel?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 1172470,
-        "rank": 14,
-        "name": "Apex 레전드™",
-        "adult": false,
-        "descriptorIds": [],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/60fcaedb88ccf94df30281533d828b86c6ffb9b6/header_alt_assets_5.jpg?t=1790164440",
-        "storeUrl": "https://store.steampowered.com/app/1172470/Apex_레전드?cc=KR&l=koreana",
-        "isFree": true,
-        "currency": null,
-        "priceText": null,
-        "priceTextInitial": null,
-        "initialMinor": null,
-        "finalMinor": null,
-        "discountPercent": 0
-      },
-      {
-        "appid": 4001890,
-        "rank": 15,
-        "name": "낚시 방법",
-        "adult": false,
-        "descriptorIds": [
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4001890/45c4ddff4901e32c4b8b643e1b97d0d01898d299/header.jpg?t=1788788717",
-        "storeUrl": "https://store.steampowered.com/app/4001890/낚시_방법?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$4.95",
-        "priceTextInitial": "$7.99",
-        "initialMinor": 799,
-        "finalMinor": 495,
-        "discountPercent": 38
-      },
-      {
         "appid": 2288340,
-        "rank": 16,
+        "rank": 14,
         "name": "에이스 컴뱃 8: 시브의 날개 (ACE COMBAT 8: WINGS OF THEVE)",
         "adult": false,
         "descriptorIds": [],
@@ -699,7 +660,7 @@
       },
       {
         "appid": 1174180,
-        "rank": 17,
+        "rank": 15,
         "name": "Red Dead Redemption 2",
         "adult": false,
         "descriptorIds": [
@@ -717,25 +678,81 @@
         "discountPercent": 75
       },
       {
-        "appid": 2483190,
-        "rank": 18,
-        "name": "Forza Horizon 6",
+        "appid": 1172470,
+        "rank": 16,
+        "name": "Apex 레전드™",
         "adult": false,
         "descriptorIds": [],
         "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2483190/a3f1465050b6103274991a29b7462d3f28918b5d/header_alt_assets_4.jpg?t=1790866995",
-        "storeUrl": "https://store.steampowered.com/app/2483190/Forza_Horizon_6?cc=KR&l=koreana",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/60fcaedb88ccf94df30281533d828b86c6ffb9b6/header_alt_assets_5.jpg?t=1790164440",
+        "storeUrl": "https://store.steampowered.com/app/1172470/Apex_레전드?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 4001890,
+        "rank": 17,
+        "name": "낚시 방법",
+        "adult": false,
+        "descriptorIds": [
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4001890/45c4ddff4901e32c4b8b643e1b97d0d01898d299/header.jpg?t=1788788717",
+        "storeUrl": "https://store.steampowered.com/app/4001890/낚시_방법?cc=KR&l=koreana",
         "isFree": false,
         "currency": null,
-        "priceText": "$55.99",
-        "priceTextInitial": "$69.99",
-        "initialMinor": 6999,
-        "finalMinor": 5599,
-        "discountPercent": 20
+        "priceText": "$4.95",
+        "priceTextInitial": "$7.99",
+        "initialMinor": 799,
+        "finalMinor": 495,
+        "discountPercent": 38
+      },
+      {
+        "appid": 1449850,
+        "rank": 18,
+        "name": "Yu-Gi-Oh! Master Duel",
+        "adult": false,
+        "descriptorIds": [],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1449850/3dabbf618664c7a561202771e3754b6690949159/header.jpg?t=1788064919",
+        "storeUrl": "https://store.steampowered.com/app/1449850/YuGiOh_Master_Duel?cc=KR&l=koreana",
+        "isFree": true,
+        "currency": null,
+        "priceText": null,
+        "priceTextInitial": null,
+        "initialMinor": null,
+        "finalMinor": null,
+        "discountPercent": 0
+      },
+      {
+        "appid": 784080,
+        "rank": 19,
+        "name": "MechWarrior 5: Mercenaries",
+        "adult": false,
+        "descriptorIds": [
+          2,
+          5
+        ],
+        "descriptorAvailable": true,
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/784080/33d11250c669e8c755c12678d1ef401e70e1c4a5/header.jpg?t=1791309626",
+        "storeUrl": "https://store.steampowered.com/app/784080/MechWarrior_5_Mercenaries?cc=KR&l=koreana",
+        "isFree": false,
+        "currency": null,
+        "priceText": "$7.49",
+        "priceTextInitial": "$29.99",
+        "initialMinor": 2999,
+        "finalMinor": 749,
+        "discountPercent": 75
       },
       {
         "appid": 2183900,
-        "rank": 19,
+        "rank": 20,
         "name": "Warhammer 40,000: Space Marine 2",
         "adult": false,
         "descriptorIds": [
@@ -752,27 +769,6 @@
         "initialMinor": 5999,
         "finalMinor": 1499,
         "discountPercent": 75
-      },
-      {
-        "appid": 1086940,
-        "rank": 20,
-        "name": "Baldur's Gate 3",
-        "adult": false,
-        "descriptorIds": [
-          1,
-          2,
-          5
-        ],
-        "descriptorAvailable": true,
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/48a2fcbda8565bb45025e98fd8ebde8a7203f6a0/header.jpg?t=1777363040",
-        "storeUrl": "https://store.steampowered.com/app/1086940/Baldurs_Gate_3?cc=KR&l=koreana",
-        "isFree": false,
-        "currency": null,
-        "priceText": "$41.99",
-        "priceTextInitial": "$59.99",
-        "initialMinor": 5999,
-        "finalMinor": 4199,
-        "discountPercent": 30
       }
     ]
   },
@@ -1390,7 +1386,7 @@
       {
         "appid": 3010850,
         "name": "Gears of War: E-Day",
-        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/d0917fcdbf27faffb3380f6f67e71e90f84b7ed5/capsule_231x87.jpg?t=1791301675",
+        "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3010850/d0917fcdbf27faffb3380f6f67e71e90f84b7ed5/capsule_231x87.jpg?t=1791309192",
         "adult": false,
         "descriptorIds": [
           2,
