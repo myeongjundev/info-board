@@ -10,19 +10,30 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-08T09:06:58.240Z",
-  "completedAt": "2026-10-08T09:06:58.611Z",
+  "startedAt": "2026-10-08T16:35:40.620Z",
+  "completedAt": "2026-10-08T16:35:40.814Z",
   "giveaways": [
     {
-      "id": "af4c34934afe4db0870b8a1d82dceb94",
-      "title": "베리드 스타즈 (BURIED STARS)",
-      "originalPrice": 41000,
+      "id": "cb733f3432db46bca94965b422c33ede",
+      "title": "Out of Sight",
+      "originalPrice": 16100,
       "currency": "KRW",
-      "startAt": "2026-10-01T15:00:00.000Z",
-      "endAt": "2026-10-08T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/e2dc55c2709641a18fc37ef7ce32cfdd/buried-stars-1j9of.jpg",
-      "storeUrl": "https://store.epicgames.com/ko/p/buried-stars-d7c88c",
-      "fetchedAt": "2026-10-08T09:06:58.611Z"
+      "startAt": "2026-10-08T15:00:00.000Z",
+      "endAt": "2026-10-15T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/6e1bf54cfa6344c89d41e4e7af036ac9/out-of-sight-1l12n.jpg",
+      "storeUrl": "https://store.epicgames.com/ko/p/out-of-sight-b96ca8",
+      "fetchedAt": "2026-10-08T16:35:40.814Z"
+    },
+    {
+      "id": "af6b823b8698465f9aedc3bddf2e8686",
+      "title": "TerraScape",
+      "originalPrice": 17400,
+      "currency": "KRW",
+      "startAt": "2026-10-08T15:00:00.000Z",
+      "endAt": "2026-10-15T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/a740a2eed807469f88b9dff17e7cd3a3/terrascape-j7p8d.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/terrascape-2b12b1",
+      "fetchedAt": "2026-10-08T16:35:40.814Z"
     }
   ]
 }
