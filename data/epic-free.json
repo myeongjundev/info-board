@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-10T15:26:47.163Z",
-  "completedAt": "2026-10-10T15:26:47.796Z",
+  "startedAt": "2026-10-10T20:08:54.464Z",
+  "completedAt": "2026-10-10T20:08:54.938Z",
   "giveaways": [
     {
       "id": "cb733f3432db46bca94965b422c33ede",
@@ -22,7 +22,7 @@
       "endAt": "2026-10-15T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/6e1bf54cfa6344c89d41e4e7af036ac9/out-of-sight-1l12n.jpg",
       "storeUrl": "https://store.epicgames.com/ko/p/out-of-sight-b96ca8",
-      "fetchedAt": "2026-10-10T15:26:47.796Z"
+      "fetchedAt": "2026-10-10T20:08:54.938Z"
     },
     {
       "id": "af6b823b8698465f9aedc3bddf2e8686",
@@ -33,7 +33,7 @@
       "endAt": "2026-10-15T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/a740a2eed807469f88b9dff17e7cd3a3/terrascape-j7p8d.png",
       "storeUrl": "https://store.epicgames.com/ko/p/terrascape-2b12b1",
-      "fetchedAt": "2026-10-10T15:26:47.796Z"
+      "fetchedAt": "2026-10-10T20:08:54.938Z"
     }
   ]
 }

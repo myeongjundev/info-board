@@ -6,7 +6,7 @@
     "url": "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana",
     "warning": "문서화된 공개 API가 아닌 상점 검색 응답이다."
   },
-  "completedAt": "2026-10-10T15:26:48.439Z",
+  "completedAt": "2026-10-10T20:08:55.309Z",
   "giveaways": [
     {
       "appid": 405640,
@@ -14,7 +14,7 @@
       "currency": "KRW",
       "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/405640/capsule_231x87.jpg?t=1791477267",
       "storeUrl": "https://store.steampowered.com/app/405640/Pony_Island/?snr=1_7_7_2300_150_1",
-      "fetchedAt": "2026-10-10T15:26:48.439Z",
+      "fetchedAt": "2026-10-10T20:08:55.309Z",
       "endAt": null,
       "originalWon": 5500
     },
@@ -24,7 +24,7 @@
       "currency": "KRW",
       "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2990600/785ca4e4adc7cdab1655f193ff77f01267ab2206/capsule_231x87.jpg?t=1789504567",
       "storeUrl": "https://store.steampowered.com/app/2990600/Fireside_Feelings/?snr=1_7_7_2300_150_1",
-      "fetchedAt": "2026-10-10T15:26:48.439Z",
+      "fetchedAt": "2026-10-10T20:08:55.309Z",
       "endAt": null,
       "originalWon": 8900
     }
