@@ -10,30 +10,19 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-15T13:30:51.392Z",
-  "completedAt": "2026-10-15T13:30:51.981Z",
+  "startedAt": "2026-10-15T18:21:53.016Z",
+  "completedAt": "2026-10-15T18:21:53.594Z",
   "giveaways": [
     {
-      "id": "cb733f3432db46bca94965b422c33ede",
-      "title": "Out of Sight",
-      "originalPrice": 16100,
+      "id": "db1202a30c5541dd99cdf54c918a9348",
+      "title": "Agent A - 숨겨진 퍼즐",
+      "originalPrice": 20400,
       "currency": "KRW",
-      "startAt": "2026-10-08T15:00:00.000Z",
-      "endAt": "2026-10-15T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/6e1bf54cfa6344c89d41e4e7af036ac9/out-of-sight-1l12n.jpg",
-      "storeUrl": "https://store.epicgames.com/ko/p/out-of-sight-b96ca8",
-      "fetchedAt": "2026-10-15T13:30:51.981Z"
-    },
-    {
-      "id": "af6b823b8698465f9aedc3bddf2e8686",
-      "title": "TerraScape",
-      "originalPrice": 17400,
-      "currency": "KRW",
-      "startAt": "2026-10-08T15:00:00.000Z",
-      "endAt": "2026-10-15T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/a740a2eed807469f88b9dff17e7cd3a3/terrascape-j7p8d.png",
-      "storeUrl": "https://store.epicgames.com/ko/p/terrascape-2b12b1",
-      "fetchedAt": "2026-10-15T13:30:51.981Z"
+      "startAt": "2026-10-15T15:00:00.000Z",
+      "endAt": "2026-10-22T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/45db4fbe68fe43f4b025dec2014d42e7/agent-a-a-puzzle-in-disguise-3cppl.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/agent-a-a-puzzle-in-disguise-42fe5f",
+      "fetchedAt": "2026-10-15T18:21:53.594Z"
     }
   ]
 }
