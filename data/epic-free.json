@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-15T22:25:40.417Z",
-  "completedAt": "2026-10-15T22:25:40.697Z",
+  "startedAt": "2026-10-16T01:27:48.596Z",
+  "completedAt": "2026-10-16T01:27:48.981Z",
   "giveaways": [
     {
       "id": "db1202a30c5541dd99cdf54c918a9348",
@@ -22,7 +22,7 @@
       "endAt": "2026-10-22T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/45db4fbe68fe43f4b025dec2014d42e7/agent-a-a-puzzle-in-disguise-3cppl.png",
       "storeUrl": "https://store.epicgames.com/ko/p/agent-a-a-puzzle-in-disguise-42fe5f",
-      "fetchedAt": "2026-10-15T22:25:40.697Z"
+      "fetchedAt": "2026-10-16T01:27:48.981Z"
     },
     {
       "id": "6a846880836044a2adad614ac771f487",
@@ -33,7 +33,7 @@
       "endAt": "2026-10-22T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/6cbb0e3805c4436bafd028cafff48307/bad-cheese-16hj0.png",
       "storeUrl": "https://store.epicgames.com/ko/p/bad-cheese-4256d9",
-      "fetchedAt": "2026-10-15T22:25:40.697Z"
+      "fetchedAt": "2026-10-16T01:27:48.981Z"
     }
   ]
 }
