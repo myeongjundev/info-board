@@ -10,30 +10,19 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-22T13:52:58.605Z",
-  "completedAt": "2026-10-22T13:52:59.289Z",
+  "startedAt": "2026-10-22T18:36:54.857Z",
+  "completedAt": "2026-10-22T18:36:55.766Z",
   "giveaways": [
     {
-      "id": "db1202a30c5541dd99cdf54c918a9348",
-      "title": "Agent A - 숨겨진 퍼즐",
-      "originalPrice": 20400,
+      "id": "06190191cede42afb633fe89ef08c27e",
+      "title": "Home - A Unique Horror Adventure",
+      "originalPrice": 5100,
       "currency": "KRW",
-      "startAt": "2026-10-15T15:00:00.000Z",
-      "endAt": "2026-10-22T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/45db4fbe68fe43f4b025dec2014d42e7/agent-a-a-puzzle-in-disguise-3cppl.png",
-      "storeUrl": "https://store.epicgames.com/ko/p/agent-a-a-puzzle-in-disguise-42fe5f",
-      "fetchedAt": "2026-10-22T13:52:59.289Z"
-    },
-    {
-      "id": "6a846880836044a2adad614ac771f487",
-      "title": "Bad Cheese",
-      "originalPrice": 13300,
-      "currency": "KRW",
-      "startAt": "2026-10-15T15:00:00.000Z",
-      "endAt": "2026-10-22T15:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/6cbb0e3805c4436bafd028cafff48307/bad-cheese-16hj0.png",
-      "storeUrl": "https://store.epicgames.com/ko/p/bad-cheese-4256d9",
-      "fetchedAt": "2026-10-22T13:52:59.289Z"
+      "startAt": "2026-10-22T15:00:00.000Z",
+      "endAt": "2026-10-29T15:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/46fc0cdb9f164a848e916249a8f68fc7/home-1f6qi.png",
+      "storeUrl": "https://store.epicgames.com/ko/p/home-19212a",
+      "fetchedAt": "2026-10-22T18:36:55.766Z"
     }
   ]
 }
