@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-10-26T20:36:40.011Z",
-  "completedAt": "2026-10-26T20:36:40.331Z",
+  "startedAt": "2026-10-27T00:32:48.119Z",
+  "completedAt": "2026-10-27T00:32:48.845Z",
   "giveaways": [
     {
       "id": "06190191cede42afb633fe89ef08c27e",
@@ -22,7 +22,7 @@
       "endAt": "2026-10-29T15:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/46fc0cdb9f164a848e916249a8f68fc7/home-1f6qi.png",
       "storeUrl": "https://store.epicgames.com/ko/p/home-19212a",
-      "fetchedAt": "2026-10-26T20:36:40.331Z"
+      "fetchedAt": "2026-10-27T00:32:48.845Z"
     }
   ]
 }
