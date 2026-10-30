@@ -6,7 +6,7 @@
     "url": "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&maxprice=free&specials=1&hidef2p=1&category1=998&infinite=1&cc=KR&l=koreana",
     "warning": "문서화된 공개 API가 아닌 상점 검색 응답이다."
   },
-  "completedAt": "2026-10-30T13:07:58.006Z",
+  "completedAt": "2026-10-30T18:39:33.706Z",
   "giveaways": [
     {
       "appid": 785890,
@@ -14,9 +14,19 @@
       "currency": "KRW",
       "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/785890/capsule_231x87.jpg?t=1793292026",
       "storeUrl": "https://store.steampowered.com/app/785890/Hexologic/?snr=1_7_7_2300_150_1",
-      "fetchedAt": "2026-10-30T13:07:58.006Z",
+      "fetchedAt": "2026-10-30T18:39:33.706Z",
       "endAt": null,
       "originalWon": 5600
+    },
+    {
+      "appid": 1583850,
+      "title": "Asleep: Act 1",
+      "currency": "KRW",
+      "imageUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1583850/f24ce1b7829455b3b0c481374c2f909fdcba766a/capsule_231x87_alt_assets_1.jpg?t=1793381725",
+      "storeUrl": "https://store.steampowered.com/app/1583850/Asleep_Act_1/?snr=1_7_7_2300_150_2",
+      "fetchedAt": "2026-10-30T18:39:33.706Z",
+      "endAt": null,
+      "originalWon": 11000
     }
   ],
   "freeWeekends": []
