@@ -10,19 +10,19 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-11-05T15:34:45.964Z",
-  "completedAt": "2026-11-05T15:34:46.384Z",
+  "startedAt": "2026-11-05T22:06:00.325Z",
+  "completedAt": "2026-11-05T22:06:01.234Z",
   "giveaways": [
     {
-      "id": "4e469c7d8bbf49bcabc2c07127d3d946",
-      "title": "Sorry We're Closed",
-      "originalPrice": 25600,
+      "id": "3be0a0d8479946d78f60d90c9442a0b4",
+      "title": "표류도시",
+      "originalPrice": 25000,
       "currency": "KRW",
-      "startAt": "2026-10-29T15:00:00.000Z",
-      "endAt": "2026-11-05T16:00:00.000Z",
-      "imageUrl": "https://cdn1.epicgames.com/spt-assets/9ab7eaaeb2f041969b350955b789f0f7/sorry-were-closed-1orqh.png",
-      "storeUrl": "https://store.epicgames.com/ko/p/sorry-were-closed-724c86",
-      "fetchedAt": "2026-11-05T15:34:46.384Z"
+      "startAt": "2026-11-05T16:00:00.000Z",
+      "endAt": "2026-11-12T16:00:00.000Z",
+      "imageUrl": "https://cdn1.epicgames.com/spt-assets/5c36b876e80d4285b9993947efeeaf2b/flotsam-1yczl.jpg",
+      "storeUrl": "https://store.epicgames.com/ko/p/flotsam-266287",
+      "fetchedAt": "2026-11-05T22:06:01.234Z"
     }
   ]
 }
