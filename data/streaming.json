@@ -10,97 +10,97 @@
     {
       "id": "chzzk",
       "status": "ok",
-      "fetchedAt": "2026-11-07T15:05:15.076Z",
+      "fetchedAt": "2026-11-07T19:35:34.191Z",
       "rankings": [
         {
           "rank": 1,
-          "gameId": "Minecraft",
-          "gameName": "마인크래프트",
-          "viewerCount": 69510,
-          "broadcastCount": 15,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/Minecraft",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyMzEyMTFfMTM3/MDAxNzAyMjgyNjI1MDgw.Ozu1fi3gdfyooyBjO_SGXJBDqRWgDFLlmWAFZg6qYIUg.rlnppQX9tMgn2nvgjhXwqsJhfktN23Gdjj09CgJ--BYg.JPEG/104.%EB%A7%88%EC%9D%B8%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8_%EC%99%84%EC%84%B1%EB%B3%B8_%EC%9D%B4%EB%8B%AC%EB%8B%98.jpg"
+          "gameId": "League_of_Legends",
+          "gameName": "리그 오브 레전드",
+          "viewerCount": 17840,
+          "broadcastCount": 14,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/League_of_Legends",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjExMDZfMjA2/MDAxNzkzOTQxNjMzMTMz.1fc-ae2RkPs2EOPuGVeevA49u8Y0dsUOeMW_8KsO9kcg.bv1X9kUqmAF-yx562XsJffKAcNDQh7eVHXxrX1HPOc8g.JPEG/IMG_6183.jpg"
         },
         {
           "rank": 2,
-          "gameId": "League_of_Legends",
-          "gameName": "리그 오브 레전드",
-          "viewerCount": 27875,
-          "broadcastCount": 13,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/League_of_Legends",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjExMDZfMjA2/MDAxNzkzOTQxNjMzMTMz.1fc-ae2RkPs2EOPuGVeevA49u8Y0dsUOeMW_8KsO9kcg.bv1X9kUqmAF-yx562XsJffKAcNDQh7eVHXxrX1HPOc8g.JPEG/IMG_6183.jpg"
+          "gameId": "Minecraft",
+          "gameName": "마인크래프트",
+          "viewerCount": 9885,
+          "broadcastCount": 4,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Minecraft",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyMzEyMTFfMTM3/MDAxNzAyMjgyNjI1MDgw.Ozu1fi3gdfyooyBjO_SGXJBDqRWgDFLlmWAFZg6qYIUg.rlnppQX9tMgn2nvgjhXwqsJhfktN23Gdjj09CgJ--BYg.JPEG/104.%EB%A7%88%EC%9D%B8%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8_%EC%99%84%EC%84%B1%EB%B3%B8_%EC%9D%B4%EB%8B%AC%EB%8B%98.jpg"
         },
         {
           "rank": 3,
           "gameId": "Probably_Stolen_Cyberpunk_Shopkeeper_Sim",
           "gameName": "프라버블리 스톨른 - 사이버펑크 숍키퍼 심",
-          "viewerCount": 11453,
-          "broadcastCount": 1,
+          "viewerCount": 9273,
+          "broadcastCount": 2,
           "categoryUrl": "https://chzzk.naver.com/category/GAME/Probably_Stolen_Cyberpunk_Shopkeeper_Sim",
           "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjEwMjFfMTc2/MDAxNzkyNTU0MDE4NjMx.5R_U3b3A71_6XHGEoP1jn79mf-fX4Q6a3-fhgLMS9vkg._3GlgCm0eHm4zlvWgNPiGXakXaFJNbBRtLhHtcBV3KAg.JPEG/%ED%94%84%EB%9D%BC%EB%B2%84%EB%B8%94%EB%A6%AC_%EC%8A%A4%ED%86%A8%EB%A5%B8_-_%EC%82%AC%EC%9D%B4%EB%B2%84%ED%8E%91%ED%81%AC_%EC%88%8D%ED%82%A4%ED%8D%BC_%EC%8B%AC_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg"
         },
         {
           "rank": 4,
-          "gameId": "various_games",
-          "gameName": "종합 게임",
-          "viewerCount": 9846,
-          "broadcastCount": 8,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/various_games",
-          "imageUrl": "https://ssl.pstatic.net/static/nng/glive/icon/category_poster_various_games.png"
-        },
-        {
-          "rank": 5,
-          "gameId": "World_of_Warcraft_Forever",
-          "gameName": "월드 오브 워크래프트: 포에버",
-          "viewerCount": 9552,
-          "broadcastCount": 6,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/World_of_Warcraft_Forever",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA5MTdfMTMx/MDAxNzg5NjI5NDAyMDg4.nj7BHIEWhhSc7OoeGspwSPtLO49U0yO6W9riLHD76Dog.0FgztmyUhar5XxRRMU_X0VcsfsIvNfsjox-ovt0ZX4Qg.PNG/%EC%9B%94%EB%93%9C_%EC%98%A4%EB%B8%8C_%EC%9B%8C%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8_%ED%8F%AC%EC%97%90%EB%B2%84.png"
-        },
-        {
-          "rank": 6,
           "gameId": "Darkest_Dungeon",
           "gameName": "다키스트 던전",
-          "viewerCount": 7313,
+          "viewerCount": 5231,
           "broadcastCount": 4,
           "categoryUrl": "https://chzzk.naver.com/category/GAME/Darkest_Dungeon",
           "imageUrl": "https://nng-phinf.pstatic.net/MjAyNDAyMjhfNDkg/MDAxNzA5MDk3ODExNjA5.siALpmmPel972K4uvh50dshIAVDD0yUWouFxs1h2RmMg.mrnQ4nZTUox1A0gyuqYv7ZGrRqAFUspWhVHQPOOojt8g.PNG/%EB%8B%A4%ED%82%A4%EC%8A%A4%ED%8A%B8_%EB%8D%98%EC%A0%84.png"
         },
         {
+          "rank": 5,
+          "gameId": "World_of_Warcraft_Forever",
+          "gameName": "월드 오브 워크래프트: 포에버",
+          "viewerCount": 5138,
+          "broadcastCount": 9,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/World_of_Warcraft_Forever",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA5MTdfMTMx/MDAxNzg5NjI5NDAyMDg4.nj7BHIEWhhSc7OoeGspwSPtLO49U0yO6W9riLHD76Dog.0FgztmyUhar5XxRRMU_X0VcsfsIvNfsjox-ovt0ZX4Qg.PNG/%EC%9B%94%EB%93%9C_%EC%98%A4%EB%B8%8C_%EC%9B%8C%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8_%ED%8F%AC%EC%97%90%EB%B2%84.png"
+        },
+        {
+          "rank": 6,
+          "gameId": "various_games",
+          "gameName": "종합 게임",
+          "viewerCount": 3996,
+          "broadcastCount": 7,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/various_games",
+          "imageUrl": "https://ssl.pstatic.net/static/nng/glive/icon/category_poster_various_games.png"
+        },
+        {
           "rank": 7,
-          "gameId": "The_Legend_of_Zelda_Ocarina_of_Time_remake",
-          "gameName": "젤다의 전설 시간의 오카리나",
-          "viewerCount": 4848,
-          "broadcastCount": 4,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/The_Legend_of_Zelda_Ocarina_of_Time_remake",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjEwMDJfMTA3/MDAxNzkwOTMwODk2NjAw.i15s17DDf5yxkiDI_89eP_xh57cvKmH2YfgFEambS3Ug.Zh8MlhgLQgZYH-0emya9K4fqdji7FbaF7kTlr9DQrdUg.PNG/%EC%A0%A4%EB%8B%A4%EC%9D%98%EC%A0%84%EC%84%A4_%ED%8F%AC%EC%8A%A4%ED%84%B0.png"
+          "gameId": "Phantom_Blade_Zero",
+          "gameName": "팬텀 블레이드 제로",
+          "viewerCount": 1411,
+          "broadcastCount": 2,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Phantom_Blade_Zero",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjAyMTJfOTIg/MDAxNzcwODg0NTQ2NzQ0.RG4pwz49YfAOhKvQOW2sNGOZx-Wc0lsNNL6WoBppAKsg.JztlFCiBWl5aKcIDVxDxmU8R7sjhP6drdHRsZ7fo6rUg.PNG/%ED%8C%AC%EB%8D%A4%EB%B8%94%EB%A0%88%EC%9D%B4%EB%93%9C%EC%A0%9C%EB%A1%9C_%ED%8F%AC%EC%8A%A4%ED%84%B0.png"
         },
         {
           "rank": 8,
-          "gameId": "Pokemon_Heart_Gold",
-          "gameName": "포켓몬스터 하트골드",
-          "viewerCount": 4193,
-          "broadcastCount": 1,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/Pokemon_Heart_Gold",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNDAyMjdfMzIg/MDAxNzA5MDIyMzYxNzAy.ictvo3XI7lhpyrYD-WI6-DPULmj_oSpetcNiv2KTdbAg.uDbkJcbwlB889a4s3Bm4YtkbgjOqR2M3RYq3i6IWzAwg.PNG/39.png"
+          "gameId": "Lost_Ark",
+          "gameName": "로스트아크",
+          "viewerCount": 963,
+          "broadcastCount": 4,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Lost_Ark",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA4MDVfMzAg/MDAxNzg1ODkzNTc0OTg3.SDwGyl3qaoU91MXhLsQURdxvlUnCt8ge6tNqVaRqDNwg.rLdVs90CuNmfXmdK6LZwBuDZqze9VEgmPc4C4NaF9CYg.PNG/LOSTARK_%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC_%EC%B1%84%EB%84%90_%EC%9D%B4%EB%AF%B8%EC%A7%80_%EB%B2%A8%EA%B0%80%EB%A5%B4%EB%94%98_300x400_260805_%EB%B0%98%EC%98%81_%ED%95%84%EC%9A%94.png"
         },
         {
           "rank": 9,
-          "gameId": "DEAD_BY_DAYLIGHT",
-          "gameName": "데드 바이 데이라이트",
-          "viewerCount": 3032,
-          "broadcastCount": 3,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/DEAD_BY_DAYLIGHT",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyMzEyMTNfNjQg/MDAxNzAyNDMxMTEyNDEz.2lPNjTnR3k_6Y9R9pLpEdIDRK_N07MRHXAXumlUu0esg.JuvDTkCSnR8-AtRg8oWpoRdyr77kAZnUOVXY_B264x0g.JPEG/393.%EB%8D%B0%EB%93%9C_%EB%B0%94%EC%9D%B4_%EB%8D%B0%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8_%EC%99%84%EC%84%B1%EB%B3%B8_%EC%84%9D%EC%A7%80%EC%97%B0.jpg"
+          "gameId": "Psycho_Sleuth",
+          "gameName": "사이코 슬루스",
+          "viewerCount": 751,
+          "broadcastCount": 1,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/Psycho_Sleuth",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjA5MTVfMTcx/MDAxNzg5NDU5NTMzNjYx.mXpcIGh-uleMg43v5LZvLLzefoQi9wMSow0cGE73bHog.fd9FtsN1QTiW7H8Bjf60hN97WS5lCKrR7aK94jQI8ykg.PNG/%EC%82%AC%EC%9D%B4%EC%BD%94%EC%86%94%EB%A3%A8%EC%8A%A4_%ED%8F%AC%EC%8A%A4%ED%84%B0.png"
         },
         {
           "rank": 10,
-          "gameId": "MapleStory_WORLDS",
-          "gameName": "메이플스토리 월드",
-          "viewerCount": 1579,
-          "broadcastCount": 1,
-          "categoryUrl": "https://chzzk.naver.com/category/GAME/MapleStory_WORLDS",
-          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNDAyMTlfODQg/MDAxNzA4MzQxMzY0MjQw.vC935FRkjcii8ujVT0s5em2lPbY-8FTVXJn463o4I8Ag.q5IoFpPo5NvdI2_XEJvqIiuDFK_stiCzexT-mmbBBxUg.PNG/image_%2842%29.png"
+          "gameId": "OVERWATCH",
+          "gameName": "오버워치",
+          "viewerCount": 644,
+          "broadcastCount": 3,
+          "categoryUrl": "https://chzzk.naver.com/category/GAME/OVERWATCH",
+          "imageUrl": "https://nng-phinf.pstatic.net/MjAyNjEwMDdfMzMg/MDAxNzkxMzM5ODk3Mjgz.CaVCfx3wuLcxZjaQVJSIe90aXPAc6gQfjBvQiE2tYLYg.vqvvTer66E4ADElgi6XhtEpOOKZMiKQBMCXSTcAq-jIg.PNG/OW_2026_S5-Launch-Social-Headers_TWITCH-THUMB_600x800.png"
         }
       ],
       "message": "상위 라이브 100개 표본을 게임별로 합산한 Top 10이다.",
@@ -109,41 +109,41 @@
     {
       "id": "twitch",
       "status": "ok",
-      "fetchedAt": "2026-11-07T15:05:15.664Z",
+      "fetchedAt": "2026-11-07T19:35:34.681Z",
       "rankings": [
         {
           "rank": 1,
           "gameId": "18122",
           "gameName": "World of Warcraft",
-          "viewerCount": 111380,
-          "broadcastCount": 14,
+          "viewerCount": 179314,
+          "broadcastCount": 19,
           "categoryUrl": "https://www.twitch.tv/directory/game/World%20of%20Warcraft",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/18122-144x192.jpg"
         },
         {
           "rank": 2,
-          "gameId": "27471",
-          "gameName": "Minecraft",
-          "viewerCount": 47242,
-          "broadcastCount": 7,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Minecraft",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/27471_IGDB-144x192.jpg"
+          "gameId": "33214",
+          "gameName": "Fortnite",
+          "viewerCount": 101530,
+          "broadcastCount": 9,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Fortnite",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/33214-144x192.jpg"
         },
         {
           "rank": 3,
-          "gameId": "225471887",
-          "gameName": "BLEACH Rebirth of Souls",
-          "viewerCount": 36927,
-          "broadcastCount": 1,
-          "categoryUrl": "https://www.twitch.tv/directory/game/BLEACH%20Rebirth%20of%20Souls",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/225471887_IGDB-144x192.jpg"
+          "gameId": "27471",
+          "gameName": "Minecraft",
+          "viewerCount": 94316,
+          "broadcastCount": 9,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Minecraft",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/27471_IGDB-144x192.jpg"
         },
         {
           "rank": 4,
           "gameId": "21779",
           "gameName": "League of Legends",
-          "viewerCount": 36655,
-          "broadcastCount": 6,
+          "viewerCount": 62832,
+          "broadcastCount": 4,
           "categoryUrl": "https://www.twitch.tv/directory/game/League%20of%20Legends",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/21779-144x192.jpg"
         },
@@ -151,55 +151,55 @@
           "rank": 5,
           "gameId": "6521",
           "gameName": "Grand Theft Auto: San Andreas",
-          "viewerCount": 32195,
+          "viewerCount": 47525,
           "broadcastCount": 2,
           "categoryUrl": "https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%3A%20San%20Andreas",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/6521_IGDB-144x192.jpg"
         },
         {
           "rank": 6,
-          "gameId": "32982",
-          "gameName": "Grand Theft Auto V",
-          "viewerCount": 28717,
-          "broadcastCount": 4,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-144x192.jpg"
+          "gameId": "1478650472",
+          "gameName": "Call of Duty: Modern Warfare 4",
+          "viewerCount": 41804,
+          "broadcastCount": 5,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Call%20of%20Duty%3A%20Modern%20Warfare%204",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/1478650472_IGDB-144x192.jpg"
         },
         {
           "rank": 7,
           "gameId": "66366",
           "gameName": "War Thunder",
-          "viewerCount": 28502,
+          "viewerCount": 32693,
           "broadcastCount": 2,
           "categoryUrl": "https://www.twitch.tv/directory/game/War%20Thunder",
           "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/66366_IGDB-144x192.jpg"
         },
         {
           "rank": 8,
-          "gameId": "771448419",
-          "gameName": "AION 2",
-          "viewerCount": 27117,
-          "broadcastCount": 4,
-          "categoryUrl": "https://www.twitch.tv/directory/game/AION%202",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/771448419_IGDB-144x192.jpg"
+          "gameId": "515025",
+          "gameName": "Overwatch",
+          "viewerCount": 30871,
+          "broadcastCount": 3,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Overwatch",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/515025-144x192.jpg"
         },
         {
           "rank": 9,
-          "gameId": "123184772",
-          "gameName": "EA Sports FC 27",
-          "viewerCount": 19200,
+          "gameId": "822994911",
+          "gameName": "Alterum",
+          "viewerCount": 28573,
           "broadcastCount": 2,
-          "categoryUrl": "https://www.twitch.tv/directory/game/EA%20Sports%20FC%2027",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/123184772_IGDB-144x192.jpg"
+          "categoryUrl": "https://www.twitch.tv/directory/game/Alterum",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/822994911_IGDB-144x192.jpg"
         },
         {
           "rank": 10,
-          "gameId": "515025",
-          "gameName": "Overwatch",
-          "viewerCount": 18886,
-          "broadcastCount": 4,
-          "categoryUrl": "https://www.twitch.tv/directory/game/Overwatch",
-          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/515025-144x192.jpg"
+          "gameId": "497480",
+          "gameName": "Detroit: Become Human",
+          "viewerCount": 21676,
+          "broadcastCount": 1,
+          "categoryUrl": "https://www.twitch.tv/directory/game/Detroit%3A%20Become%20Human",
+          "imageUrl": "https://static-cdn.jtvnw.net/ttv-boxart/497480_IGDB-144x192.jpg"
         }
       ],
       "message": "상위 라이브 100개 표본을 게임별로 합산한 Top 10이다.",
