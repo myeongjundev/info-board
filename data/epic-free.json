@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-11-11T22:46:00.209Z",
-  "completedAt": "2026-11-11T22:46:00.652Z",
+  "startedAt": "2026-11-12T03:53:07.703Z",
+  "completedAt": "2026-11-12T03:53:08.387Z",
   "giveaways": [
     {
       "id": "3be0a0d8479946d78f60d90c9442a0b4",
@@ -22,7 +22,7 @@
       "endAt": "2026-11-12T16:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/5c36b876e80d4285b9993947efeeaf2b/flotsam-1yczl.jpg",
       "storeUrl": "https://store.epicgames.com/ko/p/flotsam-266287",
-      "fetchedAt": "2026-11-11T22:46:00.652Z"
+      "fetchedAt": "2026-11-12T03:53:08.387Z"
     }
   ]
 }
