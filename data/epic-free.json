@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-11-13T17:50:40.813Z",
-  "completedAt": "2026-11-13T17:50:41.735Z",
+  "startedAt": "2026-11-13T23:39:38.397Z",
+  "completedAt": "2026-11-13T23:39:39.133Z",
   "giveaways": [
     {
       "id": "9975548b6d404a94b8a9bdb34cad49e9",
@@ -22,7 +22,7 @@
       "endAt": "2026-11-19T16:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/357100ca5613420e98208c5f14585e9d/knightica-1nuxm.png",
       "storeUrl": "https://store.epicgames.com/ko/p/knightica-3be45c",
-      "fetchedAt": "2026-11-13T17:50:41.735Z"
+      "fetchedAt": "2026-11-13T23:39:39.133Z"
     }
   ]
 }
