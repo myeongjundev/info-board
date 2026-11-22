@@ -10,8 +10,8 @@
     "pageUrl": "https://store.epicgames.com/free-games?lang=ko",
     "responseUrl": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ko&country=KR&allowCountries=KR"
   },
-  "startedAt": "2026-11-22T08:05:58.844Z",
-  "completedAt": "2026-11-22T08:05:59.366Z",
+  "startedAt": "2026-11-22T16:22:49.873Z",
+  "completedAt": "2026-11-22T16:22:50.596Z",
   "giveaways": [
     {
       "id": "1f9a12b06b4f437790b6913ad136a08c",
@@ -22,7 +22,7 @@
       "endAt": "2026-11-26T16:00:00.000Z",
       "imageUrl": "https://cdn1.epicgames.com/spt-assets/83a240506a884c10ad8fb99694e57a0d/mark-of-the-deep-w1ygr.png",
       "storeUrl": "https://store.epicgames.com/ko/p/mark-of-the-deep-f7dc08",
-      "fetchedAt": "2026-11-22T08:05:59.366Z"
+      "fetchedAt": "2026-11-22T16:22:50.596Z"
     }
   ]
 }
